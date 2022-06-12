@@ -9,8 +9,18 @@ Let's start by recreating the different chart examples that Apple gave in these 
 ## Examples
 
 - [x] Basis project setup
-- [ ] Line Chart
-- [ ] Bar Chart
+- [ ] Simple dual bar chart
+- [ ] Range Chart
+- [ ] Heartbeat Chart
+- [ ] Cumulative line Chart
+- [ ] Pyramid Chart
+- [ ] Heartbeat range Chart
+- [ ] Distribution line + Point Chart
+- [ ] Area Chart
+- [ ] Scatter Chart
+- [ ] Range with Max and Min Chart
+- [ ] Funky Gradient Chart
+- [ ] Block Block Block Chart
 - [ ] Other Charts
 - [ ] Multi-language Support
 
