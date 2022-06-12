@@ -5,8 +5,6 @@ Let's start by recreating the different chart examples that Apple gave in these 
 
 ## Examples
 
-## Roadmap
-
 - [x] Basis project setup
 - [ ] Line Chart
 - [ ] Bar Chart
