@@ -29,6 +29,11 @@ See the [open issues](https://github.com/jordibruin/SwiftChartExamples/issues) i
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
+## How to add a new chart
+
+Each chart needs a preview chart as well as a detail view. The preview chart is used in the home screen of the app for easier navigation. Look at the Simple Chart Simple code to see what the format should be for the preview charts. On the detail view, make sure you add some customisation options in a separate section from the chart.
+
+
 <img width="506" alt="image" src="https://user-images.githubusercontent.com/170948/173253555-6994957a-b3e2-4e6f-b6ed-c7edadb62eb6.png">
 
 
