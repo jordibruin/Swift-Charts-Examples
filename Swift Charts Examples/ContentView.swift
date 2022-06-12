@@ -8,8 +8,6 @@
 import SwiftUI
 
 struct ContentView: View {
-    
-    
     var body: some View {
         NavigationStack() {
             List(ChartType.allCases) { chart in
@@ -28,26 +26,5 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
-    }
-}
-
-enum ChartType: String, Identifiable, CaseIterable {
-    case lineChartSimple
-    
-    var id: String { self.rawValue }
-    
-    var title: String {
-        switch self {
-        case .lineChartSimple:
-            return "Line Chart Simple"
-        }
-    }
-    
-    @ViewBuilder
-    var view: some View {
-        switch self {
-        case .lineChartSimple:
-            LineChartSimpleView()
-        }
     }
 }

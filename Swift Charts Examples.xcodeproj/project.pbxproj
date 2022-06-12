@@ -15,6 +15,7 @@
 		C22EB5BA28568D0C000B9F9A /* Swift_Charts_ExamplesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C22EB5B928568D0C000B9F9A /* Swift_Charts_ExamplesUITests.swift */; };
 		C22EB5BC28568D0C000B9F9A /* Swift_Charts_ExamplesUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C22EB5BB28568D0C000B9F9A /* Swift_Charts_ExamplesUITestsLaunchTests.swift */; };
 		C22EB5CA28568F41000B9F9A /* LineChartSimpleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C22EB5C928568F41000B9F9A /* LineChartSimpleView.swift */; };
+		C26088132856935B00B09DDB /* ChartType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26088122856935B00B09DDB /* ChartType.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		C22EB5B928568D0C000B9F9A /* Swift_Charts_ExamplesUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Swift_Charts_ExamplesUITests.swift; sourceTree = "<group>"; };
 		C22EB5BB28568D0C000B9F9A /* Swift_Charts_ExamplesUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Swift_Charts_ExamplesUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		C22EB5C928568F41000B9F9A /* LineChartSimpleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineChartSimpleView.swift; sourceTree = "<group>"; };
+		C26088122856935B00B09DDB /* ChartType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartType.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +101,7 @@
 			children = (
 				C22EB59D28568D0B000B9F9A /* Swift_Charts_ExamplesApp.swift */,
 				C22EB59F28568D0B000B9F9A /* ContentView.swift */,
+				C26088112856935500B09DDB /* Model */,
 				C22EB5C828568EB5000B9F9A /* Charts */,
 				C22EB5A128568D0C000B9F9A /* Assets.xcassets */,
 				C22EB5A328568D0C000B9F9A /* Swift_Charts_Examples.entitlements */,
@@ -138,6 +141,14 @@
 				C22EB5C928568F41000B9F9A /* LineChartSimpleView.swift */,
 			);
 			path = Charts;
+			sourceTree = "<group>";
+		};
+		C26088112856935500B09DDB /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C26088122856935B00B09DDB /* ChartType.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -272,6 +283,7 @@
 			files = (
 				C22EB5A028568D0B000B9F9A /* ContentView.swift in Sources */,
 				C22EB59E28568D0B000B9F9A /* Swift_Charts_ExamplesApp.swift in Sources */,
+				C26088132856935B00B09DDB /* ChartType.swift in Sources */,
 				C22EB5CA28568F41000B9F9A /* LineChartSimpleView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
