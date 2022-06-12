@@ -30,3 +30,8 @@ See the [open issues](https://github.com/jordibruin/SwiftChartExamples/issues) i
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 <img width="506" alt="image" src="https://user-images.githubusercontent.com/170948/173253555-6994957a-b3e2-4e6f-b6ed-c7edadb62eb6.png">
+
+
+
+https://user-images.githubusercontent.com/170948/173256051-6c1c5ee8-492f-451a-b6ee-5831cc217763.mp4
+
