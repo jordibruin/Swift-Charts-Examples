@@ -8,18 +8,31 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State private var selectedChartType: ChartType?
+    
     var body: some View {
-        NavigationStack() {
-            List(ChartType.allCases) { chart in
-                NavigationLink(value: chart) {
-                    Text(chart.title)
+        NavigationSplitView {
+            List(selection: $selectedChartType) {
+                ForEach(ChartType.allCases) { chart in
+                    Section {
+                        NavigationLink(value: chart) {
+                            chart.view
+                        }
+                    }
                 }
             }
-            .navigationDestination(for: ChartType.self) { chart in
-                chart.view
+        } detail: {
+            NavigationStack {
+                switch selectedChartType {
+                case .none:
+                    Text("Select a chart to view")
+                case .lineChartSimple:
+                    LineChartSimpleView()
+                }
             }
-            .navigationTitle("Charts")
         }
+        .navigationTitle("Charts")
     }
 }
 
