@@ -9,6 +9,7 @@ Let's start by recreating the different chart examples that Apple gave in these 
 ## Examples
 
 - [x] Basis project setup
+- [x] Simple Line chart
 - [ ] Simple dual bar chart
 - [ ] Range Chart
 - [ ] Heartbeat Chart
