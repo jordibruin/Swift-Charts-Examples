@@ -19,9 +19,12 @@ struct ContentView: View {
                         NavigationLink(value: chart) {
                             chart.view
                         }
+                    } header: {
+                        Text("Line Charts")
                     }
                 }
             }
+            .navigationTitle("Swift Charts Examples")
         } detail: {
             NavigationStack {
                 switch selectedChartType {
@@ -32,7 +35,6 @@ struct ContentView: View {
                 }
             }
         }
-        .navigationTitle("Charts")
     }
 }
 
