@@ -24,7 +24,7 @@ enum ChartType: String, Identifiable, CaseIterable {
     var view: some View {
         switch self {
         case .lineChartSimple:
-            LineChartSimpleView()
+            LineChartSimpleOverview()
         }
     }
 }

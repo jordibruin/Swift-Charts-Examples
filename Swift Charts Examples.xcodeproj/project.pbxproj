@@ -16,6 +16,8 @@
 		C22EB5BC28568D0C000B9F9A /* Swift_Charts_ExamplesUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C22EB5BB28568D0C000B9F9A /* Swift_Charts_ExamplesUITestsLaunchTests.swift */; };
 		C22EB5CA28568F41000B9F9A /* LineChartSimpleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C22EB5C928568F41000B9F9A /* LineChartSimpleView.swift */; };
 		C26088132856935B00B09DDB /* ChartType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26088122856935B00B09DDB /* ChartType.swift */; };
+		C26088152856960000B09DDB /* LineChartSimple.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26088142856960000B09DDB /* LineChartSimple.swift */; };
+		C26088182856963D00B09DDB /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26088172856963D00B09DDB /* Data.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +51,8 @@
 		C22EB5BB28568D0C000B9F9A /* Swift_Charts_ExamplesUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Swift_Charts_ExamplesUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		C22EB5C928568F41000B9F9A /* LineChartSimpleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineChartSimpleView.swift; sourceTree = "<group>"; };
 		C26088122856935B00B09DDB /* ChartType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartType.swift; sourceTree = "<group>"; };
+		C26088142856960000B09DDB /* LineChartSimple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineChartSimple.swift; sourceTree = "<group>"; };
+		C26088172856963D00B09DDB /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +105,7 @@
 			children = (
 				C22EB59D28568D0B000B9F9A /* Swift_Charts_ExamplesApp.swift */,
 				C22EB59F28568D0B000B9F9A /* ContentView.swift */,
+				C26088162856963600B09DDB /* Data */,
 				C26088112856935500B09DDB /* Model */,
 				C22EB5C828568EB5000B9F9A /* Charts */,
 				C22EB5A128568D0C000B9F9A /* Assets.xcassets */,
@@ -138,7 +143,7 @@
 		C22EB5C828568EB5000B9F9A /* Charts */ = {
 			isa = PBXGroup;
 			children = (
-				C22EB5C928568F41000B9F9A /* LineChartSimpleView.swift */,
+				C26088192856968400B09DDB /* LineCharts */,
 			);
 			path = Charts;
 			sourceTree = "<group>";
@@ -149,6 +154,31 @@
 				C26088122856935B00B09DDB /* ChartType.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		C26088162856963600B09DDB /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				C26088172856963D00B09DDB /* Data.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		C26088192856968400B09DDB /* LineCharts */ = {
+			isa = PBXGroup;
+			children = (
+				C260881A2856968D00B09DDB /* Simple */,
+			);
+			path = LineCharts;
+			sourceTree = "<group>";
+		};
+		C260881A2856968D00B09DDB /* Simple */ = {
+			isa = PBXGroup;
+			children = (
+				C22EB5C928568F41000B9F9A /* LineChartSimpleView.swift */,
+				C26088142856960000B09DDB /* LineChartSimple.swift */,
+			);
+			path = Simple;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -282,9 +312,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				C22EB5A028568D0B000B9F9A /* ContentView.swift in Sources */,
+				C26088182856963D00B09DDB /* Data.swift in Sources */,
 				C22EB59E28568D0B000B9F9A /* Swift_Charts_ExamplesApp.swift in Sources */,
 				C26088132856935B00B09DDB /* ChartType.swift in Sources */,
 				C22EB5CA28568F41000B9F9A /* LineChartSimpleView.swift in Sources */,
+				C26088152856960000B09DDB /* LineChartSimple.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

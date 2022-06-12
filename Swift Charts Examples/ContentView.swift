@@ -28,7 +28,7 @@ struct ContentView: View {
                 case .none:
                     Text("Select a chart to view")
                 case .lineChartSimple:
-                    LineChartSimpleView()
+                    LineChartSimpleDetailView()
                 }
             }
         }
