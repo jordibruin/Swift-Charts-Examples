@@ -20,7 +20,7 @@ struct ContentView: View {
                             chart.view
                         }
                     } header: {
-                        Text("Line Charts")
+                        Text("")
                     }
                 }
             }
@@ -32,6 +32,8 @@ struct ContentView: View {
                     Text("Select a chart to view")
                 case .lineChartSimple:
                     LineChartSimpleDetailView()
+                case .twoBarsSimple:
+                    TwoBarsSimpleDetailView()
                 }
             }
         }

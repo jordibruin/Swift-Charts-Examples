@@ -9,7 +9,9 @@ import Foundation
 import SwiftUI
 
 enum ChartType: String, Identifiable, CaseIterable {
+    
     case lineChartSimple
+    case twoBarsSimple
     
     var id: String { self.rawValue }
     
@@ -17,6 +19,8 @@ enum ChartType: String, Identifiable, CaseIterable {
         switch self {
         case .lineChartSimple:
             return "Line Chart Simple"
+        case .twoBarsSimple:
+            return "Two Bars Simple"
         }
     }
     
@@ -25,6 +29,8 @@ enum ChartType: String, Identifiable, CaseIterable {
         switch self {
         case .lineChartSimple:
             LineChartSimpleOverview()
+        case .twoBarsSimple:
+            TwoBarsSimpleOverview()
         }
     }
 }

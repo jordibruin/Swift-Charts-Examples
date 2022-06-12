@@ -8,7 +8,6 @@
 import SwiftUI
 import Charts
 
-
 struct LineChartSimpleChart: View {
     var body: some View {
         Chart(SalesData.last30Days, id: \.day) {
@@ -28,8 +27,6 @@ struct LineChartSimpleOverview: View {
             Text("Line Chart (Simple)")
                 .font(.callout)
                 .foregroundStyle(.secondary)
-            Text("\(SalesData.last30DaysTotal, format: .number) Sales")
-                .font(.title2.bold())
 
             LineChartSimpleChart()
                 .frame(height: 100)

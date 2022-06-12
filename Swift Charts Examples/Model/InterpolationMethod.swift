@@ -8,7 +8,6 @@
 import Foundation
 import Charts
 
-
 enum ChartInterpolationMethod: Identifiable, CaseIterable {
     
     case linear

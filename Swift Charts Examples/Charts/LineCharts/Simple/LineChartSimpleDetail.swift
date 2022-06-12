@@ -17,7 +17,6 @@ struct LineChartSimpleDetailView: View {
     var body: some View {
         List {
             Section {
-                
                 Chart(SalesData.last30Days, id: \.day) {
                     LineMark(
                         x: .value("Date", $0.day),
@@ -27,26 +26,30 @@ struct LineChartSimpleDetailView: View {
                     .foregroundStyle(chartColor)
                     .interpolationMethod(interpolationMethod.mode)
                 }
-                .frame(height: 300)
+//                .frame(height: 300)
             }
             
-            Section {
-                Stepper(value: $lineWidth, in: 1.0...20.0) {
-                    HStack {
-                        Text("Line Width")
-                        Spacer()
-                        Text("\(String(format: "%.0f",lineWidth))")
-                    }
-                }
-                
-                Picker("Interpolation Method", selection: $interpolationMethod) {
-                    ForEach(ChartInterpolationMethod.allCases) { Text($0.mode.description).tag($0) }
-                }
-                
-                ColorPicker("Color Picker", selection: $chartColor)
-            }
+            customisation
         }
         .navigationBarTitleDisplayMode(.inline)
+    }
+    
+    var customisation: some View {
+        Section {
+            Stepper(value: $lineWidth, in: 1.0...20.0) {
+                HStack {
+                    Text("Line Width")
+                    Spacer()
+                    Text("\(String(format: "%.0f",lineWidth))")
+                }
+            }
+            
+            Picker("Interpolation Method", selection: $interpolationMethod) {
+                ForEach(ChartInterpolationMethod.allCases) { Text($0.mode.description).tag($0) }
+            }
+            
+            ColorPicker("Color Picker", selection: $chartColor)
+        }
     }
 }
 
