@@ -5,11 +5,13 @@ Let's start by recreating the different chart examples that Apple gave in these 
 
 ## Examples
 
-- [] Basis project setup
-- [] Line Chart
-- [] Bar Chart
-- [] Other Charts
-- [] Multi-language Support
+## Roadmap
+
+- [x] Basis project setup
+- [ ] Line Chart
+- [ ] Bar Chart
+- [ ] Other Charts
+- [ ] Multi-language Support
 
 See the [open issues](https://github.com/jordibruin/SwiftChartExamples/issues) if you think anything is missing from this list.
 
