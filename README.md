@@ -44,21 +44,22 @@ Source: https://developer.apple.com/videos/play/wwdc2022/10137/
 ![Simulator Screen Shot - iPhone 13 Pro - 2022-06-12 at 17 06 22](https://user-images.githubusercontent.com/170948/173259145-4907488d-1d41-46eb-b7b4-e0b51d83bce7.png)
 
 
-# Line Charts
+# Chart Types
+## Line Charts
 
 
 
 
-# Bar Charts
+## Bar Charts
 
 
 
 
-# Area Charts
+## Area Charts
 
 
 
 
-# Other Charts
+## Other Charts
 
 
