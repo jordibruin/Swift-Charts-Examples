@@ -35,7 +35,8 @@ See the [open issues](https://github.com/jordibruin/SwiftChartExamples/issues) i
 Each chart needs a preview chart as well as a detail view. The preview chart is used in the home screen of the app for easier navigation. Look at the Simple Chart Simple code to see what the format should be for the preview charts. On the detail view, make sure you add some customisation options in a separate section from the chart.
 
 
-<img width="506" alt="image" src="https://user-images.githubusercontent.com/170948/173253555-6994957a-b3e2-4e6f-b6ed-c7edadb62eb6.png">
+<img src="images/charts_wwdc_slide.png">
+
+Source: https://developer.apple.com/videos/play/wwdc2022/10137/
 
 ![Simulator Screen Shot - iPhone 13 Pro - 2022-06-12 at 17 06 22](https://user-images.githubusercontent.com/170948/173259145-4907488d-1d41-46eb-b7b4-e0b51d83bce7.png)
-
