@@ -27,7 +27,6 @@ struct ContentView: View {
         } detail: {
             NavigationStack {
                 selectedChartType?.detailView
-                
             }
         }
     }
