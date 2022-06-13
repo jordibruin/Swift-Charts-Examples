@@ -49,6 +49,9 @@ struct CustomizableHeatMapDetail: View {
                 )
                 .foregroundStyle(by: .value("Value", point.val))
             }
+            .chartXAxis(.hidden)
+            .chartYAxis(.hidden)
+            
         }
         .chartXAxis(.hidden)
         .chartYAxis(.hidden)
