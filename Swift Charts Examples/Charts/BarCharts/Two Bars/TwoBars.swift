@@ -45,8 +45,6 @@ struct TwoBarsOverview_Previews: PreviewProvider {
 }
 
 struct TwoBarsSimpleDetailView: View {
-
-    @State var lineWidth = 2.0
     @State var interpolationMethod: ChartInterpolationMethod = .cardinal
     @State var strideBy: ChartStrideBy = .day
     @State var showLegend = false
@@ -88,14 +86,6 @@ struct TwoBarsSimpleDetailView: View {
     
     var customisation: some View {
         Section {
-            Stepper(value: $lineWidth, in: 1.0...20.0) {
-                HStack {
-                    Text("Line Width")
-                    Spacer()
-                    Text("\(String(format: "%.0f",lineWidth))")
-                }
-            }
-            
             Toggle("Show Chart Legend", isOn: $showLegend)
         }
     }

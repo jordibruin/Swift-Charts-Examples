@@ -18,8 +18,6 @@ import SwiftUI
 import Charts
 
 struct AreaChartSimpleDetailView: View {
-    
-    @State var lineWidth = 2.0
     @State var interpolationMethod: ChartInterpolationMethod = .cardinal
     @State var chartColor: Color = .blue
     
@@ -31,7 +29,6 @@ struct AreaChartSimpleDetailView: View {
                         x: .value("Date", $0.day),
                         y: .value("Sales", $0.sales)
                     )
-                    .lineStyle(StrokeStyle(lineWidth: lineWidth))
                     .foregroundStyle(chartColor)
                     .interpolationMethod(interpolationMethod.mode)
                 }
@@ -45,14 +42,6 @@ struct AreaChartSimpleDetailView: View {
     
     var customisation: some View {
         Section {
-            Stepper(value: $lineWidth, in: 1.0...20.0) {
-                HStack {
-                    Text("Line Width")
-                    Spacer()
-                    Text("\(String(format: "%.0f",lineWidth))")
-                }
-            }
-            
             Picker("Interpolation Method", selection: $interpolationMethod) {
                 ForEach(ChartInterpolationMethod.allCases) { Text($0.mode.description).tag($0) }
             }
