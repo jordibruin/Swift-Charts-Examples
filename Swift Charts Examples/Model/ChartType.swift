@@ -127,6 +127,8 @@ enum ChartType: String, Identifiable, CaseIterable {
             RangeChartSimpleDetail()
         case .heatMap:
             HeatMapDetailView()
+        case .customizeableHeatMap:
+            CustomizableHeatMapDetail()
         }
         
     }
