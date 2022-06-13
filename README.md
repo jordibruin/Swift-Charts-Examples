@@ -10,6 +10,7 @@ Let's start by recreating the different chart examples that Apple gave in these 
 
 - [x] Basis project setup
 - [x] Simple Line chart
+- [x] Line chart with lollipop
 - [x] Simple Bar chart
 - [x] Simple dual bar chart
 - [x] Range Chart
