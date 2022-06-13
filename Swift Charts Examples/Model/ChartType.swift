@@ -2,7 +2,6 @@
 // Copyright © 2022 Swift Charts Examples.
 // Open Source - MIT License
 
-import Foundation
 import SwiftUI
 
 enum ChartCategory: String, CaseIterable, Hashable, Identifiable {

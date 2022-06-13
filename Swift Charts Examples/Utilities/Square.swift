@@ -1,11 +1,7 @@
 //
-//  Square.swift
-//  Swift Charts Examples
-//
-//  Created by Jordi Bruin on 12/06/2022.
-//
+// Copyright © 2022 Swift Charts Examples.
+// Open Source - MIT License
 
-import Foundation
 import Charts
 import SwiftUI
 
