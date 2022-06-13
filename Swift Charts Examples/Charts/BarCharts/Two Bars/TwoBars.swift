@@ -46,10 +46,10 @@ struct TwoBarsOverview_Previews: PreviewProvider {
 
 struct TwoBarsSimpleDetailView: View {
 
-    @State var lineWidth = 2.0
-    @State var interpolationMethod: ChartInterpolationMethod = .cardinal
-    @State var strideBy: ChartStrideBy = .day
-    @State var showLegend = false
+    @State private var lineWidth = 2.0
+    @State private var interpolationMethod: ChartInterpolationMethod = .cardinal
+    @State private var strideBy: ChartStrideBy = .day
+    @State private var showLegend = false
 
     var body: some View {
         List {
@@ -86,7 +86,7 @@ struct TwoBarsSimpleDetailView: View {
     }
     
     
-    var customisation: some View {
+    private var customisation: some View {
         Section {
             Stepper(value: $lineWidth, in: 1.0...20.0) {
                 HStack {
