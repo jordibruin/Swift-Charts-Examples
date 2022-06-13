@@ -15,7 +15,6 @@ enum ChartCategory: String, CaseIterable, Hashable, Identifiable {
 }
 
 enum ChartType: String, Identifiable, CaseIterable {
-    
     // Line Charts
     case singleLine
     

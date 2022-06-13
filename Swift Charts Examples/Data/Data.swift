@@ -159,7 +159,7 @@ enum LocationData {
     ]
 }
 
-struct PopulationByAgeData {
+enum PopulationByAgeData {
     /// A data series for the bars.
     struct Series: Identifiable {
         /// Sex.
@@ -197,6 +197,6 @@ struct PopulationByAgeData {
             (ageRange: "71-80", percentage: 5),
             (ageRange: "81-90", percentage: 1),
             (ageRange: "91+", percentage: 8)
-        ]),
+        ])
     ]
 }

@@ -1,17 +1,11 @@
 //
-//  ChartStrideBy.swift
-//  Swift Charts Examples
-//
-//  Created by Jordi Bruin on 12/06/2022.
-//
+// Copyright © 2022 Swift Charts Examples.
+// Open Source - MIT License
 
 import Foundation
-
 import Charts
 
-
 enum ChartStrideBy: Identifiable, CaseIterable {
-    
     case second
     case minute
     case hour
@@ -43,6 +37,7 @@ enum ChartStrideBy: Identifiable, CaseIterable {
             return "Year"
         }
     }
+
     var time: Calendar.Component {
         switch self {
         case .second:

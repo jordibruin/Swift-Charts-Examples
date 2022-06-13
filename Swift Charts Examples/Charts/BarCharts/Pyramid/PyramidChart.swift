@@ -98,7 +98,7 @@ struct PyramidChartDetailView: View {
                             (ageRange: "71-80", percentage: Int.random(in: 0..<100)),
                             (ageRange: "81-90", percentage: Int.random(in: 0..<100)),
                             (ageRange: "91+", percentage: Int.random(in: 0..<100))
-                        ]),
+                        ])
                     ]
                 }
             }

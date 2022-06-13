@@ -21,12 +21,6 @@ struct ContentView: View {
                         Text("\(category.rawValue)")
                     }
                 }
-//                ForEach(ChartType.allCases) { chart in
-//                    Section {
-//                    } header: {
-//                        Text("")
-//                    }
-//                }
             }
             .navigationTitle("Swift Charts Examples")
         } detail: {
