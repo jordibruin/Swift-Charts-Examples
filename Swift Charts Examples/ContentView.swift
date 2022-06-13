@@ -51,6 +51,8 @@ struct ContentView: View {
                     RangeChartSimpleDetail()
                 case .heatMap:
                     HeatMapDetailView()
+                case .customizeableHeatMap:
+                    CustomizableHeatMapDetail()
                 }
             }
         }

@@ -34,6 +34,7 @@ enum ChartType: String, Identifiable, CaseIterable {
 
     // HeatMap Charts
     case heatMap
+    case customizeableHeatMap
     
     var id: String { self.rawValue }
     
@@ -55,6 +56,8 @@ enum ChartType: String, Identifiable, CaseIterable {
             return "Simple Range"
         case .heatMap:
             return "Heat Map"
+        case .customizeableHeatMap:
+            return "Heat Map"
         }
     }
     
@@ -75,6 +78,8 @@ enum ChartType: String, Identifiable, CaseIterable {
         case .rangeSimple:
             return .range
         case .heatMap:
+            return .heatMap
+        case .customizeableHeatMap:
             return .heatMap
         }
     }
@@ -98,6 +103,8 @@ enum ChartType: String, Identifiable, CaseIterable {
             RangeChartSimpleOverview()
         case .heatMap:
             HeatMapOverview()
+        case .customizeableHeatMap:
+            CustomizableHeatMapOverview()
         }
     }
 }
