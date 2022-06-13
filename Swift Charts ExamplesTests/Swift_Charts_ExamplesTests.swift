@@ -1,9 +1,6 @@
 //
-//  Swift_Charts_ExamplesTests.swift
-//  Swift Charts ExamplesTests
-//
-//  Created by Jordi Bruin on 12/06/2022.
-//
+// Copyright © 2022 Swift Charts Examples.
+// Open Source - MIT License
 
 import XCTest
 
