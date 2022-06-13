@@ -26,7 +26,7 @@ struct SingleBarDetailView: View {
                     .foregroundStyle(chartColor)
                     .interpolationMethod(interpolationMethod.mode)
                 }
-                .frame(height: 300)
+                .frame(height: Constants.detailChartHeight)
             }
             
             customisation
@@ -74,7 +74,7 @@ struct BarChartSimpleOverview: View {
             }
             .chartXAxis(.hidden)
             .chartYAxis(.hidden)
-                .frame(height: 100)
+            .frame(height: Constants.previewChartHeight)
         }
     }
 }

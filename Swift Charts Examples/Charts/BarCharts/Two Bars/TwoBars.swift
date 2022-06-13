@@ -32,7 +32,7 @@ struct TwoBarsSimpleOverview: View {
             .chartXAxis(.hidden)
             .chartYAxis(.hidden)
             .chartLegend(.hidden)
-                .frame(height: 100)
+            .frame(height: Constants.previewChartHeight)
         }
     }
 }
@@ -76,7 +76,7 @@ struct TwoBarsSimpleDetailView: View {
                 }
                 .chartLegend(showLegend ? .visible : .hidden)
                 .chartLegend(position: .top)
-                .frame(height: 240)
+                .frame(height: Constants.detailChartHeight)
             }
             
             customisation

@@ -35,7 +35,7 @@ struct AreaChartSimpleDetailView: View {
                     .foregroundStyle(chartColor)
                     .interpolationMethod(interpolationMethod.mode)
                 }
-                .frame(height: 300)
+                .frame(height: Constants.detailChartHeight)
             }
             
             customisation
@@ -83,7 +83,7 @@ struct AreaChartSimpleOverview: View {
             }
             .chartXAxis(.hidden)
             .chartYAxis(.hidden)
-                .frame(height: 100)
+                .frame(height: Constants.previewChartHeight)
         }
     }
 }
