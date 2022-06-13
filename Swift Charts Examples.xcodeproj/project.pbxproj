@@ -28,6 +28,7 @@
 		C26088272856A95A00B09DDB /* ChartStrideBy.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26088262856A95A00B09DDB /* ChartStrideBy.swift */; };
 		C260882B2856B3C500B09DDB /* AreaSimple.swift in Sources */ = {isa = PBXBuildFile; fileRef = C260882A2856B3C500B09DDB /* AreaSimple.swift */; };
 		C260882E2856B4C900B09DDB /* SingleBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C260882D2856B4C900B09DDB /* SingleBar.swift */; };
+		C26088322857FDD800B09DDB /* HeatMapMultiColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26088312857FDD800B09DDB /* HeatMapMultiColor.swift */; };
 		FC5466C62857E0D700315632 /* SingleLineLollipop.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5466C52857E0D700315632 /* SingleLineLollipop.swift */; };
 		FC56C9AA2857B8A50044DDED /* HeatMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC56C9A92857B8A50044DDED /* HeatMap.swift */; };
 /* End PBXBuildFile section */
@@ -76,6 +77,7 @@
 		C26088262856A95A00B09DDB /* ChartStrideBy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartStrideBy.swift; sourceTree = "<group>"; };
 		C260882A2856B3C500B09DDB /* AreaSimple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreaSimple.swift; sourceTree = "<group>"; };
 		C260882D2856B4C900B09DDB /* SingleBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleBar.swift; sourceTree = "<group>"; };
+		C26088312857FDD800B09DDB /* HeatMapMultiColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeatMapMultiColor.swift; sourceTree = "<group>"; };
 		FC5466C52857E0D700315632 /* SingleLineLollipop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleLineLollipop.swift; sourceTree = "<group>"; };
 		FC56C9A92857B8A50044DDED /* HeatMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeatMap.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -302,6 +304,7 @@
 			isa = PBXGroup;
 			children = (
 				FC56C9A92857B8A50044DDED /* HeatMap.swift */,
+				C26088312857FDD800B09DDB /* HeatMapMultiColor.swift */,
 				62FF3F012857EB530022930C /* HeatMapCustomization.swift */,
 			);
 			path = HeatMap;
@@ -437,6 +440,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C26088322857FDD800B09DDB /* HeatMapMultiColor.swift in Sources */,
 				C26088252856A45800B09DDB /* Square.swift in Sources */,
 				934A95042857D035009E29F4 /* OneDimensionalBar.swift in Sources */,
 				C260882B2856B3C500B09DDB /* AreaSimple.swift in Sources */,
