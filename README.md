@@ -12,15 +12,15 @@ Let's start by recreating the different chart examples that Apple gave in these 
 - [x] Simple Line chart
 - [x] Simple Bar chart
 - [x] Simple dual bar chart
-- [ ] Range Chart
+- [x] Range Chart
+- [x] Pyramid Chart
+- [x] Area Chart
+- [x] Range with Max and Min Chart
 - [ ] Heartbeat Chart
 - [ ] Cumulative line Chart
-- [x] Pyramid Chart
 - [ ] Heartbeat range Chart
 - [ ] Distribution line + Point Chart
-- [x] Area Chart
 - [ ] Scatter Chart
-- [x] Range with Max and Min Chart
 - [ ] Funky Gradient Chart
 - [ ] Block Block Block Chart
 - [ ] Other Charts
