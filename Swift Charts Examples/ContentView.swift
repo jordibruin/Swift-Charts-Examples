@@ -37,6 +37,8 @@ struct ContentView: View {
                     Text("Select a chart to view")
                 case .singleLine:
                     LineChartSimpleDetailView()
+                case .singleLineLollipop:
+                    SingleLineLollipopView(isPreview: false)
                 case .singleBar:
                     SingleBarDetailView()
                 case .twoBars:
