@@ -9,6 +9,7 @@ struct RangeChartSimpleDetail: View {
     
     @State var barWidth = 10.0
     @State var chartColor: Color = .blue
+    @State var isShowingPoints: Bool = false
     
     var body: some View {
         List {
@@ -22,6 +23,22 @@ struct RangeChartSimpleDetail: View {
                     )
                     .clipShape(Capsule())
                     .foregroundStyle(chartColor.gradient)
+                    
+                    if isShowingPoints {
+                        PointMark(
+                            x: .value("Month", $0.month, unit: .month),
+                            y: .value("Sales Min", $0.dailyMin)
+                        )
+                        .offset(y: -5)
+                        .foregroundStyle(.yellow.gradient)
+                        
+                        PointMark(
+                            x: .value("Month", $0.month, unit: .month),
+                            y: .value("Sales Max", $0.dailyMax)
+                        )
+                        .offset(y: 5)
+                        .foregroundStyle(.yellow.gradient)
+                    }
                 }
                 .frame(height: 300)
             }
@@ -33,7 +50,7 @@ struct RangeChartSimpleDetail: View {
     
     var customisation: some View {
         Section {
-            Stepper(value: $barWidth, in: 1.0...20.0) {
+            Stepper(value: $barWidth, in: 5.0...20.0) {
                 HStack {
                     Text("Bar Width")
                     Spacer()
@@ -42,6 +59,7 @@ struct RangeChartSimpleDetail: View {
             }
             
             ColorPicker("Color Picker", selection: $chartColor)
+            Toggle("Show Min & Max Points", isOn: $isShowingPoints.animation())
         }
     }
 }
