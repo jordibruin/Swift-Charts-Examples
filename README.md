@@ -30,7 +30,7 @@ Let's start by recreating the different chart examples that Apple gave in these 
 - [ ] Multi-language Support
 - [ ] Make all charts accesssible
 
-See the [open issues](https://github.com/jordibruin/SwiftChartExamples/issues) if you think anything is missing from this list.
+See the [open issues](https://github.com/jordibruin/SwiftChartExamples/issues) if you think anything is missing from this list. You can also contact me on [Twitter](https://www.twitter.com/jordibruin) if you have any suggestions or feedback.
 
 ## Chart Types
 
