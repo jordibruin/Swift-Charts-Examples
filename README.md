@@ -16,6 +16,7 @@ Let's start by recreating the different chart examples that Apple gave in these 
 - [x] Pyramid Chart
 - [x] Area Chart
 - [x] Range with Max and Min Chart
+- [x] One dimensional bar
 - [ ] Heartbeat Chart
 - [ ] Cumulative line Chart
 - [ ] Heartbeat range Chart
