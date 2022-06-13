@@ -29,7 +29,7 @@ struct TwoBarsSimpleOverview: View {
             .chartXAxis(.hidden)
             .chartYAxis(.hidden)
             .chartLegend(.hidden)
-                .frame(height: 100)
+            .frame(height: Constants.previewChartHeight)
         }
     }
 }
@@ -42,10 +42,11 @@ struct TwoBarsOverview_Previews: PreviewProvider {
 }
 
 struct TwoBarsSimpleDetailView: View {
-    @State var lineWidth = 2.0
-    @State var interpolationMethod: ChartInterpolationMethod = .cardinal
-    @State var strideBy: ChartStrideBy = .day
-    @State var showLegend = false
+    @State private var barWidth = 12.0
+    @State private var interpolationMethod: ChartInterpolationMethod = .cardinal
+    @State private var strideBy: ChartStrideBy = .day
+    @State private var showLegend = false
+    @State private var showBarsStacked = true
 
     var body: some View {
         List {
@@ -54,7 +55,8 @@ struct TwoBarsSimpleDetailView: View {
                     ForEach(series.sales, id: \.weekday) { element in
                         BarMark(
                             x: .value("Day", element.weekday, unit: .day),
-                            y: .value("Sales", element.sales)
+                            y: .value("Sales", element.sales),
+                            width: .fixed(barWidth)
                         )
                         .accessibilityLabel("\(element.weekday.formatted())")
                         .accessibilityValue("\(element.sales)")
@@ -62,6 +64,7 @@ struct TwoBarsSimpleDetailView: View {
                     .foregroundStyle(by: .value("City", series.city))
                     .symbol(by: .value("City", series.city))
                     .interpolationMethod(.catmullRom)
+                    .position(by: .value("City", showBarsStacked ? "Common" : series.city))
                 }
                 .chartXAxis {
                     AxisMarks(values: .stride(by: strideBy.time)) { _ in
@@ -72,7 +75,7 @@ struct TwoBarsSimpleDetailView: View {
                 }
                 .chartLegend(showLegend ? .visible : .hidden)
                 .chartLegend(position: .top)
-                .frame(height: 240)
+                .frame(height: Constants.detailChartHeight)
             }
 
             customisation
@@ -80,17 +83,18 @@ struct TwoBarsSimpleDetailView: View {
         .navigationBarTitle("Two Bars", displayMode: .inline)
     }
 
-    var customisation: some View {
+    private var customisation: some View {
         Section {
-            Stepper(value: $lineWidth, in: 1.0...20.0) {
+            Stepper(value: $barWidth, in: 1.0...20.0) {
                 HStack {
-                    Text("Line Width")
+                    Text("Bar Width")
                     Spacer()
-                    Text("\(String(format: "%.0f",lineWidth))")
+                    Text("\(String(format: "%.0f", barWidth))")
                 }
             }
             
             Toggle("Show Chart Legend", isOn: $showLegend)
+            Toggle("Show Bars Stacked", isOn: $showBarsStacked)
         }
     }
 }

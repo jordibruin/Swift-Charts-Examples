@@ -33,10 +33,10 @@ struct AreaChartSimpleOverview_Previews: PreviewProvider {
 }
 
 struct AreaChartSimpleDetailView: View {
-    @State var lineWidth = 2.0
-    @State var interpolationMethod: ChartInterpolationMethod = .cardinal
-    @State var chartColor: Color = .blue
-    
+    @State private var lineWidth = 2.0
+    @State private var interpolationMethod: ChartInterpolationMethod = .cardinal
+    @State private var chartColor: Color = .blue
+
     var body: some View {
         List {
             Section {
@@ -49,7 +49,7 @@ struct AreaChartSimpleDetailView: View {
                     .foregroundStyle(chartColor)
                     .interpolationMethod(interpolationMethod.mode)
                 }
-                .frame(height: 300)
+                .frame(height: Constants.detailChartHeight)
             }
             
             customisation
@@ -57,7 +57,7 @@ struct AreaChartSimpleDetailView: View {
         .navigationBarTitleDisplayMode(.inline)
     }
     
-    var customisation: some View {
+    private var customisation: some View {
         Section {
             Stepper(value: $lineWidth, in: 1.0...20.0) {
                 HStack {
@@ -76,7 +76,7 @@ struct AreaChartSimpleDetailView: View {
     }
 }
 
-struct BarChartSimpleDetailView_Previews: PreviewProvider {
+struct AreaChartSimpleDetailView_Previews: PreviewProvider {
     static var previews: some View {
         AreaChartSimpleDetailView()
     }

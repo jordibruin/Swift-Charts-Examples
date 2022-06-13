@@ -5,7 +5,6 @@
 import SwiftUI
 
 struct ContentView: View {
-    
     @State private var selectedChartType: ChartType?
     
     var body: some View {
@@ -41,8 +40,12 @@ struct ContentView: View {
                     SingleBarDetailView()
                 case .twoBars:
                     TwoBarsSimpleDetailView()
+                case .pyramid:
+                    PyramidChartDetailView()
                 case .areaSimple:
                     AreaChartSimpleDetailView()
+                case .rangeSimple:
+                    RangeChartSimpleDetailView()
                 }
             }
         }

@@ -9,6 +9,7 @@ enum ChartCategory: String, CaseIterable, Hashable, Identifiable {
     case line
     case bar
     case area
+    case range
     
     var id: String { self.rawValue }
 }
@@ -21,9 +22,13 @@ enum ChartType: String, Identifiable, CaseIterable {
     // Bar Charts
     case singleBar
     case twoBars
+    case pyramid
     
     // Area Charts
     case areaSimple
+    
+    // Range Charts
+    case rangeSimple
     
     var id: String { self.rawValue }
     
@@ -35,8 +40,12 @@ enum ChartType: String, Identifiable, CaseIterable {
             return "Single Bar"
         case .twoBars:
             return "Two Bars"
+        case .pyramid:
+            return "Pyramid"
         case .areaSimple:
             return "Simple Area"
+        case .rangeSimple:
+            return "Simple Range"
         }
     }
     
@@ -48,8 +57,12 @@ enum ChartType: String, Identifiable, CaseIterable {
             return .bar
         case .twoBars:
             return .bar
+        case .pyramid:
+            return .bar
         case .areaSimple:
             return .area
+        case .rangeSimple:
+            return .range
         }
     }
     
@@ -62,8 +75,12 @@ enum ChartType: String, Identifiable, CaseIterable {
             BarChartSimpleOverview()
         case .twoBars:
             TwoBarsSimpleOverview()
+        case .pyramid:
+            PyramidChartOverview()
         case .areaSimple:
             AreaChartSimpleOverview()
+        case .rangeSimple:
+            RangeChartSimpleOverview()
         }
     }
 }
