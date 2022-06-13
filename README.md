@@ -17,13 +17,13 @@ Let's start by recreating the different chart examples that Apple gave in these 
 - [x] Area Chart
 - [x] Range with Max and Min Chart
 - [x] One dimensional bar
+- [x] Heatmap Block Chart
 - [ ] Heartbeat Chart
 - [ ] Cumulative line Chart
 - [ ] Heartbeat range Chart
 - [ ] Distribution line + Point Chart
 - [ ] Scatter Chart
 - [ ] Funky Gradient Chart
-- [ ] Block Block Block Chart
 - [ ] Other Charts
 - [ ] Multi-language Support
 
