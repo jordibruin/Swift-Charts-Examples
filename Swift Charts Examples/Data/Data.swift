@@ -158,3 +158,45 @@ enum LocationData {
         ])
     ]
 }
+
+struct PopulationByAgeData {
+    /// A data series for the bars.
+    struct Series: Identifiable {
+        /// Sex.
+        let sex: String
+
+        /// Percentage population for ageRange
+        let population: [(ageRange: String, percentage: Int)]
+
+        /// The identifier for the series.
+        var id: String { sex }
+    }
+    
+    /// Sales by location and weekday for the last 12 months.
+    static let example: [Series] = [
+        .init(sex: "Male", population: [
+            (ageRange: "0-10", percentage: 3),
+            (ageRange: "11-20", percentage: 29),
+            (ageRange: "21-30", percentage: 14),
+            (ageRange: "31-40", percentage: 4),
+            (ageRange: "41-50", percentage: 7),
+            (ageRange: "51-60", percentage: 2),
+            (ageRange: "61-70", percentage: 25),
+            (ageRange: "71-80", percentage: 6),
+            (ageRange: "81-90", percentage: 9),
+            (ageRange: "91+", percentage: 1)
+        ]),
+        .init(sex: "Female", population: [
+            (ageRange: "0-10", percentage: 38),
+            (ageRange: "11-20", percentage: 2),
+            (ageRange: "21-30", percentage: 10),
+            (ageRange: "31-40", percentage: 22),
+            (ageRange: "41-50", percentage: 7),
+            (ageRange: "51-60", percentage: 4),
+            (ageRange: "61-70", percentage: 3),
+            (ageRange: "71-80", percentage: 5),
+            (ageRange: "81-90", percentage: 1),
+            (ageRange: "91+", percentage: 8)
+        ]),
+    ]
+}
