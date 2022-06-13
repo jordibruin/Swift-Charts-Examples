@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>FILEHEADER</key>
+    <string>
+// Copyright © ___YEAR___ ___ORGANIZATIONNAME___.
+// Open Source - MIT License</string>
+    <key>ORGANIZATIONNAME</key>
+    <string>Swift Charts Examples</string>
+</dict>
+</plist>
