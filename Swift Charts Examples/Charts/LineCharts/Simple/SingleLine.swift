@@ -20,7 +20,7 @@ struct LineChartSimpleOverview: View {
             }
             .chartXAxis(.hidden)
             .chartYAxis(.hidden)
-                .frame(height: 100)
+            .frame(height: Constants.previewChartHeight)
         }
     }
 }
@@ -33,12 +33,12 @@ struct SalesOverview_Previews: PreviewProvider {
 }
 
 struct LineChartSimpleDetailView: View {
-    
-    @State var lineWidth = 2.0
-    @State var interpolationMethod: ChartInterpolationMethod = .cardinal
-    @State var chartColor: Color = .blue
-    @State var showSymbols = false
-    
+
+    @State private var lineWidth = 2.0
+    @State private var interpolationMethod: ChartInterpolationMethod = .cardinal
+    @State private var chartColor: Color = .blue
+    @State private var showSymbols = false
+
     var body: some View {
         List {
             Section {
@@ -53,7 +53,7 @@ struct LineChartSimpleDetailView: View {
                     .symbol(Circle().strokeBorder(lineWidth: lineWidth))
                     .symbolSize(showSymbols ? 60 : 0)
                 }
-//                .frame(height: 300)
+                .frame(height: Constants.detailChartHeight)
             }
             
             customisation
@@ -61,7 +61,7 @@ struct LineChartSimpleDetailView: View {
         .navigationBarTitleDisplayMode(.inline)
     }
     
-    var customisation: some View {
+    private var customisation: some View {
         Section {
             Stepper(value: $lineWidth, in: 1.0...20.0) {
                 HStack {
