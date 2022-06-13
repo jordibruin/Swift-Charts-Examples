@@ -50,6 +50,7 @@ struct TwoBarsSimpleDetailView: View {
     @State var interpolationMethod: ChartInterpolationMethod = .cardinal
     @State var strideBy: ChartStrideBy = .day
     @State var showLegend = false
+    @State var showBarsStacked = true
 
     var body: some View {
         List {
@@ -66,6 +67,7 @@ struct TwoBarsSimpleDetailView: View {
                     .foregroundStyle(by: .value("City", series.city))
                     .symbol(by: .value("City", series.city))
                     .interpolationMethod(.catmullRom)
+                    .position(by: .value("City", showBarsStacked ? "Common" : series.city))
                 }
                 .chartXAxis {
                     AxisMarks(values: .stride(by: strideBy.time)) { _ in
@@ -97,6 +99,7 @@ struct TwoBarsSimpleDetailView: View {
             }
             
             Toggle("Show Chart Legend", isOn: $showLegend)
+            Toggle("Show Bars Stacked", isOn: $showBarsStacked)
         }
     }
 }
