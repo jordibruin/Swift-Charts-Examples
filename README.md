@@ -15,7 +15,7 @@ Let's start by recreating the different chart examples that Apple gave in these 
 - [ ] Range Chart
 - [ ] Heartbeat Chart
 - [ ] Cumulative line Chart
-- [ ] Pyramid Chart
+- [x] Pyramid Chart
 - [ ] Heartbeat range Chart
 - [ ] Distribution line + Point Chart
 - [x] Area Chart
