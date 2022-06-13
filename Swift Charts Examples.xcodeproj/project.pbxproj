@@ -25,6 +25,7 @@
 		C26088272856A95A00B09DDB /* ChartStrideBy.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26088262856A95A00B09DDB /* ChartStrideBy.swift */; };
 		C260882B2856B3C500B09DDB /* AreaSimple.swift in Sources */ = {isa = PBXBuildFile; fileRef = C260882A2856B3C500B09DDB /* AreaSimple.swift */; };
 		C260882E2856B4C900B09DDB /* SingleBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C260882D2856B4C900B09DDB /* SingleBar.swift */; };
+		FC5466C32857DB7F00315632 /* SingleLineLollipop.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5466C22857DB7F00315632 /* SingleLineLollipop.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +69,7 @@
 		C26088262856A95A00B09DDB /* ChartStrideBy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartStrideBy.swift; sourceTree = "<group>"; };
 		C260882A2856B3C500B09DDB /* AreaSimple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreaSimple.swift; sourceTree = "<group>"; };
 		C260882D2856B4C900B09DDB /* SingleBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleBar.swift; sourceTree = "<group>"; };
+		FC5466C22857DB7F00315632 /* SingleLineLollipop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleLineLollipop.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,7 +103,7 @@
 				2E5763C528576B1B006C7C36 /* PyramidChart.swift */,
 			);
 			path = Pyramid;
-      sourceTree = "<group>";
+			sourceTree = "<group>";
 		};
 		88B3E5CC285748E400840CAA /* RangeCharts */ = {
 			isa = PBXGroup;
@@ -214,6 +216,7 @@
 			isa = PBXGroup;
 			children = (
 				C260881A2856968D00B09DDB /* Simple */,
+				FC5466C12857DB6500315632 /* Lollipop */,
 			);
 			path = LineCharts;
 			sourceTree = "<group>";
@@ -274,6 +277,14 @@
 				C260882D2856B4C900B09DDB /* SingleBar.swift */,
 			);
 			path = Simple;
+			sourceTree = "<group>";
+		};
+		FC5466C12857DB6500315632 /* Lollipop */ = {
+			isa = PBXGroup;
+			children = (
+				FC5466C22857DB7F00315632 /* SingleLineLollipop.swift */,
+			);
+			path = Lollipop;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -418,6 +429,7 @@
 				2E5763C628576B1B006C7C36 /* PyramidChart.swift in Sources */,
 				C26088132856935B00B09DDB /* ChartType.swift in Sources */,
 				C26088152856960000B09DDB /* SingleLine.swift in Sources */,
+				FC5466C32857DB7F00315632 /* SingleLineLollipop.swift in Sources */,
 				C26088272856A95A00B09DDB /* ChartStrideBy.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
