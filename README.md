@@ -1,4 +1,4 @@
-# SwiftChartExamples
+# Swift Charts Examples
 An overview of the different types of charts you can make with Swift Charts
 
 <img width="1511" alt="image" src="https://user-images.githubusercontent.com/170948/173253882-1a80b934-a0b9-4acb-a290-a299ae3fdd7d.png">
