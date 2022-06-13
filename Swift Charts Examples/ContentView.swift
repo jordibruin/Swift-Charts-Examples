@@ -22,38 +22,11 @@ struct ContentView: View {
                         Text("\(category.rawValue)")
                     }
                 }
-//                ForEach(ChartType.allCases) { chart in
-//                    Section {
-//                    } header: {
-//                        Text("")
-//                    }
-//                }
             }
-            .navigationTitle("Swift Charts Examples")
+            .navigationTitle("Charts")
         } detail: {
             NavigationStack {
-                switch selectedChartType {
-                case .none:
-                    Text("Select a chart to view")
-                case .singleLine:
-                    LineChartSimpleDetailView()
-                case .singleBar:
-                    SingleBarDetailView()
-                case .twoBars:
-                    TwoBarsSimpleDetailView()
-                case .oneDimensionalBar:
-                    OneDimensionalBarSimpleDetailView()
-                case .pyramid:
-                    PyramidChartDetailView()
-                case .areaSimple:
-                    AreaChartSimpleDetailView()
-                case .rangeSimple:
-                    RangeChartSimpleDetail()
-                case .heatMap:
-                    HeatMapDetailView()
-                case .customizeableHeatMap:
-                    CustomizableHeatMapDetail()
-                }
+                selectedChartType?.detailView
             }
         }
     }

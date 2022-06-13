@@ -28,6 +28,7 @@
 		C26088272856A95A00B09DDB /* ChartStrideBy.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26088262856A95A00B09DDB /* ChartStrideBy.swift */; };
 		C260882B2856B3C500B09DDB /* AreaSimple.swift in Sources */ = {isa = PBXBuildFile; fileRef = C260882A2856B3C500B09DDB /* AreaSimple.swift */; };
 		C260882E2856B4C900B09DDB /* SingleBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C260882D2856B4C900B09DDB /* SingleBar.swift */; };
+		FC5466C62857E0D700315632 /* SingleLineLollipop.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5466C52857E0D700315632 /* SingleLineLollipop.swift */; };
 		FC56C9AA2857B8A50044DDED /* HeatMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC56C9A92857B8A50044DDED /* HeatMap.swift */; };
 /* End PBXBuildFile section */
 
@@ -75,6 +76,7 @@
 		C26088262856A95A00B09DDB /* ChartStrideBy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartStrideBy.swift; sourceTree = "<group>"; };
 		C260882A2856B3C500B09DDB /* AreaSimple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreaSimple.swift; sourceTree = "<group>"; };
 		C260882D2856B4C900B09DDB /* SingleBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleBar.swift; sourceTree = "<group>"; };
+		FC5466C52857E0D700315632 /* SingleLineLollipop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleLineLollipop.swift; sourceTree = "<group>"; };
 		FC56C9A92857B8A50044DDED /* HeatMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeatMap.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -224,6 +226,7 @@
 			isa = PBXGroup;
 			children = (
 				C260881A2856968D00B09DDB /* Simple */,
+				FC5466C82857E0F200315632 /* Lollipop */,
 			);
 			path = LineCharts;
 			sourceTree = "<group>";
@@ -285,6 +288,14 @@
 				C260882D2856B4C900B09DDB /* SingleBar.swift */,
 			);
 			path = Simple;
+			sourceTree = "<group>";
+		};
+		FC5466C82857E0F200315632 /* Lollipop */ = {
+			isa = PBXGroup;
+			children = (
+				FC5466C52857E0D700315632 /* SingleLineLollipop.swift */,
+			);
+			path = Lollipop;
 			sourceTree = "<group>";
 		};
 		FC56C9A82857B8790044DDED /* HeatMap */ = {
@@ -435,6 +446,7 @@
 				FC56C9AA2857B8A50044DDED /* HeatMap.swift in Sources */,
 				C26088202856A34400B09DDB /* TwoBars.swift in Sources */,
 				62FF3F022857EB530022930C /* HeatMapCustomization.swift in Sources */,
+				FC5466C62857E0D700315632 /* SingleLineLollipop.swift in Sources */,
 				C26088182856963D00B09DDB /* Data.swift in Sources */,
 				C260882E2856B4C900B09DDB /* SingleBar.swift in Sources */,
 				C22EB59E28568D0B000B9F9A /* Swift_Charts_ExamplesApp.swift in Sources */,

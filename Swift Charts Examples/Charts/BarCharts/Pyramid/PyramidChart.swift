@@ -2,8 +2,8 @@
 // Copyright © 2022 Swift Charts Examples.
 // Open Source - MIT License
 
-import Charts
 import SwiftUI
+import Charts
 
 struct PyramidChartOverview: View {
     var body: some View {
