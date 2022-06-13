@@ -10,14 +10,15 @@ Let's start by recreating the different chart examples that Apple gave in these 
 
 - [x] Basis project setup
 - [x] Simple Line chart
-- [ ] Simple dual bar chart
+- [x] Simple Bar chart
+- [x] Simple dual bar chart
 - [ ] Range Chart
 - [ ] Heartbeat Chart
 - [ ] Cumulative line Chart
 - [ ] Pyramid Chart
 - [ ] Heartbeat range Chart
 - [ ] Distribution line + Point Chart
-- [ ] Area Chart
+- [x] Area Chart
 - [ ] Scatter Chart
 - [ ] Range with Max and Min Chart
 - [ ] Funky Gradient Chart
@@ -36,7 +37,5 @@ Each chart needs a preview chart as well as a detail view. The preview chart is 
 
 <img width="506" alt="image" src="https://user-images.githubusercontent.com/170948/173253555-6994957a-b3e2-4e6f-b6ed-c7edadb62eb6.png">
 
-
-
-https://user-images.githubusercontent.com/170948/173256051-6c1c5ee8-492f-451a-b6ee-5831cc217763.mp4
+![Simulator Screen Shot - iPhone 13 Pro - 2022-06-12 at 17 06 22](https://user-images.githubusercontent.com/170948/173259145-4907488d-1d41-46eb-b7b4-e0b51d83bce7.png)
 
