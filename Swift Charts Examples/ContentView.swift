@@ -14,15 +14,23 @@ struct ContentView: View {
     var body: some View {
         NavigationSplitView {
             List(selection: $selectedChartType) {
-                ForEach(ChartType.allCases) { chart in
+                ForEach(ChartCategory.allCases) { category in
                     Section {
-                        NavigationLink(value: chart) {
-                            chart.view
+                        ForEach(ChartType.allCases.filter { $0.category == category }) { chart in
+                            NavigationLink(value: chart) {
+                                chart.view
+                            }
                         }
                     } header: {
-                        Text("")
+                        Text("\(category.rawValue)")
                     }
                 }
+//                ForEach(ChartType.allCases) { chart in
+//                    Section {
+//                    } header: {
+//                        Text("")
+//                    }
+//                }
             }
             .navigationTitle("Swift Charts Examples")
         } detail: {
@@ -30,10 +38,14 @@ struct ContentView: View {
                 switch selectedChartType {
                 case .none:
                     Text("Select a chart to view")
-                case .lineChartSimple:
+                case .lineSimple:
                     LineChartSimpleDetailView()
+                case .barSimple:
+                    BarChartSimpleDetailView()
                 case .twoBarsSimple:
                     TwoBarsSimpleDetailView()
+                case .areaSimple:
+                    AreaChartSimpleDetailView()
                 }
             }
         }

@@ -8,35 +8,29 @@
 import SwiftUI
 import Charts
 
-struct TwoBarsSimpleChart: View {
-    var body: some View {
-        Chart {
-            ForEach(LocationData.last30Days) { series in
-                ForEach(series.sales, id: \.weekday) { element in
-                    BarMark(
-                        x: .value("Day", element.weekday, unit: .day),
-                        y: .value("Sales", element.sales)
-                    )
-                    .accessibilityLabel("\(element.weekday.formatted())")
-                    .accessibilityValue("\(element.sales)")
-                }
-                .foregroundStyle(by: .value("City", series.city))
-                .symbol(by: .value("City", series.city))
-            }
-        }
-        .chartXAxis(.hidden)
-        .chartYAxis(.hidden)
-    }
-}
-
 struct TwoBarsSimpleOverview: View {
     var body: some View {
         VStack(alignment: .leading) {
-            Text("Two Bars (Simple)")
+            Text("Two Bars")
                 .font(.callout)
                 .foregroundStyle(.secondary)
 
-            TwoBarsSimpleChart()
+            Chart {
+                ForEach(LocationData.last30Days) { series in
+                    ForEach(series.sales, id: \.weekday) { element in
+                        BarMark(
+                            x: .value("Day", element.weekday, unit: .day),
+                            y: .value("Sales", element.sales)
+                        )
+                        .accessibilityLabel("\(element.weekday.formatted())")
+                        .accessibilityValue("\(element.sales)")
+                    }
+                    .foregroundStyle(by: .value("City", series.city))
+                    .symbol(by: .value("City", series.city))
+                }
+            }
+            .chartXAxis(.hidden)
+            .chartYAxis(.hidden)
                 .frame(height: 100)
         }
     }

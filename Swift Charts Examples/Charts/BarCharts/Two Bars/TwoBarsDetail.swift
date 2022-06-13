@@ -46,7 +46,7 @@ struct TwoBarsSimpleDetailView: View {
             customisation
         }
 
-        .navigationBarTitle("Two Bars Simple", displayMode: .inline)
+        .navigationBarTitle("Two Bars", displayMode: .inline)
     }
     
     
