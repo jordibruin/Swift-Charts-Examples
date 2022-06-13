@@ -26,6 +26,7 @@
 		C26088272856A95A00B09DDB /* ChartStrideBy.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26088262856A95A00B09DDB /* ChartStrideBy.swift */; };
 		C260882B2856B3C500B09DDB /* AreaSimple.swift in Sources */ = {isa = PBXBuildFile; fileRef = C260882A2856B3C500B09DDB /* AreaSimple.swift */; };
 		C260882E2856B4C900B09DDB /* SingleBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C260882D2856B4C900B09DDB /* SingleBar.swift */; };
+		FC56C9AA2857B8A50044DDED /* HeatMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC56C9A92857B8A50044DDED /* HeatMap.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,6 +71,7 @@
 		C26088262856A95A00B09DDB /* ChartStrideBy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartStrideBy.swift; sourceTree = "<group>"; };
 		C260882A2856B3C500B09DDB /* AreaSimple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreaSimple.swift; sourceTree = "<group>"; };
 		C260882D2856B4C900B09DDB /* SingleBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleBar.swift; sourceTree = "<group>"; };
+		FC56C9A92857B8A50044DDED /* HeatMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeatMap.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -190,6 +192,7 @@
 				C26088282856B3AE00B09DDB /* AreaCharts */,
 				C260881D2856A32C00B09DDB /* BarCharts */,
 				C26088192856968400B09DDB /* LineCharts */,
+				FC56C9A82857B8790044DDED /* HeatMap */,
 			);
 			path = Charts;
 			sourceTree = "<group>";
@@ -277,6 +280,14 @@
 				C260882D2856B4C900B09DDB /* SingleBar.swift */,
 			);
 			path = Simple;
+			sourceTree = "<group>";
+		};
+		FC56C9A82857B8790044DDED /* HeatMap */ = {
+			isa = PBXGroup;
+			children = (
+				FC56C9A92857B8A50044DDED /* HeatMap.swift */,
+			);
+			path = HeatMap;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -415,6 +426,7 @@
 				88B3E5D02857493B00840CAA /* RangeSimple.swift in Sources */,
 				C22EB5A028568D0B000B9F9A /* ContentView.swift in Sources */,
 				C260881C28569D1B00B09DDB /* InterpolationMethod.swift in Sources */,
+				FC56C9AA2857B8A50044DDED /* HeatMap.swift in Sources */,
 				C26088202856A34400B09DDB /* TwoBars.swift in Sources */,
 				C26088182856963D00B09DDB /* Data.swift in Sources */,
 				C260882E2856B4C900B09DDB /* SingleBar.swift in Sources */,
