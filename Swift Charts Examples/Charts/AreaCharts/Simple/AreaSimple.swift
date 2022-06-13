@@ -22,7 +22,17 @@ struct AreaChartSimpleDetailView: View {
     @State private var lineWidth = 2.0
     @State private var interpolationMethod: ChartInterpolationMethod = .cardinal
     @State private var chartColor: Color = .blue
-    
+    @State private var showGradient: Bool = true
+    @State private var gradientRange = 1.0
+
+    private var gradient: Gradient {
+        var colors = [chartColor]
+        if showGradient {
+            colors.append(chartColor.opacity(-gradientRange))
+        }
+        return Gradient(colors: colors)
+    }
+
     var body: some View {
         List {
             Section {
@@ -31,9 +41,16 @@ struct AreaChartSimpleDetailView: View {
                         x: .value("Date", $0.day),
                         y: .value("Sales", $0.sales)
                     )
-                    .lineStyle(StrokeStyle(lineWidth: lineWidth))
-                    .foregroundStyle(chartColor)
+                    .foregroundStyle(gradient)
                     .interpolationMethod(interpolationMethod.mode)
+
+                    LineMark(
+                        x: .value("Date", $0.day),
+                        y: .value("Sales", $0.sales)
+                    )
+                    .lineStyle(StrokeStyle(lineWidth: lineWidth))
+                    .interpolationMethod(interpolationMethod.mode)
+                    .foregroundStyle(chartColor)
                 }
                 .frame(height: Constants.detailChartHeight)
             }
@@ -58,13 +75,27 @@ struct AreaChartSimpleDetailView: View {
             }
             
             ColorPicker("Color Picker", selection: $chartColor)
+            Toggle("Show Gradient", isOn: $showGradient.animation())
+
+            if showGradient {
+                HStack {
+                    Slider(value: $gradientRange) {
+                        Text("Gradient Range")
+                    } minimumValueLabel: {
+                        Text("Min")
+                    } maximumValueLabel: {
+                        Text("Max")
+                    }
+                    Text("\(String(format: "%.1f",gradientRange))")
+                }
+            }
         }
     }
 }
 
-struct BarChartSimpleDetailView_Previews: PreviewProvider {
+struct AreaChartSimpleDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        LineChartSimpleDetailView()
+        AreaChartSimpleDetailView()
     }
 }
 
@@ -88,7 +119,7 @@ struct AreaChartSimpleOverview: View {
     }
 }
 
-struct AreaChartSimpleOverview_Previews: PreviewProvider {
+struct AreaChartSimpleOverview2_Previews: PreviewProvider {
     static var previews: some View {
         AreaChartSimpleOverview()
             .padding()

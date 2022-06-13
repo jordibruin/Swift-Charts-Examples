@@ -53,7 +53,7 @@ struct SingleBarDetailView: View {
     }
 }
 
-struct AreaChartSimpleDetailView_Previews: PreviewProvider {
+struct SingleLineChartSimpleDetailView_Previews: PreviewProvider {
     static var previews: some View {
         LineChartSimpleDetailView()
     }
