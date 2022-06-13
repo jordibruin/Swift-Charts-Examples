@@ -61,9 +61,12 @@ struct PyramidChartDetailView: View {
                 }
             }
             .chartXAxis {
-                AxisMarks(preset: .aligned, position: .automatic) { _ in
+                AxisMarks(preset: .aligned, position: .automatic) { value in
+                    let rawValue = value.as(Int.self)!
+                    let percentage = abs(Double(rawValue) / 100)
+                    
                     AxisGridLine()
-                    AxisValueLabel()
+                    AxisValueLabel(percentage.formatted(.percent))
                 }
             }
             .chartLegend(position: .top, alignment: .center)
