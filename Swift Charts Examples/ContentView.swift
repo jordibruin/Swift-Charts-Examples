@@ -45,6 +45,8 @@ struct ContentView: View {
                     PyramidChartDetailView()
                 case .areaSimple:
                     AreaChartSimpleDetailView()
+                case .rangeSimple:
+                    RangeChartSimpleDetail()
                 }
             }
         }

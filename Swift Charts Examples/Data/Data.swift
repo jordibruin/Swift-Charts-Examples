@@ -8,8 +8,13 @@ func date(year: Int, month: Int, day: Int = 1) -> Date {
     Calendar.current.date(from: DateComponents(year: year, month: month, day: day)) ?? Date()
 }
 
+enum Constants {
+    static let previewChartHeight: CGFloat = 100
+    static let detailChartHeight: CGFloat = 300
+}
+
 /// Data for the daily and monthly sales charts.
-struct SalesData {
+enum SalesData {
     /// Sales by day for the last 30 days.
     static let last30Days = [
         (day: date(year: 2022, month: 5, day: 8), sales: 168),
@@ -80,7 +85,7 @@ struct SalesData {
 }
 
 /// Data for the sales by location and weekday charts.
-struct LocationData {
+enum LocationData {
     /// A data series for the lines.
     struct Series: Identifiable {
         /// The name of the city.
