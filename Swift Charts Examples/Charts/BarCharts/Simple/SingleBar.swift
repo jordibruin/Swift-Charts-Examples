@@ -8,7 +8,7 @@
 import SwiftUI
 import Charts
 
-struct BarChartSimpleDetailView: View {
+struct SingleBarDetailView: View {
     
     @State var lineWidth = 2.0
     @State var interpolationMethod: ChartInterpolationMethod = .cardinal

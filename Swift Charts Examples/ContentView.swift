@@ -38,11 +38,11 @@ struct ContentView: View {
                 switch selectedChartType {
                 case .none:
                     Text("Select a chart to view")
-                case .lineSimple:
+                case .singleLine:
                     LineChartSimpleDetailView()
-                case .barSimple:
-                    BarChartSimpleDetailView()
-                case .twoBarsSimple:
+                case .singleBar:
+                    SingleBarDetailView()
+                case .twoBars:
                     TwoBarsSimpleDetailView()
                 case .areaSimple:
                     AreaChartSimpleDetailView()

@@ -19,11 +19,11 @@ enum ChartCategory: String, CaseIterable, Hashable, Identifiable {
 enum ChartType: String, Identifiable, CaseIterable {
     
     // Line Charts
-    case lineSimple
+    case singleLine
     
     // Bar Charts
-    case barSimple
-    case twoBarsSimple
+    case singleBar
+    case twoBars
     
     // Area Charts
     case areaSimple
@@ -32,11 +32,11 @@ enum ChartType: String, Identifiable, CaseIterable {
     
     var title: String {
         switch self {
-        case .lineSimple:
+        case .singleLine:
             return "Single Line"
-        case .barSimple:
+        case .singleBar:
             return "Single Bar"
-        case .twoBarsSimple:
+        case .twoBars:
             return "Two Bars"
         case .areaSimple:
             return "Simple Area"
@@ -45,11 +45,11 @@ enum ChartType: String, Identifiable, CaseIterable {
     
     var category: ChartCategory {
         switch self {
-        case .lineSimple:
+        case .singleLine:
             return .line
-        case .barSimple:
+        case .singleBar:
             return .bar
-        case .twoBarsSimple:
+        case .twoBars:
             return .bar
         case .areaSimple:
             return .area
@@ -59,11 +59,11 @@ enum ChartType: String, Identifiable, CaseIterable {
     @ViewBuilder
     var view: some View {
         switch self {
-        case .lineSimple:
+        case .singleLine:
             LineChartSimpleOverview()
-        case .barSimple:
+        case .singleBar:
             BarChartSimpleOverview()
-        case .twoBarsSimple:
+        case .twoBars:
             TwoBarsSimpleOverview()
         case .areaSimple:
             AreaChartSimpleOverview()
