@@ -51,6 +51,8 @@ struct ContentView: View {
                     AreaChartSimpleDetailView()
                 case .rangeSimple:
                     RangeChartSimpleDetail()
+                case .heatMap:
+                    HeatMapDetailView()
                 }
             }
         }
