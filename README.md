@@ -20,7 +20,7 @@ Let's start by recreating the different chart examples that Apple gave in these 
 - [ ] Distribution line + Point Chart
 - [x] Area Chart
 - [ ] Scatter Chart
-- [ ] Range with Max and Min Chart
+- [x] Range with Max and Min Chart
 - [ ] Funky Gradient Chart
 - [ ] Block Block Block Chart
 - [ ] Other Charts
