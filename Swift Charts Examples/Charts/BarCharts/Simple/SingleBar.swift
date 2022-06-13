@@ -10,9 +10,9 @@ import Charts
 
 struct SingleBarDetailView: View {
     
-    @State var lineWidth = 2.0
-    @State var interpolationMethod: ChartInterpolationMethod = .cardinal
-    @State var chartColor: Color = .blue
+    @State private var lineWidth = 2.0
+    @State private var interpolationMethod: ChartInterpolationMethod = .cardinal
+    @State private var chartColor: Color = .blue
     
     var body: some View {
         List {
@@ -26,7 +26,7 @@ struct SingleBarDetailView: View {
                     .foregroundStyle(chartColor)
                     .interpolationMethod(interpolationMethod.mode)
                 }
-                .frame(height: 300)
+                .frame(height: Constants.detailChartHeight)
             }
             
             customisation
@@ -34,7 +34,7 @@ struct SingleBarDetailView: View {
         .navigationBarTitleDisplayMode(.inline)
     }
     
-    var customisation: some View {
+    private var customisation: some View {
         Section {
             Stepper(value: $lineWidth, in: 1.0...20.0) {
                 HStack {
@@ -74,7 +74,7 @@ struct BarChartSimpleOverview: View {
             }
             .chartXAxis(.hidden)
             .chartYAxis(.hidden)
-                .frame(height: 100)
+            .frame(height: Constants.previewChartHeight)
         }
     }
 }
