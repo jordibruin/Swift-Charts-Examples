@@ -37,6 +37,7 @@ struct LineChartSimpleDetailView: View {
     @State var lineWidth = 2.0
     @State var interpolationMethod: ChartInterpolationMethod = .cardinal
     @State var chartColor: Color = .blue
+    @State var showSymbols = false
     
     var body: some View {
         List {
@@ -49,6 +50,8 @@ struct LineChartSimpleDetailView: View {
                     .lineStyle(StrokeStyle(lineWidth: lineWidth))
                     .foregroundStyle(chartColor)
                     .interpolationMethod(interpolationMethod.mode)
+                    .symbol(Circle().strokeBorder(lineWidth: lineWidth))
+                    .symbolSize(showSymbols ? 60 : 0)
                 }
 //                .frame(height: 300)
             }
@@ -73,6 +76,8 @@ struct LineChartSimpleDetailView: View {
             }
             
             ColorPicker("Color Picker", selection: $chartColor)
+
+            Toggle("Show Symbols", isOn: $showSymbols)
         }
     }
 }
