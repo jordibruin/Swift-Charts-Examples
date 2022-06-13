@@ -33,7 +33,6 @@ struct SalesOverview_Previews: PreviewProvider {
 }
 
 struct LineChartSimpleDetailView: View {
-
     @State private var lineWidth = 2.0
     @State private var interpolationMethod: ChartInterpolationMethod = .cardinal
     @State private var chartColor: Color = .blue

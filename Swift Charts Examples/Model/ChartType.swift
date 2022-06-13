@@ -18,6 +18,7 @@ enum ChartType: String, Identifiable, CaseIterable {
     
     // Line Charts
     case singleLine
+    case singleLineLollipop
     
     // Bar Charts
     case singleBar
@@ -40,6 +41,8 @@ enum ChartType: String, Identifiable, CaseIterable {
         switch self {
         case .singleLine:
             return "Single Line"
+        case .singleLineLollipop:
+            return "Single Line with Lollipop"
         case .singleBar:
             return "Single Bar"
         case .twoBars:
@@ -59,15 +62,9 @@ enum ChartType: String, Identifiable, CaseIterable {
     
     var category: ChartCategory {
         switch self {
-        case .singleLine:
+        case .singleLine, .singleLineLollipop:
             return .line
-        case .singleBar:
-            return .bar
-        case .twoBars:
-            return .bar
-        case .oneDimensionalBar:
-            return .bar
-        case .pyramid:
+        case .singleBar, .twoBars, .pyramid, .oneDimensionalBar:
             return .bar
         case .areaSimple:
             return .area
@@ -83,6 +80,8 @@ enum ChartType: String, Identifiable, CaseIterable {
         switch self {
         case .singleLine:
             LineChartSimpleOverview()
+        case .singleLineLollipop:
+            SingleLineLollipopView(isPreview: true)
         case .singleBar:
             BarChartSimpleOverview()
         case .twoBars:
