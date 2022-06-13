@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		2E5763C628576B1B006C7C36 /* PyramidChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E5763C528576B1B006C7C36 /* PyramidChart.swift */; };
 		88B3E5D02857493B00840CAA /* RangeSimple.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B3E5CF2857493B00840CAA /* RangeSimple.swift */; };
+		934A95042857D035009E29F4 /* OneDimensionalBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934A95032857D035009E29F4 /* OneDimensionalBar.swift */; };
 		C22EB59E28568D0B000B9F9A /* Swift_Charts_ExamplesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C22EB59D28568D0B000B9F9A /* Swift_Charts_ExamplesApp.swift */; };
 		C22EB5A028568D0B000B9F9A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C22EB59F28568D0B000B9F9A /* ContentView.swift */; };
 		C22EB5A228568D0C000B9F9A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C22EB5A128568D0C000B9F9A /* Assets.xcassets */; };
@@ -49,6 +50,7 @@
 		262541172856A35B00A1E2EC /* Build.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Build.xcconfig; sourceTree = "<group>"; };
 		2E5763C528576B1B006C7C36 /* PyramidChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PyramidChart.swift; sourceTree = "<group>"; };
 		88B3E5CF2857493B00840CAA /* RangeSimple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RangeSimple.swift; sourceTree = "<group>"; };
+		934A95032857D035009E29F4 /* OneDimensionalBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneDimensionalBar.swift; sourceTree = "<group>"; };
 		C22EB59A28568D0B000B9F9A /* Swift Charts Examples.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Swift Charts Examples.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C22EB59D28568D0B000B9F9A /* Swift_Charts_ExamplesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Swift_Charts_ExamplesApp.swift; sourceTree = "<group>"; };
 		C22EB59F28568D0B000B9F9A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -235,6 +237,7 @@
 				2E5763C428576B0C006C7C36 /* Pyramid */,
 				C260882C2856B4B900B09DDB /* Simple */,
 				C260881E2856A33300B09DDB /* Two Bars */,
+				934A95032857D035009E29F4 /* OneDimensionalBar.swift */,
 			);
 			path = BarCharts;
 			sourceTree = "<group>";
@@ -418,6 +421,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C26088252856A45800B09DDB /* Square.swift in Sources */,
+				934A95042857D035009E29F4 /* OneDimensionalBar.swift in Sources */,
 				C260882B2856B3C500B09DDB /* AreaSimple.swift in Sources */,
 				88B3E5D02857493B00840CAA /* RangeSimple.swift in Sources */,
 				C22EB5A028568D0B000B9F9A /* ContentView.swift in Sources */,
