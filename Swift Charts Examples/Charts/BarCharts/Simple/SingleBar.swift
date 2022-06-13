@@ -1,15 +1,38 @@
 //
-//  BarSimple.swift
-//  Swift Charts Examples
-//
-//  Created by Jordi Bruin on 12/06/2022.
-//
+// Copyright © 2022 Swift Charts Examples.
+// Open Source - MIT License
 
 import SwiftUI
 import Charts
 
+struct BarChartSimpleOverview: View {
+    var body: some View {
+        VStack(alignment: .leading) {
+            Text("Single Bar")
+                .font(.callout)
+                .foregroundStyle(.secondary)
+
+            Chart(SalesData.last30Days, id: \.day) {
+                BarMark(
+                    x: .value("Day", $0.day, unit: .day),
+                    y: .value("Sales", $0.sales)
+                )
+            }
+            .chartXAxis(.hidden)
+            .chartYAxis(.hidden)
+                .frame(height: 100)
+        }
+    }
+}
+
+struct BarChartSimpleOverview_Previews: PreviewProvider {
+    static var previews: some View {
+        BarChartSimpleOverview()
+            .padding()
+    }
+}
+
 struct SingleBarDetailView: View {
-    
     @State var lineWidth = 2.0
     @State var interpolationMethod: ChartInterpolationMethod = .cardinal
     @State var chartColor: Color = .blue
@@ -55,33 +78,6 @@ struct SingleBarDetailView: View {
 
 struct AreaChartSimpleDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        LineChartSimpleDetailView()
-    }
-}
-
-struct BarChartSimpleOverview: View {
-    var body: some View {
-        VStack(alignment: .leading) {
-            Text("Single Bar")
-                .font(.callout)
-                .foregroundStyle(.secondary)
-
-            Chart(SalesData.last30Days, id: \.day) {
-                BarMark(
-                    x: .value("Day", $0.day, unit: .day),
-                    y: .value("Sales", $0.sales)
-                )
-            }
-            .chartXAxis(.hidden)
-            .chartYAxis(.hidden)
-                .frame(height: 100)
-        }
-    }
-}
-
-struct BarChartSimpleOverview_Previews: PreviewProvider {
-    static var previews: some View {
-        BarChartSimpleOverview()
-            .padding()
+        SingleBarDetailView()
     }
 }

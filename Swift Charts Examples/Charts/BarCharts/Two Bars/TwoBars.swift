@@ -1,9 +1,6 @@
 //
-//  TwoBarsSimple.swift
-//  Swift Charts Examples
-//
-//  Created by Jordi Bruin on 12/06/2022.
-//
+// Copyright © 2022 Swift Charts Examples.
+// Open Source - MIT License
 
 import SwiftUI
 import Charts
@@ -45,7 +42,6 @@ struct TwoBarsOverview_Previews: PreviewProvider {
 }
 
 struct TwoBarsSimpleDetailView: View {
-
     @State var lineWidth = 2.0
     @State var interpolationMethod: ChartInterpolationMethod = .cardinal
     @State var strideBy: ChartStrideBy = .day
@@ -78,14 +74,12 @@ struct TwoBarsSimpleDetailView: View {
                 .chartLegend(position: .top)
                 .frame(height: 240)
             }
-            
+
             customisation
         }
-
         .navigationBarTitle("Two Bars", displayMode: .inline)
     }
-    
-    
+
     var customisation: some View {
         Section {
             Stepper(value: $lineWidth, in: 1.0...20.0) {

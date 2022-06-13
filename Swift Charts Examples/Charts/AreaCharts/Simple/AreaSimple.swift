@@ -1,24 +1,38 @@
 //
-//  AreaChartSimple.swift
-//  Swift Charts Examples
-//
-//  Created by Jordi Bruin on 12/06/2022.
-//
-
-import Foundation
-
-//
-//  LineChartSimpleView.swift
-//  Swift Charts Examples
-//
-//  Created by Jordi Bruin on 12/06/2022.
-//
+// Copyright © 2022 Swift Charts Examples.
+// Open Source - MIT License
 
 import SwiftUI
 import Charts
 
+struct AreaChartSimpleOverview: View {
+    var body: some View {
+        VStack(alignment: .leading) {
+            Text("Area Chart")
+                .font(.callout)
+                .foregroundStyle(.secondary)
+
+            Chart(SalesData.last30Days, id: \.day) {
+                AreaMark(
+                    x: .value("Day", $0.day, unit: .day),
+                    y: .value("Sales", $0.sales)
+                )
+            }
+            .chartXAxis(.hidden)
+            .chartYAxis(.hidden)
+                .frame(height: 100)
+        }
+    }
+}
+
+struct AreaChartSimpleOverview_Previews: PreviewProvider {
+    static var previews: some View {
+        AreaChartSimpleOverview()
+            .padding()
+    }
+}
+
 struct AreaChartSimpleDetailView: View {
-    
     @State var lineWidth = 2.0
     @State var interpolationMethod: ChartInterpolationMethod = .cardinal
     @State var chartColor: Color = .blue
@@ -64,33 +78,6 @@ struct AreaChartSimpleDetailView: View {
 
 struct BarChartSimpleDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        LineChartSimpleDetailView()
-    }
-}
-
-struct AreaChartSimpleOverview: View {
-    var body: some View {
-        VStack(alignment: .leading) {
-            Text("Area Chart")
-                .font(.callout)
-                .foregroundStyle(.secondary)
-
-            Chart(SalesData.last30Days, id: \.day) {
-                AreaMark(
-                    x: .value("Day", $0.day, unit: .day),
-                    y: .value("Sales", $0.sales)
-                )
-            }
-            .chartXAxis(.hidden)
-            .chartYAxis(.hidden)
-                .frame(height: 100)
-        }
-    }
-}
-
-struct AreaChartSimpleOverview_Previews: PreviewProvider {
-    static var previews: some View {
-        AreaChartSimpleOverview()
-            .padding()
+        AreaChartSimpleDetailView()
     }
 }
