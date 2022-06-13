@@ -43,6 +43,8 @@ struct ContentView: View {
                     TwoBarsSimpleDetailView()
                 case .areaSimple:
                     AreaChartSimpleDetailView()
+                case .rangeSimple:
+                    RangeChartSimpleDetail()
                 }
             }
         }
