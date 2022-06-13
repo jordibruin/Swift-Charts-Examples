@@ -29,15 +29,17 @@ struct RangeChartSimpleDetail: View {
                             x: .value("Month", $0.month, unit: .month),
                             y: .value("Sales Min", $0.dailyMin)
                         )
-                        .offset(y: -5)
+                        .offset(y: -(5 + barWidth / 4))
                         .foregroundStyle(.yellow.gradient)
+                        .symbolSize(barWidth * 5)
                         
                         PointMark(
                             x: .value("Month", $0.month, unit: .month),
                             y: .value("Sales Max", $0.dailyMax)
                         )
-                        .offset(y: 5)
+                        .offset(y: 5 + barWidth / 4)
                         .foregroundStyle(.yellow.gradient)
+                        .symbolSize(barWidth * 5)
                     }
                 }
                 .frame(height: 300)
