@@ -21,6 +21,7 @@ enum ChartType: String, Identifiable, CaseIterable {
     // Bar Charts
     case singleBar
     case twoBars
+    case pyramid
     
     // Area Charts
     case areaSimple
@@ -35,6 +36,8 @@ enum ChartType: String, Identifiable, CaseIterable {
             return "Single Bar"
         case .twoBars:
             return "Two Bars"
+        case .pyramid:
+            return "Pyramid"
         case .areaSimple:
             return "Simple Area"
         }
@@ -47,6 +50,8 @@ enum ChartType: String, Identifiable, CaseIterable {
         case .singleBar:
             return .bar
         case .twoBars:
+            return .bar
+        case .pyramid:
             return .bar
         case .areaSimple:
             return .area
@@ -62,6 +67,8 @@ enum ChartType: String, Identifiable, CaseIterable {
             BarChartSimpleOverview()
         case .twoBars:
             TwoBarsSimpleOverview()
+        case .pyramid:
+            PyramidChartOverview()
         case .areaSimple:
             AreaChartSimpleOverview()
         }

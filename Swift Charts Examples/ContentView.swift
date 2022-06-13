@@ -41,6 +41,8 @@ struct ContentView: View {
                     SingleBarDetailView()
                 case .twoBars:
                     TwoBarsSimpleDetailView()
+                case .pyramid:
+                    PyramidChartDetailView()
                 case .areaSimple:
                     AreaChartSimpleDetailView()
                 }
