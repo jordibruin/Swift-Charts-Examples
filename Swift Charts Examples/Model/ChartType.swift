@@ -31,7 +31,7 @@ enum ChartType: String, Identifiable, CaseIterable {
     
     // Range Charts
     case rangeSimple
-
+    
     // HeatMap Charts
     case heatMap
     
@@ -97,5 +97,30 @@ enum ChartType: String, Identifiable, CaseIterable {
         case .heatMap:
             HeatMapOverview()
         }
+    }
+    
+    @ViewBuilder
+    var detailView: some View {
+        switch self {
+        case .singleLine:
+            LineChartSimpleDetailView()
+        case .singleLineLollipop:
+            SingleLineLollipopView(isPreview: false)
+        case .singleBar:
+            SingleBarDetailView()
+        case .twoBars:
+            TwoBarsSimpleDetailView()
+        case .oneDimensionalBar:
+            OneDimensionalBarSimpleDetailView()
+        case .pyramid:
+            PyramidChartDetailView()
+        case .areaSimple:
+            AreaChartSimpleDetailView()
+        case .rangeSimple:
+            RangeChartSimpleDetail()
+        case .heatMap:
+            HeatMapDetailView()
+        }
+        
     }
 }
