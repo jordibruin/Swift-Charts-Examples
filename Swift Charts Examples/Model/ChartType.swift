@@ -33,13 +33,13 @@ enum ChartType: String, Identifiable, CaseIterable {
     var title: String {
         switch self {
         case .lineSimple:
-            return "Line Chart Simple"
+            return "Single Line"
         case .barSimple:
-            return "Bar Chart Simple"
+            return "Single Bar"
         case .twoBarsSimple:
-            return "Two Bars Chart Simple"
+            return "Two Bars"
         case .areaSimple:
-            return "Area Chart Simple"
+            return "Simple Area"
         }
     }
     
