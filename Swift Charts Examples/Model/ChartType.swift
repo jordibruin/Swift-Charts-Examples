@@ -15,7 +15,6 @@ enum ChartCategory: String, CaseIterable, Hashable, Identifiable {
 }
 
 enum ChartType: String, Identifiable, CaseIterable {
-    
     // Line Charts
     case singleLine
     case singleLineLollipop
@@ -33,8 +32,6 @@ enum ChartType: String, Identifiable, CaseIterable {
     case rangeSimple
     
     // HeatMap Charts
-    case heatMap
-    case heatMapMultiColor
     case customizeableHeatMap
     
     var id: String { self.rawValue }
@@ -57,12 +54,8 @@ enum ChartType: String, Identifiable, CaseIterable {
             return "Simple Area"
         case .rangeSimple:
             return "Simple Range"
-        case .heatMap:
-            return "Heat Map"
         case .customizeableHeatMap:
             return "Heat Map (Customizable)"
-        case .heatMapMultiColor:
-            return "Heat Map Multi Color"
         }
     }
     
@@ -76,7 +69,7 @@ enum ChartType: String, Identifiable, CaseIterable {
             return .area
         case .rangeSimple:
             return .range
-        case .heatMap, .heatMapMultiColor, .customizeableHeatMap:
+        case .customizeableHeatMap:
             return .heatMap
     
         }
@@ -101,12 +94,8 @@ enum ChartType: String, Identifiable, CaseIterable {
             AreaChartSimpleOverview()
         case .rangeSimple:
             RangeChartSimpleOverview()
-        case .heatMap:
-            HeatMapOverview()
         case .customizeableHeatMap:
             CustomizableHeatMapOverview()
-        case .heatMapMultiColor:
-            HeatMapMultiColorOverview()
         }
     }
     
@@ -129,13 +118,8 @@ enum ChartType: String, Identifiable, CaseIterable {
             AreaChartSimpleDetailView()
         case .rangeSimple:
             RangeChartSimpleDetail()
-        case .heatMap:
-            HeatMapDetailView()
         case .customizeableHeatMap:
-            CustomizableHeatMapDetail()
-        case .heatMapMultiColor:
-            HeatMapMultiColorDetailView()
+            CustomizableHeatMapDetailView()
         }
-        
     }
 }
