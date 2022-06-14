@@ -40,18 +40,18 @@ struct CustomizableHeatMapDetail: View {
                 }
             }
             
-            GeometryReader { geo in
-                Chart(grid.points, id: \.self) { point in
-                    RectangleMark(
-                        xStart: PlottableValue.value("xStart", point.x),
-                        xEnd: PlottableValue.value("xEnd", point.x + 1),
-                        yStart: PlottableValue.value("yStart", point.y),
-                        yEnd: PlottableValue.value("yEnd", point.y + 1)
-                    )
-                    .foregroundStyle(by: .value("Value", point.val))
-                }
+            Chart(grid.points, id: \.self) { point in
+                RectangleMark(
+                    xStart: PlottableValue.value("xStart", point.x),
+                    xEnd: PlottableValue.value("xEnd", point.x + 1),
+                    yStart: PlottableValue.value("yStart", point.y),
+                    yEnd: PlottableValue.value("yEnd", point.y + 1)
+                )
+                .foregroundStyle(by: .value("Value", point.val))
             }
         }
+        .chartXAxis(.hidden)
+        .chartYAxis(.hidden)
         .padding()
         .onAppear {
             grid.generateData()
