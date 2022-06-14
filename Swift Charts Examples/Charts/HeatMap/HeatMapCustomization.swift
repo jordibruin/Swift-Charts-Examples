@@ -24,7 +24,7 @@ struct CustomizableHeatMapDetailView: View {
                             yEnd: PlottableValue.value("yEnd", point.y + 1)
                         )
                         .foregroundStyle(point.color)
-// does not compile with annotations are paired with both `chartYAxis` and `chartXAxis`
+// does not compile when annotations are paired with both `chartYAxis` and `chartXAxis`
 //                        .annotation(position: .overlay, alignment: .center) {
 //                            Text(showValues ? String(format: "%.0f", point.val) : "")
 //                        }
