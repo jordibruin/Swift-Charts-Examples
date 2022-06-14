@@ -40,11 +40,11 @@ enum ChartType: String, Identifiable, CaseIterable {
     var title: String {
         switch self {
         case .singleLine:
-            return "Single Line"
+            return "Line Chart"
         case .singleLineLollipop:
-            return "Single Line with Lollipop"
+            return "Line Chart with Lollipop"
         case .heartBeat:
-            return "Heart Beat"
+            return "Heart Beat / ECG Chart"
         case .singleBar:
             return "Single Bar"
         case .twoBars:
@@ -54,11 +54,11 @@ enum ChartType: String, Identifiable, CaseIterable {
         case .oneDimensionalBar:
             return "One Dimensional Bar"
         case .areaSimple:
-            return "Simple Area"
+            return "Area Chart"
         case .rangeSimple:
-            return "Simple Range"
+            return "Range Chart"
         case .customizeableHeatMap:
-            return "Heat Map (Customizable)"
+            return "Customizable Heat Map"
         }
     }
     
@@ -74,7 +74,6 @@ enum ChartType: String, Identifiable, CaseIterable {
             return .range
         case .customizeableHeatMap:
             return .heatMap
-    
         }
     }
     

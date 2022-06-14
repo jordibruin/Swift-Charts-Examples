@@ -8,7 +8,7 @@ import Charts
 struct AreaSimpleOverview: View {
     var body: some View {
         VStack(alignment: .leading) {
-            Text("Area Chart")
+            Text(ChartType.areaSimple.title)
                 .font(.callout)
                 .foregroundStyle(.secondary)
 
@@ -63,7 +63,7 @@ struct AreaSimple: View {
             }
             customisation
         }
-        .navigationBarTitle("Area Chart", displayMode: .inline)
+        .navigationBarTitle(ChartType.areaSimple.title, displayMode: .inline)
     }
     
     private var customisation: some View {

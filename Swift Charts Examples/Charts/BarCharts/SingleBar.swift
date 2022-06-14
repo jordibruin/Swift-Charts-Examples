@@ -8,7 +8,7 @@ import Charts
 struct SingleBarOverview: View {
     var body: some View {
         VStack(alignment: .leading) {
-            Text("Single Bar")
+            Text(ChartType.singleBar.title)
                 .font(.callout)
                 .foregroundStyle(.secondary)
 
@@ -45,7 +45,7 @@ struct SingleBar: View {
             
             customisation
         }
-        .navigationBarTitle("Single Bar", displayMode: .inline)
+        .navigationBarTitle(ChartType.singleBar.title, displayMode: .inline)
     }
     
     private var customisation: some View {

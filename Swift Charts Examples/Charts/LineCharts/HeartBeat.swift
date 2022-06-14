@@ -8,7 +8,7 @@ import Charts
 struct HeartBeatOverview: View {
     var body: some View {
         VStack(alignment: .leading) {
-            Text("Heart Beat / ECG Chart")
+            Text(ChartType.heartBeat.title)
                 .font(.callout)
                 .foregroundStyle(.secondary)
             
@@ -76,7 +76,7 @@ struct HeartBeat: View {
             
             customisation
         }
-        .navigationBarTitle("Heart Beat / ECG", displayMode: .inline)
+        .navigationBarTitle(ChartType.heartBeat.title, displayMode: .inline)
     }
     
     private var customisation: some View {

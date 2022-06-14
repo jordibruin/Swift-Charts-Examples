@@ -17,7 +17,7 @@ struct SingleLineLollipop: View {
     var body: some View {
         if isOverview {
             VStack(alignment: .leading) {
-                Text("Line Chart with Lollipop")
+                Text(ChartType.singleLineLollipop.title)
                     .font(.callout)
                     .foregroundStyle(.secondary)
                 chart
@@ -33,7 +33,7 @@ struct SingleLineLollipop: View {
                         .font(.callout)
                 }
             }
-            .navigationBarTitle("Line Chart with Lollipop", displayMode: .inline)
+            .navigationBarTitle(ChartType.singleLineLollipop.title, displayMode: .inline)
         }
     }
 

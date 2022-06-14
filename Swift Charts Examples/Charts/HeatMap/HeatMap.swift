@@ -10,7 +10,7 @@ struct HeatMapOverview: View {
 
     var body: some View {
         VStack(alignment: .leading) {
-            Text("Customizable Heat Map")
+            Text(ChartType.customizeableHeatMap.title)
                 .font(.callout)
                 .foregroundStyle(.secondary)
             
@@ -109,7 +109,7 @@ struct HeatMap: View {
 //                Toggle("Show Annotations", isOn: $showValues)
             }
         }
-        .navigationBarTitle("Customizable Heat Map", displayMode: .inline)
+        .navigationBarTitle(ChartType.customizeableHeatMap.title, displayMode: .inline)
     }
 
     private func reloadGrid() {
