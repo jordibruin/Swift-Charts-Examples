@@ -82,25 +82,25 @@ enum ChartType: String, Identifiable, CaseIterable {
     var view: some View {
         switch self {
         case .singleLine:
-            LineChartSimpleOverview()
+            SingleLineOverview()
         case .singleLineLollipop:
-            SingleLineLollipopView(isPreview: true)
+            SingleLineLollipop(isOverview: true)
         case .heartBeat:
             HeartBeatOverview()
         case .singleBar:
-            BarChartSimpleOverview()
+            SingleBarOverview()
         case .twoBars:
-            TwoBarsSimpleOverview()
+            TwoBarsOverview()
         case .oneDimensionalBar:
-            OneDimensionalBarSimpleOverview()
+            OneDimensionalBarOverview()
         case .pyramid:
             PyramidChartOverview()
         case .areaSimple:
-            AreaChartSimpleOverview()
+            AreaSimpleOverview()
         case .rangeSimple:
-            RangeChartSimpleOverview()
+            RangeSimpleOverview()
         case .customizeableHeatMap:
-            CustomizableHeatMapOverview()
+            HeatMapOverview()
         }
     }
     
@@ -108,25 +108,25 @@ enum ChartType: String, Identifiable, CaseIterable {
     var detailView: some View {
         switch self {
         case .singleLine:
-            LineChartSimpleDetailView()
+            SingleLine()
         case .singleLineLollipop:
-            SingleLineLollipopView(isPreview: false)
+            SingleLineLollipop(isOverview: false)
         case .heartBeat:
-            HeartBeatDetailView()
+            HeartBeat()
         case .singleBar:
-            SingleBarDetailView()
+            SingleBar()
         case .twoBars:
-            TwoBarsSimpleDetailView()
+            TwoBars()
         case .oneDimensionalBar:
-            OneDimensionalBarSimpleDetailView()
+            OneDimensionalBar()
         case .pyramid:
-            PyramidChartDetailView()
+            PyramidChart()
         case .areaSimple:
-            AreaChartSimpleDetailView()
+            AreaSimple()
         case .rangeSimple:
-            RangeChartSimpleDetail()
+            RangeSimple()
         case .customizeableHeatMap:
-            CustomizableHeatMapDetailView()
+            HeatMap()
         }
     }
 }

@@ -31,14 +31,7 @@ struct HeartBeatOverview: View {
     }
 }
 
-struct HeartBeatOverview_Previews: PreviewProvider {
-    static var previews: some View {
-        HeartBeatOverview()
-            .padding()
-    }
-}
-
-struct HeartBeatDetailView: View {
+struct HeartBeat: View {
     @State private var lineWidth = 2.0
     @State private var interpolationMethod: ChartInterpolationMethod = .cardinal
     @State private var chartColor: Color = .pink
@@ -101,14 +94,14 @@ struct HeartBeatDetailView: View {
             }
             
             ColorPicker("Color Picker", selection: $chartColor)
-
         }
     }
 }
 
-struct HeartBeatDetailView_Previews: PreviewProvider {
+struct HeartBeat_Previews: PreviewProvider {
     static var previews: some View {
-        HeartBeatDetailView()
+        HeartBeatOverview()
+        HeartBeat()
     }
 }
 
