@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2E5763C628576B1B006C7C36 /* PyramidChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E5763C528576B1B006C7C36 /* PyramidChart.swift */; };
+		5BC09FE02858153200C2DB92 /* HeartRateRangeChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BC09FDF2858153200C2DB92 /* HeartRateRangeChart.swift */; };
 		62FF3F002857EADF0022930C /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62FF3EFF2857EADF0022930C /* Grid.swift */; };
 		62FF3F022857EB530022930C /* HeatMapCustomization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62FF3F012857EB530022930C /* HeatMapCustomization.swift */; };
 		88B3E5D02857493B00840CAA /* RangeSimple.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B3E5CF2857493B00840CAA /* RangeSimple.swift */; };
@@ -53,6 +54,7 @@
 /* Begin PBXFileReference section */
 		262541172856A35B00A1E2EC /* Build.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Build.xcconfig; sourceTree = "<group>"; };
 		2E5763C528576B1B006C7C36 /* PyramidChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PyramidChart.swift; sourceTree = "<group>"; };
+		5BC09FDF2858153200C2DB92 /* HeartRateRangeChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartRateRangeChart.swift; sourceTree = "<group>"; };
 		62FF3EFF2857EADF0022930C /* Grid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
 		62FF3F012857EB530022930C /* HeatMapCustomization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeatMapCustomization.swift; sourceTree = "<group>"; };
 		88B3E5CF2857493B00840CAA /* RangeSimple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RangeSimple.swift; sourceTree = "<group>"; };
@@ -115,9 +117,18 @@
 			path = Pyramid;
 			sourceTree = "<group>";
 		};
+		5BC09FDE2858150F00C2DB92 /* Heart Rate */ = {
+			isa = PBXGroup;
+			children = (
+				5BC09FDF2858153200C2DB92 /* HeartRateRangeChart.swift */,
+			);
+			path = "Heart Rate";
+			sourceTree = "<group>";
+		};
 		88B3E5CC285748E400840CAA /* RangeCharts */ = {
 			isa = PBXGroup;
 			children = (
+				5BC09FDE2858150F00C2DB92 /* Heart Rate */,
 				88B3E5CE2857492F00840CAA /* Simple */,
 			);
 			path = RangeCharts;
@@ -447,6 +458,7 @@
 				88B3E5D02857493B00840CAA /* RangeSimple.swift in Sources */,
 				C22EB5A028568D0B000B9F9A /* ContentView.swift in Sources */,
 				C260881C28569D1B00B09DDB /* InterpolationMethod.swift in Sources */,
+				5BC09FE02858153200C2DB92 /* HeartRateRangeChart.swift in Sources */,
 				FC56C9AA2857B8A50044DDED /* HeatMap.swift in Sources */,
 				C26088202856A34400B09DDB /* TwoBars.swift in Sources */,
 				62FF3F022857EB530022930C /* HeatMapCustomization.swift in Sources */,

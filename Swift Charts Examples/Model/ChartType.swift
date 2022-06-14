@@ -31,6 +31,7 @@ enum ChartType: String, Identifiable, CaseIterable {
     
     // Range Charts
     case rangeSimple
+    case rangeHeartRate
     
     // HeatMap Charts
     case heatMap
@@ -57,6 +58,8 @@ enum ChartType: String, Identifiable, CaseIterable {
             return "Simple Area"
         case .rangeSimple:
             return "Simple Range"
+        case .rangeHeartRate:
+            return "Heart Rate Range"
         case .heatMap:
             return "Heat Map"
         case .customizeableHeatMap:
@@ -74,7 +77,7 @@ enum ChartType: String, Identifiable, CaseIterable {
             return .bar
         case .areaSimple:
             return .area
-        case .rangeSimple:
+        case .rangeSimple, .rangeHeartRate:
             return .range
         case .heatMap, .heatMapMultiColor, .customizeableHeatMap:
             return .heatMap
@@ -101,6 +104,8 @@ enum ChartType: String, Identifiable, CaseIterable {
             AreaChartSimpleOverview()
         case .rangeSimple:
             RangeChartSimpleOverview()
+        case .rangeHeartRate:
+            HeartRateRangeChartOverview()
         case .heatMap:
             HeatMapOverview()
         case .customizeableHeatMap:
@@ -129,6 +134,8 @@ enum ChartType: String, Identifiable, CaseIterable {
             AreaChartSimpleDetailView()
         case .rangeSimple:
             RangeChartSimpleDetail()
+        case .rangeHeartRate:
+            HeartRateRangeChartDetail()
         case .heatMap:
             HeatMapDetailView()
         case .customizeableHeatMap:
