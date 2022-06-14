@@ -18,6 +18,7 @@ enum ChartType: String, Identifiable, CaseIterable {
     // Line Charts
     case singleLine
     case singleLineLollipop
+    case heartBeat
     
     // Bar Charts
     case singleBar
@@ -42,6 +43,8 @@ enum ChartType: String, Identifiable, CaseIterable {
             return "Single Line"
         case .singleLineLollipop:
             return "Single Line with Lollipop"
+        case .heartBeat:
+            return "Heart Beat"
         case .singleBar:
             return "Single Bar"
         case .twoBars:
@@ -61,7 +64,7 @@ enum ChartType: String, Identifiable, CaseIterable {
     
     var category: ChartCategory {
         switch self {
-        case .singleLine, .singleLineLollipop:
+        case .singleLine, .singleLineLollipop, .heartBeat:
             return .line
         case .singleBar, .twoBars, .pyramid, .oneDimensionalBar:
             return .bar
@@ -82,6 +85,8 @@ enum ChartType: String, Identifiable, CaseIterable {
             LineChartSimpleOverview()
         case .singleLineLollipop:
             SingleLineLollipopView(isPreview: true)
+        case .heartBeat:
+            HeartBeatOverview()
         case .singleBar:
             BarChartSimpleOverview()
         case .twoBars:
@@ -106,6 +111,8 @@ enum ChartType: String, Identifiable, CaseIterable {
             LineChartSimpleDetailView()
         case .singleLineLollipop:
             SingleLineLollipopView(isPreview: false)
+        case .heartBeat:
+            HeartBeatDetailView()
         case .singleBar:
             SingleBarDetailView()
         case .twoBars:
