@@ -51,6 +51,8 @@ struct LineChartSimpleDetailView: View {
                     .interpolationMethod(interpolationMethod.mode)
                     .symbol(Circle().strokeBorder(lineWidth: lineWidth))
                     .symbolSize(showSymbols ? 60 : 0)
+                    .accessibilityLabel($0.day.description)
+                    .accessibilityValue("\($0.sales) sold")
                 }
                 .frame(height: Constants.detailChartHeight)
             }
