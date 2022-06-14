@@ -10,6 +10,7 @@ Let's start by recreating the different chart examples that Apple gave in these 
 - [x] Basis project setup
 - [x] Simple Line chart
 - [x] Line chart with lollipop
+- [x] Heartbeat Chart
 - [x] Simple Bar chart
 - [x] Simple dual bar chart
 - [x] Range Chart
@@ -20,7 +21,6 @@ Let's start by recreating the different chart examples that Apple gave in these 
 - [x] Heatmap Block Chart
 
 ## Todo
-- [ ] Heartbeat Chart
 - [ ] Cumulative line Chart
 - [ ] Heartbeat range Chart
 - [ ] Distribution line + Point Chart
