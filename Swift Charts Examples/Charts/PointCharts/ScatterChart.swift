@@ -61,7 +61,7 @@ struct ScatterChart: View {
             
             customisation
         }
-        .navigationBarTitle(ChartType.singleBar.title, displayMode: .inline)
+        .navigationBarTitle(ChartType.scatter.title, displayMode: .inline)
     }
     
     private var customisation: some View {
