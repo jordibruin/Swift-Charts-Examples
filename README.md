@@ -28,7 +28,7 @@ Let's start by recreating the different chart examples that Apple gave in these 
 - [ ] Funky Gradient Chart
 - [ ] Other Charts
 - [ ] Multi-language Support
-- [ ] Make all charts accesssible
+- [ ] Make all charts accessible
 
 See the [open issues](https://github.com/jordibruin/SwiftChartExamples/issues) if you think anything is missing from this list. You can also contact me on [Twitter](https://www.twitter.com/jordibruin) if you have any suggestions or feedback.
 
@@ -48,6 +48,8 @@ Each chart needs a preview chart as well as a detail view. The preview chart is 
 Source: https://developer.apple.com/videos/play/wwdc2022/10137/
 
 # Chart Types
+
+Below we'll fill in example screenshots and descriptions for each chart type.
 ## Line Charts
 
 
