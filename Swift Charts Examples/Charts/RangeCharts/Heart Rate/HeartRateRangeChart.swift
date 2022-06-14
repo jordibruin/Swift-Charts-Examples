@@ -6,13 +6,12 @@ import SwiftUI
 import Charts
 
 struct HeartRateRangeChartDetail: View {
-    @State var barWidth = 10.0
+    @State var barWidth = 6.0
     @State var chartColor: Color = .red
-    @State var isShowingPoints: Bool = false
     
     var body: some View {
         List {
-            Section(header: makeHeader()) {
+            Section(header: header) {
                 Chart(HeartRateData.lastWeek, id: \.weekday) {
                     BarMark(
                         x: .value("Day", $0.weekday, unit: .day),
@@ -27,10 +26,10 @@ struct HeartRateRangeChartDetail: View {
                     AxisMarks(values: .stride(by: ChartStrideBy.day.time)) { _ in
                         AxisTick()
                         AxisGridLine()
-                        AxisValueLabel(format: .dateTime.weekday(.abbreviated), centered: true)
+                        AxisValueLabel(format: .dateTime.weekday(.abbreviated))
                     }
                 }
-                    .frame(height: 300)
+                .frame(height: 300)
             }
             
             customisation
@@ -51,9 +50,8 @@ struct HeartRateRangeChartDetail: View {
             ColorPicker("Color Picker", selection: $chartColor)
         }
     }
-    
-    @ViewBuilder
-    private func makeHeader() -> some View {
+
+    var header: some View {
         VStack(alignment: .leading) {
             Text("Range")
             Text("\(HeartRateData.minBPM)-\(HeartRateData.maxBPM) ")
@@ -63,7 +61,8 @@ struct HeartRateRangeChartDetail: View {
             
             Text("\(HeartRateData.dateInterval), ") + Text(HeartRateData.latestDate, format: .dateTime.year())
             
-        }.fontWeight(.semibold)
+        }
+        .fontWeight(.semibold)
     }
 }
 
@@ -85,7 +84,7 @@ struct HeartRateRangeChartOverview: View {
                     x: .value("Day", $0.weekday, unit: .day),
                     yStart: .value("BPM Min", $0.dailyMin),
                     yEnd: .value("BPM Max", $0.dailyMax),
-                    width: .fixed(10)
+                    width: .fixed(6)
                 )
                 .clipShape(Capsule())
                 .foregroundStyle(.red.gradient)
@@ -94,7 +93,7 @@ struct HeartRateRangeChartOverview: View {
                 AxisMarks(values: .stride(by: ChartStrideBy.day.time)) { _ in
                     AxisTick()
                     AxisGridLine()
-                    AxisValueLabel(format: .dateTime.weekday(.abbreviated), centered: true)
+                    AxisValueLabel(format: .dateTime.weekday(.abbreviated))
                 }
             }
             .frame(height: 100)
