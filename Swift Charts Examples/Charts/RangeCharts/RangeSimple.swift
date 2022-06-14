@@ -5,11 +5,33 @@
 import SwiftUI
 import Charts
 
-struct RangeChartSimpleDetail: View {
-    
-    @State var barWidth = 10.0
-    @State var chartColor: Color = .blue
-    @State var isShowingPoints: Bool = false
+struct RangeSimpleOverview: View {
+    var body: some View {
+        VStack(alignment: .leading) {
+            Text(ChartType.rangeSimple.title)
+                .font(.callout)
+                .foregroundStyle(.secondary)
+            
+            Chart(SalesData.last12Months, id: \.month) {
+                BarMark(
+                    x: .value("Month", $0.month, unit: .month),
+                    yStart: .value("Sales Min", $0.dailyMin),
+                    yEnd: .value("Sales Max", $0.dailyMax)
+                )
+                .foregroundStyle(.blue.gradient)
+                .clipShape(Capsule())
+            }
+            .chartXAxis(.hidden)
+            .chartYAxis(.hidden)
+            .frame(height: 100)
+        }
+    }
+}
+
+struct RangeSimple: View {
+    @State private var barWidth = 10.0
+    @State private var chartColor: Color = .blue
+    @State private var isShowingPoints = false
     
     var body: some View {
         List {
@@ -44,13 +66,12 @@ struct RangeChartSimpleDetail: View {
                 }
                 .frame(height: 300)
             }
-            
             customisation
         }
-        .navigationBarTitleDisplayMode(.inline)
+        .navigationBarTitle(ChartType.rangeSimple.title, displayMode: .inline)
     }
     
-    var customisation: some View {
+    private var customisation: some View {
         Section {
             Stepper(value: $barWidth, in: 5.0...20.0) {
                 HStack {
@@ -66,38 +87,9 @@ struct RangeChartSimpleDetail: View {
     }
 }
 
-struct RangeChartSimpleDetail_Previews: PreviewProvider {
+struct RangeSimple_Previews: PreviewProvider {
     static var previews: some View {
-        RangeChartSimpleDetail()
-    }
-}
-
-struct RangeChartSimpleOverview: View {
-    var body: some View {
-        VStack(alignment: .leading) {
-            Text("Range Chart")
-                .font(.callout)
-                .foregroundStyle(.secondary)
-            
-            Chart(SalesData.last12Months, id: \.month) {
-                BarMark(
-                    x: .value("Month", $0.month, unit: .month),
-                    yStart: .value("Sales Min", $0.dailyMin),
-                    yEnd: .value("Sales Max", $0.dailyMax)
-                )
-                .foregroundStyle(.blue.gradient)
-                .clipShape(Capsule())
-            }
-            .chartXAxis(.hidden)
-            .chartYAxis(.hidden)
-            .frame(height: 100)
-        }
-    }
-}
-
-
-struct SingleRangeChart_Previews: PreviewProvider {
-    static var previews: some View {
-        RangeChartSimpleOverview()
+        RangeSimpleOverview()
+        RangeSimple()
     }
 }

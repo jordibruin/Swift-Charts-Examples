@@ -10,42 +10,42 @@ enum ChartCategory: String, CaseIterable, Hashable, Identifiable {
     case area
     case range
     case heatMap
-    
+
     var id: String { self.rawValue }
 }
 
 enum ChartType: String, Identifiable, CaseIterable {
-    
     // Line Charts
     case singleLine
     case singleLineLollipop
-    
+    case heartBeat
+
     // Bar Charts
     case singleBar
     case twoBars
     case pyramid
     case oneDimensionalBar
-    
+
     // Area Charts
     case areaSimple
-    
+
     // Range Charts
     case rangeSimple
     case rangeHeartRate
-    
+
     // HeatMap Charts
-    case heatMap
-    case heatMapMultiColor
     case customizeableHeatMap
-    
+
     var id: String { self.rawValue }
-    
+
     var title: String {
         switch self {
         case .singleLine:
-            return "Single Line"
+            return "Line Chart"
         case .singleLineLollipop:
-            return "Single Line with Lollipop"
+            return "Line Chart with Lollipop"
+        case .heartBeat:
+            return "Heart Beat / ECG Chart"
         case .singleBar:
             return "Single Bar"
         case .twoBars:
@@ -55,23 +55,19 @@ enum ChartType: String, Identifiable, CaseIterable {
         case .oneDimensionalBar:
             return "One Dimensional Bar"
         case .areaSimple:
-            return "Simple Area"
+            return "Area Chart"
         case .rangeSimple:
-            return "Simple Range"
+            return "Range Chart"
         case .rangeHeartRate:
             return "Heart Rate Range"
-        case .heatMap:
-            return "Heat Map"
         case .customizeableHeatMap:
-            return "Heat Map (Customizable)"
-        case .heatMapMultiColor:
-            return "Heat Map Multi Color"
+            return "Customizable Heat Map"
         }
     }
-    
+
     var category: ChartCategory {
         switch self {
-        case .singleLine, .singleLineLollipop:
+        case .singleLine, .singleLineLollipop, .heartBeat:
             return .line
         case .singleBar, .twoBars, .pyramid, .oneDimensionalBar:
             return .bar
@@ -79,70 +75,64 @@ enum ChartType: String, Identifiable, CaseIterable {
             return .area
         case .rangeSimple, .rangeHeartRate:
             return .range
-        case .heatMap, .heatMapMultiColor, .customizeableHeatMap:
+        case .customizeableHeatMap:
             return .heatMap
-    
         }
     }
-    
+
     @ViewBuilder
     var view: some View {
         switch self {
         case .singleLine:
-            LineChartSimpleOverview()
+            SingleLineOverview()
         case .singleLineLollipop:
-            SingleLineLollipopView(isPreview: true)
+            SingleLineLollipop(isOverview: true)
+        case .heartBeat:
+            HeartBeatOverview()
         case .singleBar:
-            BarChartSimpleOverview()
+            SingleBarOverview()
         case .twoBars:
-            TwoBarsSimpleOverview()
+            TwoBarsOverview()
         case .oneDimensionalBar:
-            OneDimensionalBarSimpleOverview()
+            OneDimensionalBarOverview()
         case .pyramid:
             PyramidChartOverview()
         case .areaSimple:
-            AreaChartSimpleOverview()
+            AreaSimpleOverview()
         case .rangeSimple:
-            RangeChartSimpleOverview()
+            RangeSimpleOverview()
         case .rangeHeartRate:
             HeartRateRangeChartOverview()
-        case .heatMap:
-            HeatMapOverview()
         case .customizeableHeatMap:
-            CustomizableHeatMapOverview()
-        case .heatMapMultiColor:
-            HeatMapMultiColorOverview()
+            HeatMapOverview()
         }
     }
-    
+
     @ViewBuilder
     var detailView: some View {
         switch self {
         case .singleLine:
-            LineChartSimpleDetailView()
+            SingleLine()
         case .singleLineLollipop:
-            SingleLineLollipopView(isPreview: false)
+            SingleLineLollipop(isOverview: false)
+        case .heartBeat:
+            HeartBeat()
         case .singleBar:
-            SingleBarDetailView()
+            SingleBar()
         case .twoBars:
-            TwoBarsSimpleDetailView()
+            TwoBars()
         case .oneDimensionalBar:
-            OneDimensionalBarSimpleDetailView()
+            OneDimensionalBar()
         case .pyramid:
-            PyramidChartDetailView()
+            PyramidChart()
         case .areaSimple:
-            AreaChartSimpleDetailView()
+            AreaSimple()
         case .rangeSimple:
-            RangeChartSimpleDetail()
+            RangeSimple()
         case .rangeHeartRate:
             HeartRateRangeChartDetail()
-        case .heatMap:
-            HeatMapDetailView()
         case .customizeableHeatMap:
-            CustomizableHeatMapDetail()
-        case .heatMapMultiColor:
-            HeatMapMultiColorDetailView()
+            HeatMap()
         }
-        
     }
 }

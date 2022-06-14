@@ -8,9 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		2E5763C628576B1B006C7C36 /* PyramidChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E5763C528576B1B006C7C36 /* PyramidChart.swift */; };
-		5BC09FE02858153200C2DB92 /* HeartRateRangeChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BC09FDF2858153200C2DB92 /* HeartRateRangeChart.swift */; };
+		5BC09FE32859526B00C2DB92 /* HeartRateRangeChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BC09FE22859526B00C2DB92 /* HeartRateRangeChart.swift */; };
 		62FF3F002857EADF0022930C /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62FF3EFF2857EADF0022930C /* Grid.swift */; };
-		62FF3F022857EB530022930C /* HeatMapCustomization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62FF3F012857EB530022930C /* HeatMapCustomization.swift */; };
+		62FF3F022857EB530022930C /* HeatMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62FF3F012857EB530022930C /* HeatMap.swift */; };
+		88242C262858C17A00DDD8D0 /* HeartBeat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88242C252858C17A00DDD8D0 /* HeartBeat.swift */; };
 		88B3E5D02857493B00840CAA /* RangeSimple.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B3E5CF2857493B00840CAA /* RangeSimple.swift */; };
 		934A95042857D035009E29F4 /* OneDimensionalBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934A95032857D035009E29F4 /* OneDimensionalBar.swift */; };
 		C22EB59E28568D0B000B9F9A /* Swift_Charts_ExamplesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C22EB59D28568D0B000B9F9A /* Swift_Charts_ExamplesApp.swift */; };
@@ -29,9 +30,7 @@
 		C26088272856A95A00B09DDB /* ChartStrideBy.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26088262856A95A00B09DDB /* ChartStrideBy.swift */; };
 		C260882B2856B3C500B09DDB /* AreaSimple.swift in Sources */ = {isa = PBXBuildFile; fileRef = C260882A2856B3C500B09DDB /* AreaSimple.swift */; };
 		C260882E2856B4C900B09DDB /* SingleBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C260882D2856B4C900B09DDB /* SingleBar.swift */; };
-		C26088322857FDD800B09DDB /* HeatMapMultiColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26088312857FDD800B09DDB /* HeatMapMultiColor.swift */; };
 		FC5466C62857E0D700315632 /* SingleLineLollipop.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5466C52857E0D700315632 /* SingleLineLollipop.swift */; };
-		FC56C9AA2857B8A50044DDED /* HeatMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC56C9A92857B8A50044DDED /* HeatMap.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,9 +53,10 @@
 /* Begin PBXFileReference section */
 		262541172856A35B00A1E2EC /* Build.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Build.xcconfig; sourceTree = "<group>"; };
 		2E5763C528576B1B006C7C36 /* PyramidChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PyramidChart.swift; sourceTree = "<group>"; };
-		5BC09FDF2858153200C2DB92 /* HeartRateRangeChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartRateRangeChart.swift; sourceTree = "<group>"; };
+		5BC09FE22859526B00C2DB92 /* HeartRateRangeChart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeartRateRangeChart.swift; sourceTree = "<group>"; };
 		62FF3EFF2857EADF0022930C /* Grid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
-		62FF3F012857EB530022930C /* HeatMapCustomization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeatMapCustomization.swift; sourceTree = "<group>"; };
+		62FF3F012857EB530022930C /* HeatMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeatMap.swift; sourceTree = "<group>"; };
+		88242C252858C17A00DDD8D0 /* HeartBeat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartBeat.swift; sourceTree = "<group>"; };
 		88B3E5CF2857493B00840CAA /* RangeSimple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RangeSimple.swift; sourceTree = "<group>"; };
 		934A95032857D035009E29F4 /* OneDimensionalBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneDimensionalBar.swift; sourceTree = "<group>"; };
 		C22EB59A28568D0B000B9F9A /* Swift Charts Examples.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Swift Charts Examples.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -79,9 +79,7 @@
 		C26088262856A95A00B09DDB /* ChartStrideBy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartStrideBy.swift; sourceTree = "<group>"; };
 		C260882A2856B3C500B09DDB /* AreaSimple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreaSimple.swift; sourceTree = "<group>"; };
 		C260882D2856B4C900B09DDB /* SingleBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleBar.swift; sourceTree = "<group>"; };
-		C26088312857FDD800B09DDB /* HeatMapMultiColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeatMapMultiColor.swift; sourceTree = "<group>"; };
 		FC5466C52857E0D700315632 /* SingleLineLollipop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleLineLollipop.swift; sourceTree = "<group>"; };
-		FC56C9A92857B8A50044DDED /* HeatMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeatMap.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,37 +107,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2E5763C428576B0C006C7C36 /* Pyramid */ = {
-			isa = PBXGroup;
-			children = (
-				2E5763C528576B1B006C7C36 /* PyramidChart.swift */,
-			);
-			path = Pyramid;
-			sourceTree = "<group>";
-		};
-		5BC09FDE2858150F00C2DB92 /* Heart Rate */ = {
-			isa = PBXGroup;
-			children = (
-				5BC09FDF2858153200C2DB92 /* HeartRateRangeChart.swift */,
-			);
-			path = "Heart Rate";
-			sourceTree = "<group>";
-		};
 		88B3E5CC285748E400840CAA /* RangeCharts */ = {
 			isa = PBXGroup;
 			children = (
-				5BC09FDE2858150F00C2DB92 /* Heart Rate */,
-				88B3E5CE2857492F00840CAA /* Simple */,
-			);
-			path = RangeCharts;
-			sourceTree = "<group>";
-		};
-		88B3E5CE2857492F00840CAA /* Simple */ = {
-			isa = PBXGroup;
-			children = (
+				5BC09FE22859526B00C2DB92 /* HeartRateRangeChart.swift */,
 				88B3E5CF2857493B00840CAA /* RangeSimple.swift */,
 			);
-			path = Simple;
+			path = RangeCharts;
 			sourceTree = "<group>";
 		};
 		C22EB59128568D0B000B9F9A = {
@@ -207,10 +181,10 @@
 		C22EB5C828568EB5000B9F9A /* Charts */ = {
 			isa = PBXGroup;
 			children = (
-				88B3E5CC285748E400840CAA /* RangeCharts */,
-				C26088282856B3AE00B09DDB /* AreaCharts */,
-				C260881D2856A32C00B09DDB /* BarCharts */,
 				C26088192856968400B09DDB /* LineCharts */,
+				C260881D2856A32C00B09DDB /* BarCharts */,
+				C26088282856B3AE00B09DDB /* AreaCharts */,
+				88B3E5CC285748E400840CAA /* RangeCharts */,
 				FC56C9A82857B8790044DDED /* HeatMap */,
 			);
 			path = Charts;
@@ -238,37 +212,22 @@
 		C26088192856968400B09DDB /* LineCharts */ = {
 			isa = PBXGroup;
 			children = (
-				C260881A2856968D00B09DDB /* Simple */,
-				FC5466C82857E0F200315632 /* Lollipop */,
+				C26088142856960000B09DDB /* SingleLine.swift */,
+				FC5466C52857E0D700315632 /* SingleLineLollipop.swift */,
+				88242C252858C17A00DDD8D0 /* HeartBeat.swift */,
 			);
 			path = LineCharts;
-			sourceTree = "<group>";
-		};
-		C260881A2856968D00B09DDB /* Simple */ = {
-			isa = PBXGroup;
-			children = (
-				C26088142856960000B09DDB /* SingleLine.swift */,
-			);
-			path = Simple;
 			sourceTree = "<group>";
 		};
 		C260881D2856A32C00B09DDB /* BarCharts */ = {
 			isa = PBXGroup;
 			children = (
-				2E5763C428576B0C006C7C36 /* Pyramid */,
-				C260882C2856B4B900B09DDB /* Simple */,
-				C260881E2856A33300B09DDB /* Two Bars */,
+				C260882D2856B4C900B09DDB /* SingleBar.swift */,
+				C260881F2856A34400B09DDB /* TwoBars.swift */,
+				2E5763C528576B1B006C7C36 /* PyramidChart.swift */,
 				934A95032857D035009E29F4 /* OneDimensionalBar.swift */,
 			);
 			path = BarCharts;
-			sourceTree = "<group>";
-		};
-		C260881E2856A33300B09DDB /* Two Bars */ = {
-			isa = PBXGroup;
-			children = (
-				C260881F2856A34400B09DDB /* TwoBars.swift */,
-			);
-			path = "Two Bars";
 			sourceTree = "<group>";
 		};
 		C26088232856A45200B09DDB /* Utilities */ = {
@@ -282,41 +241,15 @@
 		C26088282856B3AE00B09DDB /* AreaCharts */ = {
 			isa = PBXGroup;
 			children = (
-				C26088292856B3B700B09DDB /* Simple */,
-			);
-			path = AreaCharts;
-			sourceTree = "<group>";
-		};
-		C26088292856B3B700B09DDB /* Simple */ = {
-			isa = PBXGroup;
-			children = (
 				C260882A2856B3C500B09DDB /* AreaSimple.swift */,
 			);
-			path = Simple;
-			sourceTree = "<group>";
-		};
-		C260882C2856B4B900B09DDB /* Simple */ = {
-			isa = PBXGroup;
-			children = (
-				C260882D2856B4C900B09DDB /* SingleBar.swift */,
-			);
-			path = Simple;
-			sourceTree = "<group>";
-		};
-		FC5466C82857E0F200315632 /* Lollipop */ = {
-			isa = PBXGroup;
-			children = (
-				FC5466C52857E0D700315632 /* SingleLineLollipop.swift */,
-			);
-			path = Lollipop;
+			path = AreaCharts;
 			sourceTree = "<group>";
 		};
 		FC56C9A82857B8790044DDED /* HeatMap */ = {
 			isa = PBXGroup;
 			children = (
-				FC56C9A92857B8A50044DDED /* HeatMap.swift */,
-				C26088312857FDD800B09DDB /* HeatMapMultiColor.swift */,
-				62FF3F012857EB530022930C /* HeatMapCustomization.swift */,
+				62FF3F012857EB530022930C /* HeatMap.swift */,
 			);
 			path = HeatMap;
 			sourceTree = "<group>";
@@ -451,22 +384,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C26088322857FDD800B09DDB /* HeatMapMultiColor.swift in Sources */,
 				C26088252856A45800B09DDB /* Square.swift in Sources */,
 				934A95042857D035009E29F4 /* OneDimensionalBar.swift in Sources */,
 				C260882B2856B3C500B09DDB /* AreaSimple.swift in Sources */,
 				88B3E5D02857493B00840CAA /* RangeSimple.swift in Sources */,
 				C22EB5A028568D0B000B9F9A /* ContentView.swift in Sources */,
 				C260881C28569D1B00B09DDB /* InterpolationMethod.swift in Sources */,
-				5BC09FE02858153200C2DB92 /* HeartRateRangeChart.swift in Sources */,
-				FC56C9AA2857B8A50044DDED /* HeatMap.swift in Sources */,
 				C26088202856A34400B09DDB /* TwoBars.swift in Sources */,
-				62FF3F022857EB530022930C /* HeatMapCustomization.swift in Sources */,
+				62FF3F022857EB530022930C /* HeatMap.swift in Sources */,
 				FC5466C62857E0D700315632 /* SingleLineLollipop.swift in Sources */,
 				C26088182856963D00B09DDB /* Data.swift in Sources */,
+				88242C262858C17A00DDD8D0 /* HeartBeat.swift in Sources */,
 				C260882E2856B4C900B09DDB /* SingleBar.swift in Sources */,
 				C22EB59E28568D0B000B9F9A /* Swift_Charts_ExamplesApp.swift in Sources */,
 				62FF3F002857EADF0022930C /* Grid.swift in Sources */,
+				5BC09FE32859526B00C2DB92 /* HeartRateRangeChart.swift in Sources */,
 				2E5763C628576B1B006C7C36 /* PyramidChart.swift in Sources */,
 				C26088132856935B00B09DDB /* ChartType.swift in Sources */,
 				C26088152856960000B09DDB /* SingleLine.swift in Sources */,

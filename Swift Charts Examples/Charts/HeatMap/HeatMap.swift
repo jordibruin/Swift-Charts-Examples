@@ -6,113 +6,122 @@ import SwiftUI
 import Charts
 
 struct HeatMapOverview: View {
-    @State private var data = HeatMapData().data
+    @State private var grid = Grid(numRows: 10, numCols: 10)
 
     var body: some View {
         VStack(alignment: .leading) {
-            Text("Heat Map")
+            Text(ChartType.customizeableHeatMap.title)
                 .font(.callout)
                 .foregroundStyle(.secondary)
-
-            GeometryReader { geo in
-                Chart {
-                    ForEach(data) {
-                        RectangleMark(
-                            x: .value("X", $0.x),
-                            yStart: .value("Y", $0.y),
-                            yEnd: .value("Y", $0.y + 1),
-                            width: .fixed(geo.size.width / 10.0)
-                        )
-                        .opacity($0.value)
-                    }
-                }
-                .chartXAxis(.hidden)
-                .chartYAxis(.hidden)
-                .padding()
+            
+            Chart(grid.points) { point in
+                RectangleMark(
+                    xStart: .value("xStart", point.x),
+                    xEnd: .value("xEnd", point.x + 1),
+                    yStart: .value("yStart", point.y),
+                    yEnd: .value("yEnd", point.y + 1)
+                )
+                .foregroundStyle(point.color)
             }
+            .chartXAxis(.hidden)
+            .chartYAxis(.hidden)
             .aspectRatio(contentMode: .fit)
         }
     }
 }
 
-struct HeatMapOverview_Previews: PreviewProvider {
-    static var previews: some View {
-        HeatMapOverview()
-            .padding()
-    }
-}
-
-struct HeatMapDetailView: View {
-    @State private var data = HeatMapData().data
-
+struct HeatMap: View {
+    @State private var numRows = 10
+    @State private var numCols = 10
+    @State private var grid = Grid(numRows: 10, numCols: 10)
+    @State private var showColors = true
+    @State private var showValues = false
+    
     var body: some View {
         List {
             Section {
-                GeometryReader { geo in
-                    Chart {
-                        ForEach(data) { data in
-                            RectangleMark(
-                                x: .value("X", data.x),
-                                yStart: .value("Y", data.y),
-                                yEnd: .value("Y", data.y + 1),
-                                width: .fixed(geo.size.width / 10.0)
-                            )
-                            .opacity(data.value)
-                            .foregroundStyle(
-                                correctColor(value: data.value)
-                            )
-                            
-                        }
+                Chart(grid.points) { point in
+                    if showColors {
+                        RectangleMark(
+                            xStart: PlottableValue.value("xStart", point.x),
+                            xEnd: PlottableValue.value("xEnd", point.x + 1),
+                            yStart: PlottableValue.value("yStart", point.y),
+                            yEnd: PlottableValue.value("yEnd", point.y + 1)
+                        )
+                        .foregroundStyle(point.color)
+// does not compile when annotations are paired with both `chartYAxis` and `chartXAxis`
+//                        .annotation(position: .overlay) {
+//                            Text(showValues ? String(format: "%.0f", point.val) : "")
+//                        }
+                    } else {
+                        RectangleMark(
+                            xStart: PlottableValue.value("xStart", point.x),
+                            xEnd: PlottableValue.value("xEnd", point.x + 1),
+                            yStart: PlottableValue.value("yStart", point.y),
+                            yEnd: PlottableValue.value("yEnd", point.y + 1)
+                        )
+                        .foregroundStyle(by: .value("Value", point.val))
+//                        .annotation(position: .overlay) {
+//                            Text(showValues ? String(format: "%.0f", point.val) : "")
+//                        }
                     }
-                    .chartXAxis(.hidden)
-                    .chartYAxis(.hidden)
-                    .padding()
-                    
+                }
+                .chartYAxis {
+                    AxisMarks(values: .automatic(desiredCount: grid.numRows,
+                                                 roundLowerBound: false,
+                                                 roundUpperBound: false)) { _ in
+                        AxisGridLine()
+                        AxisTick()
+                        AxisValueLabel(centered: true)
+                    }
+                }
+                .chartXAxis {
+                    AxisMarks(values: .automatic(desiredCount: grid.numCols,
+                                                 roundLowerBound: false,
+                                                 roundUpperBound: false)) { _ in
+                        AxisGridLine()
+                        AxisTick()
+                        AxisValueLabel(centered: true)
+                    }
                 }
                 .aspectRatio(contentMode: .fit)
             }
-        }
-        .navigationBarTitleDisplayMode(.inline)
-    }
-    
-    func correctColor(value: CGFloat) -> Color {
-        if value < 0.25 {
-            return .red
-        } else if value < 0.5 {
-            return .orange
-        } else if value < 0.8 {
-            return .yellow
-        } else {
-            return .green
-        }
-    }
-}
-
-struct HeatMapDetailView_Previews: PreviewProvider {
-    static var previews: some View {
-        HeatMapDetailView()
-    }
-}
-
-struct HeatMapData {
-    var data: [DataPoint] = []
-
-    init() {
-        for x in 0..<10 {
-            for y in 0..<10 {
-                if x + y == 9 {
-                    data.append(DataPoint(x: x, y: y, value: 1))
-                } else {
-                    data.append(DataPoint(x: x, y: y, value: Double(Int.random(in: 10..<96))/100.0))
+            Section {
+                Stepper {
+                    Text("Rows: \(numRows)")
+                } onIncrement: {
+                    numRows += 1
+                    reloadGrid()
+                } onDecrement: {
+                    numRows -= 1
+                    reloadGrid()
                 }
+                Stepper {
+                    Text("Columns: \(numCols)")
+                } onIncrement: {
+                    numCols += 1
+                    reloadGrid()
+                } onDecrement: {
+                    numCols -= 1
+                    reloadGrid()
+                }
+                Toggle("Show Colors", isOn: $showColors)
+//                Toggle("Show Annotations", isOn: $showValues)
             }
         }
+        .navigationBarTitle(ChartType.customizeableHeatMap.title, displayMode: .inline)
     }
 
-    struct DataPoint: Identifiable {
-        let id = UUID()
-        let x: Int
-        let y: Int
-        let value: CGFloat
+    private func reloadGrid() {
+        withAnimation {
+            grid = Grid(numRows: numRows, numCols: numCols)
+        }
+    }
+}
+
+struct HeatMap_Previews: PreviewProvider {
+    static var previews: some View {
+        HeatMapOverview()
+        HeatMap()
     }
 }
