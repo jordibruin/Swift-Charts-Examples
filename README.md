@@ -34,9 +34,11 @@ See the [open issues](https://github.com/jordibruin/SwiftChartExamples/issues) i
 
 ## Chart Types
 
-- [Line Charts](Line-Charts)
-- [Bar Charts](Bar-Charts)
-- [Area Charts](Area-Charts)
+- [Line Charts](https://github.com/jordibruin/SwiftChartExamples/tree/main/Swift%20Charts%20Examples/Charts/LineCharts)
+- [Bar Charts](https://github.com/jordibruin/SwiftChartExamples/tree/main/Swift%20Charts%20Examples/Charts/BarCharts)
+- [Area Charts](https://github.com/jordibruin/SwiftChartExamples/tree/main/Swift%20Charts%20Examples/Charts/AreaCharts)
+- [Range Charts](https://github.com/jordibruin/SwiftChartExamples/tree/main/Swift%20Charts%20Examples/Charts/RangeCharts)
+- [Heat Maps](https://github.com/jordibruin/SwiftChartExamples/tree/main/Swift%20Charts%20Examples/Charts/HeatMap)
 
 ## How to add a new chart
 
