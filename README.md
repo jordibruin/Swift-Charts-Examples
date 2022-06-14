@@ -49,22 +49,23 @@ Source: https://developer.apple.com/videos/play/wwdc2022/10137/
 
 # Chart Types
 
-Below we'll fill in example screenshots and descriptions for each chart type.
 ## Line Charts
 
-
-
+![Line Chart](images/charts/line/singleLine.png)
+![Line Chart with Lollipop](images/charts/line/singleLineLollipop.png)
 
 ## Bar Charts
 
-
-
+![One Dimensional Bar](images/charts/bar/oneDimensionalBar.png)
+![Pyramid](images/charts/bar/pyramid.png)
+![Single Bar](images/charts/bar/singleBar.png)
+![Two Bars](images/charts/bar/twoBars.png)
 
 ## Area Charts
 
-
-
+![Area Chart](images/charts/area/areaSimple.png)
 
 ## Other Charts
 
-
+![Customizable Heat Map](images/charts/heatMap/customizeableHeatMap.png)
+![Range Chart](images/charts/range/rangeSimple.png)
