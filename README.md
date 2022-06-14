@@ -19,12 +19,12 @@ Let's start by recreating the different chart examples that Apple gave in these 
 - [x] Range with Max and Min Chart
 - [x] One dimensional bar
 - [x] Heatmap Block Chart
+- [x] Scatter Chart
 
 ## Todo
 - [ ] Cumulative line Chart
 - [ ] Heartbeat range Chart
 - [ ] Distribution line + Point Chart
-- [ ] Scatter Chart
 - [ ] Funky Gradient Chart
 - [ ] Other Charts
 - [ ] Multi-language Support
@@ -39,6 +39,7 @@ See the [open issues](https://github.com/jordibruin/SwiftChartExamples/issues) i
 - [Area Charts](https://github.com/jordibruin/SwiftChartExamples/tree/main/Swift%20Charts%20Examples/Charts/AreaCharts)
 - [Range Charts](https://github.com/jordibruin/SwiftChartExamples/tree/main/Swift%20Charts%20Examples/Charts/RangeCharts)
 - [Heat Maps](https://github.com/jordibruin/SwiftChartExamples/tree/main/Swift%20Charts%20Examples/Charts/HeatMap)
+- [Point Charts](https://github.com/jordibruin/SwiftChartExamples/tree/main/Swift%20Charts%20Examples/Charts/PointCharts)
 
 ## How to add a new chart
 
@@ -76,3 +77,5 @@ Source: https://developer.apple.com/videos/play/wwdc2022/10137/
 ![Customizable Heat Map](images/charts/heatMap/customizeableHeatMap.png)
 
 ![Range Chart](images/charts/range/rangeSimple.png)
+
+![Scatter Chart](images/charts/point/scatter.png)
