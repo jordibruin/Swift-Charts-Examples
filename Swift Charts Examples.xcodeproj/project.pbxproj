@@ -176,10 +176,10 @@
 		C22EB5C828568EB5000B9F9A /* Charts */ = {
 			isa = PBXGroup;
 			children = (
-				88B3E5CC285748E400840CAA /* RangeCharts */,
-				C26088282856B3AE00B09DDB /* AreaCharts */,
-				C260881D2856A32C00B09DDB /* BarCharts */,
 				C26088192856968400B09DDB /* LineCharts */,
+				C260881D2856A32C00B09DDB /* BarCharts */,
+				C26088282856B3AE00B09DDB /* AreaCharts */,
+				88B3E5CC285748E400840CAA /* RangeCharts */,
 				FC56C9A82857B8790044DDED /* HeatMap */,
 			);
 			path = Charts;
@@ -216,10 +216,10 @@
 		C260881D2856A32C00B09DDB /* BarCharts */ = {
 			isa = PBXGroup;
 			children = (
-				934A95032857D035009E29F4 /* OneDimensionalBar.swift */,
-				2E5763C528576B1B006C7C36 /* PyramidChart.swift */,
 				C260882D2856B4C900B09DDB /* SingleBar.swift */,
 				C260881F2856A34400B09DDB /* TwoBars.swift */,
+				2E5763C528576B1B006C7C36 /* PyramidChart.swift */,
+				934A95032857D035009E29F4 /* OneDimensionalBar.swift */,
 			);
 			path = BarCharts;
 			sourceTree = "<group>";
