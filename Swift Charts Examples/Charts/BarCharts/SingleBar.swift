@@ -18,7 +18,7 @@ struct SingleBarDetailView: View {
                         y: .value("Sales", $0.sales),
                         width: .fixed(barWidth)
                     )
-                    .accessibilityLabel($0.day.description)
+                    .accessibilityLabel($0.day.formatted())
                     .accessibilityValue("\($0.sales) sold")
                     .foregroundStyle(chartColor)
                 }

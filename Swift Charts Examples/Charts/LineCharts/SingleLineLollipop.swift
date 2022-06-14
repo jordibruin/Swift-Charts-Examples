@@ -39,7 +39,7 @@ struct SingleLineLollipopView: View {
                 x: .value("Date", $0.day),
                 y: .value("Sales", $0.sales)
             )
-            .accessibilityLabel($0.day.description)
+            .accessibilityLabel($0.day.formatted())
             .accessibilityValue("\($0.sales) sold")
             .lineStyle(StrokeStyle(lineWidth: lineWidth))
             .foregroundStyle(chartColor)
