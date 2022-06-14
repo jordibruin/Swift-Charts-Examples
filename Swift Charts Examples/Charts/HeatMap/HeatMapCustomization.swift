@@ -14,45 +14,49 @@ struct CustomizableHeatMapDetail: View {
     var body: some View {
         
         VStack {
-            VStack {
-                Stepper {
-                    Text("Rows: \(numRows)")
-                } onIncrement: {
-                    numRows += 1
-                    grid = Grid(numRows: numRows, numCols: numCols)
-                    grid.generateData()
-                } onDecrement: {
-                    numRows -= 1
-                    grid = Grid(numRows: numRows, numCols: numCols)
-                    grid.generateData()
+            List {
+                Section {
+                    Chart(grid.points, id: \.self) { point in
+                        RectangleMark(
+                            xStart: PlottableValue.value("xStart", point.x),
+                            xEnd: PlottableValue.value("xEnd", point.x + 1),
+                            yStart: PlottableValue.value("yStart", point.y),
+                            yEnd: PlottableValue.value("yEnd", point.y + 1)
+                        )
+                        .foregroundStyle(by: .value("Value", point.val))
+                    }
+                    .chartXAxis(.hidden)
+                    .chartYAxis(.hidden)
                 }
-                
-                Stepper {
-                    Text("Columns: \(numCols)")
-                } onIncrement: {
-                    numCols += 1
-                    grid = Grid(numRows: numRows, numCols: numCols)
-                    grid.generateData()
-                } onDecrement: {
-                    numCols -= 1
-                    grid = Grid(numRows: numRows, numCols: numCols)
-                    grid.generateData()
+                .frame(height: 300)
+                Section {
+                    Stepper {
+                        Text("Rows: \(numRows)")
+                    } onIncrement: {
+                        numRows += 1
+                        grid = Grid(numRows: numRows, numCols: numCols)
+                        grid.generateData()
+                    } onDecrement: {
+                        numRows -= 1
+                        grid = Grid(numRows: numRows, numCols: numCols)
+                        grid.generateData()
+                    }
+                    
+                    Stepper {
+                        Text("Columns: \(numCols)")
+                    } onIncrement: {
+                        numCols += 1
+                        grid = Grid(numRows: numRows, numCols: numCols)
+                        grid.generateData()
+                    } onDecrement: {
+                        numCols -= 1
+                        grid = Grid(numRows: numRows, numCols: numCols)
+                        grid.generateData()
+                    }
                 }
             }
-            
-            Chart(grid.points, id: \.self) { point in
-                RectangleMark(
-                    xStart: PlottableValue.value("xStart", point.x),
-                    xEnd: PlottableValue.value("xEnd", point.x + 1),
-                    yStart: PlottableValue.value("yStart", point.y),
-                    yEnd: PlottableValue.value("yEnd", point.y + 1)
-                )
-                .foregroundStyle(by: .value("Value", point.val))
-            }
+
         }
-        .chartXAxis(.hidden)
-        .chartYAxis(.hidden)
-        .padding()
         .onAppear {
             grid.generateData()
         }

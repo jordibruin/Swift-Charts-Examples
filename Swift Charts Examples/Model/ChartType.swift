@@ -136,6 +136,5 @@ enum ChartType: String, Identifiable, CaseIterable {
         case .heatMapMultiColor:
             HeatMapMultiColorDetailView()
         }
-        
     }
 }
