@@ -4,6 +4,7 @@
 
 import SwiftUI
 import Charts
+import DataFactory
 
 struct SingleLineLollipopView: View {
     @State var isPreview: Bool

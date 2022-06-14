@@ -4,6 +4,7 @@
 
 import SwiftUI
 import Charts
+import DataFactory
 
 struct PyramidChartOverview: View {
     var body: some View {

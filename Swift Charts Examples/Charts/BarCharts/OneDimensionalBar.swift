@@ -4,6 +4,7 @@
 
 import SwiftUI
 import Charts
+import DataFactory
 
 struct OneDimensionalBarSimpleOverview: View {
     var body: some View {

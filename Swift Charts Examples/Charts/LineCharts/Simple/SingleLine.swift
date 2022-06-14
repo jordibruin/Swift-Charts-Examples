@@ -4,6 +4,7 @@
 
 import SwiftUI
 import Charts
+import DataFactory
 
 struct LineChartSimpleOverview: View {
     var body: some View {
