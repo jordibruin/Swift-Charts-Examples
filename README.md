@@ -28,15 +28,17 @@ Let's start by recreating the different chart examples that Apple gave in these 
 - [ ] Funky Gradient Chart
 - [ ] Other Charts
 - [ ] Multi-language Support
-- [ ] Make all charts accesssible
+- [ ] Make all charts accessible
 
 See the [open issues](https://github.com/jordibruin/SwiftChartExamples/issues) if you think anything is missing from this list. You can also contact me on [Twitter](https://www.twitter.com/jordibruin) if you have any suggestions or feedback.
 
 ## Chart Types
 
-- [Line Charts](Line-Charts)
-- [Bar Charts](Bar-Charts)
-- [Area Charts](Area-Charts)
+- [Line Charts](https://github.com/jordibruin/SwiftChartExamples/tree/main/Swift%20Charts%20Examples/Charts/LineCharts)
+- [Bar Charts](https://github.com/jordibruin/SwiftChartExamples/tree/main/Swift%20Charts%20Examples/Charts/BarCharts)
+- [Area Charts](https://github.com/jordibruin/SwiftChartExamples/tree/main/Swift%20Charts%20Examples/Charts/AreaCharts)
+- [Range Charts](https://github.com/jordibruin/SwiftChartExamples/tree/main/Swift%20Charts%20Examples/Charts/RangeCharts)
+- [Heat Maps](https://github.com/jordibruin/SwiftChartExamples/tree/main/Swift%20Charts%20Examples/Charts/HeatMap)
 
 ## How to add a new chart
 
@@ -46,6 +48,8 @@ Each chart needs a preview chart as well as a detail view. The preview chart is 
 Source: https://developer.apple.com/videos/play/wwdc2022/10137/
 
 # Chart Types
+
+Below we'll fill in example screenshots and descriptions for each chart type.
 ## Line Charts
 
 
