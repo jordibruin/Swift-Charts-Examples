@@ -24,13 +24,10 @@ struct CustomizableHeatMapDetailView: View {
                             yEnd: PlottableValue.value("yEnd", point.y + 1)
                         )
                         .foregroundStyle(point.color)
-                        .annotation(position: .overlay) {
-                            if showValues {
-                                Text(String(format: "%.0f", point.val))
-                            } else {
-                                EmptyView()
-                            }
-                        }
+// does not compile when annotations are paired with both `chartYAxis` and `chartXAxis`
+//                        .annotation(position: .overlay, alignment: .center) {
+//                            Text(showValues ? String(format: "%.0f", point.val) : "")
+//                        }
                     } else {
                         RectangleMark(
                             xStart: PlottableValue.value("xStart", point.x),
@@ -39,13 +36,27 @@ struct CustomizableHeatMapDetailView: View {
                             yEnd: PlottableValue.value("yEnd", point.y + 1)
                         )
                         .foregroundStyle(by: .value("Value", point.val))
-                        .annotation(position: .overlay) {
-                            if showValues {
-                                Text(String(format: "%.0f", point.val))
-                            } else {
-                                EmptyView()
-                            }
-                        }
+//                        .annotation(position: .overlay, alignment: .center) {
+//                            Text(showValues ? String(format: "%.0f", point.val) : "")
+//                        }
+                    }
+                }
+                .chartYAxis {
+                    AxisMarks(values: .automatic(desiredCount: grid.numRows,
+                                                 roundLowerBound: false,
+                                                 roundUpperBound: false)) { _ in
+                        AxisGridLine()
+                        AxisTick()
+                        AxisValueLabel(centered: true)
+                    }
+                }
+                .chartXAxis {
+                    AxisMarks(values: .automatic(desiredCount: grid.numCols,
+                                                 roundLowerBound: false,
+                                                 roundUpperBound: false)) { _ in
+                        AxisGridLine()
+                        AxisTick()
+                        AxisValueLabel(centered: true)
                     }
                 }
             }
@@ -70,7 +81,7 @@ struct CustomizableHeatMapDetailView: View {
                     reloadGrid()
                 }
                 Toggle("Show Colors", isOn: $showColors)
-                Toggle("Show Annotations", isOn: $showValues)
+//                Toggle("Show Annotations", isOn: $showValues)
             }
         }
         .navigationBarTitle("Customizable Heat Map", displayMode: .inline)
