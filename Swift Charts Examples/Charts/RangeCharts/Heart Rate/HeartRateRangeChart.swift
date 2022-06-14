@@ -13,7 +13,23 @@ struct HeartRateRangeChartDetail: View {
     var body: some View {
         List {
             Section(header: makeHeader()) {
-                makeHeartRateChart()
+                Chart(HeartRateData.lastWeek, id: \.weekday) {
+                    BarMark(
+                        x: .value("Day", $0.weekday, unit: .day),
+                        yStart: .value("BPM Min", $0.dailyMin),
+                        yEnd: .value("BPM Max", $0.dailyMax),
+                        width: .fixed(barWidth)
+                    )
+                    .clipShape(Capsule())
+                    .foregroundStyle(chartColor.gradient)
+                }
+                .chartXAxis {
+                    AxisMarks(values: .stride(by: ChartStrideBy.day.time)) { _ in
+                        AxisTick()
+                        AxisGridLine()
+                        AxisValueLabel(format: .dateTime.weekday(.abbreviated), centered: true)
+                    }
+                }
                     .frame(height: 300)
             }
             
@@ -48,27 +64,6 @@ struct HeartRateRangeChartDetail: View {
             Text("\(HeartRateData.dateInterval), ") + Text(HeartRateData.latestDate, format: .dateTime.year())
             
         }.fontWeight(.semibold)
-    }
-    
-    @ViewBuilder
-    private func makeHeartRateChart() -> some View {
-        Chart(HeartRateData.lastWeek, id: \.weekday) {
-            BarMark(
-                x: .value("Day", $0.weekday, unit: .day),
-                yStart: .value("BPM Min", $0.dailyMin),
-                yEnd: .value("BPM Max", $0.dailyMax),
-                width: .fixed(barWidth)
-            )
-            .clipShape(Capsule())
-            .foregroundStyle(chartColor.gradient)
-        }
-        .chartXAxis {
-            AxisMarks(values: .stride(by: ChartStrideBy.day.time)) { _ in
-                AxisTick()
-                AxisGridLine()
-                AxisValueLabel(format: .dateTime.weekday(.abbreviated), centered: true)
-            }
-        }
     }
 }
 
