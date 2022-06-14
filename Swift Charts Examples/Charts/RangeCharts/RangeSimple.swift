@@ -8,7 +8,7 @@ import Charts
 struct RangeSimpleOverview: View {
     var body: some View {
         VStack(alignment: .leading) {
-            Text("Range Chart")
+            Text(ChartType.rangeSimple.title)
                 .font(.callout)
                 .foregroundStyle(.secondary)
             
@@ -68,7 +68,7 @@ struct RangeSimple: View {
             }
             customisation
         }
-        .navigationBarTitle("Range Chart", displayMode: .inline)
+        .navigationBarTitle(ChartType.rangeSimple.title, displayMode: .inline)
     }
     
     private var customisation: some View {

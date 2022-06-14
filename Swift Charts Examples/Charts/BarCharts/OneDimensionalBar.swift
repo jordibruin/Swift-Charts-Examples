@@ -8,7 +8,7 @@ import Charts
 struct OneDimensionalBarOverview: View {
     var body: some View {
         VStack(alignment: .leading) {
-            Text("One Dimensional Bar")
+            Text(ChartType.oneDimensionalBar.title)
                 .font(.callout)
                 .foregroundStyle(.secondary)
 
@@ -75,7 +75,7 @@ struct OneDimensionalBar: View {
             
             customisation
         }
-        .navigationBarTitle("One Dimensional Bar", displayMode: .inline)
+        .navigationBarTitle(ChartType.oneDimensionalBar.title, displayMode: .inline)
     }
     
     private var customisation: some View {

@@ -8,7 +8,7 @@ import Charts
 struct SingleLineOverview: View {
     var body: some View {
         VStack(alignment: .leading) {
-            Text("Line Chart")
+            Text(ChartType.singleLine.title)
                 .font(.callout)
                 .foregroundStyle(.secondary)
 
@@ -50,7 +50,7 @@ struct SingleLine: View {
             
             customisation
         }
-        .navigationBarTitle("Line Chart", displayMode: .inline)
+        .navigationBarTitle(ChartType.singleLine.title, displayMode: .inline)
     }
     
     private var customisation: some View {

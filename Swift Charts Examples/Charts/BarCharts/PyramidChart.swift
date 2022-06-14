@@ -8,7 +8,7 @@ import Charts
 struct PyramidChartOverview: View {
     var body: some View {
         VStack(alignment: .leading) {
-            Text("Pyramid")
+            Text(ChartType.pyramid.title)
                 .font(.callout)
                 .foregroundStyle(.secondary)
             
@@ -101,7 +101,7 @@ struct PyramidChart: View {
                 }
             }
         }
-        .navigationBarTitle("Pyramid", displayMode: .inline)
+        .navigationBarTitle(ChartType.pyramid.title, displayMode: .inline)
     }
 }
 
