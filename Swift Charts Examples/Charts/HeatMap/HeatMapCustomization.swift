@@ -25,7 +25,7 @@ struct CustomizableHeatMapDetailView: View {
                         )
                         .foregroundStyle(point.color)
 // does not compile when annotations are paired with both `chartYAxis` and `chartXAxis`
-//                        .annotation(position: .overlay, alignment: .center) {
+//                        .annotation(position: .overlay) {
 //                            Text(showValues ? String(format: "%.0f", point.val) : "")
 //                        }
                     } else {
@@ -36,7 +36,7 @@ struct CustomizableHeatMapDetailView: View {
                             yEnd: PlottableValue.value("yEnd", point.y + 1)
                         )
                         .foregroundStyle(by: .value("Value", point.val))
-//                        .annotation(position: .overlay, alignment: .center) {
+//                        .annotation(position: .overlay) {
 //                            Text(showValues ? String(format: "%.0f", point.val) : "")
 //                        }
                     }
@@ -59,8 +59,8 @@ struct CustomizableHeatMapDetailView: View {
                         AxisValueLabel(centered: true)
                     }
                 }
+                .aspectRatio(contentMode: .fit)
             }
-            .aspectRatio(contentMode: .fit)
             Section {
                 Stepper {
                     Text("Rows: \(numRows)")

@@ -52,13 +52,19 @@ Source: https://developer.apple.com/videos/play/wwdc2022/10137/
 ## Line Charts
 
 ![Line Chart](images/charts/line/singleLine.png)
+
 ![Line Chart with Lollipop](images/charts/line/singleLineLollipop.png)
+
+![Heart Beat / ECG Chart](images/charts/line/heartBeat.png)
 
 ## Bar Charts
 
 ![One Dimensional Bar](images/charts/bar/oneDimensionalBar.png)
+
 ![Pyramid](images/charts/bar/pyramid.png)
+
 ![Single Bar](images/charts/bar/singleBar.png)
+
 ![Two Bars](images/charts/bar/twoBars.png)
 
 ## Area Charts
@@ -68,4 +74,5 @@ Source: https://developer.apple.com/videos/play/wwdc2022/10137/
 ## Other Charts
 
 ![Customizable Heat Map](images/charts/heatMap/customizeableHeatMap.png)
+
 ![Range Chart](images/charts/range/rangeSimple.png)
