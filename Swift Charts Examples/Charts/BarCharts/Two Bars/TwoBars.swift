@@ -42,7 +42,7 @@ struct TwoBarsOverview_Previews: PreviewProvider {
 }
 
 struct TwoBarsSimpleDetailView: View {
-    @State private var lineWidth = 2.0
+    @State private var barWidth = 13.0
     @State private var interpolationMethod: ChartInterpolationMethod = .cardinal
     @State private var strideBy: ChartStrideBy = .day
     @State private var showLegend = false
@@ -55,7 +55,8 @@ struct TwoBarsSimpleDetailView: View {
                     ForEach(series.sales, id: \.weekday) { element in
                         BarMark(
                             x: .value("Day", element.weekday, unit: .day),
-                            y: .value("Sales", element.sales)
+                            y: .value("Sales", element.sales),
+                            width: .fixed(barWidth)
                         )
                         .accessibilityLabel("\(element.weekday.formatted())")
                         .accessibilityValue("\(element.sales)")
@@ -79,18 +80,17 @@ struct TwoBarsSimpleDetailView: View {
             
             customisation
         }
-
         .navigationBarTitle("Two Bars", displayMode: .inline)
     }
     
     
     private var customisation: some View {
         Section {
-            Stepper(value: $lineWidth, in: 1.0...20.0) {
+            Stepper(value: $barWidth, in: 1.0...20.0) {
                 HStack {
-                    Text("Line Width")
+                    Text("Bar Width")
                     Spacer()
-                    Text("\(String(format: "%.0f",lineWidth))")
+                    Text("\(String(format: "%.0f", barWidth))")
                 }
             }
             
