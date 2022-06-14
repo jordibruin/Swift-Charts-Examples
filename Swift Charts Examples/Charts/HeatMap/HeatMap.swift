@@ -5,12 +5,37 @@
 import SwiftUI
 import Charts
 
-struct CustomizableHeatMapDetailView: View {
-    @State var numRows: Int = 10
-    @State var numCols: Int = 10
-    @State var grid = Grid(numRows: 10, numCols: 10)
-    @State var showColors = true
-    @State var showValues = false
+struct HeatMapOverview: View {
+    @State private var grid = Grid(numRows: 10, numCols: 10)
+
+    var body: some View {
+        VStack(alignment: .leading) {
+            Text("Customizable Heat Map")
+                .font(.callout)
+                .foregroundStyle(.secondary)
+            
+            Chart(grid.points) { point in
+                RectangleMark(
+                    xStart: .value("xStart", point.x),
+                    xEnd: .value("xEnd", point.x + 1),
+                    yStart: .value("yStart", point.y),
+                    yEnd: .value("yEnd", point.y + 1)
+                )
+                .foregroundStyle(point.color)
+            }
+            .chartXAxis(.hidden)
+            .chartYAxis(.hidden)
+            .aspectRatio(contentMode: .fit)
+        }
+    }
+}
+
+struct HeatMap: View {
+    @State private var numRows = 10
+    @State private var numCols = 10
+    @State private var grid = Grid(numRows: 10, numCols: 10)
+    @State private var showColors = true
+    @State private var showValues = false
     
     var body: some View {
         List {
@@ -94,34 +119,9 @@ struct CustomizableHeatMapDetailView: View {
     }
 }
 
-struct CustomizableHeatMapOverview: View {
-    @State var grid = Grid(numRows: 10, numCols: 10)
-
-    var body: some View {
-        VStack (alignment: .leading) {
-            Text("Customizable Heat Map")
-                .font(.callout)
-                .foregroundStyle(.secondary)
-            
-            Chart(grid.points) { point in
-                RectangleMark(
-                    xStart: .value("xStart", point.x),
-                    xEnd: .value("xEnd", point.x + 1),
-                    yStart: .value("yStart", point.y),
-                    yEnd: .value("yEnd", point.y + 1)
-                )
-                .foregroundStyle(point.color)
-            }
-            .chartXAxis(.hidden)
-            .chartYAxis(.hidden)
-            .aspectRatio(contentMode: .fit)
-        }
-    }
-}
-
-struct CustomizableHeatMap_Previews: PreviewProvider {
+struct HeatMap_Previews: PreviewProvider {
     static var previews: some View {
-        CustomizableHeatMapOverview()
-        CustomizableHeatMapDetailView()
+        HeatMapOverview()
+        HeatMap()
     }
 }

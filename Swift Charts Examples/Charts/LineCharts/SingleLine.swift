@@ -5,7 +5,7 @@
 import SwiftUI
 import Charts
 
-struct LineChartSimpleOverview: View {
+struct SingleLineOverview: View {
     var body: some View {
         VStack(alignment: .leading) {
             Text("Line Chart")
@@ -25,14 +25,7 @@ struct LineChartSimpleOverview: View {
     }
 }
 
-struct SalesOverview_Previews: PreviewProvider {
-    static var previews: some View {
-        LineChartSimpleOverview()
-            .padding()
-    }
-}
-
-struct LineChartSimpleDetailView: View {
+struct SingleLine: View {
     @State private var lineWidth = 2.0
     @State private var interpolationMethod: ChartInterpolationMethod = .cardinal
     @State private var chartColor: Color = .blue
@@ -57,7 +50,7 @@ struct LineChartSimpleDetailView: View {
             
             customisation
         }
-        .navigationBarTitleDisplayMode(.inline)
+        .navigationBarTitle("Line Chart", displayMode: .inline)
     }
     
     private var customisation: some View {
@@ -81,8 +74,9 @@ struct LineChartSimpleDetailView: View {
     }
 }
 
-struct LineChartSimpleDetailView_Previews: PreviewProvider {
+struct SingleLine_Previews: PreviewProvider {
     static var previews: some View {
-        LineChartSimpleDetailView()
+        SingleLineOverview()
+        SingleLine()
     }
 }

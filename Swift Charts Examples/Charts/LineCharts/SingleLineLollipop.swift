@@ -5,8 +5,8 @@
 import SwiftUI
 import Charts
 
-struct SingleLineLollipopView: View {
-    @State var isPreview: Bool
+struct SingleLineLollipop: View {
+    @State var isOverview: Bool
 
     @State private var lineWidth = 2.0
     @State private var interpolationMethod: ChartInterpolationMethod = .cardinal
@@ -15,7 +15,7 @@ struct SingleLineLollipopView: View {
     @State private var selectedElement: (day: Date, sales: Int)? = (SalesData.last30Days[10].day, SalesData.last30Days[10].sales)
 
     var body: some View {
-        if isPreview {
+        if isOverview {
             VStack(alignment: .leading) {
                 Text("Line Chart with Lollipop")
                     .font(.callout)
@@ -28,8 +28,12 @@ struct SingleLineLollipopView: View {
                 Section {
                     chart
                 }
+                Section {
+                    Text("Tap and drag over the chart to move the lollipop")
+                        .font(.callout)
+                }
             }
-            .navigationBarTitleDisplayMode(.inline)
+            .navigationBarTitle("Line Chart with Lollipop", displayMode: .inline)
         }
     }
 
@@ -68,7 +72,7 @@ struct SingleLineLollipopView: View {
                     )
             }
         }
-        .frame(height: isPreview ? Constants.previewChartHeight : Constants.detailChartHeight)
+        .frame(height: isOverview ? Constants.previewChartHeight : Constants.detailChartHeight)
         .chartBackground { proxy in
             ZStack(alignment: .topLeading) {
                 GeometryReader { geo in
@@ -110,8 +114,8 @@ struct SingleLineLollipopView: View {
                 }
             }
         }
-        .chartXAxis(isPreview ? .hidden : .automatic)
-        .chartYAxis(isPreview ? .hidden : .automatic)
+        .chartXAxis(isOverview ? .hidden : .automatic)
+        .chartYAxis(isOverview ? .hidden : .automatic)
     }
 
     private func findElement(location: CGPoint, proxy: ChartProxy, geometry: GeometryProxy) -> (day: Date, sales: Int)? {
@@ -135,9 +139,9 @@ struct SingleLineLollipopView: View {
     }
 }
 
-struct SingleLineLollipopDetailView_Previews: PreviewProvider {
+struct SingleLineLollipop_Previews: PreviewProvider {
     static var previews: some View {
-        SingleLineLollipopView(isPreview: true)
-        SingleLineLollipopView(isPreview: false)
+        SingleLineLollipop(isOverview: true)
+        SingleLineLollipop(isOverview: false)
     }
 }

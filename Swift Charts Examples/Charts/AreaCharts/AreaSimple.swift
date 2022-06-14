@@ -5,12 +5,31 @@
 import SwiftUI
 import Charts
 
-struct AreaChartSimpleDetailView: View {
-    
+struct AreaSimpleOverview: View {
+    var body: some View {
+        VStack(alignment: .leading) {
+            Text("Area Chart")
+                .font(.callout)
+                .foregroundStyle(.secondary)
+
+            Chart(SalesData.last30Days, id: \.day) {
+                AreaMark(
+                    x: .value("Day", $0.day, unit: .day),
+                    y: .value("Sales", $0.sales)
+                )
+            }
+            .chartXAxis(.hidden)
+            .chartYAxis(.hidden)
+                .frame(height: Constants.previewChartHeight)
+        }
+    }
+}
+
+struct AreaSimple: View {
     @State private var lineWidth = 2.0
     @State private var interpolationMethod: ChartInterpolationMethod = .cardinal
     @State private var chartColor: Color = .blue
-    @State private var showGradient: Bool = true
+    @State private var showGradient = true
     @State private var gradientRange = 1.0
 
     private var gradient: Gradient {
@@ -42,10 +61,9 @@ struct AreaChartSimpleDetailView: View {
                 }
                 .frame(height: Constants.detailChartHeight)
             }
-            
             customisation
         }
-        .navigationBarTitleDisplayMode(.inline)
+        .navigationBarTitle("Area Chart", displayMode: .inline)
     }
     
     private var customisation: some View {
@@ -81,35 +99,9 @@ struct AreaChartSimpleDetailView: View {
     }
 }
 
-struct AreaChartSimpleDetailView_Previews: PreviewProvider {
+struct AreaSimple_Previews: PreviewProvider {
     static var previews: some View {
-        AreaChartSimpleDetailView()
-    }
-}
-
-struct AreaChartSimpleOverview: View {
-    var body: some View {
-        VStack(alignment: .leading) {
-            Text("Area Chart")
-                .font(.callout)
-                .foregroundStyle(.secondary)
-
-            Chart(SalesData.last30Days, id: \.day) {
-                AreaMark(
-                    x: .value("Day", $0.day, unit: .day),
-                    y: .value("Sales", $0.sales)
-                )
-            }
-            .chartXAxis(.hidden)
-            .chartYAxis(.hidden)
-                .frame(height: Constants.previewChartHeight)
-        }
-    }
-}
-
-struct AreaChartSimpleOverview2_Previews: PreviewProvider {
-    static var previews: some View {
-        AreaChartSimpleOverview()
-            .padding()
+        AreaSimpleOverview()
+        AreaSimple()
     }
 }

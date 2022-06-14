@@ -5,7 +5,7 @@
 import SwiftUI
 import Charts
 
-struct TwoBarsSimpleOverview: View {
+struct TwoBarsOverview: View {
     var body: some View {
         VStack(alignment: .leading) {
             Text("Two Bars")
@@ -34,14 +34,7 @@ struct TwoBarsSimpleOverview: View {
     }
 }
 
-struct TwoBarsOverview_Previews: PreviewProvider {
-    static var previews: some View {
-        TwoBarsSimpleOverview()
-            .padding()
-    }
-}
-
-struct TwoBarsSimpleDetailView: View {
+struct TwoBars: View {
     @State private var barWidth = 13.0
     @State private var interpolationMethod: ChartInterpolationMethod = .cardinal
     @State private var strideBy: ChartStrideBy = .day
@@ -83,7 +76,6 @@ struct TwoBarsSimpleDetailView: View {
         .navigationBarTitle("Two Bars", displayMode: .inline)
     }
     
-    
     private var customisation: some View {
         Section {
             Stepper(value: $barWidth, in: 1.0...20.0) {
@@ -100,8 +92,9 @@ struct TwoBarsSimpleDetailView: View {
     }
 }
 
-struct TwoBarsSimpleDetailView_Previews: PreviewProvider {
+struct TwoBars_Previews: PreviewProvider {
     static var previews: some View {
-        TwoBarsSimpleDetailView()
+        TwoBarsOverview()
+        TwoBars()
     }
 }
