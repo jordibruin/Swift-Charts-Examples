@@ -23,7 +23,7 @@ struct RangeSimpleOverview: View {
             }
             .chartXAxis(.hidden)
             .chartYAxis(.hidden)
-            .frame(height: 100)
+            .frame(height: Constants.previewChartHeight)
         }
     }
 }
@@ -64,7 +64,7 @@ struct RangeSimple: View {
                         .symbolSize(barWidth * 5)
                     }
                 }
-                .frame(height: 300)
+                .frame(height: Constants.detailChartHeight)
             }
             customisation
         }

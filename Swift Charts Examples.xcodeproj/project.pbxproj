@@ -82,6 +82,7 @@
 		C260882A2856B3C500B09DDB /* AreaSimple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreaSimple.swift; sourceTree = "<group>"; };
 		C260882D2856B4C900B09DDB /* SingleBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleBar.swift; sourceTree = "<group>"; };
 		FC5466C52857E0D700315632 /* SingleLineLollipop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleLineLollipop.swift; sourceTree = "<group>"; };
+		FC8C2FE02859E64B00C334A9 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,8 +113,8 @@
 		88B3E5CC285748E400840CAA /* RangeCharts */ = {
 			isa = PBXGroup;
 			children = (
-				5BC09FE22859526B00C2DB92 /* HeartRateRangeChart.swift */,
 				88B3E5CF2857493B00840CAA /* RangeSimple.swift */,
+				5BC09FE22859526B00C2DB92 /* HeartRateRangeChart.swift */,
 			);
 			path = RangeCharts;
 			sourceTree = "<group>";
@@ -129,6 +130,7 @@
 		C22EB59128568D0B000B9F9A = {
 			isa = PBXGroup;
 			children = (
+				FC8C2FE02859E64B00C334A9 /* README.md */,
 				262541172856A35B00A1E2EC /* Build.xcconfig */,
 				C22EB59C28568D0B000B9F9A /* Swift Charts Examples */,
 				C22EB5AE28568D0C000B9F9A /* Swift Charts ExamplesTests */,
@@ -191,12 +193,12 @@
 		C22EB5C828568EB5000B9F9A /* Charts */ = {
 			isa = PBXGroup;
 			children = (
-				9691226D28594EB4001FCF65 /* PointCharts */,
 				C26088192856968400B09DDB /* LineCharts */,
 				C260881D2856A32C00B09DDB /* BarCharts */,
 				C26088282856B3AE00B09DDB /* AreaCharts */,
 				88B3E5CC285748E400840CAA /* RangeCharts */,
 				FC56C9A82857B8790044DDED /* HeatMap */,
+				9691226D28594EB4001FCF65 /* PointCharts */,
 			);
 			path = Charts;
 			sourceTree = "<group>";
