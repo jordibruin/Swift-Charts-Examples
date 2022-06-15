@@ -25,6 +25,7 @@ enum ChartType: String, Identifiable, CaseIterable {
     case twoBars
     case pyramid
     case oneDimensionalBar
+    case threshold
     
     // Area Charts
     case areaSimple
@@ -51,6 +52,8 @@ enum ChartType: String, Identifiable, CaseIterable {
             return "Two Bars"
         case .pyramid:
             return "Pyramid"
+        case .threshold:
+            return "Threshold Bar"
         case .oneDimensionalBar:
             return "One Dimensional Bar"
         case .areaSimple:
@@ -66,7 +69,7 @@ enum ChartType: String, Identifiable, CaseIterable {
         switch self {
         case .singleLine, .singleLineLollipop, .heartBeat:
             return .line
-        case .singleBar, .twoBars, .pyramid, .oneDimensionalBar:
+        case .singleBar, .twoBars, .pyramid, .threshold, .oneDimensionalBar:
             return .bar
         case .areaSimple:
             return .area
@@ -94,6 +97,8 @@ enum ChartType: String, Identifiable, CaseIterable {
             OneDimensionalBarOverview()
         case .pyramid:
             PyramidChartOverview()
+        case .threshold:
+            ThresholdBarOverview()
         case .areaSimple:
             AreaSimpleOverview()
         case .rangeSimple:
@@ -120,6 +125,8 @@ enum ChartType: String, Identifiable, CaseIterable {
             OneDimensionalBar()
         case .pyramid:
             PyramidChart()
+        case .threshold:
+            ThresholdBar()
         case .areaSimple:
             AreaSimple()
         case .rangeSimple:
