@@ -10,6 +10,7 @@
 		2E5763C628576B1B006C7C36 /* PyramidChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E5763C528576B1B006C7C36 /* PyramidChart.swift */; };
 		5BC09FE32859526B00C2DB92 /* HeartRateRangeChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BC09FE22859526B00C2DB92 /* HeartRateRangeChart.swift */; };
 		62FF3F002857EADF0022930C /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62FF3EFF2857EADF0022930C /* Grid.swift */; };
+		7425DF832858DF4300672F3B /* HealthData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7425DF822858DF4300672F3B /* HealthData.swift */; };
 		62FF3F022857EB530022930C /* HeatMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62FF3F012857EB530022930C /* HeatMap.swift */; };
 		88242C262858C17A00DDD8D0 /* HeartBeat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88242C252858C17A00DDD8D0 /* HeartBeat.swift */; };
 		88B3E5D02857493B00840CAA /* RangeSimple.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B3E5CF2857493B00840CAA /* RangeSimple.swift */; };
@@ -56,6 +57,7 @@
 		2E5763C528576B1B006C7C36 /* PyramidChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PyramidChart.swift; sourceTree = "<group>"; };
 		5BC09FE22859526B00C2DB92 /* HeartRateRangeChart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeartRateRangeChart.swift; sourceTree = "<group>"; };
 		62FF3EFF2857EADF0022930C /* Grid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
+		7425DF822858DF4300672F3B /* HealthData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthData.swift; sourceTree = "<group>"; };
 		62FF3F012857EB530022930C /* HeatMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeatMap.swift; sourceTree = "<group>"; };
 		88242C252858C17A00DDD8D0 /* HeartBeat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartBeat.swift; sourceTree = "<group>"; };
 		88B3E5CF2857493B00840CAA /* RangeSimple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RangeSimple.swift; sourceTree = "<group>"; };
@@ -218,6 +220,7 @@
 			isa = PBXGroup;
 			children = (
 				C26088172856963D00B09DDB /* Data.swift */,
+				7425DF822858DF4300672F3B /* HealthData.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -400,6 +403,7 @@
 				C26088252856A45800B09DDB /* Square.swift in Sources */,
 				934A95042857D035009E29F4 /* OneDimensionalBar.swift in Sources */,
 				C260882B2856B3C500B09DDB /* AreaSimple.swift in Sources */,
+				7425DF832858DF4300672F3B /* HealthData.swift in Sources */,
 				88B3E5D02857493B00840CAA /* RangeSimple.swift in Sources */,
 				9691226F28594EC5001FCF65 /* ScatterChart.swift in Sources */,
 				C22EB5A028568D0B000B9F9A /* ContentView.swift in Sources */,
