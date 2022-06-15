@@ -34,9 +34,7 @@ See the [open issues](https://github.com/jordibruin/SwiftChartExamples/issues) i
 
 ## Chart Types
 
-### Line Charts
-
-- [Line Charts](https://github.com/jordibruin/SwiftChartExamples/tree/main/Swift%20Charts%20Examples/Charts/LineCharts)
+### [Line Charts](https://github.com/jordibruin/SwiftChartExamples/tree/main/Swift%20Charts%20Examples/Charts/LineCharts)
 
 ![Line Chart](images/charts/line/singleLine.png)
 
@@ -44,9 +42,7 @@ See the [open issues](https://github.com/jordibruin/SwiftChartExamples/issues) i
 
 ![Heart Beat / ECG Chart](images/charts/line/heartBeat.png)
 
-### Bar Charts
-
-- [Bar Charts](https://github.com/jordibruin/SwiftChartExamples/tree/main/Swift%20Charts%20Examples/Charts/BarCharts)
+### [Bar Charts](https://github.com/jordibruin/SwiftChartExamples/tree/main/Swift%20Charts%20Examples/Charts/BarCharts)
 
 ![Single Bar](images/charts/bar/singleBar.png)
 
@@ -56,29 +52,21 @@ See the [open issues](https://github.com/jordibruin/SwiftChartExamples/issues) i
 
 ![One Dimensional Bar](images/charts/bar/oneDimensionalBar.png)
 
-### Area Charts
-
-- [Area Charts](https://github.com/jordibruin/SwiftChartExamples/tree/main/Swift%20Charts%20Examples/Charts/AreaCharts)
+### [Area Charts](https://github.com/jordibruin/SwiftChartExamples/tree/main/Swift%20Charts%20Examples/Charts/AreaCharts)
 
 ![Area Chart](images/charts/area/areaSimple.png)
 
-### Range Charts
-
-- [Range Charts](https://github.com/jordibruin/SwiftChartExamples/tree/main/Swift%20Charts%20Examples/Charts/RangeCharts)
+### [Range Charts](https://github.com/jordibruin/SwiftChartExamples/tree/main/Swift%20Charts%20Examples/Charts/RangeCharts)
 
 ![Range Chart](images/charts/range/rangeSimple.png)
 
 ![Heart Rate Range Chart](images/charts/range/rangeHeartRate.png)
 
-### Heat Maps
-
-- [Heat Maps](https://github.com/jordibruin/SwiftChartExamples/tree/main/Swift%20Charts%20Examples/Charts/HeatMap)
+### [Heat Maps](https://github.com/jordibruin/SwiftChartExamples/tree/main/Swift%20Charts%20Examples/Charts/HeatMap)
 
 ![Customizable Heat Map](images/charts/heatMap/customizeableHeatMap.png)
 
-### Point Charts
-
-- [Point Charts](https://github.com/jordibruin/SwiftChartExamples/tree/main/Swift%20Charts%20Examples/Charts/PointCharts)
+### [Point Charts](https://github.com/jordibruin/SwiftChartExamples/tree/main/Swift%20Charts%20Examples/Charts/PointCharts)
 
 ![Scatter Chart](images/charts/point/scatter.png)
 
