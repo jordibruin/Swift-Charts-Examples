@@ -5,10 +5,10 @@
 import SwiftUI
 import Charts
 
-struct OneDimensionalBarSimpleOverview: View {
+struct OneDimensionalBarOverview: View {
     var body: some View {
         VStack(alignment: .leading) {
-            Text("One Dimensional Bar")
+            Text(ChartType.oneDimensionalBar.title)
                 .font(.callout)
                 .foregroundStyle(.secondary)
 
@@ -32,18 +32,11 @@ struct OneDimensionalBarSimpleOverview: View {
     }
 }
 
-struct OneDimensionalBarOverview_Previews: PreviewProvider {
-    static var previews: some View {
-        OneDimensionalBarSimpleOverview()
-            .padding()
-    }
-}
-
-struct OneDimensionalBarSimpleDetailView: View {
+struct OneDimensionalBar: View {
     @State private var showLegend = true
     
-    var totalSize: Double {
-        return DataUsageData
+    private var totalSize: Double {
+        DataUsageData
             .example
             .reduce(0) { $0 + $1.size }
     }
@@ -82,10 +75,8 @@ struct OneDimensionalBarSimpleDetailView: View {
             
             customisation
         }
-
-        .navigationBarTitle("One Dimensional Bar", displayMode: .inline)
+        .navigationBarTitle(ChartType.oneDimensionalBar.title, displayMode: .inline)
     }
-    
     
     private var customisation: some View {
         Section {
@@ -94,8 +85,9 @@ struct OneDimensionalBarSimpleDetailView: View {
     }
 }
 
-struct OneDimensionalBarDetailView_Previews: PreviewProvider {
+struct OneDimensionalBar_Previews: PreviewProvider {
     static var previews: some View {
-        OneDimensionalBarSimpleDetailView()
+        OneDimensionalBarOverview()
+        OneDimensionalBar()
     }
 }

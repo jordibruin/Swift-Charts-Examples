@@ -5,15 +5,15 @@
 import SwiftUI
 import Charts
 
-struct TwoBarsSimpleOverview: View {
+struct TwoBarsOverview: View {
     var body: some View {
         VStack(alignment: .leading) {
-            Text("Two Bars")
+            Text(ChartType.twoBars.title)
                 .font(.callout)
                 .foregroundStyle(.secondary)
 
             Chart {
-                ForEach(LocationData.last30Days) { series in
+                ForEach(LocationData.last7Days) { series in
                     ForEach(series.sales, id: \.weekday) { element in
                         BarMark(
                             x: .value("Day", element.weekday, unit: .day),
@@ -23,7 +23,6 @@ struct TwoBarsSimpleOverview: View {
                         .accessibilityValue("\(element.sales)")
                     }
                     .foregroundStyle(by: .value("City", series.city))
-//                    .symbol(by: .value("City", series.city))
                 }
             }
             .chartXAxis(.hidden)
@@ -34,14 +33,7 @@ struct TwoBarsSimpleOverview: View {
     }
 }
 
-struct TwoBarsOverview_Previews: PreviewProvider {
-    static var previews: some View {
-        TwoBarsSimpleOverview()
-            .padding()
-    }
-}
-
-struct TwoBarsSimpleDetailView: View {
+struct TwoBars: View {
     @State private var barWidth = 13.0
     @State private var interpolationMethod: ChartInterpolationMethod = .cardinal
     @State private var strideBy: ChartStrideBy = .day
@@ -51,7 +43,7 @@ struct TwoBarsSimpleDetailView: View {
     var body: some View {
         List {
             Section {
-                Chart(LocationData.last30Days) { series in
+                Chart(LocationData.last7Days) { series in
                     ForEach(series.sales, id: \.weekday) { element in
                         BarMark(
                             x: .value("Day", element.weekday, unit: .day),
@@ -80,9 +72,8 @@ struct TwoBarsSimpleDetailView: View {
             
             customisation
         }
-        .navigationBarTitle("Two Bars", displayMode: .inline)
+        .navigationBarTitle(ChartType.twoBars.title, displayMode: .inline)
     }
-    
     
     private var customisation: some View {
         Section {
@@ -100,8 +91,9 @@ struct TwoBarsSimpleDetailView: View {
     }
 }
 
-struct TwoBarsSimpleDetailView_Previews: PreviewProvider {
+struct TwoBars_Previews: PreviewProvider {
     static var previews: some View {
-        TwoBarsSimpleDetailView()
+        TwoBarsOverview()
+        TwoBars()
     }
 }
