@@ -13,7 +13,7 @@ struct TwoBarsOverview: View {
                 .foregroundStyle(.secondary)
 
             Chart {
-                ForEach(LocationData.last30Days) { series in
+                ForEach(LocationData.last7Days) { series in
                     ForEach(series.sales, id: \.weekday) { element in
                         BarMark(
                             x: .value("Day", element.weekday, unit: .day),
@@ -23,7 +23,6 @@ struct TwoBarsOverview: View {
                         .accessibilityValue("\(element.sales)")
                     }
                     .foregroundStyle(by: .value("City", series.city))
-//                    .symbol(by: .value("City", series.city))
                 }
             }
             .chartXAxis(.hidden)
@@ -44,7 +43,7 @@ struct TwoBars: View {
     var body: some View {
         List {
             Section {
-                Chart(LocationData.last30Days) { series in
+                Chart(LocationData.last7Days) { series in
                     ForEach(series.sales, id: \.weekday) { element in
                         BarMark(
                             x: .value("Day", element.weekday, unit: .day),
