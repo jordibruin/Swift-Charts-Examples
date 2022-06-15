@@ -6,6 +6,9 @@ import SwiftUI
 import Charts
 
 struct TwoBarsSimpleOverview: View {
+
+    var data = LocationData.last30Days
+
     var body: some View {
         VStack(alignment: .leading) {
             Text("Two Bars")
@@ -13,14 +16,12 @@ struct TwoBarsSimpleOverview: View {
                 .foregroundStyle(.secondary)
 
             Chart {
-                ForEach(LocationData.last30Days) { series in
+                ForEach(data) { series in
                     ForEach(series.sales, id: \.weekday) { element in
                         BarMark(
                             x: .value("Day", element.weekday, unit: .day),
                             y: .value("Sales", element.sales)
                         )
-                        .accessibilityLabel("\(element.weekday.formatted())")
-                        .accessibilityValue("\(element.sales)")
                     }
                     .foregroundStyle(by: .value("City", series.city))
 //                    .symbol(by: .value("City", series.city))
@@ -30,6 +31,9 @@ struct TwoBarsSimpleOverview: View {
             .chartYAxis(.hidden)
             .chartLegend(.hidden)
             .frame(height: Constants.previewChartHeight)
+            // For the simple overview chart,
+            // skip individual labels and only set the chartDescriptor
+            .accessibilityChartDescriptor(self)
         }
     }
 }

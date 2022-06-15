@@ -80,39 +80,3 @@ struct BarChartSimpleOverview_Previews: PreviewProvider {
             .padding()
     }
 }
-
-extension BarChartSimpleOverview: AXChartDescriptorRepresentable {
-    func makeChartDescriptor() -> AXChartDescriptor {
-        
-        let min = data.map(\.sales).min() ?? 0
-        let max = data.map(\.sales).max() ?? 0
-        
-        let xAxis = AXCategoricalDataAxisDescriptor(
-            title: "Days",
-            categoryOrder: data.map(\.day.description)
-        )
-        
-        let yAxis = AXNumericDataAxisDescriptor(
-            title: "Sales",
-            range: Double(min)...Double(max),
-            gridlinePositions: []
-        ) { value in "\(value) sold" }
-        
-        let series = AXDataSeriesDescriptor(
-            name: "",
-            isContinuous: false,
-            dataPoints: data.map {
-                .init(x: $0.day.description, y: Double($0.sales))
-            }
-        )
-        
-        return AXChartDescriptor(
-            title: "Sales per day",
-            summary: nil,
-            xAxis: xAxis,
-            yAxis: yAxis,
-            additionalAxes: [],
-            series: [series]
-        )
-    }
-}
