@@ -11,7 +11,7 @@ enum ChartCategory: String, CaseIterable, Hashable, Identifiable {
     case range
     case heatMap
     case point
-    
+  
     var id: String { self.rawValue }
 }
 
@@ -20,27 +20,28 @@ enum ChartType: String, Identifiable, CaseIterable {
     case singleLine
     case singleLineLollipop
     case heartBeat
-    
+
     // Bar Charts
     case singleBar
     case twoBars
     case pyramid
     case oneDimensionalBar
-    
+
     // Area Charts
     case areaSimple
-    
+
     // Range Charts
     case rangeSimple
-    
+    case rangeHeartRate
+
     // HeatMap Charts
     case customizeableHeatMap
-    
+
     // Point Charts
     case scatter
-    
+
     var id: String { self.rawValue }
-    
+
     var title: String {
         switch self {
         case .singleLine:
@@ -61,13 +62,15 @@ enum ChartType: String, Identifiable, CaseIterable {
             return "Area Chart"
         case .rangeSimple:
             return "Range Chart"
+        case .rangeHeartRate:
+            return "Heart Rate Range"
         case .customizeableHeatMap:
             return "Customizable Heat Map"
         case .scatter:
             return "Scatter Chart"
         }
     }
-    
+
     var category: ChartCategory {
         switch self {
         case .singleLine, .singleLineLollipop, .heartBeat:
@@ -76,7 +79,7 @@ enum ChartType: String, Identifiable, CaseIterable {
             return .bar
         case .areaSimple:
             return .area
-        case .rangeSimple:
+        case .rangeSimple, .rangeHeartRate:
             return .range
         case .customizeableHeatMap:
             return .heatMap
@@ -84,7 +87,7 @@ enum ChartType: String, Identifiable, CaseIterable {
             return .point
         }
     }
-    
+
     @ViewBuilder
     var view: some View {
         switch self {
@@ -106,13 +109,15 @@ enum ChartType: String, Identifiable, CaseIterable {
             AreaSimpleOverview()
         case .rangeSimple:
             RangeSimpleOverview()
+        case .rangeHeartRate:
+            HeartRateRangeChartOverview()
         case .customizeableHeatMap:
             HeatMapOverview()
         case .scatter:
             ScatterChartOverview()
         }
     }
-    
+
     @ViewBuilder
     var detailView: some View {
         switch self {
@@ -134,6 +139,8 @@ enum ChartType: String, Identifiable, CaseIterable {
             AreaSimple()
         case .rangeSimple:
             RangeSimple()
+        case .rangeHeartRate:
+            HeartRateRangeChartDetail()
         case .customizeableHeatMap:
             HeatMap()
         case .scatter:
