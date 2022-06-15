@@ -49,7 +49,8 @@ struct HeatMap: View {
                             yEnd: PlottableValue.value("yEnd", point.y + 1)
                         )
                         .foregroundStyle(point.color)
-// does not compile when annotations are paired with both `chartYAxis` and `chartXAxis`
+                        // does not compile when annotations are paired with both `chartYAxis` and `chartXAxis`
+                        // Reported FB10250889
 //                        .annotation(position: .overlay) {
 //                            Text(showValues ? String(format: "%.0f", point.val) : "")
 //                        }

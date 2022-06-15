@@ -63,7 +63,7 @@ enum ChartType: String, Identifiable, CaseIterable {
         case .rangeSimple:
             return "Range Chart"
         case .rangeHeartRate:
-            return "Heart Rate Range"
+            return "Heart Rate Range Chart"
         case .customizeableHeatMap:
             return "Customizable Heat Map"
         case .scatter:
@@ -140,7 +140,7 @@ enum ChartType: String, Identifiable, CaseIterable {
         case .rangeSimple:
             RangeSimple()
         case .rangeHeartRate:
-            HeartRateRangeChartDetail()
+            HeartRateRangeChart()
         case .customizeableHeatMap:
             HeatMap()
         case .scatter:
