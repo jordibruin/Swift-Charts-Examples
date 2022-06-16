@@ -37,8 +37,8 @@ struct SingleBarThresholdOverview: View {
                                 RoundedRectangle(cornerRadius: 8)
                                     .fill(.quaternary.opacity(0.7))
                             }
-                            .padding([.leading, .trailing], -8)
-                            .padding([.top, .bottom], -4)
+                            .padding(.horizontal, -8)
+                            .padding(.vertical, -4)
                         }
                         .padding(.bottom, 4)
                 }
@@ -78,8 +78,8 @@ struct SingleBarThreshold: View {
                                     RoundedRectangle(cornerRadius: 8)
                                         .fill(.quaternary.opacity(0.7))
                                 }
-                                .padding([.leading, .trailing], -8)
-                                .padding([.top, .bottom], -4)
+                                .padding(.horizontal, -8)
+                                .padding(.vertical, -4)
                             }
                             .padding(.bottom, 4)
                     }

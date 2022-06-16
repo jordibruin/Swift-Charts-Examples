@@ -76,7 +76,7 @@ struct SingleLineLollipop: View {
         .chartBackground { proxy in
             ZStack(alignment: .topLeading) {
                 GeometryReader { geo in
-                    if let selectedElement = selectedElement {
+                    if let selectedElement {
                         let dateInterval = Calendar.current.dateInterval(of: .day, for: selectedElement.day)!
                         let startPositionX1 = proxy.position(forX: dateInterval.start) ?? 0
 
@@ -106,8 +106,8 @@ struct SingleLineLollipop: View {
                                 RoundedRectangle(cornerRadius: 8)
                                     .fill(.quaternary.opacity(0.7))
                             }
-                            .padding([.leading, .trailing], -8)
-                            .padding([.top, .bottom], -4)
+                            .padding(.horizontal, -8)
+                            .padding(.vertical, -4)
                         }
                         .offset(x: boxOffset)
                     }
@@ -131,7 +131,7 @@ struct SingleLineLollipop: View {
                     index = salesDataIndex
                 }
             }
-            if let index = index {
+            if let index {
                 return SalesData.last30Days[index]
             }
         }
