@@ -5,7 +5,48 @@
 import SwiftUI
 
 
-extension BarChartSimpleOverview: AXChartDescriptorRepresentable {
+/*
+ This file collects the Accessibility descriptors used for the "simple" versions of
+ charts
+ */
+
+extension SingleLineOverview: AXChartDescriptorRepresentable {
+	func makeChartDescriptor() -> AXChartDescriptor {
+
+		let min = data.map(\.sales).min() ?? 0
+		let max = data.map(\.sales).max() ?? 0
+
+		let xAxis = AXCategoricalDataAxisDescriptor(
+			title: "Days",
+			categoryOrder: data.map { $0.day.formatted() }
+		)
+
+		let yAxis = AXNumericDataAxisDescriptor(
+			title: "Sales",
+			range: Double(min)...Double(max),
+			gridlinePositions: []
+		) { value in "\(value) sold" }
+
+		let series = AXDataSeriesDescriptor(
+			name: "",
+			isContinuous: false,
+			dataPoints: data.map {
+				.init(x: $0.day.formatted(), y: Double($0.sales))
+			}
+		)
+
+		return AXChartDescriptor(
+			title: "Sales per day",
+			summary: nil,
+			xAxis: xAxis,
+			yAxis: yAxis,
+			additionalAxes: [],
+			series: [series]
+		)
+	}
+}
+
+extension SingleBarOverview: AXChartDescriptorRepresentable {
     func makeChartDescriptor() -> AXChartDescriptor {
 
         let min = data.map(\.sales).min() ?? 0
@@ -42,7 +83,7 @@ extension BarChartSimpleOverview: AXChartDescriptorRepresentable {
 }
 
 
-extension TwoBarsSimpleOverview: AXChartDescriptorRepresentable {
+extension TwoBarsOverview: AXChartDescriptorRepresentable {
     func makeChartDescriptor() -> AXChartDescriptor {
 
         // Create a descriptor for each Series object

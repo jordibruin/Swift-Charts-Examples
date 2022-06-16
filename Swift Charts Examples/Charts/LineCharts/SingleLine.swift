@@ -31,10 +31,12 @@ struct SingleLine: View {
     @State private var chartColor: Color = .blue
     @State private var showSymbols = false
 
+    var data = SalesData.last30Days
+
     var body: some View {
         List {
             Section {
-                Chart(SalesData.last30Days, id: \.day) {
+                Chart(data, id: \.day) {
                     LineMark(
                         x: .value("Date", $0.day),
                         y: .value("Sales", $0.sales)
@@ -44,10 +46,9 @@ struct SingleLine: View {
                     .interpolationMethod(interpolationMethod.mode)
                     .symbol(Circle().strokeBorder(lineWidth: lineWidth))
                     .symbolSize(showSymbols ? 60 : 0)
-                    .accessibilityLabel($0.day.formatted())
-                    .accessibilityValue("\($0.sales) sold")
                 }
                 .frame(height: Constants.detailChartHeight)
+                .accessibilityChartDescriptor(self)
             }
             
             customisation
