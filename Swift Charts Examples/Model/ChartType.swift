@@ -23,6 +23,7 @@ enum ChartType: String, Identifiable, CaseIterable {
 
     // Bar Charts
     case singleBar
+    case singleBarThreshold
     case twoBars
     case pyramid
     case oneDimensionalBar
@@ -53,6 +54,8 @@ enum ChartType: String, Identifiable, CaseIterable {
             return "Heart Beat / ECG Chart"
         case .singleBar:
             return "Single Bar"
+        case .singleBarThreshold:
+            return "Single Bar with Threshold Rule Mark"
         case .twoBars:
             return "Two Bars"
         case .pyramid:
@@ -78,7 +81,7 @@ enum ChartType: String, Identifiable, CaseIterable {
         switch self {
         case .singleLine, .singleLineLollipop, .heartBeat:
             return .line
-        case .singleBar, .twoBars, .pyramid, .oneDimensionalBar:
+        case .singleBar, .singleBarThreshold, .twoBars, .pyramid, .oneDimensionalBar:
             return .bar
         case .areaSimple:
             return .area
@@ -102,6 +105,8 @@ enum ChartType: String, Identifiable, CaseIterable {
             HeartBeatOverview()
         case .singleBar:
             SingleBarOverview()
+        case .singleBarThreshold:
+            SingleBarThresholdOverview()
         case .twoBars:
             TwoBarsOverview()
         case .oneDimensionalBar:
@@ -134,6 +139,8 @@ enum ChartType: String, Identifiable, CaseIterable {
             HeartBeat()
         case .singleBar:
             SingleBar()
+        case .singleBarThreshold:
+            SingleBarThreshold()
         case .twoBars:
             TwoBars()
         case .oneDimensionalBar:
