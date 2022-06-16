@@ -29,6 +29,11 @@ struct ContentView: View {
                     Section {
                         ForEach(ChartType.allCases.filter { $0.category == category }) { chart in
                             NavigationLink(value: chart) {
+                                // causes UI to hang for several seconds when scrolling
+                                // from 100% CPU usage when cells are reloaded
+//                                chart.view
+                                
+                                // workaround to address hanging UI
                                 cachedView(chart: chart)
                             }
                         }
