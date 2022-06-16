@@ -39,6 +39,7 @@ enum ChartType: String, Identifiable, CaseIterable {
 
     // Point Charts
     case scatter
+    case vectorField
 
     var id: String { self.rawValue }
 
@@ -68,6 +69,8 @@ enum ChartType: String, Identifiable, CaseIterable {
             return "Customizable Heat Map"
         case .scatter:
             return "Scatter Chart"
+        case .vectorField:
+            return "Vector Field"
         }
     }
 
@@ -83,7 +86,7 @@ enum ChartType: String, Identifiable, CaseIterable {
             return .range
         case .customizeableHeatMap:
             return .heatMap
-        case .scatter:
+        case .scatter, .vectorField:
             return .point
         }
     }
@@ -115,6 +118,8 @@ enum ChartType: String, Identifiable, CaseIterable {
             HeatMapOverview()
         case .scatter:
             ScatterChartOverview()
+        case .vectorField:
+            VectorFieldOverview()
         }
     }
 
@@ -145,6 +150,8 @@ enum ChartType: String, Identifiable, CaseIterable {
             HeatMap()
         case .scatter:
             ScatterChart()
+        case .vectorField:
+            VectorField()
         }
     }
 }
