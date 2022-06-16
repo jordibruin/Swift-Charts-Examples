@@ -47,6 +47,8 @@ See the [open issues](https://github.com/jordibruin/SwiftChartExamples/issues) i
 
 ![Single Bar](images/charts/bar/singleBar.png)
 
+![Single Bar with Threshold Rule Mark](images/charts/bar/singleBarThreshold.png)
+
 ![Two Bars](images/charts/bar/twoBars.png)
 
 ![Pyramid](images/charts/bar/pyramid.png)

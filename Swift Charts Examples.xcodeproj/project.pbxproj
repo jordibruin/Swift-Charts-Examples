@@ -34,6 +34,7 @@
 		C260882B2856B3C500B09DDB /* AreaSimple.swift in Sources */ = {isa = PBXBuildFile; fileRef = C260882A2856B3C500B09DDB /* AreaSimple.swift */; };
 		C260882E2856B4C900B09DDB /* SingleBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C260882D2856B4C900B09DDB /* SingleBar.swift */; };
 		FC5466C62857E0D700315632 /* SingleLineLollipop.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5466C52857E0D700315632 /* SingleLineLollipop.swift */; };
+		FC602024285B532C0089DBDC /* SingleBarThreshold.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC602023285B532C0089DBDC /* SingleBarThreshold.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -86,6 +87,7 @@
 		C260882A2856B3C500B09DDB /* AreaSimple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreaSimple.swift; sourceTree = "<group>"; };
 		C260882D2856B4C900B09DDB /* SingleBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleBar.swift; sourceTree = "<group>"; };
 		FC5466C52857E0D700315632 /* SingleLineLollipop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleLineLollipop.swift; sourceTree = "<group>"; };
+		FC602023285B532C0089DBDC /* SingleBarThreshold.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleBarThreshold.swift; sourceTree = "<group>"; };
 		FC8C2FE02859E64B00C334A9 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -242,6 +244,7 @@
 			isa = PBXGroup;
 			children = (
 				C260882D2856B4C900B09DDB /* SingleBar.swift */,
+				FC602023285B532C0089DBDC /* SingleBarThreshold.swift */,
 				C260881F2856A34400B09DDB /* TwoBars.swift */,
 				2E5763C528576B1B006C7C36 /* PyramidChart.swift */,
 				934A95032857D035009E29F4 /* OneDimensionalBar.swift */,
@@ -424,6 +427,7 @@
 				2E5763C628576B1B006C7C36 /* PyramidChart.swift in Sources */,
 				C26088132856935B00B09DDB /* ChartType.swift in Sources */,
 				C26088152856960000B09DDB /* SingleLine.swift in Sources */,
+				FC602024285B532C0089DBDC /* SingleBarThreshold.swift in Sources */,
 				C26088272856A95A00B09DDB /* ChartStrideBy.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
