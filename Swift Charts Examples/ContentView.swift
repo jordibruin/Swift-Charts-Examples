@@ -7,6 +7,21 @@ import SwiftUI
 struct ContentView: View {
     @State private var selectedChartType: ChartType?
     
+    private var cachedChartImages: [String: UIImage] = [:]
+    
+    @MainActor
+    init() {
+        ChartType.allCases.forEach { chart in
+            let view = chart.view
+                .frame(width: 300)
+                .background(.white)
+            let renderer = ImageRenderer(content: view)
+            if let image = renderer.cgImage {
+                cachedChartImages[chart.id] = UIImage(cgImage: image)
+            }
+        }
+    }
+    
     var body: some View {
         NavigationSplitView {
             List(selection: $selectedChartType) {
@@ -14,7 +29,7 @@ struct ContentView: View {
                     Section {
                         ForEach(ChartType.allCases.filter { $0.category == category }) { chart in
                             NavigationLink(value: chart) {
-                                chart.view
+                                cachedView(chart: chart)
                             }
                         }
                     } header: {
@@ -33,6 +48,18 @@ struct ContentView: View {
                 }
             }
         }
+    }
+    
+    private func cachedView(chart: ChartType) -> AnyView {
+        guard let image = cachedChartImages[chart.id] else {
+            return AnyView(Text(chart.title))
+        }
+        return AnyView(
+            Image(uiImage: image)
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(maxWidth: 300)
+        )
     }
 }
 
