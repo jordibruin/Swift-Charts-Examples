@@ -5,7 +5,28 @@
 import SwiftUI
 import Charts
 
-struct SingleBarDetailView: View {
+struct SingleBarOverview: View {
+    var body: some View {
+        VStack(alignment: .leading) {
+            Text(ChartType.singleBar.title)
+                .font(.callout)
+                .foregroundStyle(.secondary)
+
+            Chart(SalesData.last30Days, id: \.day) {
+                BarMark(
+                    x: .value("Day", $0.day, unit: .day),
+                    y: .value("Sales", $0.sales)
+                )
+            }
+			.accessibilityChartDescriptor(self)
+            .chartXAxis(.hidden)
+            .chartYAxis(.hidden)
+            .frame(height: Constants.previewChartHeight)
+        }
+    }
+}
+
+struct SingleBar: View {
     @State private var barWidth = 7.0
     @State private var chartColor: Color = .blue
     
@@ -27,7 +48,7 @@ struct SingleBarDetailView: View {
             
             customisation
         }
-        .navigationBarTitle("Single Bar", displayMode: .inline)
+        .navigationBarTitle(ChartType.singleBar.title, displayMode: .inline)
     }
     
     private var customisation: some View {
@@ -44,39 +65,9 @@ struct SingleBarDetailView: View {
     }
 }
 
-struct SingleLineChartSimpleDetailView_Previews: PreviewProvider {
+struct SingleBar_Previews: PreviewProvider {
     static var previews: some View {
-        LineChartSimpleDetailView()
-    }
-}
-
-struct BarChartSimpleOverview: View {
-    
-    var data = SalesData.last30Days
-    
-    var body: some View {
-        VStack(alignment: .leading) {
-            Text("Single Bar")
-                .font(.callout)
-                .foregroundStyle(.secondary)
-
-            Chart(data, id: \.day) {
-                BarMark(
-                    x: .value("Day", $0.day, unit: .day),
-                    y: .value("Sales", $0.sales)
-                )
-            }
-            .accessibilityChartDescriptor(self)
-            .chartXAxis(.hidden)
-            .chartYAxis(.hidden)
-            .frame(height: Constants.previewChartHeight)
-        }
-    }
-}
-
-struct BarChartSimpleOverview_Previews: PreviewProvider {
-    static var previews: some View {
-        BarChartSimpleOverview()
-            .padding()
+        SingleBarOverview()
+        SingleBar()
     }
 }

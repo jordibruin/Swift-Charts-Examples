@@ -5,8 +5,8 @@
 import SwiftUI
 import Charts
 
-struct SingleLineLollipopView: View {
-    @State var isPreview: Bool
+struct SingleLineLollipop: View {
+    @State var isOverview: Bool
 
     @State private var lineWidth = 2.0
     @State private var interpolationMethod: ChartInterpolationMethod = .cardinal
@@ -15,9 +15,9 @@ struct SingleLineLollipopView: View {
     @State private var selectedElement: (day: Date, sales: Int)? = (SalesData.last30Days[10].day, SalesData.last30Days[10].sales)
 
     var body: some View {
-        if isPreview {
+        if isOverview {
             VStack(alignment: .leading) {
-                Text("Line Chart with Lollipop")
+                Text(ChartType.singleLineLollipop.title)
                     .font(.callout)
                     .foregroundStyle(.secondary)
                 chart
@@ -28,8 +28,12 @@ struct SingleLineLollipopView: View {
                 Section {
                     chart
                 }
+                Section {
+                    Text("Tap and drag over the chart to move the lollipop")
+                        .font(.callout)
+                }
             }
-            .navigationBarTitleDisplayMode(.inline)
+            .navigationBarTitle(ChartType.singleLineLollipop.title, displayMode: .inline)
         }
     }
 
@@ -70,11 +74,11 @@ struct SingleLineLollipopView: View {
                     )
             }
         }
-        .frame(height: isPreview ? Constants.previewChartHeight : Constants.detailChartHeight)
+        .frame(height: isOverview ? Constants.previewChartHeight : Constants.detailChartHeight)
         .chartBackground { proxy in
             ZStack(alignment: .topLeading) {
                 GeometryReader { geo in
-                    if let selectedElement = selectedElement {
+                    if let selectedElement {
                         let dateInterval = Calendar.current.dateInterval(of: .day, for: selectedElement.day)!
                         let startPositionX1 = proxy.position(forX: dateInterval.start) ?? 0
 
@@ -104,16 +108,16 @@ struct SingleLineLollipopView: View {
                                 RoundedRectangle(cornerRadius: 8)
                                     .fill(.quaternary.opacity(0.7))
                             }
-                            .padding([.leading, .trailing], -8)
-                            .padding([.top, .bottom], -4)
+                            .padding(.horizontal, -8)
+                            .padding(.vertical, -4)
                         }
                         .offset(x: boxOffset)
                     }
                 }
             }
         }
-        .chartXAxis(isPreview ? .hidden : .automatic)
-        .chartYAxis(isPreview ? .hidden : .automatic)
+        .chartXAxis(isOverview ? .hidden : .automatic)
+        .chartYAxis(isOverview ? .hidden : .automatic)
     }
 
     private func findElement(location: CGPoint, proxy: ChartProxy, geometry: GeometryProxy) -> (day: Date, sales: Int)? {
@@ -129,7 +133,7 @@ struct SingleLineLollipopView: View {
                     index = salesDataIndex
                 }
             }
-            if let index = index {
+            if let index {
                 return SalesData.last30Days[index]
             }
         }
@@ -137,9 +141,9 @@ struct SingleLineLollipopView: View {
     }
 }
 
-struct SingleLineLollipopDetailView_Previews: PreviewProvider {
+struct SingleLineLollipop_Previews: PreviewProvider {
     static var previews: some View {
-        SingleLineLollipopView(isPreview: true)
-        SingleLineLollipopView(isPreview: false)
+        SingleLineLollipop(isOverview: true)
+        SingleLineLollipop(isOverview: false)
     }
 }

@@ -10,6 +10,7 @@ Let's start by recreating the different chart examples that Apple gave in these 
 - [x] Basis project setup
 - [x] Simple Line chart
 - [x] Line chart with lollipop
+- [x] Heartbeat Chart
 - [x] Simple Bar chart
 - [x] Simple dual bar chart
 - [x] Range Chart
@@ -18,13 +19,13 @@ Let's start by recreating the different chart examples that Apple gave in these 
 - [x] Range with Max and Min Chart
 - [x] One dimensional bar
 - [x] Heatmap Block Chart
+- [x] Scatter Chart
+- [x] Heartbeat range Chart
+- [x] Vector Field
 
 ## Todo
-- [ ] Heartbeat Chart
 - [ ] Cumulative line Chart
-- [ ] Heartbeat range Chart
 - [ ] Distribution line + Point Chart
-- [ ] Scatter Chart
 - [ ] Funky Gradient Chart
 - [ ] Other Charts
 - [ ] Multi-language Support
@@ -34,11 +35,45 @@ See the [open issues](https://github.com/jordibruin/SwiftChartExamples/issues) i
 
 ## Chart Types
 
-- [Line Charts](https://github.com/jordibruin/SwiftChartExamples/tree/main/Swift%20Charts%20Examples/Charts/LineCharts)
-- [Bar Charts](https://github.com/jordibruin/SwiftChartExamples/tree/main/Swift%20Charts%20Examples/Charts/BarCharts)
-- [Area Charts](https://github.com/jordibruin/SwiftChartExamples/tree/main/Swift%20Charts%20Examples/Charts/AreaCharts)
-- [Range Charts](https://github.com/jordibruin/SwiftChartExamples/tree/main/Swift%20Charts%20Examples/Charts/RangeCharts)
-- [Heat Maps](https://github.com/jordibruin/SwiftChartExamples/tree/main/Swift%20Charts%20Examples/Charts/HeatMap)
+### [Line Charts](https://github.com/jordibruin/SwiftChartExamples/tree/main/Swift%20Charts%20Examples/Charts/LineCharts)
+
+![Line Chart](images/charts/line/singleLine.png)
+
+![Line Chart with Lollipop](images/charts/line/singleLineLollipop.png)
+
+![Heart Beat / ECG Chart](images/charts/line/heartBeat.png)
+
+### [Bar Charts](https://github.com/jordibruin/SwiftChartExamples/tree/main/Swift%20Charts%20Examples/Charts/BarCharts)
+
+![Single Bar](images/charts/bar/singleBar.png)
+
+![Single Bar with Threshold Rule Mark](images/charts/bar/singleBarThreshold.png)
+
+![Two Bars](images/charts/bar/twoBars.png)
+
+![Pyramid](images/charts/bar/pyramid.png)
+
+![One Dimensional Bar](images/charts/bar/oneDimensionalBar.png)
+
+### [Area Charts](https://github.com/jordibruin/SwiftChartExamples/tree/main/Swift%20Charts%20Examples/Charts/AreaCharts)
+
+![Area Chart](images/charts/area/areaSimple.png)
+
+### [Range Charts](https://github.com/jordibruin/SwiftChartExamples/tree/main/Swift%20Charts%20Examples/Charts/RangeCharts)
+
+![Range Chart](images/charts/range/rangeSimple.png)
+
+![Heart Rate Range Chart](images/charts/range/rangeHeartRate.png)
+
+### [Heat Maps](https://github.com/jordibruin/SwiftChartExamples/tree/main/Swift%20Charts%20Examples/Charts/HeatMap)
+
+![Customizable Heat Map](images/charts/heatMap/customizeableHeatMap.png)
+
+### [Point Charts](https://github.com/jordibruin/SwiftChartExamples/tree/main/Swift%20Charts%20Examples/Charts/PointCharts)
+
+![Scatter Chart](images/charts/point/scatter.png)
+
+![Vector Field](images/charts/point/vectorField.png)
 
 ## How to add a new chart
 
@@ -46,25 +81,3 @@ Each chart needs a preview chart as well as a detail view. The preview chart is 
 
 <img src="images/charts_wwdc_slide.png">
 Source: https://developer.apple.com/videos/play/wwdc2022/10137/
-
-# Chart Types
-
-Below we'll fill in example screenshots and descriptions for each chart type.
-## Line Charts
-
-
-
-
-## Bar Charts
-
-
-
-
-## Area Charts
-
-
-
-
-## Other Charts
-
-

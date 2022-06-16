@@ -4,8 +4,8 @@
 
 import Foundation
 
-func date(year: Int, month: Int, day: Int = 1) -> Date {
-    Calendar.current.date(from: DateComponents(year: year, month: month, day: day)) ?? Date()
+func date(year: Int, month: Int, day: Int = 1, hour: Int = 0, minutes: Int = 0, seconds: Int = 0) -> Date {
+    Calendar.current.date(from: DateComponents(year: year, month: month, day: day, hour: hour, minute: minutes, second: seconds)) ?? Date()
 }
 
 enum Constants {
@@ -98,27 +98,94 @@ enum LocationData {
         /// The identifier for the series.
         var id: String { city }
     }
+    
+    /// Sales by location and weekday for the last 7 days.
+    static let last7Days: [Series] = [
+        .init(city: "Cupertino", sales: [
+            (weekday: date(year: 2022, month: 5, day: 1), sales: 54),
+            (weekday: date(year: 2022, month: 5, day: 2), sales: 42),
+            (weekday: date(year: 2022, month: 5, day: 3), sales: 88),
+            (weekday: date(year: 2022, month: 5, day: 4), sales: 49),
+            (weekday: date(year: 2022, month: 5, day: 5), sales: 42),
+            (weekday: date(year: 2022, month: 5, day: 6), sales: 61),
+            (weekday: date(year: 2022, month: 5, day: 7), sales: 67)
+        ]),
+        .init(city: "San Francisco", sales: [
+            (weekday: date(year: 2022, month: 5, day: 1), sales: 81),
+            (weekday: date(year: 2022, month: 5, day: 2), sales: 90),
+            (weekday: date(year: 2022, month: 5, day: 3), sales: 52),
+            (weekday: date(year: 2022, month: 5, day: 4), sales: 72),
+            (weekday: date(year: 2022, month: 5, day: 5), sales: 84),
+            (weekday: date(year: 2022, month: 5, day: 6), sales: 84),
+            (weekday: date(year: 2022, month: 5, day: 7), sales: 137)
+        ])
+    ]
 
     /// Sales by location and weekday for the last 30 days.
     static let last30Days: [Series] = [
         .init(city: "Cupertino", sales: [
-            (weekday: date(year: 2022, month: 5, day: 2), sales: 54),
-            (weekday: date(year: 2022, month: 5, day: 3), sales: 42),
-            (weekday: date(year: 2022, month: 5, day: 4), sales: 88),
-            (weekday: date(year: 2022, month: 5, day: 5), sales: 49),
-            (weekday: date(year: 2022, month: 5, day: 6), sales: 42),
-            (weekday: date(year: 2022, month: 5, day: 7), sales: 125),
-            (weekday: date(year: 2022, month: 5, day: 8), sales: 67)
-
+            (weekday: date(year: 2022, month: 5, day: 1), sales: 54),
+            (weekday: date(year: 2022, month: 5, day: 2), sales: 42),
+            (weekday: date(year: 2022, month: 5, day: 3), sales: 88),
+            (weekday: date(year: 2022, month: 5, day: 4), sales: 49),
+            (weekday: date(year: 2022, month: 5, day: 5), sales: 42),
+            (weekday: date(year: 2022, month: 5, day: 6), sales: 61),
+            (weekday: date(year: 2022, month: 5, day: 7), sales: 67),
+            (weekday: date(year: 2022, month: 5, day: 8), sales: 54),
+            (weekday: date(year: 2022, month: 5, day: 9), sales: 47),
+            (weekday: date(year: 2022, month: 5, day: 10), sales: 42),
+            (weekday: date(year: 2022, month: 5, day: 11), sales: 71),
+            (weekday: date(year: 2022, month: 5, day: 12), sales: 56),
+            (weekday: date(year: 2022, month: 5, day: 13), sales: 81),
+            (weekday: date(year: 2022, month: 5, day: 14), sales: 40),
+            (weekday: date(year: 2022, month: 5, day: 15), sales: 49),
+            (weekday: date(year: 2022, month: 5, day: 16), sales: 42),
+            (weekday: date(year: 2022, month: 5, day: 17), sales: 58),
+            (weekday: date(year: 2022, month: 5, day: 18), sales: 66),
+            (weekday: date(year: 2022, month: 5, day: 19), sales: 62),
+            (weekday: date(year: 2022, month: 5, day: 20), sales: 77),
+            (weekday: date(year: 2022, month: 5, day: 21), sales: 55),
+            (weekday: date(year: 2022, month: 5, day: 22), sales: 52),
+            (weekday: date(year: 2022, month: 5, day: 23), sales: 42),
+            (weekday: date(year: 2022, month: 5, day: 24), sales: 49),
+            (weekday: date(year: 2022, month: 5, day: 25), sales: 58),
+            (weekday: date(year: 2022, month: 5, day: 26), sales: 61),
+            (weekday: date(year: 2022, month: 5, day: 27), sales: 68),
+            (weekday: date(year: 2022, month: 5, day: 28), sales: 43),
+            (weekday: date(year: 2022, month: 5, day: 29), sales: 49),
+            (weekday: date(year: 2022, month: 5, day: 30), sales: 125)
         ]),
         .init(city: "San Francisco", sales: [
-            (weekday: date(year: 2022, month: 5, day: 2), sales: 81),
-            (weekday: date(year: 2022, month: 5, day: 3), sales: 90),
-            (weekday: date(year: 2022, month: 5, day: 4), sales: 52),
-            (weekday: date(year: 2022, month: 5, day: 5), sales: 72),
+            (weekday: date(year: 2022, month: 5, day: 1), sales: 81),
+            (weekday: date(year: 2022, month: 5, day: 2), sales: 90),
+            (weekday: date(year: 2022, month: 5, day: 3), sales: 52),
+            (weekday: date(year: 2022, month: 5, day: 4), sales: 72),
+            (weekday: date(year: 2022, month: 5, day: 5), sales: 84),
             (weekday: date(year: 2022, month: 5, day: 6), sales: 84),
-            (weekday: date(year: 2022, month: 5, day: 7), sales: 84),
-            (weekday: date(year: 2022, month: 5, day: 8), sales: 137)
+            (weekday: date(year: 2022, month: 5, day: 7), sales: 137),
+            (weekday: date(year: 2022, month: 5, day: 8), sales: 99),
+            (weekday: date(year: 2022, month: 5, day: 9), sales: 81),
+            (weekday: date(year: 2022, month: 5, day: 10), sales: 52),
+            (weekday: date(year: 2022, month: 5, day: 11), sales: 66),
+            (weekday: date(year: 2022, month: 5, day: 12), sales: 84),
+            (weekday: date(year: 2022, month: 5, day: 13), sales: 84),
+            (weekday: date(year: 2022, month: 5, day: 14), sales: 122),
+            (weekday: date(year: 2022, month: 5, day: 15), sales: 147),
+            (weekday: date(year: 2022, month: 5, day: 16), sales: 66),
+            (weekday: date(year: 2022, month: 5, day: 17), sales: 72),
+            (weekday: date(year: 2022, month: 5, day: 18), sales: 62),
+            (weekday: date(year: 2022, month: 5, day: 19), sales: 55),
+            (weekday: date(year: 2022, month: 5, day: 20), sales: 84),
+            (weekday: date(year: 2022, month: 5, day: 21), sales: 122),
+            (weekday: date(year: 2022, month: 5, day: 22), sales: 81),
+            (weekday: date(year: 2022, month: 5, day: 23), sales: 95),
+            (weekday: date(year: 2022, month: 5, day: 24), sales: 63),
+            (weekday: date(year: 2022, month: 5, day: 25), sales: 72),
+            (weekday: date(year: 2022, month: 5, day: 26), sales: 74),
+            (weekday: date(year: 2022, month: 5, day: 27), sales: 79),
+            (weekday: date(year: 2022, month: 5, day: 28), sales: 93),
+            (weekday: date(year: 2022, month: 5, day: 29), sales: 84),
+            (weekday: date(year: 2022, month: 5, day: 30), sales: 87)
         ])
     ]
 
@@ -171,7 +238,7 @@ struct PopulationByAgeData {
         /// The identifier for the series.
         var id: String { sex }
     }
-    
+
     /// Sales by location and weekday for the last 12 months.
     static let example: [Series] = [
         .init(sex: "Male", population: [
@@ -213,13 +280,66 @@ struct DataUsageData {
         /// The identifier for the series.
         var id: String { category }
     }
-    
+
     static let example: [Series] = [
         .init(category: "Apps", size: 61.6),
         .init(category: "Photos", size: 8.2),
         .init(category: "iOS", size: 5.7),
         .init(category: "System Data", size: 2.6)
 //        .init(category: "Photos", size: )
-        
+
     ]
+}
+
+/// MARK: - Heart Rate data
+enum HeartRateData {
+    /// Heart Rate for the last week
+    static let lastWeek = [
+        (weekday: date(year: 2022, month: 7, day: 1), dailyAverage: 127, dailyMin: 95, dailyMax: 194),
+        (weekday: date(year: 2022, month: 7, day: 1), dailyAverage: 130, dailyMin: 200, dailyMax: 239),
+
+        (weekday: date(year: 2022, month: 7, day: 2), dailyAverage: 131, dailyMin: 101, dailyMax: 184),
+
+        (weekday: date(year: 2022, month: 7, day: 3), dailyAverage: 136, dailyMin: 96, dailyMax: 193),
+        (weekday: date(year: 2022, month: 7, day: 3), dailyAverage: 136, dailyMin: 80, dailyMax: 93),
+
+        (weekday: date(year: 2022, month: 7, day: 4), dailyAverage: 134, dailyMin: 104, dailyMax: 202),
+
+        (weekday: date(year: 2022, month: 7, day: 5), dailyAverage: 129, dailyMin: 90, dailyMax: 95),
+        (weekday: date(year: 2022, month: 7, day: 5), dailyAverage: 129, dailyMin: 96, dailyMax: 190),
+
+        (weekday: date(year: 2022, month: 7, day: 6), dailyAverage: 136, dailyMin: 96, dailyMax: 203),
+
+        (weekday: date(year: 2022, month: 7, day: 7), dailyAverage: 134, dailyMin: 98, dailyMax: 200),
+    ]
+
+    // MARK: - Static constants
+
+    static let minBPM: Int = {
+        Self.lastWeek.min { a, b in
+            a.dailyMin < b.dailyMin
+        }?.dailyMin ?? 0
+    }()
+
+    static let maxBPM: Int = {
+        Self.lastWeek.max { a, b in
+            a.dailyMax < b.dailyMax
+        }?.dailyMax ?? 0
+    }()
+
+    static let earliestDate: Date = {
+        Self.lastWeek.min { a, b in
+            a.weekday < b.weekday
+        }?.weekday ?? Date()
+    }()
+
+    static let latestDate: Date = {
+        Self.lastWeek.max { a, b in
+            a.weekday < b.weekday
+        }?.weekday ?? Date()
+    }()
+
+    static let dateInterval: DateInterval = {
+        DateInterval(start: earliestDate, end: latestDate)
+    }()
 }
