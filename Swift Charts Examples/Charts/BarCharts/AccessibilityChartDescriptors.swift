@@ -10,75 +10,49 @@ import SwiftUI
  charts
  */
 
+// TODO: This should be a protocol but since the data objects are in flux this will suffice
+private func chartDescriptor(forSingleSeries data: [(day: Date, sales: Int)]) -> AXChartDescriptor {
+    let min = data.map(\.sales).min() ?? 0
+    let max = data.map(\.sales).max() ?? 0
+
+    let xAxis = AXCategoricalDataAxisDescriptor(
+        title: "Days",
+        categoryOrder: data.map { $0.day.formatted() }
+    )
+
+    let yAxis = AXNumericDataAxisDescriptor(
+        title: "Sales",
+        range: Double(min)...Double(max),
+        gridlinePositions: []
+    ) { value in "\(value) sold" }
+
+    let series = AXDataSeriesDescriptor(
+        name: "",
+        isContinuous: false,
+        dataPoints: data.map {
+            .init(x: $0.day.formatted(), y: Double($0.sales))
+        }
+    )
+
+    return AXChartDescriptor(
+        title: "Sales per day",
+        summary: nil,
+        xAxis: xAxis,
+        yAxis: yAxis,
+        additionalAxes: [],
+        series: [series]
+    )
+}
+
 extension SingleLineOverview: AXChartDescriptorRepresentable {
 	func makeChartDescriptor() -> AXChartDescriptor {
-
-		let min = data.map(\.sales).min() ?? 0
-		let max = data.map(\.sales).max() ?? 0
-
-		let xAxis = AXCategoricalDataAxisDescriptor(
-			title: "Days",
-			categoryOrder: data.map { $0.day.formatted() }
-		)
-
-		let yAxis = AXNumericDataAxisDescriptor(
-			title: "Sales",
-			range: Double(min)...Double(max),
-			gridlinePositions: []
-		) { value in "\(value) sold" }
-
-		let series = AXDataSeriesDescriptor(
-			name: "",
-			isContinuous: false,
-			dataPoints: data.map {
-				.init(x: $0.day.formatted(), y: Double($0.sales))
-			}
-		)
-
-		return AXChartDescriptor(
-			title: "Sales per day",
-			summary: nil,
-			xAxis: xAxis,
-			yAxis: yAxis,
-			additionalAxes: [],
-			series: [series]
-		)
+        return chartDescriptor(forSingleSeries: data)
 	}
 }
 
 extension SingleBarOverview: AXChartDescriptorRepresentable {
     func makeChartDescriptor() -> AXChartDescriptor {
-
-        let min = data.map(\.sales).min() ?? 0
-        let max = data.map(\.sales).max() ?? 0
-
-        let xAxis = AXCategoricalDataAxisDescriptor(
-            title: "Days",
-            categoryOrder: data.map { $0.day.formatted() }
-        )
-
-        let yAxis = AXNumericDataAxisDescriptor(
-            title: "Sales",
-            range: Double(min)...Double(max),
-            gridlinePositions: []
-        ) { value in "\(value) sold" }
-
-        let series = AXDataSeriesDescriptor(
-            name: "",
-            isContinuous: false,
-            dataPoints: data.map {
-                .init(x: $0.day.formatted(), y: Double($0.sales))
-            }
-        )
-
-        return AXChartDescriptor(
-            title: "Sales per day",
-            summary: nil,
-            xAxis: xAxis,
-            yAxis: yAxis,
-            additionalAxes: [],
-            series: [series]
-        )
+        chartDescriptor(forSingleSeries: data)
     }
 }
 

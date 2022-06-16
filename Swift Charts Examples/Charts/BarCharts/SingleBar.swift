@@ -6,13 +6,16 @@ import SwiftUI
 import Charts
 
 struct SingleBarOverview: View {
+
+    var data = SalesData.last30Days
+
     var body: some View {
         VStack(alignment: .leading) {
             Text(ChartType.singleBar.title)
                 .font(.callout)
                 .foregroundStyle(.secondary)
 
-            Chart(SalesData.last30Days, id: \.day) {
+            Chart(data, id: \.day) {
                 BarMark(
                     x: .value("Day", $0.day, unit: .day),
                     y: .value("Sales", $0.sales)
