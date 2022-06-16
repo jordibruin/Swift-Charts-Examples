@@ -5,7 +5,6 @@
 import SwiftUI
 
 struct ContentView: View {
-    
     @State private var selectedChartType: ChartType?
     
     var body: some View {
@@ -23,10 +22,15 @@ struct ContentView: View {
                     }
                 }
             }
+            .listStyle(.insetGrouped)
             .navigationTitle("Charts")
         } detail: {
             NavigationStack {
-                selectedChartType?.detailView
+                if let selectedChartType {
+                    selectedChartType.detailView
+                } else {
+                    Text("Select a chart")
+                }
             }
         }
     }

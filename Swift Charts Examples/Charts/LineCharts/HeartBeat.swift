@@ -85,7 +85,7 @@ struct HeartBeat: View {
                 HStack {
                     Text("Line Width")
                     Spacer()
-                    Text("\(String(format: "%.0f",lineWidth))")
+                    Text("\(String(format: "%.0f", lineWidth))")
                 }
             }
             

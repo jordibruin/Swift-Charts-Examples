@@ -72,7 +72,7 @@ struct AreaSimple: View {
                 HStack {
                     Text("Line Width")
                     Spacer()
-                    Text("\(String(format: "%.0f",lineWidth))")
+                    Text("\(String(format: "%.0f", lineWidth))")
                 }
             }
             
@@ -92,7 +92,7 @@ struct AreaSimple: View {
                     } maximumValueLabel: {
                         Text("Max")
                     }
-                    Text("\(String(format: "%.1f",gradientRange))")
+                    Text("\(String(format: "%.1f", gradientRange))")
                 }
             }
         }

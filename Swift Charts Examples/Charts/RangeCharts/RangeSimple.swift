@@ -77,7 +77,7 @@ struct RangeSimple: View {
                 HStack {
                     Text("Bar Width")
                     Spacer()
-                    Text("\(String(format: "%.0f",barWidth))")
+                    Text("\(String(format: "%.0f", barWidth))")
                 }
             }
             
