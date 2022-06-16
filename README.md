@@ -21,6 +21,7 @@ Let's start by recreating the different chart examples that Apple gave in these 
 - [x] Heatmap Block Chart
 - [x] Scatter Chart
 - [x] Heartbeat range Chart
+- [x] Vector Field
 
 ## Todo
 - [ ] Cumulative line Chart
@@ -69,6 +70,8 @@ See the [open issues](https://github.com/jordibruin/SwiftChartExamples/issues) i
 ### [Point Charts](https://github.com/jordibruin/SwiftChartExamples/tree/main/Swift%20Charts%20Examples/Charts/PointCharts)
 
 ![Scatter Chart](images/charts/point/scatter.png)
+
+![Vector Field](images/charts/point/vectorField.png)
 
 ## How to add a new chart
 
