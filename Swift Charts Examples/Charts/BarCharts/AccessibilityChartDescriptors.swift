@@ -50,6 +50,12 @@ extension SingleLineOverview: AXChartDescriptorRepresentable {
 	}
 }
 
+extension SingleLineLollipop: AXChartDescriptorRepresentable {
+    func makeChartDescriptor() -> AXChartDescriptor {
+        return chartDescriptor(forSingleSeries: data)
+    }
+}
+
 extension SingleBarOverview: AXChartDescriptorRepresentable {
     func makeChartDescriptor() -> AXChartDescriptor {
         chartDescriptor(forSingleSeries: data)
@@ -121,6 +127,8 @@ extension HeartBeatOverview: AXChartDescriptorRepresentable {
         let min = data.min() ?? 0.0
         let max = data.max() ?? 0.0
 
+        // Set the units when creating the axes
+        // so users can scrub and pause to narrow on a data point
         let xAxis = AXNumericDataAxisDescriptor(
             title: "Time",
             range: Double(0)...Double(data.count),

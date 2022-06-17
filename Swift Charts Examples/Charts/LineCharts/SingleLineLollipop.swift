@@ -14,6 +14,8 @@ struct SingleLineLollipop: View {
     @State private var showSymbols = true
     @State private var selectedElement: (day: Date, sales: Int)? = (SalesData.last30Days[10].day, SalesData.last30Days[10].sales)
 
+    var data = SalesData.last30Days
+
     var body: some View {
         if isOverview {
             VStack(alignment: .leading) {
@@ -38,13 +40,14 @@ struct SingleLineLollipop: View {
     }
 
     private var chart: some View {
-        Chart(SalesData.last30Days, id: \.day) {
+        Chart(data, id: \.day) {
             LineMark(
                 x: .value("Date", $0.day),
                 y: .value("Sales", $0.sales)
             )
             .accessibilityLabel($0.day.formatted())
             .accessibilityValue("\($0.sales) sold")
+            .accessibilityHidden(isOverview)
             .lineStyle(StrokeStyle(lineWidth: lineWidth))
             .foregroundStyle(chartColor)
             .interpolationMethod(interpolationMethod.mode)
@@ -100,6 +103,8 @@ struct SingleLineLollipop: View {
                                 .font(.title2.bold())
                                 .foregroundColor(.primary)
                         }
+                        .accessibilityElement(children: .combine)
+                        .accessibilityHidden(isOverview)
                         .frame(width: boxWidth, alignment: .leading)
                         .background {
                             ZStack {
@@ -118,6 +123,7 @@ struct SingleLineLollipop: View {
         }
         .chartXAxis(isOverview ? .hidden : .automatic)
         .chartYAxis(isOverview ? .hidden : .automatic)
+        .accessibilityChartDescriptor(self)
     }
 
     private func findElement(location: CGPoint, proxy: ChartProxy, geometry: GeometryProxy) -> (day: Date, sales: Int)? {
@@ -126,15 +132,15 @@ struct SingleLineLollipop: View {
             // Find the closest date element.
             var minDistance: TimeInterval = .infinity
             var index: Int? = nil
-            for salesDataIndex in SalesData.last30Days.indices {
-                let nthSalesDataDistance = SalesData.last30Days[salesDataIndex].day.distance(to: date)
+            for salesDataIndex in data.indices {
+                let nthSalesDataDistance = data[salesDataIndex].day.distance(to: date)
                 if abs(nthSalesDataDistance) < minDistance {
                     minDistance = abs(nthSalesDataDistance)
                     index = salesDataIndex
                 }
             }
             if let index {
-                return SalesData.last30Days[index]
+                return data[index]
             }
         }
         return nil
