@@ -6,6 +6,9 @@ import SwiftUI
 import Charts
 
 struct HeartBeatOverview: View {
+
+    var data = HealthData.ecgSample
+
     var body: some View {
         VStack(alignment: .leading) {
             Text(ChartType.heartBeat.title)
@@ -13,17 +16,16 @@ struct HeartBeatOverview: View {
                 .foregroundStyle(.secondary)
             
             Chart {
-                ForEach(Array(HealthData.ecgSample.enumerated()), id: \.element) { index, element in
+                ForEach(Array(data.enumerated()), id: \.element) { index, element in
                     LineMark(
                         x: .value("Index", index),
                         y: .value("Unit", element)
                     )
                     .foregroundStyle(.pink.gradient)
                     .interpolationMethod(.cardinal)
-                    .accessibilityLabel("Index")
-                    .accessibilityValue("\(element)")
                 }
             }
+            .accessibilityChartDescriptor(self)
             .chartXAxis(.hidden)
             .chartYAxis(.hidden)
             .frame(height: Constants.previewChartHeight)

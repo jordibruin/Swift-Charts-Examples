@@ -115,3 +115,40 @@ extension TwoBarsOverview: AXChartDescriptorRepresentable {
         )
     }
 }
+
+extension HeartBeatOverview: AXChartDescriptorRepresentable {
+    func makeChartDescriptor() -> AXChartDescriptor {
+        let min = data.min() ?? 0.0
+        let max = data.max() ?? 0.0
+
+        let xAxis = AXNumericDataAxisDescriptor(
+            title: "Time",
+            range: Double(0)...Double(data.count),
+            gridlinePositions: []
+        ) { value in "\(value)s" }
+
+
+        let yAxis = AXNumericDataAxisDescriptor(
+            title: "Millivolts",
+            range: Double(min)...Double(max),
+            gridlinePositions: []
+        ) { value in "\(value) mV" }
+
+        let series = AXDataSeriesDescriptor(
+            name: "ECG from \(Date().formatted())",
+            isContinuous: true,
+            dataPoints: data.enumerated().map {
+                .init(x: Double($0), y: $1)
+            }
+        )
+
+        return AXChartDescriptor(
+            title: "ElectroCardiogram (ECG)",
+            summary: nil,
+            xAxis: xAxis,
+            yAxis: yAxis,
+            additionalAxes: [],
+            series: [series]
+        )
+    }
+}
