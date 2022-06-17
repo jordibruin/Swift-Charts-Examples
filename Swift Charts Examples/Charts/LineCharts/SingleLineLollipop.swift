@@ -16,13 +16,8 @@ struct SingleLineLollipop: View {
 
     var body: some View {
         if isOverview {
-            VStack(alignment: .leading) {
-                Text(ChartType.singleLineLollipop.title)
-                    .font(.callout)
-                    .foregroundStyle(.secondary)
-                chart
-                    .allowsHitTesting(false)
-            }
+            chart
+                .allowsHitTesting(false)
         } else {
             List {
                 Section {

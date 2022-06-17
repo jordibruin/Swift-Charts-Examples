@@ -10,43 +10,37 @@ struct SingleBarThresholdOverview: View {
     @State private var threshold = 150.0
 
     var body: some View {
-        VStack(alignment: .leading) {
-            Text(ChartType.singleBarThreshold.title)
-                .font(.callout)
-                .foregroundStyle(.secondary)
-
-            Chart(SalesData.last30Days, id: \.day) {
-                BarMark(
-                    x: .value("Date", $0.day),
-                    y: .value("Sales", $0.sales)
-                )
-                .foregroundStyle($0.sales > Int(threshold) ? .orange : .blue)
-                RuleMark(
-                    y: .value("Threshold", threshold)
-                )
-                .lineStyle(StrokeStyle(lineWidth: 2))
-                .foregroundStyle(.red)
-                .annotation(position: .top, alignment: .leading) {
-                    Text("\(threshold, specifier: "%.0f")")
-                        .font(.title2.bold())
-                        .foregroundColor(.primary)
-                        .background {
-                            ZStack {
-                                RoundedRectangle(cornerRadius: 8)
-                                    .fill(.background)
-                                RoundedRectangle(cornerRadius: 8)
-                                    .fill(.quaternary.opacity(0.7))
-                            }
-                            .padding(.horizontal, -8)
-                            .padding(.vertical, -4)
+        Chart(SalesData.last30Days, id: \.day) {
+            BarMark(
+                x: .value("Date", $0.day),
+                y: .value("Sales", $0.sales)
+            )
+            .foregroundStyle($0.sales > Int(threshold) ? .orange : .blue)
+            RuleMark(
+                y: .value("Threshold", threshold)
+            )
+            .lineStyle(StrokeStyle(lineWidth: 2))
+            .foregroundStyle(.red)
+            .annotation(position: .top, alignment: .leading) {
+                Text("\(threshold, specifier: "%.0f")")
+                    .font(.title2.bold())
+                    .foregroundColor(.primary)
+                    .background {
+                        ZStack {
+                            RoundedRectangle(cornerRadius: 8)
+                                .fill(.background)
+                            RoundedRectangle(cornerRadius: 8)
+                                .fill(.quaternary.opacity(0.7))
                         }
-                        .padding(.bottom, 4)
-                }
+                        .padding(.horizontal, -8)
+                        .padding(.vertical, -4)
+                    }
+                    .padding(.bottom, 4)
             }
-            .chartXAxis(.hidden)
-            .chartYAxis(.hidden)
-            .frame(height: Constants.previewChartHeight)
         }
+        .chartXAxis(.hidden)
+        .chartYAxis(.hidden)
+        .frame(height: Constants.previewChartHeight)
     }
 }
 

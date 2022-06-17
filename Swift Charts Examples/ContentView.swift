@@ -13,11 +13,13 @@ struct ContentView: View {
     init() {
         ChartType.allCases.forEach { chart in
             let view = chart.view
+                .padding(10)
                 .frame(width: 300)
                 .background(.white)
+                .clipShape(RoundedRectangle(cornerRadius: 10))
             let renderer = ImageRenderer(content: view)
-            if let image = renderer.cgImage {
-                cachedChartImages[chart.id] = UIImage(cgImage: image)
+            if let image = renderer.uiImage {
+                cachedChartImages[chart.id] = image
             }
         }
     }
@@ -29,12 +31,7 @@ struct ContentView: View {
                     Section {
                         ForEach(ChartType.allCases.filter { $0.category == category }) { chart in
                             NavigationLink(value: chart) {
-                                // causes UI to hang for several seconds when scrolling
-                                // from 100% CPU usage when cells are reloaded
-//                                chart.view
-                                
-                                // workaround to address hanging UI
-                                cachedView(chart: chart)
+                                preview(chart: chart)
                             }
                         }
                     } header: {
@@ -55,15 +52,23 @@ struct ContentView: View {
         }
     }
     
-    private func cachedView(chart: ChartType) -> AnyView {
-        guard let image = cachedChartImages[chart.id] else {
-            return AnyView(Text(chart.title))
-        }
-        return AnyView(
-            Image(uiImage: image)
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(maxWidth: 300)
+    private func preview(chart: ChartType) -> AnyView {
+        AnyView(
+            VStack(alignment: .leading) {
+                Text(chart.title)
+
+                // causes UI to hang for several seconds when scrolling
+                // from 100% CPU usage when cells are reloaded
+//                chart.view
+
+                // workaround to address hanging UI
+                if let image = cachedChartImages[chart.id] {
+                    Image(uiImage: image)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(maxWidth: 320)
+                }
+            }
         )
     }
 }

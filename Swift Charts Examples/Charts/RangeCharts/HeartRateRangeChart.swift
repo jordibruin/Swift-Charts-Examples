@@ -7,25 +7,19 @@ import Charts
 
 struct HeartRateRangeChartOverview: View {
     var body: some View {
-        VStack(alignment: .leading) {
-            Text(ChartType.rangeHeartRate.title)
-                .font(.callout)
-                .foregroundStyle(.secondary)
-
-            Chart(HeartRateData.lastWeek, id: \.weekday) {
-                BarMark(
-                    x: .value("Day", $0.weekday, unit: .day),
-                    yStart: .value("BPM Min", $0.dailyMin),
-                    yEnd: .value("BPM Max", $0.dailyMax),
-                    width: .fixed(6)
-                )
-                .clipShape(Capsule())
-                .foregroundStyle(.red.gradient)
-            }
-            .chartXAxis(.hidden)
-            .chartYAxis(.hidden)
-            .frame(height: Constants.previewChartHeight)
+        Chart(HeartRateData.lastWeek, id: \.weekday) {
+            BarMark(
+                x: .value("Day", $0.weekday, unit: .day),
+                yStart: .value("BPM Min", $0.dailyMin),
+                yEnd: .value("BPM Max", $0.dailyMax),
+                width: .fixed(6)
+            )
+            .clipShape(Capsule())
+            .foregroundStyle(.red.gradient)
         }
+        .chartXAxis(.hidden)
+        .chartYAxis(.hidden)
+        .frame(height: Constants.previewChartHeight)
     }
 }
 

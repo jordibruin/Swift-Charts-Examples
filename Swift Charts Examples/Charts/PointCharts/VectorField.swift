@@ -9,22 +9,16 @@ struct VectorFieldOverview: View {
     @State private var grid = Grid(numRows: 20, numCols: 20)
     
     var body: some View {
-        VStack(alignment: .leading) {
-            Text(ChartType.vectorField.title)
-                .font(.callout)
-                .foregroundStyle(.secondary)
-            
-            Chart(grid.points) { point in
-                PointMark(x: .value("x", point.x),
-                          y: .value("y", point.y))
-                .symbol(Arrow(angle: CGFloat(point.angle(degreeOffset: 0)), size: 50))
-                .foregroundStyle(point.angleColor(hueOffset: 0))
-                .opacity(0.7)
-            }
-            .chartXAxis(.hidden)
-            .chartYAxis(.hidden)
-            .aspectRatio(contentMode: .fit)
+        Chart(grid.points) { point in
+            PointMark(x: .value("x", point.x),
+                      y: .value("y", point.y))
+            .symbol(Arrow(angle: CGFloat(point.angle(degreeOffset: 0)), size: 50))
+            .foregroundStyle(point.angleColor(hueOffset: 0))
+            .opacity(0.7)
         }
+        .chartXAxis(.hidden)
+        .chartYAxis(.hidden)
+        .aspectRatio(contentMode: .fit)
     }
 }
 

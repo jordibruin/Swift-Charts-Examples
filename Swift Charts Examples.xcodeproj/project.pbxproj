@@ -21,7 +21,7 @@
 		C22EB5A028568D0B000B9F9A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C22EB59F28568D0B000B9F9A /* ContentView.swift */; };
 		C22EB5A228568D0C000B9F9A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C22EB5A128568D0C000B9F9A /* Assets.xcassets */; };
 		C22EB5A628568D0C000B9F9A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C22EB5A528568D0C000B9F9A /* Preview Assets.xcassets */; };
-		C22EB5B028568D0C000B9F9A /* Swift_Charts_ExamplesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C22EB5AF28568D0C000B9F9A /* Swift_Charts_ExamplesTests.swift */; };
+		C22EB5B028568D0C000B9F9A /* ChartScreenshotGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C22EB5AF28568D0C000B9F9A /* ChartScreenshotGenerator.swift */; };
 		C22EB5BA28568D0C000B9F9A /* Swift_Charts_ExamplesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C22EB5B928568D0C000B9F9A /* Swift_Charts_ExamplesUITests.swift */; };
 		C22EB5BC28568D0C000B9F9A /* Swift_Charts_ExamplesUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C22EB5BB28568D0C000B9F9A /* Swift_Charts_ExamplesUITestsLaunchTests.swift */; };
 		C26088132856935B00B09DDB /* ChartType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26088122856935B00B09DDB /* ChartType.swift */; };
@@ -73,7 +73,7 @@
 		C22EB5A328568D0C000B9F9A /* Swift_Charts_Examples.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Swift_Charts_Examples.entitlements; sourceTree = "<group>"; };
 		C22EB5A528568D0C000B9F9A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		C22EB5AB28568D0C000B9F9A /* Swift Charts ExamplesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Swift Charts ExamplesTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		C22EB5AF28568D0C000B9F9A /* Swift_Charts_ExamplesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Swift_Charts_ExamplesTests.swift; sourceTree = "<group>"; };
+		C22EB5AF28568D0C000B9F9A /* ChartScreenshotGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartScreenshotGenerator.swift; sourceTree = "<group>"; };
 		C22EB5B528568D0C000B9F9A /* Swift Charts ExamplesUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Swift Charts ExamplesUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C22EB5B928568D0C000B9F9A /* Swift_Charts_ExamplesUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Swift_Charts_ExamplesUITests.swift; sourceTree = "<group>"; };
 		C22EB5BB28568D0C000B9F9A /* Swift_Charts_ExamplesUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Swift_Charts_ExamplesUITestsLaunchTests.swift; sourceTree = "<group>"; };
@@ -183,7 +183,7 @@
 		C22EB5AE28568D0C000B9F9A /* Swift Charts ExamplesTests */ = {
 			isa = PBXGroup;
 			children = (
-				C22EB5AF28568D0C000B9F9A /* Swift_Charts_ExamplesTests.swift */,
+				C22EB5AF28568D0C000B9F9A /* ChartScreenshotGenerator.swift */,
 			);
 			path = "Swift Charts ExamplesTests";
 			sourceTree = "<group>";
@@ -436,7 +436,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C22EB5B028568D0C000B9F9A /* Swift_Charts_ExamplesTests.swift in Sources */,
+				C22EB5B028568D0C000B9F9A /* ChartScreenshotGenerator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
