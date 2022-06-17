@@ -15,7 +15,7 @@ struct SingleBarThresholdOverview: View {
                 x: .value("Date", $0.day),
                 y: .value("Sales", $0.sales)
             )
-            .foregroundStyle($0.sales > Int(threshold) ? .orange : .blue)
+            .foregroundStyle($0.sales > Int(threshold) ? Color.orange.gradient : Color.blue.gradient)
             RuleMark(
                 y: .value("Threshold", threshold)
             )
@@ -55,7 +55,7 @@ struct SingleBarThreshold: View {
                         x: .value("Date", $0.day),
                         y: .value("Sales", $0.sales)
                     )
-                    .foregroundStyle($0.sales > Int(threshold) ? .orange : .blue)
+                    .foregroundStyle($0.sales > Int(threshold) ? Color.orange.gradient : Color.blue.gradient)
                     RuleMark(
                         y: .value("Threshold", threshold)
                     )

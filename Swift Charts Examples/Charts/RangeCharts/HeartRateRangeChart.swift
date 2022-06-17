@@ -12,7 +12,7 @@ struct HeartRateRangeChartOverview: View {
                 x: .value("Day", $0.weekday, unit: .day),
                 yStart: .value("BPM Min", $0.dailyMin),
                 yEnd: .value("BPM Max", $0.dailyMax),
-                width: .fixed(6)
+                width: .fixed(8)
             )
             .clipShape(Capsule())
             .foregroundStyle(.red.gradient)
@@ -24,7 +24,7 @@ struct HeartRateRangeChartOverview: View {
 }
 
 struct HeartRateRangeChart: View {
-    @State private var barWidth = 6.0
+    @State private var barWidth = 10.0
     @State private var chartColor: Color = .red
     
     var body: some View {

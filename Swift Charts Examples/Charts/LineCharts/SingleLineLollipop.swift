@@ -39,7 +39,7 @@ struct SingleLineLollipop: View {
                 y: .value("Sales", $0.sales)
             )
             .lineStyle(StrokeStyle(lineWidth: lineWidth))
-            .foregroundStyle(chartColor)
+            .foregroundStyle(chartColor.gradient)
             .interpolationMethod(interpolationMethod.mode)
             .symbol(Circle().strokeBorder(lineWidth: lineWidth))
             .symbolSize(showSymbols ? 60 : 0)

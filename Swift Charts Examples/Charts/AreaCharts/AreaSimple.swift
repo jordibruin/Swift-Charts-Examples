@@ -12,6 +12,8 @@ struct AreaSimpleOverview: View {
                 x: .value("Day", $0.day, unit: .day),
                 y: .value("Sales", $0.sales)
             )
+            .foregroundStyle(Gradient(colors: [.blue, .blue.opacity(0.5)]))
+            .interpolationMethod(.cardinal)
         }
         .chartXAxis(.hidden)
         .chartYAxis(.hidden)
@@ -24,7 +26,7 @@ struct AreaSimple: View {
     @State private var interpolationMethod: ChartInterpolationMethod = .cardinal
     @State private var chartColor: Color = .blue
     @State private var showGradient = true
-    @State private var gradientRange = 1.0
+    @State private var gradientRange = 0.5
 
     private var gradient: Gradient {
         var colors = [chartColor]

@@ -16,8 +16,8 @@ struct TwoBarsOverview: View {
                     )
                     .accessibilityLabel("\(element.weekday.formatted())")
                     .accessibilityValue("\(element.sales)")
+                    .foregroundStyle(series.city == "Cupertino" ? Color.blue.gradient : Color.green.gradient)
                 }
-                .foregroundStyle(by: .value("City", series.city))
             }
         }
         .chartXAxis(.hidden)
@@ -46,8 +46,8 @@ struct TwoBars: View {
                         )
                         .accessibilityLabel("\(element.weekday.formatted())")
                         .accessibilityValue("\(element.sales)")
+                        .foregroundStyle(series.city == "Cupertino" ? Color.blue.gradient : Color.green.gradient)
                     }
-                    .foregroundStyle(by: .value("City", series.city))
                     .symbol(by: .value("City", series.city))
                     .interpolationMethod(.catmullRom)
                     .position(by: .value("City", showBarsStacked ? "Common" : series.city))

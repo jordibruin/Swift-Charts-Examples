@@ -12,6 +12,7 @@ struct SingleBarOverview: View {
                 x: .value("Day", $0.day, unit: .day),
                 y: .value("Sales", $0.sales)
             )
+            .foregroundStyle(Color.blue.gradient)
         }
         .chartXAxis(.hidden)
         .chartYAxis(.hidden)
@@ -32,7 +33,7 @@ struct SingleBar: View {
                         y: .value("Sales", $0.sales),
                         width: .fixed(barWidth)
                     )
-                    .foregroundStyle(chartColor)
+                    .foregroundStyle(chartColor.gradient)
                 }
                 .frame(height: Constants.detailChartHeight)
             }
