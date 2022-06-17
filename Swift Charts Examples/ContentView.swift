@@ -16,7 +16,6 @@ struct ContentView: View {
                 .padding(10)
                 .frame(width: 300)
                 .background(.white)
-                .clipShape(RoundedRectangle(cornerRadius: 10))
             let renderer = ImageRenderer(content: view)
             if let image = renderer.uiImage {
                 cachedChartImages[chart.id] = image
@@ -67,6 +66,7 @@ struct ContentView: View {
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(maxWidth: 320)
+                        .clipShape(RoundedRectangle(cornerRadius: 10))
                 }
             }
         )
