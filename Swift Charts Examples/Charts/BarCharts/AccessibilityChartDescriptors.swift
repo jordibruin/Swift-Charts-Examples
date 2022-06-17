@@ -160,3 +160,65 @@ extension HeartBeatOverview: AXChartDescriptorRepresentable {
         )
     }
 }
+
+extension RangeSimpleOverview: AXChartDescriptorRepresentable {
+    func makeChartDescriptor() -> AXChartDescriptor {
+
+        let min = data.map(\.dailyMin).min() ?? 0
+        let max = data.map(\.dailyMax).max() ?? 0
+        let salesMin = data.map(\.sales).min() ?? 0
+        let salesMax = data.map(\.sales).max() ?? 0
+
+        let xAxis = AXCategoricalDataAxisDescriptor(
+            title: "Month",
+            categoryOrder: data.map { $0.month.formatted() }
+        )
+
+        let yAxis = AXNumericDataAxisDescriptor(
+            title: "Sales Average",
+            range: Double(min)...Double(max),
+            gridlinePositions: []
+        ) { value in "\(value) sales per day average" }
+
+        // Create axes for the daily min/max and sales
+        // and use the standard X/Y axes for month vs daily average
+        let salesAxis = AXNumericDataAxisDescriptor(
+            title: "Total Sales",
+            range: Double(salesMin)...Double(salesMax),
+            gridlinePositions: []
+        ) { value in "\(value) total sales" }
+
+        let minAxis = AXNumericDataAxisDescriptor(
+            title: "Daily Minimum Sales",
+            range: Double(min)...Double(max),
+            gridlinePositions: []
+        ) { value in "\(value) sales min" }
+
+        let maxAxis = AXNumericDataAxisDescriptor(
+            title: "Daily Maximum Sales",
+            range: Double(min)...Double(max),
+            gridlinePositions: []
+        ) { value in "\(value) sales max" }
+
+        let series = AXDataSeriesDescriptor(
+            name: "Daily sales ranges per month",
+            isContinuous: false,
+            dataPoints: data.map {
+                .init(x: $0.month.formatted(),
+                      y: Double($0.dailyAverage),
+                      additionalValues: [.number(Double($0.sales)),
+                                         .number(Double($0.dailyMin)),
+                                         .number(Double($0.dailyMax))])
+            }
+        )
+
+        return AXChartDescriptor(
+            title: "Sales per day",
+            summary: nil,
+            xAxis: xAxis,
+            yAxis: yAxis,
+            additionalAxes: [salesAxis, minAxis, maxAxis],
+            series: [series]
+        )
+    }
+}

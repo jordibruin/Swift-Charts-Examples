@@ -6,13 +6,16 @@ import SwiftUI
 import Charts
 
 struct RangeSimpleOverview: View {
+
+    var data = SalesData.last12Months
+
     var body: some View {
         VStack(alignment: .leading) {
             Text(ChartType.rangeSimple.title)
                 .font(.callout)
                 .foregroundStyle(.secondary)
             
-            Chart(SalesData.last12Months, id: \.month) {
+            Chart(data, id: \.month) {
                 BarMark(
                     x: .value("Month", $0.month, unit: .month),
                     yStart: .value("Sales Min", $0.dailyMin),
@@ -21,6 +24,7 @@ struct RangeSimpleOverview: View {
                 .foregroundStyle(.blue.gradient)
                 .clipShape(Capsule())
             }
+            .accessibilityChartDescriptor(self)
             .chartXAxis(.hidden)
             .chartYAxis(.hidden)
             .frame(height: Constants.previewChartHeight)
@@ -43,6 +47,8 @@ struct RangeSimple: View {
                         yEnd: .value("Sales Max", $0.dailyMax),
                         width: .fixed(barWidth)
                     )
+                    .accessibilityLabel("\($0.month.formatted())")
+                    .accessibilityValue("Sales: \($0.sales), Min: \($0.dailyMin), Max: \($0.dailyMax)")
                     .clipShape(Capsule())
                     .foregroundStyle(chartColor.gradient)
                     
