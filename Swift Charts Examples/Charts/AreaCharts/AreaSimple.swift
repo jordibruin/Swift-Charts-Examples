@@ -31,7 +31,7 @@ struct AreaSimple: View {
     private var gradient: Gradient {
         var colors = [chartColor]
         if showGradient {
-            colors.append(chartColor.opacity(-gradientRange))
+            colors.append(chartColor.opacity(gradientRange))
         }
         return Gradient(colors: colors)
     }
