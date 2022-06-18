@@ -6,6 +6,9 @@ import SwiftUI
 import Charts
 
 struct PyramidChartOverview: View {
+
+    @State var data = PopulationByAgeData.example
+
     var body: some View {
         VStack(alignment: .leading) {
             Text(ChartType.pyramid.title)
@@ -13,7 +16,7 @@ struct PyramidChartOverview: View {
                 .foregroundStyle(.secondary)
             
             Chart {
-                ForEach(PopulationByAgeData.example) { series in
+                ForEach(data) { series in
                     ForEach(series.population, id: \.percentage) { element in
                         BarMark(
                             xStart: .value("Percentage", 0),
@@ -24,6 +27,7 @@ struct PyramidChartOverview: View {
                     .foregroundStyle(by: .value("Sex", series.sex))
                 }
             }
+            .accessibilityChartDescriptor(self)
             .chartXAxis(.hidden)
             .chartYAxis(.hidden)
             .chartLegend(.hidden)
@@ -45,7 +49,7 @@ struct PyramidChart: View {
                             xEnd: .value("Percentage", series.sex == "Male" ? element.percentage : element.percentage * -1),
                             y: .value("AgeRange", element.ageRange)
                         )
-                        .accessibilityLabel("\(element.ageRange)")
+                        .accessibilityLabel("\(series.sex) Ages: \(element.ageRange)")
                         .accessibilityValue("\(element.percentage)")
                     }
                     .foregroundStyle(by: .value("Sex", series.sex))

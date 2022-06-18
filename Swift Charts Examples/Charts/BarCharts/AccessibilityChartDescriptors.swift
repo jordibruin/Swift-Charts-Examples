@@ -122,6 +122,66 @@ extension TwoBarsOverview: AXChartDescriptorRepresentable {
     }
 }
 
+// TODO: This is virtually the same as TwoBarsOverview's chartDescriptor. Use a protocol?
+extension PyramidChartOverview: AXChartDescriptorRepresentable {
+    func makeChartDescriptor() -> AXChartDescriptor {
+
+        // Create a descriptor for each Series object
+        // as that allows auditory comparison with VoiceOver
+        // much like the chart does visually and allows individual city charts to be played
+        let series = data.map {
+            AXDataSeriesDescriptor(
+                name: "\($0.sex)",
+                isContinuous: false,
+                dataPoints: $0.population.map { data in
+                        .init(x: "\(data.ageRange)",
+                              y: Double(data.percentage))
+                }
+            )
+        }
+
+        // Get the minimum/maximum within each series
+        // and then the limits of the resulting list
+        // to pass in as the Y axis limits
+        let limits: [(Int, Int)] = data.map { seriesData in
+            let percentages = seriesData.population.map { $0.percentage }
+            let localMin = percentages.min() ?? 0
+            let localMax = percentages.max() ?? 0
+            return (localMin, localMax)
+        }
+
+        let min = limits.map { $0.0 }.min() ?? 0
+        let max = limits.map { $0.1 }.max() ?? 0
+
+        // Get the unique age ranges to mark the x-axis
+        // and then sort them
+        let uniqueRanges = Set( data
+            .map { $0.population.map { $0.ageRange } }
+            .joined() )
+        let ranges = Array(uniqueRanges).sorted()
+
+        let xAxis = AXCategoricalDataAxisDescriptor(
+            title: "Age Ranges",
+            categoryOrder: ranges.map { $0 }
+        )
+
+        let yAxis = AXNumericDataAxisDescriptor(
+            title: "Population percentage",
+            range: Double(min)...Double(max),
+            gridlinePositions: []
+        ) { value in "\(value)%" }
+
+        return AXChartDescriptor(
+            title: "Population by age",
+            summary: nil,
+            xAxis: xAxis,
+            yAxis: yAxis,
+            additionalAxes: [],
+            series: series
+        )
+    }
+}
+
 extension HeartBeatOverview: AXChartDescriptorRepresentable {
     func makeChartDescriptor() -> AXChartDescriptor {
         let min = data.min() ?? 0.0
