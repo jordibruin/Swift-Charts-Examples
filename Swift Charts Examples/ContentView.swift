@@ -60,6 +60,7 @@ struct ContentView: View {
 //                chart.view
 
                 // workaround to address hanging UI
+                // Reported FB10335209
                 if let image = cachedChartImages[chart.id] {
                     Image(uiImage: image)
                         .resizable()
