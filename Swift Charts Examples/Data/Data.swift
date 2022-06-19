@@ -291,7 +291,8 @@ struct DataUsageData {
     ]
 }
 
-/// MARK: - Heart Rate data
+// MARK: - Heart Rate data
+
 enum HeartRateData {
     /// Heart Rate for the last week
     static let lastWeek = [
@@ -344,8 +345,17 @@ enum HeartRateData {
     }()
 }
 
-/// MARK: - Time Sheet data
+// MARK: - Time Sheet data
+
 enum TimeSheetData {
+    static let lastDay = [
+        /// Monday
+        (department: "Bread", clockIn: date(year: 2022, month: 6, day: 13, hour: 08, minutes: 00), clockOut: date(year: 2022, month: 6, day: 13, hour: 09, minutes: 28)),
+        (department: "Bread", clockIn: date(year: 2022, month: 6, day: 13, hour: 09, minutes: 47), clockOut: date(year: 2022, month: 6, day: 13, hour: 12, minutes: 04)),
+        (department: "Butchery", clockIn: date(year: 2022, month: 6, day: 13, hour: 13, minutes: 01), clockOut: date(year: 2022, month: 6, day: 13, hour: 15, minutes: 10)),
+        (department: "Butchery", clockIn: date(year: 2022, month: 6, day: 13, hour: 15, minutes: 33), clockOut: date(year: 2022, month: 6, day: 13, hour: 17, minutes: 01)),
+        (department: "Vegetables", clockIn: date(year: 2022, month: 6, day: 13, hour: 17, minutes: 02), clockOut: date(year: 2022, month: 6, day: 13, hour: 18, minutes: 08))
+        ]
     /// Time Sheet Date for the last week
     static let lastWeek = [
         /// Monday

@@ -71,6 +71,10 @@ One Dimensional Bar
 
 ![](images/charts/bar/oneDimensionalBar.png)
 
+Time Sheet Bar
+
+![](images/charts/bar/timeSheetBar.png)
+
 ### [Area Charts](https://github.com/jordibruin/SwiftChartExamples/tree/main/Swift%20Charts%20Examples/Charts/AreaCharts)
 
 Area Chart
