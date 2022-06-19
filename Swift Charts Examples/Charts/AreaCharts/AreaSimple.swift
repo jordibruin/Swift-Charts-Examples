@@ -27,6 +27,7 @@ struct AreaSimple: View {
     @State private var chartColor: Color = .blue
     @State private var showGradient = true
     @State private var gradientRange = 0.5
+    @State private var data: [Sale] = SalesData.last30Days.map { Sale(day: $0.day, sales: 0) }
 
     private var gradient: Gradient {
         var colors = [chartColor]
@@ -39,7 +40,7 @@ struct AreaSimple: View {
     var body: some View {
         List {
             Section {
-                Chart(SalesData.last30Days, id: \.day) {
+                Chart(data, id: \.day) {
                     AreaMark(
                         x: .value("Date", $0.day),
                         y: .value("Sales", $0.sales)
@@ -60,6 +61,15 @@ struct AreaSimple: View {
             customisation
         }
         .navigationBarTitle(ChartType.areaSimple.title, displayMode: .inline)
+        .onAppear {
+            for index in data.indices {
+                DispatchQueue.main.asyncAfter(deadline: .now() + Double(index) * 0.02) {
+                    withAnimation(.interactiveSpring(response: 0.8, dampingFraction: 0.8, blendDuration: 0.8)) {
+                        data[index].sales = SalesData.last30Days[index].sales
+                    }
+                }
+            }
+        }
     }
     
     private var customisation: some View {

@@ -84,6 +84,11 @@ enum SalesData {
     }
 }
 
+struct Sale {
+    let day: Date
+    var sales: Int
+}
+
 /// Data for the sales by location and weekday charts.
 enum LocationData {
     /// A data series for the lines.
