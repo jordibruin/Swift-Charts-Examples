@@ -7,29 +7,23 @@ import Charts
 
 struct TwoBarsOverview: View {
     var body: some View {
-        VStack(alignment: .leading) {
-            Text(ChartType.twoBars.title)
-                .font(.callout)
-                .foregroundStyle(.secondary)
-
-            Chart {
-                ForEach(LocationData.last7Days) { series in
-                    ForEach(series.sales, id: \.weekday) { element in
-                        BarMark(
-                            x: .value("Day", element.weekday, unit: .day),
-                            y: .value("Sales", element.sales)
-                        )
-                        .accessibilityLabel("\(element.weekday.formatted())")
-                        .accessibilityValue("\(element.sales)")
-                    }
-                    .foregroundStyle(by: .value("City", series.city))
+        Chart {
+            ForEach(LocationData.last7Days) { series in
+                ForEach(series.sales, id: \.weekday) { element in
+                    BarMark(
+                        x: .value("Day", element.weekday, unit: .day),
+                        y: .value("Sales", element.sales)
+                    )
+                    .accessibilityLabel("\(element.weekday.formatted())")
+                    .accessibilityValue("\(element.sales)")
+                    .foregroundStyle(series.city == "Cupertino" ? Color.blue.gradient : Color.green.gradient)
                 }
             }
-            .chartXAxis(.hidden)
-            .chartYAxis(.hidden)
-            .chartLegend(.hidden)
-            .frame(height: Constants.previewChartHeight)
         }
+        .chartXAxis(.hidden)
+        .chartYAxis(.hidden)
+        .chartLegend(.hidden)
+        .frame(height: Constants.previewChartHeight)
     }
 }
 
@@ -52,8 +46,8 @@ struct TwoBars: View {
                         )
                         .accessibilityLabel("\(element.weekday.formatted())")
                         .accessibilityValue("\(element.sales)")
+                        .foregroundStyle(series.city == "Cupertino" ? Color.blue.gradient : Color.green.gradient)
                     }
-                    .foregroundStyle(by: .value("City", series.city))
                     .symbol(by: .value("City", series.city))
                     .interpolationMethod(.catmullRom)
                     .position(by: .value("City", showBarsStacked ? "Common" : series.city))

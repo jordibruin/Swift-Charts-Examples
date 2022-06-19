@@ -7,21 +7,17 @@ import Charts
 
 struct AreaSimpleOverview: View {
     var body: some View {
-        VStack(alignment: .leading) {
-            Text(ChartType.areaSimple.title)
-                .font(.callout)
-                .foregroundStyle(.secondary)
-
-            Chart(SalesData.last30Days, id: \.day) {
-                AreaMark(
-                    x: .value("Day", $0.day, unit: .day),
-                    y: .value("Sales", $0.sales)
-                )
-            }
-            .chartXAxis(.hidden)
-            .chartYAxis(.hidden)
-                .frame(height: Constants.previewChartHeight)
+        Chart(SalesData.last30Days, id: \.day) {
+            AreaMark(
+                x: .value("Day", $0.day, unit: .day),
+                y: .value("Sales", $0.sales)
+            )
+            .foregroundStyle(Gradient(colors: [.blue, .blue.opacity(0.5)]))
+            .interpolationMethod(.cardinal)
         }
+        .chartXAxis(.hidden)
+        .chartYAxis(.hidden)
+        .frame(height: Constants.previewChartHeight)
     }
 }
 
@@ -30,12 +26,12 @@ struct AreaSimple: View {
     @State private var interpolationMethod: ChartInterpolationMethod = .cardinal
     @State private var chartColor: Color = .blue
     @State private var showGradient = true
-    @State private var gradientRange = 1.0
+    @State private var gradientRange = 0.5
 
     private var gradient: Gradient {
         var colors = [chartColor]
         if showGradient {
-            colors.append(chartColor.opacity(-gradientRange))
+            colors.append(chartColor.opacity(gradientRange))
         }
         return Gradient(colors: colors)
     }

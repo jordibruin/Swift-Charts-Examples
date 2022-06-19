@@ -7,27 +7,21 @@ import Charts
 
 struct HeartBeatOverview: View {
     var body: some View {
-        VStack(alignment: .leading) {
-            Text(ChartType.heartBeat.title)
-                .font(.callout)
-                .foregroundStyle(.secondary)
-            
-            Chart {
-                ForEach(Array(HealthData.ecgSample.enumerated()), id: \.element) { index, element in
-                    LineMark(
-                        x: .value("Index", index),
-                        y: .value("Unit", element)
-                    )
-                    .foregroundStyle(.pink.gradient)
-                    .interpolationMethod(.cardinal)
-                    .accessibilityLabel("Index")
-                    .accessibilityValue("\(element)")
-                }
+        Chart {
+            ForEach(Array(HealthData.ecgSample.enumerated()), id: \.element) { index, element in
+                LineMark(
+                    x: .value("Index", index),
+                    y: .value("Unit", element)
+                )
+                .foregroundStyle(.pink.gradient)
+                .interpolationMethod(.cardinal)
+                .accessibilityLabel("Index")
+                .accessibilityValue("\(element)")
             }
-            .chartXAxis(.hidden)
-            .chartYAxis(.hidden)
-            .frame(height: Constants.previewChartHeight)
         }
+        .chartXAxis(.hidden)
+        .chartYAxis(.hidden)
+        .frame(height: Constants.previewChartHeight)
     }
 }
 

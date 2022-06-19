@@ -7,28 +7,22 @@ import Charts
 
 struct PyramidChartOverview: View {
     var body: some View {
-        VStack(alignment: .leading) {
-            Text(ChartType.pyramid.title)
-                .font(.callout)
-                .foregroundStyle(.secondary)
-            
-            Chart {
-                ForEach(PopulationByAgeData.example) { series in
-                    ForEach(series.population, id: \.percentage) { element in
-                        BarMark(
-                            xStart: .value("Percentage", 0),
-                            xEnd: .value("Percentage", series.sex == "Male" ? element.percentage : element.percentage * -1),
-                            y: .value("AgeRange", element.ageRange)
-                        )
-                    }
-                    .foregroundStyle(by: .value("Sex", series.sex))
+        Chart {
+            ForEach(PopulationByAgeData.example) { series in
+                ForEach(series.population, id: \.percentage) { element in
+                    BarMark(
+                        xStart: .value("Percentage", 0),
+                        xEnd: .value("Percentage", series.sex == "Male" ? element.percentage : element.percentage * -1),
+                        y: .value("AgeRange", element.ageRange)
+                    )
                 }
+                .foregroundStyle(by: .value("Sex", series.sex))
             }
-            .chartXAxis(.hidden)
-            .chartYAxis(.hidden)
-            .chartLegend(.hidden)
-            .frame(height: 200)
         }
+        .chartXAxis(.hidden)
+        .chartYAxis(.hidden)
+        .chartLegend(.hidden)
+        .frame(height: 200)
     }
 }
 

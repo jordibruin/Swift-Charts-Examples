@@ -7,24 +7,18 @@ import Charts
 
 struct RangeSimpleOverview: View {
     var body: some View {
-        VStack(alignment: .leading) {
-            Text(ChartType.rangeSimple.title)
-                .font(.callout)
-                .foregroundStyle(.secondary)
-            
-            Chart(SalesData.last12Months, id: \.month) {
-                BarMark(
-                    x: .value("Month", $0.month, unit: .month),
-                    yStart: .value("Sales Min", $0.dailyMin),
-                    yEnd: .value("Sales Max", $0.dailyMax)
-                )
-                .foregroundStyle(.blue.gradient)
-                .clipShape(Capsule())
-            }
-            .chartXAxis(.hidden)
-            .chartYAxis(.hidden)
-            .frame(height: Constants.previewChartHeight)
+        Chart(SalesData.last12Months, id: \.month) {
+            BarMark(
+                x: .value("Month", $0.month, unit: .month),
+                yStart: .value("Sales Min", $0.dailyMin),
+                yEnd: .value("Sales Max", $0.dailyMax)
+            )
+            .foregroundStyle(.blue.gradient)
+            .clipShape(Capsule())
         }
+        .chartXAxis(.hidden)
+        .chartYAxis(.hidden)
+        .frame(height: Constants.previewChartHeight)
     }
 }
 

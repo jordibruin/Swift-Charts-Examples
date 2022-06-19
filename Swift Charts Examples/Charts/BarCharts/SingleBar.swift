@@ -7,21 +7,16 @@ import Charts
 
 struct SingleBarOverview: View {
     var body: some View {
-        VStack(alignment: .leading) {
-            Text(ChartType.singleBar.title)
-                .font(.callout)
-                .foregroundStyle(.secondary)
-
-            Chart(SalesData.last30Days, id: \.day) {
-                BarMark(
-                    x: .value("Day", $0.day, unit: .day),
-                    y: .value("Sales", $0.sales)
-                )
-            }
-            .chartXAxis(.hidden)
-            .chartYAxis(.hidden)
-            .frame(height: Constants.previewChartHeight)
+        Chart(SalesData.last30Days, id: \.day) {
+            BarMark(
+                x: .value("Day", $0.day, unit: .day),
+                y: .value("Sales", $0.sales)
+            )
+            .foregroundStyle(Color.blue.gradient)
         }
+        .chartXAxis(.hidden)
+        .chartYAxis(.hidden)
+        .frame(height: Constants.previewChartHeight)
     }
 }
 
@@ -38,7 +33,7 @@ struct SingleBar: View {
                         y: .value("Sales", $0.sales),
                         width: .fixed(barWidth)
                     )
-                    .foregroundStyle(chartColor)
+                    .foregroundStyle(chartColor.gradient)
                 }
                 .frame(height: Constants.detailChartHeight)
             }

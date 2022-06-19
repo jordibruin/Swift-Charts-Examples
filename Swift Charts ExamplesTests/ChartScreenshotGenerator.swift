@@ -6,8 +6,7 @@ import XCTest
 import SwiftUI
 @testable import Swift_Charts_Examples
 
-final class Swift_Charts_ExamplesTests: XCTestCase {
-
+final class ChartScreenshotGenerator: XCTestCase {
     @MainActor
     func testGenerateScreenshots() throws {
         let url = URL(fileURLWithPath: "\(#file)", isDirectory: false)

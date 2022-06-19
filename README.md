@@ -37,43 +37,71 @@ See the [open issues](https://github.com/jordibruin/SwiftChartExamples/issues) i
 
 ### [Line Charts](https://github.com/jordibruin/SwiftChartExamples/tree/main/Swift%20Charts%20Examples/Charts/LineCharts)
 
-![Line Chart](images/charts/line/singleLine.png)
+Line Chart
 
-![Line Chart with Lollipop](images/charts/line/singleLineLollipop.png)
+![](images/charts/line/singleLine.png)
 
-![Heart Beat / ECG Chart](images/charts/line/heartBeat.png)
+Line Chart with Lollipop
+
+![](images/charts/line/singleLineLollipop.png)
+
+Heart Beat / ECG Chart
+
+![](images/charts/line/heartBeat.png)
 
 ### [Bar Charts](https://github.com/jordibruin/SwiftChartExamples/tree/main/Swift%20Charts%20Examples/Charts/BarCharts)
 
-![Single Bar](images/charts/bar/singleBar.png)
+Single Bar
 
-![Single Bar with Threshold Rule Mark](images/charts/bar/singleBarThreshold.png)
+![](images/charts/bar/singleBar.png)
 
-![Two Bars](images/charts/bar/twoBars.png)
+Single Bar with Threshold Rule Mark
 
-![Pyramid](images/charts/bar/pyramid.png)
+![](images/charts/bar/singleBarThreshold.png)
 
-![One Dimensional Bar](images/charts/bar/oneDimensionalBar.png)
+Two Bars
+
+![](images/charts/bar/twoBars.png)
+
+Pyramid
+
+![](images/charts/bar/pyramid.png)
+
+One Dimensional Bar
+
+![](images/charts/bar/oneDimensionalBar.png)
 
 ### [Area Charts](https://github.com/jordibruin/SwiftChartExamples/tree/main/Swift%20Charts%20Examples/Charts/AreaCharts)
 
-![Area Chart](images/charts/area/areaSimple.png)
+Area Chart
+
+![](images/charts/area/areaSimple.png)
 
 ### [Range Charts](https://github.com/jordibruin/SwiftChartExamples/tree/main/Swift%20Charts%20Examples/Charts/RangeCharts)
 
-![Range Chart](images/charts/range/rangeSimple.png)
+Range Chart
 
-![Heart Rate Range Chart](images/charts/range/rangeHeartRate.png)
+![](images/charts/range/rangeSimple.png)
+
+Heart Rate Range Chart
+
+![](images/charts/range/rangeHeartRate.png)
 
 ### [Heat Maps](https://github.com/jordibruin/SwiftChartExamples/tree/main/Swift%20Charts%20Examples/Charts/HeatMap)
 
-![Customizable Heat Map](images/charts/heatMap/customizeableHeatMap.png)
+Customizable Heat Map
+
+![](images/charts/heatMap/customizeableHeatMap.png)
 
 ### [Point Charts](https://github.com/jordibruin/SwiftChartExamples/tree/main/Swift%20Charts%20Examples/Charts/PointCharts)
 
-![Scatter Chart](images/charts/point/scatter.png)
+Scatter Chart
 
-![Vector Field](images/charts/point/vectorField.png)
+![](images/charts/point/scatter.png)
+
+Vector Field
+
+![](images/charts/point/vectorField.png)
 
 ## How to add a new chart
 

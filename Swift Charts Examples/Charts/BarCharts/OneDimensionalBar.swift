@@ -7,28 +7,22 @@ import Charts
 
 struct OneDimensionalBarOverview: View {
     var body: some View {
-        VStack(alignment: .leading) {
-            Text(ChartType.oneDimensionalBar.title)
-                .font(.callout)
-                .foregroundStyle(.secondary)
-
-            Chart(DataUsageData.example, id: \.category) { element in
-                BarMark(
-                    x: .value("Data Size", element.size)
-                )
-                .foregroundStyle(by: .value("Data Category", element.category))
-            }
-            .chartPlotStyle { plotArea in
-                plotArea
-                    .background(Color(.systemFill))
-                    .cornerRadius(8)
-            }
-            .chartXScale(range: 0...128)
-            .chartXAxis(.hidden)
-            .chartYAxis(.hidden)
-            .chartLegend(.hidden)
-            .frame(height: Constants.previewChartHeight)
+        Chart(DataUsageData.example, id: \.category) { element in
+            BarMark(
+                x: .value("Data Size", element.size)
+            )
+            .foregroundStyle(by: .value("Data Category", element.category))
         }
+        .chartPlotStyle { plotArea in
+            plotArea
+                .background(Color(.systemFill))
+                .cornerRadius(8)
+        }
+        .chartXScale(range: 0...128)
+        .chartXAxis(.hidden)
+        .chartYAxis(.hidden)
+        .chartLegend(.hidden)
+        .frame(height: 32)
     }
 }
 

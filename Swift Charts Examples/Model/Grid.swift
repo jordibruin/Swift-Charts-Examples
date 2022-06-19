@@ -35,20 +35,23 @@ struct Grid {
         let val: Double
 
         var color: Color {
+            var returnColor: Color = .red
             switch val {
             case _ where val < 20.0:
-                return .blue
+                returnColor = .blue
             case 20..<40:
-                return .green
+                returnColor = .green
             case 40..<60:
-                return .yellow
+                returnColor = .yellow
             case 60..<80:
-                return .orange
+                returnColor = .orange
             case _ where val >= 80:
-                return .red
+                returnColor = .red
             default:
-                return .red
+                returnColor = .red
             }
+
+            return returnColor.opacity(Double.random(in: 0.75...1.0))
         }
 
         func angle(degreeOffset: Double) -> Double {

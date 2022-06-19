@@ -7,21 +7,17 @@ import Charts
 
 struct SingleLineOverview: View {
     var body: some View {
-        VStack(alignment: .leading) {
-            Text(ChartType.singleLine.title)
-                .font(.callout)
-                .foregroundStyle(.secondary)
-
-            Chart(SalesData.last30Days, id: \.day) {
-                LineMark(
-                    x: .value("Day", $0.day, unit: .day),
-                    y: .value("Sales", $0.sales)
-                )
-            }
-            .chartXAxis(.hidden)
-            .chartYAxis(.hidden)
-            .frame(height: Constants.previewChartHeight)
+        Chart(SalesData.last30Days, id: \.day) {
+            LineMark(
+                x: .value("Day", $0.day, unit: .day),
+                y: .value("Sales", $0.sales)
+            )
+            .interpolationMethod(.cardinal)
+            .foregroundStyle(Color.blue.gradient)
         }
+        .chartXAxis(.hidden)
+        .chartYAxis(.hidden)
+        .frame(height: Constants.previewChartHeight)
     }
 }
 
@@ -40,7 +36,7 @@ struct SingleLine: View {
                         y: .value("Sales", $0.sales)
                     )
                     .lineStyle(StrokeStyle(lineWidth: lineWidth))
-                    .foregroundStyle(chartColor)
+                    .foregroundStyle(chartColor.gradient)
                     .interpolationMethod(interpolationMethod.mode)
                     .symbol(Circle().strokeBorder(lineWidth: lineWidth))
                     .symbolSize(showSymbols ? 60 : 0)
