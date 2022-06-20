@@ -90,20 +90,24 @@ struct SingleBarThreshold: View {
     }
 
     private var customisation: some View {
-        Section {
-            VStack(alignment: .leading) {
-                Text("Threshold: \(threshold, specifier: "%.0f")")
-                Slider(value: $threshold, in: 0...275) {
-                    Text("Threshold")
-                } minimumValueLabel: {
-                    Text("0")
-                } maximumValueLabel: {
-                    Text("275")
+        Group {
+            Section {
+                VStack(alignment: .leading) {
+                    Text("Threshold: \(threshold, specifier: "%.0f")")
+                    Slider(value: $threshold, in: 0...275) {
+                        Text("Threshold")
+                    } minimumValueLabel: {
+                        Text("0")
+                    } maximumValueLabel: {
+                        Text("275")
+                    }
                 }
             }
             
-            ColorPicker("Below Threshold Color", selection: $belowColor)
-            ColorPicker("Above Threshold Color", selection: $aboveColor)
+            Section {
+                ColorPicker("Below Threshold Color", selection: $belowColor)
+                ColorPicker("Above Threshold Color", selection: $aboveColor)
+            }
         }
     }
 }
