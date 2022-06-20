@@ -24,7 +24,7 @@ enum ChartCategory: String, CaseIterable, Hashable, Identifiable {
         case .bar:
             return "chart.bar.fill"
         case .area:
-            return "chart.bar.fill"
+            return "triangle.fill"
         case .range:
             return "trapezoid.and.line.horizontal.fill"
         case .heatMap:
