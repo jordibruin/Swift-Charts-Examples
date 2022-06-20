@@ -29,6 +29,11 @@ struct PyramidChartOverview: View {
 struct PyramidChart: View {
     @State private var data = PopulationByAgeData.example
     
+    @State var leftColor: Color = .green
+    @State var rightColor: Color = .blue
+    
+    @State var barHeight: CGFloat = 10.0
+    
     var body: some View {
         List {
             Section {
@@ -37,12 +42,13 @@ struct PyramidChart: View {
                         BarMark(
                             xStart: .value("Percentage", 0),
                             xEnd: .value("Percentage", series.sex == "Male" ? element.percentage : element.percentage * -1),
-                            y: .value("AgeRange", element.ageRange)
+                            y: .value("AgeRange", element.ageRange),
+                            height: .fixed(barHeight)
                         )
                         .accessibilityLabel("\(element.ageRange)")
                         .accessibilityValue("\(element.percentage)")
                     }
-                    .foregroundStyle(by: .value("Sex", series.sex))
+                    .foregroundStyle(series.sex == "Male" ? rightColor.gradient : leftColor.gradient)
                     .interpolationMethod(.catmullRom)
                 }
                 .chartYAxis {
@@ -62,40 +68,64 @@ struct PyramidChart: View {
                 .chartLegend(position: .top, alignment: .center)
                 .frame(height: 340)
             }
+            
+            customization
+        }
+        .navigationBarTitle(ChartType.pyramid.title, displayMode: .inline)
+    }
+    
+    var customization: some View {
+        Group {
             Section {
                 Button("Generate random data") {
                     withAnimation {
-                        data = [
-                            .init(sex: "Male", population: [
-                                (ageRange: "0-10", percentage: Int.random(in: 0..<100)),
-                                (ageRange: "11-20", percentage: Int.random(in: 0..<100)),
-                                (ageRange: "21-30", percentage: Int.random(in: 0..<100)),
-                                (ageRange: "31-40", percentage: Int.random(in: 0..<100)),
-                                (ageRange: "41-50", percentage: Int.random(in: 0..<100)),
-                                (ageRange: "51-60", percentage: Int.random(in: 0..<100)),
-                                (ageRange: "61-70", percentage: Int.random(in: 0..<100)),
-                                (ageRange: "71-80", percentage: Int.random(in: 0..<100)),
-                                (ageRange: "81-90", percentage: Int.random(in: 0..<100)),
-                                (ageRange: "91+", percentage: Int.random(in: 0..<100))
-                            ]),
-                            .init(sex: "Female", population: [
-                                (ageRange: "0-10", percentage: Int.random(in: 0..<100)),
-                                (ageRange: "11-20", percentage: Int.random(in: 0..<100)),
-                                (ageRange: "21-30", percentage: Int.random(in: 0..<100)),
-                                (ageRange: "31-40", percentage: Int.random(in: 0..<100)),
-                                (ageRange: "41-50", percentage: Int.random(in: 0..<100)),
-                                (ageRange: "51-60", percentage: Int.random(in: 0..<100)),
-                                (ageRange: "61-70", percentage: Int.random(in: 0..<100)),
-                                (ageRange: "71-80", percentage: Int.random(in: 0..<100)),
-                                (ageRange: "81-90", percentage: Int.random(in: 0..<100)),
-                                (ageRange: "91+", percentage: Int.random(in: 0..<100))
-                            ]),
-                        ]
+                        generateRandomData()
                     }
                 }
             }
+            
+            Section {
+                Slider(value: $barHeight, in: 0...25) {
+                    Text("Bar Height")
+                } minimumValueLabel: {
+                    Text("0")
+                } maximumValueLabel: {
+                    Text("25")
+                }
+                
+                ColorPicker("Left Color", selection: $leftColor)
+                ColorPicker("Right Color", selection: $rightColor)
+            }
         }
-        .navigationBarTitle(ChartType.pyramid.title, displayMode: .inline)
+    }
+    
+    func generateRandomData() {
+        data = [
+            .init(sex: "Male", population: [
+                (ageRange: "0-10", percentage: Int.random(in: 0..<100)),
+                (ageRange: "11-20", percentage: Int.random(in: 0..<100)),
+                (ageRange: "21-30", percentage: Int.random(in: 0..<100)),
+                (ageRange: "31-40", percentage: Int.random(in: 0..<100)),
+                (ageRange: "41-50", percentage: Int.random(in: 0..<100)),
+                (ageRange: "51-60", percentage: Int.random(in: 0..<100)),
+                (ageRange: "61-70", percentage: Int.random(in: 0..<100)),
+                (ageRange: "71-80", percentage: Int.random(in: 0..<100)),
+                (ageRange: "81-90", percentage: Int.random(in: 0..<100)),
+                (ageRange: "91+", percentage: Int.random(in: 0..<100))
+            ]),
+            .init(sex: "Female", population: [
+                (ageRange: "0-10", percentage: Int.random(in: 0..<100)),
+                (ageRange: "11-20", percentage: Int.random(in: 0..<100)),
+                (ageRange: "21-30", percentage: Int.random(in: 0..<100)),
+                (ageRange: "31-40", percentage: Int.random(in: 0..<100)),
+                (ageRange: "41-50", percentage: Int.random(in: 0..<100)),
+                (ageRange: "51-60", percentage: Int.random(in: 0..<100)),
+                (ageRange: "61-70", percentage: Int.random(in: 0..<100)),
+                (ageRange: "71-80", percentage: Int.random(in: 0..<100)),
+                (ageRange: "81-90", percentage: Int.random(in: 0..<100)),
+                (ageRange: "91+", percentage: Int.random(in: 0..<100))
+            ]),
+        ]
     }
 }
 
