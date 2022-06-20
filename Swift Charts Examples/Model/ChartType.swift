@@ -5,6 +5,7 @@
 import SwiftUI
 
 enum ChartCategory: String, CaseIterable, Hashable, Identifiable {
+    case all
     case line
     case bar
     case area
@@ -13,6 +14,25 @@ enum ChartCategory: String, CaseIterable, Hashable, Identifiable {
     case point
   
     var id: String { self.rawValue }
+    
+    var sfSymbolName: String {
+        switch self {
+        case .all:
+            return ""
+        case .line:
+            return "chart.xyaxis.line"
+        case .bar:
+            return "chart.bar.fill"
+        case .area:
+            return "chart.bar.fill"
+        case .range:
+            return "trapezoid.and.line.horizontal.fill"
+        case .heatMap:
+            return "checkerboard.rectangle"
+        case .point:
+            return "point.3.connected.trianglepath.dotted"
+        }
+    }
 }
 
 enum ChartType: String, Identifiable, CaseIterable {
