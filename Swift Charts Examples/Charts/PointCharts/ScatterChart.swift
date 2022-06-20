@@ -7,29 +7,24 @@ import Charts
 
 struct ScatterChartOverview: View {
     var body: some View {
-        VStack(alignment: .leading) {
-            Text(ChartType.scatter.title)
-                .font(.callout)
-                .foregroundStyle(.secondary)
-
-            Chart {
-                ForEach(LocationData.last30Days) { series in
-                    ForEach(series.sales, id: \.weekday) { element in
-                        PointMark(
-                            x: .value("Day", element.weekday, unit: .day),
-                            y: .value("Sales", element.sales)
-                        )
-                        .accessibilityLabel("\(element.weekday.formatted())")
-                        .accessibilityValue("\(element.sales)")
-                    }
-                    .foregroundStyle(by: .value("City", series.city))
+        Chart {
+            ForEach(LocationData.last30Days) { series in
+                ForEach(series.sales, id: \.weekday) { element in
+                    PointMark(
+                        x: .value("Day", element.weekday, unit: .day),
+                        y: .value("Sales", element.sales)
+                    )
+                    .accessibilityLabel("\(element.weekday.formatted())")
+                    .accessibilityValue("\(element.sales)")
                 }
+                .foregroundStyle(by: .value("City", series.city))
+                .symbol(by: .value("City", series.city))
             }
-            .chartXAxis(.hidden)
-            .chartYAxis(.hidden)
-            .chartLegend(.hidden)
-            .frame(height: Constants.previewChartHeight)
         }
+        .chartXAxis(.hidden)
+        .chartYAxis(.hidden)
+        .chartLegend(.hidden)
+        .frame(height: Constants.previewChartHeight)
     }
 }
 
@@ -51,6 +46,7 @@ struct ScatterChart: View {
                             .accessibilityValue("\(element.sales) sold")
                         }
                         .foregroundStyle(by: .value("City", series.city))
+                        .symbol(by: .value("City", series.city))
                         .symbolSize(pointSize * 5)
                     }
                 }

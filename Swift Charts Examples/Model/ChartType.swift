@@ -5,6 +5,7 @@
 import SwiftUI
 
 enum ChartCategory: String, CaseIterable, Hashable, Identifiable {
+    case all
     case line
     case bar
     case area
@@ -13,6 +14,25 @@ enum ChartCategory: String, CaseIterable, Hashable, Identifiable {
     case point
   
     var id: String { self.rawValue }
+    
+    var sfSymbolName: String {
+        switch self {
+        case .all:
+            return ""
+        case .line:
+            return "chart.xyaxis.line"
+        case .bar:
+            return "chart.bar.fill"
+        case .area:
+            return "triangle.fill"
+        case .range:
+            return "trapezoid.and.line.horizontal.fill"
+        case .heatMap:
+            return "checkerboard.rectangle"
+        case .point:
+            return "point.3.connected.trianglepath.dotted"
+        }
+    }
 }
 
 enum ChartType: String, Identifiable, CaseIterable {
@@ -20,6 +40,7 @@ enum ChartType: String, Identifiable, CaseIterable {
     case singleLine
     case singleLineLollipop
     case heartBeat
+    case animatingLine
 
     // Bar Charts
     case singleBar
@@ -27,6 +48,7 @@ enum ChartType: String, Identifiable, CaseIterable {
     case twoBars
     case pyramid
     case oneDimensionalBar
+    case timeSheetBar
 
     // Area Charts
     case areaSimple
@@ -50,6 +72,8 @@ enum ChartType: String, Identifiable, CaseIterable {
             return "Line Chart"
         case .singleLineLollipop:
             return "Line Chart with Lollipop"
+        case .animatingLine:
+            return "Animating Line"
         case .heartBeat:
             return "Heart Beat / ECG Chart"
         case .singleBar:
@@ -62,6 +86,8 @@ enum ChartType: String, Identifiable, CaseIterable {
             return "Pyramid"
         case .oneDimensionalBar:
             return "One Dimensional Bar"
+        case .timeSheetBar:
+            return "Time Sheet Bar"
         case .areaSimple:
             return "Area Chart"
         case .rangeSimple:
@@ -79,9 +105,9 @@ enum ChartType: String, Identifiable, CaseIterable {
 
     var category: ChartCategory {
         switch self {
-        case .singleLine, .singleLineLollipop, .heartBeat:
+        case .singleLine, .singleLineLollipop, .heartBeat, .animatingLine:
             return .line
-        case .singleBar, .singleBarThreshold, .twoBars, .pyramid, .oneDimensionalBar:
+        case .singleBar, .singleBarThreshold, .twoBars, .pyramid, .oneDimensionalBar, .timeSheetBar:
             return .bar
         case .areaSimple:
             return .area
@@ -103,6 +129,8 @@ enum ChartType: String, Identifiable, CaseIterable {
             SingleLineLollipop(isOverview: true)
         case .heartBeat:
             HeartBeatOverview()
+        case .animatingLine:
+            AnimatingLineOverview()
         case .singleBar:
             SingleBarOverview()
         case .singleBarThreshold:
@@ -111,6 +139,8 @@ enum ChartType: String, Identifiable, CaseIterable {
             TwoBarsOverview()
         case .oneDimensionalBar:
             OneDimensionalBarOverview()
+        case .timeSheetBar:
+            TimeSheetBarOverview()
         case .pyramid:
             PyramidChartOverview()
         case .areaSimple:
@@ -137,6 +167,8 @@ enum ChartType: String, Identifiable, CaseIterable {
             SingleLineLollipop(isOverview: false)
         case .heartBeat:
             HeartBeat()
+        case .animatingLine:
+            AnimatingLine()
         case .singleBar:
             SingleBar()
         case .singleBarThreshold:
@@ -145,6 +177,8 @@ enum ChartType: String, Identifiable, CaseIterable {
             TwoBars()
         case .oneDimensionalBar:
             OneDimensionalBar()
+        case .timeSheetBar:
+            TimeSheetBar()
         case .pyramid:
             PyramidChart()
         case .areaSimple:

@@ -18,13 +18,8 @@ struct SingleLineLollipop: View {
 
     var body: some View {
         if isOverview {
-            VStack(alignment: .leading) {
-                Text(ChartType.singleLineLollipop.title)
-                    .font(.callout)
-                    .foregroundStyle(.secondary)
-                chart
-                    .allowsHitTesting(false)
-            }
+            chart
+                .allowsHitTesting(false)
         } else {
             List {
                 Section {
@@ -49,7 +44,7 @@ struct SingleLineLollipop: View {
             .accessibilityValue("\($0.sales) sold")
             .accessibilityHidden(isOverview)
             .lineStyle(StrokeStyle(lineWidth: lineWidth))
-            .foregroundStyle(chartColor)
+            .foregroundStyle(chartColor.gradient)
             .interpolationMethod(interpolationMethod.mode)
             .symbol(Circle().strokeBorder(lineWidth: lineWidth))
             .symbolSize(showSymbols ? 60 : 0)

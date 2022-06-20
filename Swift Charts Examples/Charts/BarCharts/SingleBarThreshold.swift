@@ -10,49 +10,46 @@ struct SingleBarThresholdOverview: View {
     @State private var threshold = 150.0
 
     var body: some View {
-        VStack(alignment: .leading) {
-            Text(ChartType.singleBarThreshold.title)
-                .font(.callout)
-                .foregroundStyle(.secondary)
-
-            Chart(SalesData.last30Days, id: \.day) {
-                BarMark(
-                    x: .value("Date", $0.day),
-                    y: .value("Sales", $0.sales)
-                )
-                .foregroundStyle($0.sales > Int(threshold) ? .orange : .blue)
-                RuleMark(
-                    y: .value("Threshold", threshold)
-                )
-                .lineStyle(StrokeStyle(lineWidth: 2))
-                .foregroundStyle(.red)
-                .annotation(position: .top, alignment: .leading) {
-                    Text("\(threshold, specifier: "%.0f")")
-                        .font(.title2.bold())
-                        .foregroundColor(.primary)
-                        .background {
-                            ZStack {
-                                RoundedRectangle(cornerRadius: 8)
-                                    .fill(.background)
-                                RoundedRectangle(cornerRadius: 8)
-                                    .fill(.quaternary.opacity(0.7))
-                            }
-                            .padding(.horizontal, -8)
-                            .padding(.vertical, -4)
+        Chart(SalesData.last30Days, id: \.day) {
+            BarMark(
+                x: .value("Date", $0.day),
+                y: .value("Sales", $0.sales)
+            )
+            .foregroundStyle($0.sales > Int(threshold) ? Color.orange.gradient : Color.blue.gradient)
+            RuleMark(
+                y: .value("Threshold", threshold)
+            )
+            .lineStyle(StrokeStyle(lineWidth: 2))
+            .foregroundStyle(.red)
+            .annotation(position: .top, alignment: .leading) {
+                Text("\(threshold, specifier: "%.0f")")
+                    .font(.title2.bold())
+                    .foregroundColor(.primary)
+                    .background {
+                        ZStack {
+                            RoundedRectangle(cornerRadius: 8)
+                                .fill(.background)
+                            RoundedRectangle(cornerRadius: 8)
+                                .fill(.quaternary.opacity(0.7))
                         }
-                        .padding(.bottom, 4)
-                }
+                        .padding(.horizontal, -8)
+                        .padding(.vertical, -4)
+                    }
+                    .padding(.bottom, 4)
             }
-            .chartXAxis(.hidden)
-            .chartYAxis(.hidden)
-            .frame(height: Constants.previewChartHeight)
         }
+        .chartXAxis(.hidden)
+        .chartYAxis(.hidden)
+        .frame(height: Constants.previewChartHeight)
     }
 }
 
 struct SingleBarThreshold: View {
+    
     @State private var threshold = 150.0
-
+    @State var belowColor: Color = .blue
+    @State var aboveColor: Color = .orange
+    
     var body: some View {
         List {
             Section {
@@ -61,7 +58,7 @@ struct SingleBarThreshold: View {
                         x: .value("Date", $0.day),
                         y: .value("Sales", $0.sales)
                     )
-                    .foregroundStyle($0.sales > Int(threshold) ? .orange : .blue)
+                    .foregroundStyle($0.sales > Int(threshold) ? aboveColor.gradient :  belowColor.gradient)
                     RuleMark(
                         y: .value("Threshold", threshold)
                     )
@@ -93,16 +90,23 @@ struct SingleBarThreshold: View {
     }
 
     private var customisation: some View {
-        Section {
-            VStack(alignment: .leading) {
-                Text("Threshold: \(threshold, specifier: "%.0f")")
-                Slider(value: $threshold, in: 0...275) {
-                    Text("Threshold")
-                } minimumValueLabel: {
-                    Text("0")
-                } maximumValueLabel: {
-                    Text("275")
+        Group {
+            Section {
+                VStack(alignment: .leading) {
+                    Text("Threshold: \(threshold, specifier: "%.0f")")
+                    Slider(value: $threshold, in: 0...275) {
+                        Text("Threshold")
+                    } minimumValueLabel: {
+                        Text("0")
+                    } maximumValueLabel: {
+                        Text("275")
+                    }
                 }
+            }
+            
+            Section {
+                ColorPicker("Below Threshold Color", selection: $belowColor)
+                ColorPicker("Above Threshold Color", selection: $aboveColor)
             }
         }
     }

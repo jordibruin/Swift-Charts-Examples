@@ -10,30 +10,26 @@ struct TwoBarsOverview: View {
     var data = LocationData.last30Days
 
     var body: some View {
-        VStack(alignment: .leading) {
-            Text(ChartType.twoBars.title)
-                .font(.callout)
-                .foregroundStyle(.secondary)
-
-            Chart {
-                ForEach(data) { series in
-                    ForEach(series.sales, id: \.weekday) { element in
-                        BarMark(
-                            x: .value("Day", element.weekday, unit: .day),
-                            y: .value("Sales", element.sales)
-                        )
-                    }
-                    .foregroundStyle(by: .value("City", series.city))
+        Chart {
+            ForEach(LocationData.last7Days) { series in
+                ForEach(series.sales, id: \.weekday) { element in
+                    BarMark(
+                        x: .value("Day", element.weekday, unit: .day),
+                        y: .value("Sales", element.sales)
+                    )
+                    .accessibilityLabel("\(element.weekday.formatted())")
+                    .accessibilityValue("\(element.sales)")
+                    .foregroundStyle(series.city == "Cupertino" ? Color.blue.gradient : Color.green.gradient)
                 }
             }
-            .chartXAxis(.hidden)
-            .chartYAxis(.hidden)
-            .chartLegend(.hidden)
-            .frame(height: Constants.previewChartHeight)
-            // For the simple overview chart,
-            // skip individual labels and only set the chartDescriptor
-            .accessibilityChartDescriptor(self)
         }
+        // For the simple overview chart,
+        // skip individual labels and only set the chartDescriptor
+        .accessibilityChartDescriptor(self)
+        .chartXAxis(.hidden)
+        .chartYAxis(.hidden)
+        .chartLegend(.hidden)
+        .frame(height: Constants.previewChartHeight)
     }
 }
 
@@ -54,10 +50,15 @@ struct TwoBars: View {
                             y: .value("Sales", element.sales),
                             width: .fixed(barWidth)
                         )
+<<<<<<< HEAD
                         .accessibilityLabel("\(element.weekday.weekdayString)")
                         .accessibilityValue("\(element.sales) sold")
+=======
+                        .accessibilityLabel("\(element.weekday.formatted())")
+                        .accessibilityValue("\(element.sales)")
+                        .foregroundStyle(series.city == "Cupertino" ? Color.blue.gradient : Color.green.gradient)
+>>>>>>> main
                     }
-                    .foregroundStyle(by: .value("City", series.city))
                     .symbol(by: .value("City", series.city))
                     .interpolationMethod(.catmullRom)
                     .position(by: .value("City", showBarsStacked ? "Common" : series.city))

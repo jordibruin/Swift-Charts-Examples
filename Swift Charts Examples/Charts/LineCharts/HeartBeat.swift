@@ -10,26 +10,20 @@ struct HeartBeatOverview: View {
     var data = HealthData.ecgSample
 
     var body: some View {
-        VStack(alignment: .leading) {
-            Text(ChartType.heartBeat.title)
-                .font(.callout)
-                .foregroundStyle(.secondary)
-            
-            Chart {
-                ForEach(Array(data.enumerated()), id: \.element) { index, element in
-                    LineMark(
-                        x: .value("Index", index),
-                        y: .value("Unit", element)
-                    )
-                    .foregroundStyle(.pink.gradient)
-                    .interpolationMethod(.cardinal)
-                }
+        Chart {
+            ForEach(Array(data.enumerated()), id: \.element) { index, element in
+                LineMark(
+                    x: .value("Index", index),
+                    y: .value("Unit", element)
+                )
+                .foregroundStyle(.pink.gradient)
+                .interpolationMethod(.cardinal)
             }
-            .accessibilityChartDescriptor(self)
-            .chartXAxis(.hidden)
-            .chartYAxis(.hidden)
-            .frame(height: Constants.previewChartHeight)
         }
+        .accessibilityChartDescriptor(self)
+        .chartXAxis(.hidden)
+        .chartYAxis(.hidden)
+        .frame(height: Constants.previewChartHeight)
     }
 }
 

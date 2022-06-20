@@ -10,25 +10,21 @@ struct RangeSimpleOverview: View {
     var data = SalesData.last12Months
 
     var body: some View {
-        VStack(alignment: .leading) {
-            Text(ChartType.rangeSimple.title)
-                .font(.callout)
-                .foregroundStyle(.secondary)
-            
-            Chart(data, id: \.month) {
-                BarMark(
-                    x: .value("Month", $0.month, unit: .month),
-                    yStart: .value("Sales Min", $0.dailyMin),
-                    yEnd: .value("Sales Max", $0.dailyMax)
-                )
-                .foregroundStyle(.blue.gradient)
-                .clipShape(Capsule())
-            }
-            .accessibilityChartDescriptor(self)
-            .chartXAxis(.hidden)
-            .chartYAxis(.hidden)
-            .frame(height: Constants.previewChartHeight)
+
+        Chart(data, id: \.month) {
+            BarMark(
+                x: .value("Month", $0.month, unit: .month),
+                yStart: .value("Sales Min", $0.dailyMin),
+                yEnd: .value("Sales Max", $0.dailyMax),
+                width: .fixed(10)
+            )
+            .foregroundStyle(.blue.gradient)
+            .clipShape(Capsule())
         }
+        .accessibilityChartDescriptor(self)
+        .chartXAxis(.hidden)
+        .chartYAxis(.hidden)
+        .frame(height: Constants.previewChartHeight)
     }
 }
 

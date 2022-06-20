@@ -13,6 +13,7 @@
 		62FF3F002857EADF0022930C /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62FF3EFF2857EADF0022930C /* Grid.swift */; };
 		62FF3F022857EB530022930C /* HeatMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62FF3F012857EB530022930C /* HeatMap.swift */; };
 		7425DF832858DF4300672F3B /* HealthData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7425DF822858DF4300672F3B /* HealthData.swift */; };
+		84A8089D285E112E00B60AFB /* TimeSheetBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A8089C285E112E00B60AFB /* TimeSheetBar.swift */; };
 		88242C262858C17A00DDD8D0 /* HeartBeat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88242C252858C17A00DDD8D0 /* HeartBeat.swift */; };
 		88B3E5D02857493B00840CAA /* RangeSimple.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B3E5CF2857493B00840CAA /* RangeSimple.swift */; };
 		934A95042857D035009E29F4 /* OneDimensionalBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934A95032857D035009E29F4 /* OneDimensionalBar.swift */; };
@@ -22,9 +23,10 @@
 		C22EB5A028568D0B000B9F9A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C22EB59F28568D0B000B9F9A /* ContentView.swift */; };
 		C22EB5A228568D0C000B9F9A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C22EB5A128568D0C000B9F9A /* Assets.xcassets */; };
 		C22EB5A628568D0C000B9F9A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C22EB5A528568D0C000B9F9A /* Preview Assets.xcassets */; };
-		C22EB5B028568D0C000B9F9A /* Swift_Charts_ExamplesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C22EB5AF28568D0C000B9F9A /* Swift_Charts_ExamplesTests.swift */; };
+		C22EB5B028568D0C000B9F9A /* ChartScreenshotGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C22EB5AF28568D0C000B9F9A /* ChartScreenshotGenerator.swift */; };
 		C22EB5BA28568D0C000B9F9A /* Swift_Charts_ExamplesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C22EB5B928568D0C000B9F9A /* Swift_Charts_ExamplesUITests.swift */; };
 		C22EB5BC28568D0C000B9F9A /* Swift_Charts_ExamplesUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C22EB5BB28568D0C000B9F9A /* Swift_Charts_ExamplesUITestsLaunchTests.swift */; };
+		C23072892860D8FA00DA1CED /* AnimatingLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23072882860D8FA00DA1CED /* AnimatingLine.swift */; };
 		C26088132856935B00B09DDB /* ChartType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26088122856935B00B09DDB /* ChartType.swift */; };
 		C26088152856960000B09DDB /* SingleLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26088142856960000B09DDB /* SingleLine.swift */; };
 		C26088182856963D00B09DDB /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26088172856963D00B09DDB /* Data.swift */; };
@@ -63,6 +65,7 @@
 		62FF3EFF2857EADF0022930C /* Grid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
 		62FF3F012857EB530022930C /* HeatMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeatMap.swift; sourceTree = "<group>"; };
 		7425DF822858DF4300672F3B /* HealthData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthData.swift; sourceTree = "<group>"; };
+		84A8089C285E112E00B60AFB /* TimeSheetBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSheetBar.swift; sourceTree = "<group>"; };
 		88242C252858C17A00DDD8D0 /* HeartBeat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartBeat.swift; sourceTree = "<group>"; };
 		88B3E5CF2857493B00840CAA /* RangeSimple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RangeSimple.swift; sourceTree = "<group>"; };
 		934A95032857D035009E29F4 /* OneDimensionalBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneDimensionalBar.swift; sourceTree = "<group>"; };
@@ -75,10 +78,11 @@
 		C22EB5A328568D0C000B9F9A /* Swift_Charts_Examples.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Swift_Charts_Examples.entitlements; sourceTree = "<group>"; };
 		C22EB5A528568D0C000B9F9A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		C22EB5AB28568D0C000B9F9A /* Swift Charts ExamplesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Swift Charts ExamplesTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		C22EB5AF28568D0C000B9F9A /* Swift_Charts_ExamplesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Swift_Charts_ExamplesTests.swift; sourceTree = "<group>"; };
+		C22EB5AF28568D0C000B9F9A /* ChartScreenshotGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartScreenshotGenerator.swift; sourceTree = "<group>"; };
 		C22EB5B528568D0C000B9F9A /* Swift Charts ExamplesUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Swift Charts ExamplesUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C22EB5B928568D0C000B9F9A /* Swift_Charts_ExamplesUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Swift_Charts_ExamplesUITests.swift; sourceTree = "<group>"; };
 		C22EB5BB28568D0C000B9F9A /* Swift_Charts_ExamplesUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Swift_Charts_ExamplesUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		C23072882860D8FA00DA1CED /* AnimatingLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatingLine.swift; sourceTree = "<group>"; };
 		C26088122856935B00B09DDB /* ChartType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartType.swift; sourceTree = "<group>"; };
 		C26088142856960000B09DDB /* SingleLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleLine.swift; sourceTree = "<group>"; };
 		C26088172856963D00B09DDB /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
@@ -186,7 +190,7 @@
 		C22EB5AE28568D0C000B9F9A /* Swift Charts ExamplesTests */ = {
 			isa = PBXGroup;
 			children = (
-				C22EB5AF28568D0C000B9F9A /* Swift_Charts_ExamplesTests.swift */,
+				C22EB5AF28568D0C000B9F9A /* ChartScreenshotGenerator.swift */,
 			);
 			path = "Swift Charts ExamplesTests";
 			sourceTree = "<group>";
@@ -238,6 +242,7 @@
 			isa = PBXGroup;
 			children = (
 				C26088142856960000B09DDB /* SingleLine.swift */,
+				C23072882860D8FA00DA1CED /* AnimatingLine.swift */,
 				FC5466C52857E0D700315632 /* SingleLineLollipop.swift */,
 				88242C252858C17A00DDD8D0 /* HeartBeat.swift */,
 			);
@@ -252,6 +257,7 @@
 				C260881F2856A34400B09DDB /* TwoBars.swift */,
 				2E5763C528576B1B006C7C36 /* PyramidChart.swift */,
 				934A95032857D035009E29F4 /* OneDimensionalBar.swift */,
+				84A8089C285E112E00B60AFB /* TimeSheetBar.swift */,
 			);
 			path = BarCharts;
 			sourceTree = "<group>";
@@ -415,6 +421,7 @@
 				97665180285BB9C80079660D /* AccessibilityChartDescriptors.swift in Sources */,
 				C260882B2856B3C500B09DDB /* AreaSimple.swift in Sources */,
 				7425DF832858DF4300672F3B /* HealthData.swift in Sources */,
+				C23072892860D8FA00DA1CED /* AnimatingLine.swift in Sources */,
 				88B3E5D02857493B00840CAA /* RangeSimple.swift in Sources */,
 				9691226F28594EC5001FCF65 /* ScatterChart.swift in Sources */,
 				C22EB5A028568D0B000B9F9A /* ContentView.swift in Sources */,
@@ -423,6 +430,7 @@
 				62FF3F022857EB530022930C /* HeatMap.swift in Sources */,
 				FC5466C62857E0D700315632 /* SingleLineLollipop.swift in Sources */,
 				C26088182856963D00B09DDB /* Data.swift in Sources */,
+				84A8089D285E112E00B60AFB /* TimeSheetBar.swift in Sources */,
 				88242C262858C17A00DDD8D0 /* HeartBeat.swift in Sources */,
 				C260882E2856B4C900B09DDB /* SingleBar.swift in Sources */,
 				C22EB59E28568D0B000B9F9A /* Swift_Charts_ExamplesApp.swift in Sources */,
@@ -441,7 +449,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C22EB5B028568D0C000B9F9A /* Swift_Charts_ExamplesTests.swift in Sources */,
+				C22EB5B028568D0C000B9F9A /* ChartScreenshotGenerator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
