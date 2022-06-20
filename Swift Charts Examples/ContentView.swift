@@ -25,7 +25,7 @@ struct ContentView: View {
     var body: some View {
         NavigationSplitView {
             List(selection: $selectedChartType) {
-                ForEach(ChartCategory.allCases) { category in
+                ForEach(ChartCategory.allCases.filter { filterCategory != nil ? $0 == filterCategory : true } ) { category in
                     Section {
                         ForEach(ChartType.allCases.filter { $0.category == category }) { chart in
                             NavigationLink(value: chart) {
@@ -39,6 +39,9 @@ struct ContentView: View {
             }
             .listStyle(.insetGrouped)
             .navigationTitle("Charts")
+            .toolbar(content: {
+                toolbarItems
+            })
         } detail: {
             NavigationStack {
                 if let selectedChartType {
@@ -50,15 +53,43 @@ struct ContentView: View {
         }
     }
     
+    @State var filterCategory: ChartCategory?
+    
+    var toolbarItems: some ToolbarContent {
+        Group {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Menu {
+                    ForEach(ChartCategory.allCases) { category in
+                        Button {
+                            filterCategory = category
+                        } label: {
+                            Label("\(category.rawValue.capitalized)", systemImage: filterCategory == category ? "checkmark.circle.fill" : category.sfSymbolName)
+                        }
+                    }
+                    
+                    Divider()
+                    
+                    Button {
+                        filterCategory = nil
+                    } label: {
+                        Text("Show all")
+                    }
+                } label: {
+                    Text("Filter")
+                }
+            }
+        }
+    }
+    
     private func preview(chart: ChartType) -> AnyView {
         AnyView(
             VStack(alignment: .leading) {
                 Text(chart.title)
-
+                
                 // causes UI to hang for several seconds when scrolling
                 // from 100% CPU usage when cells are reloaded
-//                chart.view
-
+                //                chart.view
+                
                 // workaround to address hanging UI
                 // Reported FB10335209
                 if let image = cachedChartImages[chart.id] {
