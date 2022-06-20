@@ -20,6 +20,7 @@ This repo aims to provide sample code for lots of different chart types for you 
 - [x] Scatter Chart
 - [x] Heartbeat range Chart
 - [x] Vector Field
+- [x] Animating Line chart
 
 ## Todo
 - [ ] Cumulative line Chart
