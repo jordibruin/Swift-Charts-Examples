@@ -31,6 +31,14 @@ This repo aims to provide sample code for lots of different chart types for you 
 
 See the [open issues](https://github.com/jordibruin/SwiftChartExamples/issues) if you think anything is missing from this list. You can also contact me on [Twitter](https://www.twitter.com/jordibruin) if you have any suggestions or feedback.
 
+## How to add a new chart
+
+Each chart needs a preview chart as well as a detail view. The preview chart is used in the home screen of the app for easier navigation. Look at the Simple Chart Simple code to see what the format should be for the preview charts. On the detail view, make sure you add some customisation options in a separate section from the chart.
+
+<img src="images/charts_wwdc_slide.png">
+Source: https://developer.apple.com/videos/play/wwdc2022/10137/
+
+
 ## Chart Types
 
 ### [Line Charts](https://github.com/jordibruin/SwiftChartExamples/tree/main/Swift%20Charts%20Examples/Charts/LineCharts)
@@ -104,10 +112,3 @@ Scatter Chart
 Vector Field
 
 ![](images/charts/point/vectorField.png)
-
-## How to add a new chart
-
-Each chart needs a preview chart as well as a detail view. The preview chart is used in the home screen of the app for easier navigation. Look at the Simple Chart Simple code to see what the format should be for the preview charts. On the detail view, make sure you add some customisation options in a separate section from the chart.
-
-<img src="images/charts_wwdc_slide.png">
-Source: https://developer.apple.com/videos/play/wwdc2022/10137/
