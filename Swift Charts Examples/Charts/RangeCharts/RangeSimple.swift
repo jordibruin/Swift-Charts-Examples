@@ -11,7 +11,8 @@ struct RangeSimpleOverview: View {
             BarMark(
                 x: .value("Month", $0.month, unit: .month),
                 yStart: .value("Sales Min", $0.dailyMin),
-                yEnd: .value("Sales Max", $0.dailyMax)
+                yEnd: .value("Sales Max", $0.dailyMax),
+                width: .fixed(10)
             )
             .foregroundStyle(.blue.gradient)
             .clipShape(Capsule())
