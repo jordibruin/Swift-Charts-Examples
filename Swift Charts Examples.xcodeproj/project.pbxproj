@@ -25,6 +25,7 @@
 		C22EB5B028568D0C000B9F9A /* ChartScreenshotGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C22EB5AF28568D0C000B9F9A /* ChartScreenshotGenerator.swift */; };
 		C22EB5BA28568D0C000B9F9A /* Swift_Charts_ExamplesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C22EB5B928568D0C000B9F9A /* Swift_Charts_ExamplesUITests.swift */; };
 		C22EB5BC28568D0C000B9F9A /* Swift_Charts_ExamplesUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C22EB5BB28568D0C000B9F9A /* Swift_Charts_ExamplesUITestsLaunchTests.swift */; };
+		C23072892860D8FA00DA1CED /* AnimatingLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23072882860D8FA00DA1CED /* AnimatingLine.swift */; };
 		C26088132856935B00B09DDB /* ChartType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26088122856935B00B09DDB /* ChartType.swift */; };
 		C26088152856960000B09DDB /* SingleLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26088142856960000B09DDB /* SingleLine.swift */; };
 		C26088182856963D00B09DDB /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26088172856963D00B09DDB /* Data.swift */; };
@@ -79,6 +80,7 @@
 		C22EB5B528568D0C000B9F9A /* Swift Charts ExamplesUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Swift Charts ExamplesUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C22EB5B928568D0C000B9F9A /* Swift_Charts_ExamplesUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Swift_Charts_ExamplesUITests.swift; sourceTree = "<group>"; };
 		C22EB5BB28568D0C000B9F9A /* Swift_Charts_ExamplesUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Swift_Charts_ExamplesUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		C23072882860D8FA00DA1CED /* AnimatingLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatingLine.swift; sourceTree = "<group>"; };
 		C26088122856935B00B09DDB /* ChartType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartType.swift; sourceTree = "<group>"; };
 		C26088142856960000B09DDB /* SingleLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleLine.swift; sourceTree = "<group>"; };
 		C26088172856963D00B09DDB /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
@@ -236,6 +238,7 @@
 			isa = PBXGroup;
 			children = (
 				C26088142856960000B09DDB /* SingleLine.swift */,
+				C23072882860D8FA00DA1CED /* AnimatingLine.swift */,
 				FC5466C52857E0D700315632 /* SingleLineLollipop.swift */,
 				88242C252858C17A00DDD8D0 /* HeartBeat.swift */,
 			);
@@ -413,6 +416,7 @@
 				934A95042857D035009E29F4 /* OneDimensionalBar.swift in Sources */,
 				C260882B2856B3C500B09DDB /* AreaSimple.swift in Sources */,
 				7425DF832858DF4300672F3B /* HealthData.swift in Sources */,
+				C23072892860D8FA00DA1CED /* AnimatingLine.swift in Sources */,
 				88B3E5D02857493B00840CAA /* RangeSimple.swift in Sources */,
 				9691226F28594EC5001FCF65 /* ScatterChart.swift in Sources */,
 				C22EB5A028568D0B000B9F9A /* ContentView.swift in Sources */,
