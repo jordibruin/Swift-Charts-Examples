@@ -50,14 +50,9 @@ struct TwoBars: View {
                             y: .value("Sales", element.sales),
                             width: .fixed(barWidth)
                         )
-<<<<<<< HEAD
                         .accessibilityLabel("\(element.weekday.weekdayString)")
                         .accessibilityValue("\(element.sales) sold")
-=======
-                        .accessibilityLabel("\(element.weekday.formatted())")
-                        .accessibilityValue("\(element.sales)")
                         .foregroundStyle(series.city == "Cupertino" ? Color.blue.gradient : Color.green.gradient)
->>>>>>> main
                     }
                     .symbol(by: .value("City", series.city))
                     .interpolationMethod(.catmullRom)
