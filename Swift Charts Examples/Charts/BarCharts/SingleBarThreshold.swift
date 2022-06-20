@@ -45,8 +45,11 @@ struct SingleBarThresholdOverview: View {
 }
 
 struct SingleBarThreshold: View {
+    
     @State private var threshold = 150.0
-
+    @State var belowColor: Color = .blue
+    @State var aboveColor: Color = .orange
+    
     var body: some View {
         List {
             Section {
@@ -55,7 +58,7 @@ struct SingleBarThreshold: View {
                         x: .value("Date", $0.day),
                         y: .value("Sales", $0.sales)
                     )
-                    .foregroundStyle($0.sales > Int(threshold) ? Color.orange.gradient : Color.blue.gradient)
+                    .foregroundStyle($0.sales > Int(threshold) ? aboveColor.gradient :  belowColor.gradient)
                     RuleMark(
                         y: .value("Threshold", threshold)
                     )
@@ -98,6 +101,9 @@ struct SingleBarThreshold: View {
                     Text("275")
                 }
             }
+            
+            ColorPicker("Below Threshold Color", selection: $belowColor)
+            ColorPicker("Above Threshold Color", selection: $aboveColor)
         }
     }
 }
