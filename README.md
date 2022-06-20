@@ -1,9 +1,7 @@
 # Swift Charts Examples
-An overview of the different types of charts you can make with Swift Charts
+This repo aims to provide sample code for lots of different chart types for you to use as inspiration for your own projects. We start by recreating the sample charts Apple uses in their sessions related to Swift Charts. The goal is to make each chart type customizable, accessible and flexible so that you can easily change it to your needs.
 
 <img width="1511" alt="image" src="https://user-images.githubusercontent.com/170948/173253882-1a80b934-a0b9-4acb-a290-a299ae3fdd7d.png">
-
-Let's start by recreating the different chart examples that Apple gave in these session screenshots.
 
 ## Included Charts
 
