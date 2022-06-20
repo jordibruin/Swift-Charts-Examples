@@ -6,6 +6,7 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var selectedChartType: ChartType?
+    @State var filterCategory: ChartCategory = .all
     
     private var cachedChartImages: [String: UIImage] = [:]
     
@@ -25,7 +26,7 @@ struct ContentView: View {
     var body: some View {
         NavigationSplitView {
             List(selection: $selectedChartType) {
-                ForEach(ChartCategory.allCases.filter { filterCategory != nil ? $0 == filterCategory : true } ) { category in
+                ForEach(displayedCategories) { category in
                     Section {
                         ForEach(ChartType.allCases.filter { $0.category == category }) { chart in
                             NavigationLink(value: chart) {
@@ -39,9 +40,9 @@ struct ContentView: View {
             }
             .listStyle(.insetGrouped)
             .navigationTitle("Charts")
-            .toolbar(content: {
+            .toolbar {
                 toolbarItems
-            })
+            }
         } detail: {
             NavigationStack {
                 if let selectedChartType {
@@ -52,31 +53,29 @@ struct ContentView: View {
             }
         }
     }
-    
-    @State var filterCategory: ChartCategory?
-    
-    var toolbarItems: some ToolbarContent {
-        Group {
-            ToolbarItem(placement: .navigationBarTrailing) {
-                Menu {
-                    ForEach(ChartCategory.allCases) { category in
-                        Button {
-                            filterCategory = category
-                        } label: {
-                            Label("\(category.rawValue.capitalized)", systemImage: filterCategory == category ? "checkmark.circle.fill" : category.sfSymbolName)
-                        }
+
+    private var displayedCategories: [ChartCategory] {
+        var categories = ChartCategory.allCases.filter { $0 != .all }
+        if filterCategory != .all {
+            categories = ChartCategory.allCases.filter { $0 == filterCategory }
+        }
+        return categories
+    }
+
+    private var toolbarItems: some ToolbarContent {
+        ToolbarItem(placement: .navigationBarTrailing) {
+            Menu {
+                Picker(selection: $filterCategory, label: Text("Filter")) {
+                    ForEach(ChartCategory.allCases.filter { $0 != .all }) { category in
+                        Label("\(category.rawValue.capitalized)", systemImage: category.sfSymbolName)
+                            .tag(category)
                     }
-                    
                     Divider()
-                    
-                    Button {
-                        filterCategory = nil
-                    } label: {
-                        Text("Show all")
-                    }
-                } label: {
-                    Text("Filter")
+                    Text("Show all")
+                        .tag(ChartCategory.all)
                 }
+            } label: {
+                Text("Filter")
             }
         }
     }

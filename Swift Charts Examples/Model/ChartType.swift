@@ -5,6 +5,7 @@
 import SwiftUI
 
 enum ChartCategory: String, CaseIterable, Hashable, Identifiable {
+    case all
     case line
     case bar
     case area
@@ -16,6 +17,8 @@ enum ChartCategory: String, CaseIterable, Hashable, Identifiable {
     
     var sfSymbolName: String {
         switch self {
+        case .all:
+            return ""
         case .line:
             return "chart.xyaxis.line"
         case .bar:
@@ -97,9 +100,6 @@ enum ChartType: String, Identifiable, CaseIterable {
         }
     }
 
-    
-
-    
     var category: ChartCategory {
         switch self {
         case .singleLine, .singleLineLollipop, .heartBeat:
