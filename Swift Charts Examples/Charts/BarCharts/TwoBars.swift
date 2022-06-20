@@ -54,8 +54,8 @@ struct TwoBars: View {
                             y: .value("Sales", element.sales),
                             width: .fixed(barWidth)
                         )
-                        .accessibilityLabel("\(element.weekday.formatted())")
-                        .accessibilityValue("\(element.sales)")
+                        .accessibilityLabel("\(element.weekday.weekdayString)")
+                        .accessibilityValue("\(element.sales) sold")
                     }
                     .foregroundStyle(by: .value("City", series.city))
                     .symbol(by: .value("City", series.city))

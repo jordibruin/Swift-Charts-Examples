@@ -5,6 +5,17 @@
 import SwiftUI
 
 
+extension Date {
+    // Used for charts where the day of the week is used: visually  M/T/W etc
+    // (but we want VoiceOver to read out the full day)
+    var weekdayString: String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "EEEE"
+
+        return formatter.string(from: self)
+    }
+}
+
 /*
  This file collects the Accessibility descriptors used for the "simple" versions of
  charts

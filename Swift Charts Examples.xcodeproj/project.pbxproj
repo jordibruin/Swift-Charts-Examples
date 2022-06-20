@@ -147,6 +147,7 @@
 				C22EB59B28568D0B000B9F9A /* Products */,
 			);
 			sourceTree = "<group>";
+			usesTabs = 0;
 		};
 		C22EB59B28568D0B000B9F9A /* Products */ = {
 			isa = PBXGroup;
@@ -202,6 +203,7 @@
 		C22EB5C828568EB5000B9F9A /* Charts */ = {
 			isa = PBXGroup;
 			children = (
+				9766517F285BB9C80079660D /* AccessibilityChartDescriptors.swift */,
 				C26088192856968400B09DDB /* LineCharts */,
 				C260881D2856A32C00B09DDB /* BarCharts */,
 				C26088282856B3AE00B09DDB /* AreaCharts */,
@@ -245,7 +247,6 @@
 		C260881D2856A32C00B09DDB /* BarCharts */ = {
 			isa = PBXGroup;
 			children = (
-				9766517F285BB9C80079660D /* AccessibilityChartDescriptors.swift */,
 				C260882D2856B4C900B09DDB /* SingleBar.swift */,
 				FC602023285B532C0089DBDC /* SingleBarThreshold.swift */,
 				C260881F2856A34400B09DDB /* TwoBars.swift */,

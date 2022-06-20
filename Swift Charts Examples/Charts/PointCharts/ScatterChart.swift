@@ -47,8 +47,8 @@ struct ScatterChart: View {
                                 x: .value("Day", element.weekday, unit: .day),
                                 y: .value("Sales", element.sales)
                             )
-                            .accessibilityLabel("\(element.weekday.formatted())")
-                            .accessibilityValue("\(element.sales)")
+                            .accessibilityLabel("\(element.weekday.weekdayString)")
+                            .accessibilityValue("\(element.sales) sold")
                         }
                         .foregroundStyle(by: .value("City", series.city))
                         .symbolSize(pointSize * 5)
