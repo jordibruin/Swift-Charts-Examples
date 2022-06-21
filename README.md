@@ -9,18 +9,19 @@ This repo aims to provide sample code for lots of different chart types for you 
 - [x] Simple Line chart
 - [x] Line chart with lollipop
 - [x] Heartbeat Chart
+- [x] Animating Line chart
 - [x] Simple Bar chart
 - [x] Simple dual bar chart
-- [x] Range Chart
 - [x] Pyramid Chart
-- [x] Area Chart
-- [x] Range with Max and Min Chart
 - [x] One dimensional bar
+- [x] Time Sheet Bar
+- [x] Area Chart
+- [x] Range Chart
+- [x] Range with Max and Min Chart
+- [x] Heartbeat range Chart
 - [x] Heatmap Block Chart
 - [x] Scatter Chart
-- [x] Heartbeat range Chart
 - [x] Vector Field
-- [x] Animating Line chart
 
 ## Todo
 - [ ] Cumulative line Chart
@@ -46,70 +47,74 @@ Source: https://developer.apple.com/videos/play/wwdc2022/10137/
 
 Line Chart
 
-![](images/charts/line/singleLine.png)
+<img src="images/charts/line/singleLine.png" width="380">
 
 Line Chart with Lollipop
 
-![](images/charts/line/singleLineLollipop.png)
+<img src="images/charts/line/singleLineLollipop.png" width="380">
 
 Heart Beat / ECG Chart
 
-![](images/charts/line/heartBeat.png)
+<img src="images/charts/line/heartBeat.png" width="380">
+
+Animating Line
+
+<img src="images/charts/line/animatingLine.png" width="380">
 
 ### [Bar Charts](https://github.com/jordibruin/SwiftChartExamples/tree/main/Swift%20Charts%20Examples/Charts/BarCharts)
 
 Single Bar
 
-![](images/charts/bar/singleBar.png)
+<img src="images/charts/bar/singleBar.png" width="380">
 
 Single Bar with Threshold Rule Mark
 
-![](images/charts/bar/singleBarThreshold.png)
+<img src="images/charts/bar/singleBarThreshold.png" width="380">
 
 Two Bars
 
-![](images/charts/bar/twoBars.png)
+<img src="images/charts/bar/twoBars.png" width="380">
 
 Pyramid
 
-![](images/charts/bar/pyramid.png)
+<img src="images/charts/bar/pyramid.png" width="380">
 
 One Dimensional Bar
 
-![](images/charts/bar/oneDimensionalBar.png)
+<img src="images/charts/bar/oneDimensionalBar.png" width="380">
 
 Time Sheet Bar
 
-![](images/charts/bar/timeSheetBar.png)
+<img src="images/charts/bar/timeSheetBar.png" width="380">
 
 ### [Area Charts](https://github.com/jordibruin/SwiftChartExamples/tree/main/Swift%20Charts%20Examples/Charts/AreaCharts)
 
 Area Chart
 
-![](images/charts/area/areaSimple.png)
+<img src="images/charts/area/areaSimple.png" width="380">
 
 ### [Range Charts](https://github.com/jordibruin/SwiftChartExamples/tree/main/Swift%20Charts%20Examples/Charts/RangeCharts)
 
 Range Chart
 
-![](images/charts/range/rangeSimple.png)
+<img src="images/charts/range/rangeSimple.png" width="380">
 
 Heart Rate Range Chart
 
-![](images/charts/range/rangeHeartRate.png)
+<img src="images/charts/range/rangeHeartRate.png" width="380">
 
 ### [Heat Maps](https://github.com/jordibruin/SwiftChartExamples/tree/main/Swift%20Charts%20Examples/Charts/HeatMap)
 
 Customizable Heat Map
 
-![](images/charts/heatMap/customizeableHeatMap.png)
+<img src="images/charts/heatMap/customizeableHeatMap.png" width="380">
 
 ### [Point Charts](https://github.com/jordibruin/SwiftChartExamples/tree/main/Swift%20Charts%20Examples/Charts/PointCharts)
 
 Scatter Chart
 
-![](images/charts/point/scatter.png)
+<img src="images/charts/point/scatter.png" width="380">
 
 Vector Field
 
-![](images/charts/point/vectorField.png)
+<img src="images/charts/point/vectorField.png" width="380">
