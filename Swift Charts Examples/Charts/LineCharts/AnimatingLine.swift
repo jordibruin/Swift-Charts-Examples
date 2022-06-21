@@ -7,19 +7,16 @@ import SwiftUI
 import Charts
 
 struct AnimatingLineOverview: View {
-    
-    @State var x: Double = -0.4
+    @State private var x: Double = -0.4
     
     var body: some View {
-        AnimatedChart(x: x)
-//        .aspectRatio(1, contentMode: .fit)
-        .frame(height: Constants.previewChartHeight)
+        AnimatedChart(x: x, isOverview: true)
+            .frame(height: Constants.previewChartHeight)
     }
 }
 
 struct AnimatingLine: View {
-    
-    @State var x: Double = -1
+    @State private var x: Double = -1
     
     var body: some View {
         List {
@@ -32,16 +29,14 @@ struct AnimatingLine: View {
             Section {
                 Button {
                     withAnimation(.linear(duration: 2)) {
-                        x = 1
+                        x = (x == 1) ? -1 : 1
                     }
                 } label: {
                     Text("Animate")
                 }
-
             }
         }
         .navigationBarTitle(ChartType.animatingLine.title, displayMode: .inline)
-        
     }
 }
 
@@ -52,28 +47,18 @@ struct AnimatingLine_Previews: PreviewProvider {
     }
 }
 
-import Charts
-import SwiftUI
-
-struct Sample: Identifiable {
-    var x: Double
-    var y: Double
-    
-    var id: some Hashable { x }
-}
-
 struct AnimatedChart: View, Animatable {
-    var animatableData: Double  = 0
+    var animatableData: Double = 0
+    var isOverview = false
 
-    init(x: Double) {
+    init(x: Double, isOverview: Bool = false) {
         self.animatableData = x
+        self.isOverview = isOverview
     }
 
-    let samples = stride(from: -1, through: 1, by: 0.01).map {
+    private let samples = stride(from: -1, through: 1, by: 0.01).map {
         Sample(x: $0, y: pow($0, 3))
     }
-
-//    @State var x: Double = -1
 
     var body: some View {
         VStack {
@@ -88,34 +73,15 @@ struct AnimatedChart: View, Animatable {
                     y: .value("y", pow(animatableData, 3))
                 )
             }
+            .chartXAxis(isOverview ? .hidden : .automatic)
+            .chartYAxis(isOverview ? .hidden : .automatic)
         }
+    }
 
+    struct Sample: Identifiable {
+        var x: Double
+        var y: Double
+
+        var id: some Hashable { x }
     }
 }
-//
-//struct AnimatedChart_Previews: PreviewProvider {
-//    struct Preview: View {
-//        @State
-//        var x: Double = -1
-//
-//        var body: some View {
-//            VStack {
-//                AnimatedChart(x: x)
-//                    .aspectRatio(1, contentMode: .fit)
-//                    .padding()
-//
-//                Spacer()
-//            }
-//            .contentShape(Rectangle())
-//            .onTapGesture {
-//                withAnimation(.linear(duration: 2)) {
-//                    x = 1
-//                }
-//            }
-//        }
-//    }
-//
-//    static var previews: some View {
-//        Preview()
-//    }
-//}
