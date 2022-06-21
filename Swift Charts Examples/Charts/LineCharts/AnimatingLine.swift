@@ -22,8 +22,7 @@ struct AnimatingLine: View {
         List {
             Section {
                 AnimatedChart(x: x)
-                .aspectRatio(1, contentMode: .fit)
-                .padding()
+                    .aspectRatio(1, contentMode: .fit)
             }
             
             Section {
@@ -33,6 +32,17 @@ struct AnimatingLine: View {
                     }
                 } label: {
                     Text("Animate")
+                }
+                VStack(alignment: .leading) {
+                    Text("X Value: \(x, specifier: "%.2f")")
+                        .animation(.none)
+                    Slider(value: $x, in: -1...1) {
+                        Text("X Value")
+                    } minimumValueLabel: {
+                        Text("-1")
+                    } maximumValueLabel: {
+                        Text("1")
+                    }
                 }
             }
         }
@@ -61,21 +71,19 @@ struct AnimatedChart: View, Animatable {
     }
 
     var body: some View {
-        VStack {
-            Chart {
-                // Ideally, there'd be a way to not evaluate this every time.
-                ForEach(samples) { sample in
-                    LineMark(x: .value("x", sample.x), y: .value("y", sample.y))
-                }
-
-                PointMark(
-                    x: .value("x", animatableData),
-                    y: .value("y", pow(animatableData, 3))
-                )
+        Chart {
+            // Ideally, there'd be a way to not evaluate this every time.
+            ForEach(samples) { sample in
+                LineMark(x: .value("x", sample.x), y: .value("y", sample.y))
             }
-            .chartXAxis(isOverview ? .hidden : .automatic)
-            .chartYAxis(isOverview ? .hidden : .automatic)
+
+            PointMark(
+                x: .value("x", animatableData),
+                y: .value("y", pow(animatableData, 3))
+            )
         }
+        .chartXAxis(isOverview ? .hidden : .automatic)
+        .chartYAxis(isOverview ? .hidden : .automatic)
     }
 
     struct Sample: Identifiable {
