@@ -77,7 +77,7 @@ Two Bars
 
 Pyramid
 
-!<img src="images/charts/bar/pyramid.png" width="380">
+<img src="images/charts/bar/pyramid.png" width="380">
 
 One Dimensional Bar
 
