@@ -6,8 +6,11 @@ import SwiftUI
 import Charts
 
 struct HeartRateRangeChartOverview: View {
+    
+    @State var data = HeartRateData.lastWeek
+    
     var body: some View {
-        Chart(HeartRateData.lastWeek, id: \.weekday) {
+        Chart(data, id: \.weekday) {
             BarMark(
                 x: .value("Day", $0.weekday, unit: .day),
                 yStart: .value("BPM Min", $0.dailyMin),
@@ -17,6 +20,7 @@ struct HeartRateRangeChartOverview: View {
             .clipShape(Capsule())
             .foregroundStyle(.red.gradient)
         }
+        .accessibilityChartDescriptor(self)
         .chartXAxis(.hidden)
         .chartYAxis(.hidden)
         .frame(height: Constants.previewChartHeight)

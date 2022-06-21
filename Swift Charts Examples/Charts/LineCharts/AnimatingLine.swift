@@ -52,9 +52,6 @@ struct AnimatingLine_Previews: PreviewProvider {
     }
 }
 
-import Charts
-import SwiftUI
-
 struct Sample: Identifiable {
     var x: Double
     var y: Double

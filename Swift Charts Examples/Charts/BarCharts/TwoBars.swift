@@ -7,7 +7,7 @@ import Charts
 
 struct TwoBarsOverview: View {
 
-    var data = LocationData.last30Days
+    var data = LocationData.last7Days
 
     var body: some View {
         Chart {

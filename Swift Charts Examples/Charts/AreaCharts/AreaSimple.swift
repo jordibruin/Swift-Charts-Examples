@@ -6,8 +6,11 @@ import SwiftUI
 import Charts
 
 struct AreaSimpleOverview: View {
+    
+    @State var data = SalesData.last30Days
+
     var body: some View {
-        Chart(SalesData.last30Days, id: \.day) {
+        Chart(data, id: \.day) {
             AreaMark(
                 x: .value("Day", $0.day, unit: .day),
                 y: .value("Sales", $0.sales)
@@ -15,6 +18,7 @@ struct AreaSimpleOverview: View {
             .foregroundStyle(Gradient(colors: [.blue, .blue.opacity(0.5)]))
             .interpolationMethod(.cardinal)
         }
+        .accessibilityChartDescriptor(self)
         .chartXAxis(.hidden)
         .chartYAxis(.hidden)
         .frame(height: Constants.previewChartHeight)
@@ -52,6 +56,8 @@ struct AreaSimple: View {
                         x: .value("Date", $0.day),
                         y: .value("Sales", $0.sales)
                     )
+                    .accessibilityLabel($0.day.formatted())
+                    .accessibilityValue("\($0.sales) sold")
                     .lineStyle(StrokeStyle(lineWidth: lineWidth))
                     .interpolationMethod(interpolationMethod.mode)
                     .foregroundStyle(chartColor)

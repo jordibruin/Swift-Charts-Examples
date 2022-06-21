@@ -22,7 +22,7 @@ extension Date {
  */
 
 // TODO: This should be a protocol but since the data objects are in flux this will suffice
-private func chartDescriptor(forSingleSeries data: [(day: Date, sales: Int)]) -> AXChartDescriptor {
+private func chartDescriptor(forSalesSeries data: [(day: Date, sales: Int)]) -> AXChartDescriptor {
     let min = data.map(\.sales).min() ?? 0
     let max = data.map(\.sales).max() ?? 0
 
@@ -55,83 +55,99 @@ private func chartDescriptor(forSingleSeries data: [(day: Date, sales: Int)]) ->
     )
 }
 
+private func chartDescriptor(forLocationSeries data: [LocationData.Series]) -> AXChartDescriptor {
+    
+    // Create a descriptor for each Series object
+    // as that allows auditory comparison with VoiceOver
+    // much like the chart does visually and allows individual city charts to be played
+    let series = data.map {
+        AXDataSeriesDescriptor(
+            name: "\($0.city)",
+            isContinuous: false,
+            dataPoints: $0.sales.map { data in
+                    .init(x: "\(data.weekday.formatted())",
+                          y: Double(data.sales))
+            }
+        )
+    }
+
+    // Get the minimum/maximum within each city
+    // and then the limits of the resulting list
+    // to pass in as the Y axis limits
+    let limits: [(Int, Int)] = data.map { seriesData in
+        let sales = seriesData.sales.map { $0.sales }
+        let localMin = sales.min() ?? 0
+        let localMax = sales.max() ?? 0
+        return (localMin, localMax)
+    }
+
+    let min = limits.map { $0.0 }.min() ?? 0
+    let max = limits.map { $0.1 }.max() ?? 0
+
+    // Get the unique days to mark the x-axis
+    // and then sort them
+    let uniqueDays = Set( data
+        .map { $0.sales.map { $0.weekday } }
+        .joined() )
+    let days = Array(uniqueDays).sorted()
+
+    let xAxis = AXCategoricalDataAxisDescriptor(
+        title: "Days",
+        categoryOrder: days.map { $0.formatted() }
+    )
+
+    let yAxis = AXNumericDataAxisDescriptor(
+        title: "Sales",
+        range: Double(min)...Double(max),
+        gridlinePositions: []
+    ) { value in "\(value) sold" }
+
+    return AXChartDescriptor(
+        title: "Sales per day",
+        summary: nil,
+        xAxis: xAxis,
+        yAxis: yAxis,
+        additionalAxes: [],
+        series: series
+    )
+}
+
 extension SingleLineOverview: AXChartDescriptorRepresentable {
 	func makeChartDescriptor() -> AXChartDescriptor {
-        return chartDescriptor(forSingleSeries: data)
+        return chartDescriptor(forSalesSeries: data)
 	}
 }
 
 extension SingleLineLollipop: AXChartDescriptorRepresentable {
     func makeChartDescriptor() -> AXChartDescriptor {
-        return chartDescriptor(forSingleSeries: data)
+        return chartDescriptor(forSalesSeries: data)
     }
 }
 
 extension SingleBarOverview: AXChartDescriptorRepresentable {
     func makeChartDescriptor() -> AXChartDescriptor {
-        chartDescriptor(forSingleSeries: data)
+        chartDescriptor(forSalesSeries: data)
     }
 }
 
+extension AreaSimpleOverview: AXChartDescriptorRepresentable {
+    func makeChartDescriptor() -> AXChartDescriptor {
+        return chartDescriptor(forSalesSeries: data)
+    }
+}
 
 extension TwoBarsOverview: AXChartDescriptorRepresentable {
     func makeChartDescriptor() -> AXChartDescriptor {
-
-        // Create a descriptor for each Series object
-        // as that allows auditory comparison with VoiceOver
-        // much like the chart does visually and allows individual city charts to be played
-        let series = data.map {
-            AXDataSeriesDescriptor(
-                name: "\($0.city)",
-                isContinuous: false,
-                dataPoints: $0.sales.map { data in
-                        .init(x: "\(data.weekday.formatted())",
-                              y: Double(data.sales))
-                }
-            )
-        }
-
-        // Get the minimum/maximum within each city
-        // and then the limits of the resulting list
-        // to pass in as the Y axis limits
-        let limits: [(Int, Int)] = data.map { seriesData in
-            let sales = seriesData.sales.map { $0.sales }
-            let localMin = sales.min() ?? 0
-            let localMax = sales.max() ?? 0
-            return (localMin, localMax)
-        }
-
-        let min = limits.map { $0.0 }.min() ?? 0
-        let max = limits.map { $0.1 }.max() ?? 0
-
-        // Get the unique days to mark the x-axis
-        // and then sort them
-        let uniqueDays = Set( data
-            .map { $0.sales.map { $0.weekday } }
-            .joined() )
-        let days = Array(uniqueDays).sorted()
-
-        let xAxis = AXCategoricalDataAxisDescriptor(
-            title: "Days",
-            categoryOrder: days.map { $0.formatted() }
-        )
-
-        let yAxis = AXNumericDataAxisDescriptor(
-            title: "Sales",
-            range: Double(min)...Double(max),
-            gridlinePositions: []
-        ) { value in "\(value) sold" }
-
-        return AXChartDescriptor(
-            title: "Sales per day",
-            summary: nil,
-            xAxis: xAxis,
-            yAxis: yAxis,
-            additionalAxes: [],
-            series: series
-        )
+        return chartDescriptor(forLocationSeries: data)
     }
 }
+
+extension ScatterChartOverview: AXChartDescriptorRepresentable {
+    func makeChartDescriptor() -> AXChartDescriptor {
+        return chartDescriptor(forLocationSeries: data)
+    }
+}
+
 
 // TODO: This is virtually the same as TwoBarsOverview's chartDescriptor. Use a protocol?
 extension PyramidChartOverview: AXChartDescriptorRepresentable {
@@ -289,6 +305,63 @@ extension RangeSimpleOverview: AXChartDescriptorRepresentable {
             xAxis: xAxis,
             yAxis: yAxis,
             additionalAxes: [salesAxis, minAxis, maxAxis],
+            series: [series]
+        )
+    }
+}
+
+extension HeartRateRangeChartOverview: AXChartDescriptorRepresentable {
+    func makeChartDescriptor() -> AXChartDescriptor {
+        
+        let min = data.map(\.dailyMin).min() ?? 0
+        let max = data.map(\.dailyMax).max() ?? 0
+
+        // Use this for the label, so dates are verbalized accurately
+        let formatter = DateFormatter()
+        formatter.dateStyle = .full
+        formatter.timeStyle = .none
+        
+        let xAxis = AXCategoricalDataAxisDescriptor(
+            title: "Day",
+            categoryOrder: data.map { $0.weekday.formatted() }
+        )
+
+        let yAxis = AXNumericDataAxisDescriptor(
+            title: "Heart Rate",
+            range: Double(min)...Double(max),
+            gridlinePositions: []
+        ) { value in "Average: \(Int(value)) BPM" }
+        
+        let minAxis = AXNumericDataAxisDescriptor(
+            title: "Daily Minimum Heartrate",
+            range: Double(min)...Double(max),
+            gridlinePositions: []
+        ) { value in "Minimum: \(Int(value)) BPM" }
+
+        let maxAxis = AXNumericDataAxisDescriptor(
+            title: "Daily Maximum Heartrate",
+            range: Double(min)...Double(max),
+            gridlinePositions: []
+        ) { value in "Maximum: \(Int(value)) BPM" }
+
+        let series = AXDataSeriesDescriptor(
+            name: "Last Week",
+            isContinuous: false,
+            dataPoints: data.map {
+                .init(x: $0.weekday.formatted(),
+                      y: Double($0.dailyAverage),
+                      additionalValues: [.number(Double($0.dailyMin)),
+                                         .number(Double($0.dailyMax))],
+                      label: formatter.string(from: $0.weekday))
+            }
+        )
+
+        return AXChartDescriptor(
+            title: "Heart Rate range",
+            summary: nil,
+            xAxis: xAxis,
+            yAxis: yAxis,
+            additionalAxes: [minAxis, maxAxis],
             series: [series]
         )
     }

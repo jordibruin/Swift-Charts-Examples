@@ -6,9 +6,12 @@ import SwiftUI
 import Charts
 
 struct ScatterChartOverview: View {
+    
+    @State var data = LocationData.last30Days
+    
     var body: some View {
         Chart {
-            ForEach(LocationData.last30Days) { series in
+            ForEach(data) { series in
                 ForEach(series.sales, id: \.weekday) { element in
                     PointMark(
                         x: .value("Day", element.weekday, unit: .day),
@@ -21,6 +24,7 @@ struct ScatterChartOverview: View {
                 .symbol(by: .value("City", series.city))
             }
         }
+        .accessibilityChartDescriptor(self)
         .chartXAxis(.hidden)
         .chartYAxis(.hidden)
         .chartLegend(.hidden)
