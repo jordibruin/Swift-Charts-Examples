@@ -17,6 +17,7 @@ struct ContentView: View {
                 .padding(10)
                 .frame(width: 300)
             let renderer = ImageRenderer(content: view)
+            renderer.scale = UIScreen.main.scale
             if let image = renderer.uiImage {
                 cachedChartImages[chart.id] = image
             }

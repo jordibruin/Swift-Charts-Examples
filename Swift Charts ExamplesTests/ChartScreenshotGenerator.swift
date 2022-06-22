@@ -19,8 +19,11 @@ final class ChartScreenshotGenerator: XCTestCase {
             try createDirectoryIfNeeded(at: categoryURL)
 
             for chart in ChartType.allCases.filter({ $0.category == category }) {
-                let view = chart.view.frame(width: 360).padding()
+                let view = chart.view
+                    .padding(10)
+                    .frame(width: 360)
                 let renderer = ImageRenderer(content: view)
+                renderer.scale = UIScreen.main.scale
                 let pngData = try XCTUnwrap(renderer.uiImage?.pngData(), "Failed to generate PNG data for chart '\(chart.title)'")
                 let chartURL = categoryURL.appending(component: "\(chart.id).png")
                 try pngData.write(to: chartURL)

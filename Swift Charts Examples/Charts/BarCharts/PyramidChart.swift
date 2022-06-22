@@ -89,12 +89,15 @@ struct PyramidChart: View {
             }
             
             Section {
-                Slider(value: $barHeight, in: 0...25) {
-                    Text("Bar Height")
-                } minimumValueLabel: {
-                    Text("0")
-                } maximumValueLabel: {
-                    Text("25")
+                VStack(alignment: .leading) {
+                    Text("Bar Height: \(barHeight, specifier: "%.1f")")
+                    Slider(value: $barHeight, in: 0...25) {
+                        Text("Bar Height")
+                    } minimumValueLabel: {
+                        Text("0")
+                    } maximumValueLabel: {
+                        Text("25")
+                    }
                 }
                 
                 ColorPicker("Left Color", selection: $leftColor)
