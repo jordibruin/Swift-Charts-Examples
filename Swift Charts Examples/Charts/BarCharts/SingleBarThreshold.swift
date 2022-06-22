@@ -8,9 +8,10 @@ import Charts
 
 struct SingleBarThresholdOverview: View {
     @State private var threshold = 150.0
-
+    @State var data = SalesData.last30Days
+    
     var body: some View {
-        Chart(SalesData.last30Days, id: \.day) {
+        Chart(data, id: \.day) {
             BarMark(
                 x: .value("Date", $0.day),
                 y: .value("Sales", $0.sales)
@@ -38,6 +39,7 @@ struct SingleBarThresholdOverview: View {
                     .padding(.bottom, 4)
             }
         }
+        .accessibilityChartDescriptor(self)
         .chartXAxis(.hidden)
         .chartYAxis(.hidden)
         .frame(height: Constants.previewChartHeight)
@@ -58,6 +60,8 @@ struct SingleBarThreshold: View {
                         x: .value("Date", $0.day),
                         y: .value("Sales", $0.sales)
                     )
+                    .accessibilityLabel($0.day.formatted())
+                    .accessibilityValue("\($0.sales) sold")
                     .foregroundStyle($0.sales > Int(threshold) ? aboveColor.gradient :  belowColor.gradient)
                     RuleMark(
                         y: .value("Threshold", threshold)

@@ -169,11 +169,11 @@ enum ChartType: String, Identifiable, CaseIterable {
         case .heartBeat:
             return HeartBeatOverview().makeChartDescriptor()
         case .animatingLine:
-            fallthrough // TODO: return AnimatingLineOverview().makeChartDescriptor()
+            return AnimatedChart(x: 0, isOverview: true).makeChartDescriptor()
         case .singleBar:
             return SingleBarOverview().makeChartDescriptor()
         case .singleBarThreshold:
-            fallthrough // TODO: return SingleBarThresholdOverview().makeChartDescriptor()
+            return SingleBarThresholdOverview().makeChartDescriptor()
         case .twoBars:
             return TwoBarsOverview().makeChartDescriptor()
         case .oneDimensionalBar:

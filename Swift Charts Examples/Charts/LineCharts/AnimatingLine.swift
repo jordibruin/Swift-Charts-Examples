@@ -66,7 +66,7 @@ struct AnimatedChart: View, Animatable {
         self.isOverview = isOverview
     }
 
-    private let samples = stride(from: -1, through: 1, by: 0.01).map {
+    let samples = stride(from: -1, through: 1, by: 0.01).map {
         Sample(x: $0, y: pow($0, 3))
     }
 
@@ -75,6 +75,9 @@ struct AnimatedChart: View, Animatable {
             // Ideally, there'd be a way to not evaluate this every time.
             ForEach(samples) { sample in
                 LineMark(x: .value("x", sample.x), y: .value("y", sample.y))
+                    .accessibilityLabel("\(sample.x)")
+                    .accessibilityValue("\(sample.y)")
+                    .accessibilityHidden(isOverview)
             }
 
             PointMark(
@@ -82,6 +85,7 @@ struct AnimatedChart: View, Animatable {
                 y: .value("y", pow(animatableData, 3))
             )
         }
+        .accessibilityChartDescriptor(self)
         .chartXAxis(isOverview ? .hidden : .automatic)
         .chartYAxis(isOverview ? .hidden : .automatic)
     }

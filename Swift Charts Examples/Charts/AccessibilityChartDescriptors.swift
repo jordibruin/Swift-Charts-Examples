@@ -26,22 +26,26 @@ private func chartDescriptor(forSalesSeries data: [(day: Date, sales: Int)]) -> 
     let min = data.map(\.sales).min() ?? 0
     let max = data.map(\.sales).max() ?? 0
 
+    let dateStringConverter: (((day: Date, sales: Int)) -> (String)) = { dataPoint in
+        dataPoint.day.formatted(date: .abbreviated, time: .omitted)
+    }
+    
     let xAxis = AXCategoricalDataAxisDescriptor(
         title: "Days",
-        categoryOrder: data.map { $0.day.formatted() }
+        categoryOrder: data.map { dateStringConverter($0) }
     )
 
     let yAxis = AXNumericDataAxisDescriptor(
         title: "Sales",
         range: Double(min)...Double(max),
         gridlinePositions: []
-    ) { value in "\(value) sold" }
+    ) { value in "\(Int(value)) sold" }
 
     let series = AXDataSeriesDescriptor(
-        name: "",
+        name: "Daily sale quantity",
         isContinuous: false,
         dataPoints: data.map {
-            .init(x: $0.day.formatted(), y: Double($0.sales))
+            .init(x: dateStringConverter($0), y: Double($0.sales), label: "\($0.day.weekdayString)")
         }
     )
 
@@ -176,6 +180,12 @@ extension SingleBarOverview: AXChartDescriptorRepresentable {
     }
 }
 
+extension SingleBarThresholdOverview: AXChartDescriptorRepresentable {
+    func makeChartDescriptor() -> AXChartDescriptor {
+        chartDescriptor(forSalesSeries: data)
+    }
+}
+
 extension AreaSimpleOverview: AXChartDescriptorRepresentable {
     func makeChartDescriptor() -> AXChartDescriptor {
         return chartDescriptor(forSalesSeries: data)
@@ -194,6 +204,29 @@ extension ScatterChartOverview: AXChartDescriptorRepresentable {
     }
 }
 
+extension AnimatedChart: AXChartDescriptorRepresentable {
+    func makeChartDescriptor() -> AXChartDescriptor {
+        let xAxis = AXNumericDataAxisDescriptor(title: "Position",
+                                                range: -1...1,
+                                                gridlinePositions: []) { String(format: "%.2f", $0) }
+        
+        let yAxis = AXNumericDataAxisDescriptor(title: "Value",
+                                                range: -1...1,
+                                                gridlinePositions: []) { String(format: "%.2f", $0) }
+        
+        let series = AXDataSeriesDescriptor(name: "Data",
+                                            isContinuous: true, dataPoints: self.samples.map {
+            .init(x: $0.x, y: $0.y)
+        })
+        
+        return AXChartDescriptor(title: "Animated Change in Data",
+                                 summary: nil,
+                                 xAxis: xAxis,
+                                 yAxis: yAxis,
+                                 additionalAxes: [],
+                                 series: [series])
+    }
+}
 
 // TODO: This is virtually the same as TwoBarsOverview's chartDescriptor. Use a protocol?
 extension PyramidChartOverview: AXChartDescriptorRepresentable {
