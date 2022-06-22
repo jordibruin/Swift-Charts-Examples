@@ -6,16 +6,18 @@ import SwiftUI
 import Charts
 
 struct VectorFieldOverview: View {
-    @State private var grid = Grid(numRows: 20, numCols: 20)
-    
+    @State private var grid = Grid(numRows: 5, numCols: 5)
+    var data: [Grid.Point] { grid.points }
+
     var body: some View {
-        Chart(grid.points) { point in
+        Chart(data) { point in
             PointMark(x: .value("x", point.x),
                       y: .value("y", point.y))
             .symbol(Arrow(angle: CGFloat(point.angle(degreeOffset: 0)), size: 50))
             .foregroundStyle(point.angleColor(hueOffset: 0))
             .opacity(0.7)
         }
+        .accessibilityChartDescriptor(self)
         .chartXAxis(.hidden)
         .chartYAxis(.hidden)
         .aspectRatio(contentMode: .fit)
@@ -23,7 +25,7 @@ struct VectorFieldOverview: View {
 }
 
 struct VectorField: View {
-    @State private var grid = Grid(numRows: 20, numCols: 20)
+    @State private var grid = Grid(numRows: 5, numCols: 5)
     @State private var degreeOffset = 0.0
     @State private var hueOffset = 0.0
     @State private var opacity = 0.7
@@ -35,6 +37,8 @@ struct VectorField: View {
                 Chart(grid.points) { point in
                     PointMark(x: .value("x", point.x),
                               y: .value("y", point.y))
+                    .accessibilityLabel("\(point.x)")
+                    .accessibilityValue("Y: \(point.y), Color: \(point.accessibilityColorName), Angle: \(point.angle(degreeOffset: degreeOffset))")
                     .symbol(Arrow(angle: CGFloat(point.angle(degreeOffset: degreeOffset)), size: size))
                     .foregroundStyle(point.angleColor(hueOffset: hueOffset))
                     .opacity(opacity)

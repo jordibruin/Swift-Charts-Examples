@@ -112,6 +112,52 @@ private func chartDescriptor(forLocationSeries data: [LocationData.Series]) -> A
     )
 }
 
+private func chartDescriptor(forGrid data: [Grid.Point]) -> AXChartDescriptor {
+    let xmin = data.map(\.x).min() ?? 0
+    let xmax = data.map(\.x).max() ?? 0
+    let ymin = data.map(\.y).min() ?? 0
+    let ymax = data.map(\.y).max() ?? 0
+    let vmin = data.map(\.val).min() ?? 0
+    let vmax = data.map(\.val).max() ?? 0
+    
+    let xAxis = AXNumericDataAxisDescriptor(
+        title: "X",
+        range: Double(xmin)...Double(xmax),
+        gridlinePositions: Array(stride(from: xmin, to: xmax, by: 1)).map { Double($0) }
+    ) { "X: \($0)" }
+
+    let yAxis = AXNumericDataAxisDescriptor(
+        title: "Y",
+        range: Double(ymin)...Double(ymax),
+        gridlinePositions: Array(stride(from: ymin, to: ymax, by: 1)).map { Double($0) }
+    ) { "Y: \($0)" }
+    
+    let valueAxis = AXNumericDataAxisDescriptor(
+        title: "Value",
+        range: Double(vmin)...Double(vmax),
+        gridlinePositions: []
+    ) { "Color: \($0)" }
+
+    let series = AXDataSeriesDescriptor(
+        name: "",
+        isContinuous: false,
+        dataPoints: data.map {
+            .init(x: Double($0.x),
+                  y: Double($0.y),
+                  additionalValues: [.category($0.accessibilityColorName)])
+        }
+    )
+
+    return AXChartDescriptor(
+        title: "Grid Data",
+        summary: nil,
+        xAxis: xAxis,
+        yAxis: yAxis,
+        additionalAxes: [valueAxis],
+        series: [series]
+    )
+}
+
 extension SingleLineOverview: AXChartDescriptorRepresentable {
 	func makeChartDescriptor() -> AXChartDescriptor {
         return chartDescriptor(forSalesSeries: data)
@@ -364,5 +410,38 @@ extension HeartRateRangeChartOverview: AXChartDescriptorRepresentable {
             additionalAxes: [minAxis, maxAxis],
             series: [series]
         )
+    }
+}
+
+extension HeatMapOverview: AXChartDescriptorRepresentable {
+    func makeChartDescriptor() -> AXChartDescriptor {
+        return chartDescriptor(forGrid: data)
+    }
+}
+
+extension VectorFieldOverview: AXChartDescriptorRepresentable {
+    func makeChartDescriptor() -> AXChartDescriptor {
+        let base = chartDescriptor(forGrid: data)
+  
+        // Add the vector field's angle to the grid based series
+        if
+            let series = base.series.first,
+            let name = series.name {
+            let modifiedSeries = AXDataSeriesDescriptor(
+                name: name,
+                isContinuous: series.isContinuous,
+                dataPoints: data.map {
+                    .init(x: Double($0.x),
+                          y: Double($0.y),
+                          additionalValues: [
+                            .category($0.accessibilityColorName),
+                          ],
+                          label: "Angle: \(Int($0.angle(degreeOffset: 0, inRadians: false))) degrees")
+                })
+
+            base.series = [modifiedSeries]
+        }
+        
+        return base
     }
 }

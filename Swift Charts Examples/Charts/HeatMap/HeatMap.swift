@@ -7,9 +7,10 @@ import Charts
 
 struct HeatMapOverview: View {
     @State private var grid = Grid(numRows: 10, numCols: 10)
+    var data: [Grid.Point] { grid.points }
 
     var body: some View {
-        Chart(grid.points) { point in
+        Chart(data) { point in
             RectangleMark(
                 xStart: .value("xStart", point.x),
                 xEnd: .value("xEnd", point.x + 1),
@@ -18,6 +19,7 @@ struct HeatMapOverview: View {
             )
             .foregroundStyle(point.color)
         }
+        .accessibilityChartDescriptor(self)
         .chartXAxis(.hidden)
         .chartYAxis(.hidden)
         .aspectRatio(contentMode: .fit)
@@ -42,6 +44,8 @@ struct HeatMap: View {
                             yStart: PlottableValue.value("yStart", point.y),
                             yEnd: PlottableValue.value("yEnd", point.y + 1)
                         )
+                        .accessibilityLabel("\(point.x)")
+                        .accessibilityValue("Y: \(point.y), Color: \(point.accessibilityColorName)")
                         .foregroundStyle(point.color)
                         // does not compile when annotations are paired with both `chartYAxis` and `chartXAxis`
                         // Reported FB10250889
@@ -55,6 +59,8 @@ struct HeatMap: View {
                             yStart: PlottableValue.value("yStart", point.y),
                             yEnd: PlottableValue.value("yEnd", point.y + 1)
                         )
+                        .accessibilityLabel("\(point.x)")
+                        .accessibilityValue("Y: \(point.y), Color: \(point.accessibilityColorName)")
                         .foregroundStyle(by: .value("Value", point.val))
 //                        .annotation(position: .overlay) {
 //                            Text(showValues ? String(format: "%.0f", point.val) : "")
