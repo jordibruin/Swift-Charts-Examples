@@ -35,7 +35,7 @@ See the [open issues](https://github.com/jordibruin/SwiftChartExamples/issues) i
 
 ## How to add a new chart
 
-Each chart needs a preview chart as well as a detail view. The preview chart is used in the home screen of the app for easier navigation. Look at the Simple Chart Simple code to see what the format should be for the preview charts. On the detail view, make sure you add some customisation options in a separate section from the chart.
+Each chart needs a preview chart as well as a detail view. The preview chart is used in the home screen of the app for easier navigation. Look at the Simple Line Chart code to see what the format should be for the preview charts. On the detail view, make sure you add some customisation options in a separate section from the chart. If you have any questions feel free to create an [issue](https://github.com/jordibruin/SwiftChartExamples/issues).
 
 <img src="images/charts_wwdc_slide.png">
 Source: https://developer.apple.com/videos/play/wwdc2022/10137/
