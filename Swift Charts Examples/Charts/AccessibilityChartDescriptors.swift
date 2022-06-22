@@ -26,13 +26,14 @@ private func chartDescriptor(forSalesSeries data: [(day: Date, sales: Int)]) -> 
     let min = data.map(\.sales).min() ?? 0
     let max = data.map(\.sales).max() ?? 0
 
-    let dateStringConverter: (((day: Date, sales: Int)) -> (String)) = { dataPoint in
+    // A closure that takes a date and converts it to a label for axes
+    let dateTupleStringConverter: (((day: Date, sales: Int)) -> (String)) = { dataPoint in
         dataPoint.day.formatted(date: .abbreviated, time: .omitted)
     }
     
     let xAxis = AXCategoricalDataAxisDescriptor(
         title: "Days",
-        categoryOrder: data.map { dateStringConverter($0) }
+        categoryOrder: data.map { dateTupleStringConverter($0) }
     )
 
     let yAxis = AXNumericDataAxisDescriptor(
@@ -45,7 +46,7 @@ private func chartDescriptor(forSalesSeries data: [(day: Date, sales: Int)]) -> 
         name: "Daily sale quantity",
         isContinuous: false,
         dataPoints: data.map {
-            .init(x: dateStringConverter($0), y: Double($0.sales), label: "\($0.day.weekdayString)")
+            .init(x: dateTupleStringConverter($0), y: Double($0.sales), label: "\($0.day.weekdayString)")
         }
     )
 
@@ -61,16 +62,21 @@ private func chartDescriptor(forSalesSeries data: [(day: Date, sales: Int)]) -> 
 
 private func chartDescriptor(forLocationSeries data: [LocationData.Series]) -> AXChartDescriptor {
     
+    let dateStringConverter: ((Date) -> (String)) = { date in
+        date.formatted(date: .abbreviated, time: .omitted)
+    }
+    
     // Create a descriptor for each Series object
     // as that allows auditory comparison with VoiceOver
     // much like the chart does visually and allows individual city charts to be played
-    let series = data.map {
+    let series = data.map { dataPoint in
         AXDataSeriesDescriptor(
-            name: "\($0.city)",
+            name: "\(dataPoint.city)",
             isContinuous: false,
-            dataPoints: $0.sales.map { data in
-                    .init(x: "\(data.weekday.formatted())",
-                          y: Double(data.sales))
+            dataPoints: dataPoint.sales.map { data in
+                    .init(x: dateStringConverter(data.weekday),
+                          y: Double(data.sales),
+                          label: "\(dataPoint.city): \(data.weekday.weekdayString)")
             }
         )
     }
@@ -97,14 +103,14 @@ private func chartDescriptor(forLocationSeries data: [LocationData.Series]) -> A
 
     let xAxis = AXCategoricalDataAxisDescriptor(
         title: "Days",
-        categoryOrder: days.map { $0.formatted() }
+        categoryOrder: days.map { dateStringConverter($0) }
     )
 
     let yAxis = AXNumericDataAxisDescriptor(
         title: "Sales",
         range: Double(min)...Double(max),
         gridlinePositions: []
-    ) { value in "\(value) sold" }
+    ) { value in "\(Int(value)) sold" }
 
     return AXChartDescriptor(
         title: "Sales per day",
@@ -125,19 +131,19 @@ private func chartDescriptor(forGrid data: [Grid.Point]) -> AXChartDescriptor {
     let vmax = data.map(\.val).max() ?? 0
     
     let xAxis = AXNumericDataAxisDescriptor(
-        title: "X",
+        title: "Position",
         range: Double(xmin)...Double(xmax),
         gridlinePositions: Array(stride(from: xmin, to: xmax, by: 1)).map { Double($0) }
     ) { "X: \($0)" }
 
     let yAxis = AXNumericDataAxisDescriptor(
-        title: "Y",
+        title: "Value",
         range: Double(ymin)...Double(ymax),
         gridlinePositions: Array(stride(from: ymin, to: ymax, by: 1)).map { Double($0) }
     ) { "Y: \($0)" }
     
     let valueAxis = AXNumericDataAxisDescriptor(
-        title: "Value",
+        title: "Value based Color",
         range: Double(vmin)...Double(vmax),
         gridlinePositions: []
     ) { "Color: \($0)" }
@@ -182,6 +188,7 @@ extension SingleBarOverview: AXChartDescriptorRepresentable {
 
 extension SingleBarThresholdOverview: AXChartDescriptorRepresentable {
     func makeChartDescriptor() -> AXChartDescriptor {
+        // TODO: The threshold chart should indicate to VoiceOver users when a datapoint is above threshold
         chartDescriptor(forSalesSeries: data)
     }
 }
@@ -329,7 +336,11 @@ extension HeartBeatOverview: AXChartDescriptorRepresentable {
 
 extension RangeSimpleOverview: AXChartDescriptorRepresentable {
     func makeChartDescriptor() -> AXChartDescriptor {
-
+        
+        let dateStringConverter: ((Date) -> (String)) = { date in
+            date.formatted(.dateTime.month(.wide))
+        }
+        
         let min = data.map(\.dailyMin).min() ?? 0
         let max = data.map(\.dailyMax).max() ?? 0
         let salesMin = data.map(\.sales).min() ?? 0
@@ -337,14 +348,14 @@ extension RangeSimpleOverview: AXChartDescriptorRepresentable {
 
         let xAxis = AXCategoricalDataAxisDescriptor(
             title: "Month",
-            categoryOrder: data.map { $0.month.formatted() }
+            categoryOrder: data.map { dateStringConverter($0.month) }
         )
 
         let yAxis = AXNumericDataAxisDescriptor(
             title: "Sales Average",
             range: Double(min)...Double(max),
             gridlinePositions: []
-        ) { value in "\(value) sales per day average" }
+        ) { value in "\(Int(value)) sales per day average" }
 
         // Create axes for the daily min/max and sales
         // and use the standard X/Y axes for month vs daily average
@@ -352,25 +363,25 @@ extension RangeSimpleOverview: AXChartDescriptorRepresentable {
             title: "Total Sales",
             range: Double(salesMin)...Double(salesMax),
             gridlinePositions: []
-        ) { value in "\(value) total sales" }
+        ) { value in "\(Int(value)) total sales" }
 
         let minAxis = AXNumericDataAxisDescriptor(
             title: "Daily Minimum Sales",
             range: Double(min)...Double(max),
             gridlinePositions: []
-        ) { value in "\(value) sales min" }
+        ) { value in "\(Int(value)) sales min" }
 
         let maxAxis = AXNumericDataAxisDescriptor(
             title: "Daily Maximum Sales",
             range: Double(min)...Double(max),
             gridlinePositions: []
-        ) { value in "\(value) sales max" }
+        ) { value in "\(Int(value)) sales max" }
 
         let series = AXDataSeriesDescriptor(
             name: "Daily sales ranges per month",
             isContinuous: false,
             dataPoints: data.map {
-                .init(x: $0.month.formatted(),
+                .init(x: dateStringConverter($0.month),
                       y: Double($0.dailyAverage),
                       additionalValues: [.number(Double($0.sales)),
                                          .number(Double($0.dailyMin)),
@@ -392,17 +403,16 @@ extension RangeSimpleOverview: AXChartDescriptorRepresentable {
 extension HeartRateRangeChartOverview: AXChartDescriptorRepresentable {
     func makeChartDescriptor() -> AXChartDescriptor {
         
+        let dateStringConverter: ((Date) -> (String)) = { date in
+            date.formatted(date: .abbreviated, time: .omitted)
+        }
+        
         let min = data.map(\.dailyMin).min() ?? 0
         let max = data.map(\.dailyMax).max() ?? 0
-
-        // Use this for the label, so dates are verbalized accurately
-        let formatter = DateFormatter()
-        formatter.dateStyle = .full
-        formatter.timeStyle = .none
         
         let xAxis = AXCategoricalDataAxisDescriptor(
             title: "Day",
-            categoryOrder: data.map { $0.weekday.formatted() }
+            categoryOrder: data.map { dateStringConverter($0.weekday) }
         )
 
         let yAxis = AXNumericDataAxisDescriptor(
@@ -417,6 +427,7 @@ extension HeartRateRangeChartOverview: AXChartDescriptorRepresentable {
             gridlinePositions: []
         ) { value in "Minimum: \(Int(value)) BPM" }
 
+        // FIXME: This is not verbalized when scrubbing the summary
         let maxAxis = AXNumericDataAxisDescriptor(
             title: "Daily Maximum Heartrate",
             range: Double(min)...Double(max),
@@ -427,11 +438,10 @@ extension HeartRateRangeChartOverview: AXChartDescriptorRepresentable {
             name: "Last Week",
             isContinuous: false,
             dataPoints: data.map {
-                .init(x: $0.weekday.formatted(),
+                .init(x: dateStringConverter($0.weekday),
                       y: Double($0.dailyAverage),
                       additionalValues: [.number(Double($0.dailyMin)),
-                                         .number(Double($0.dailyMax))],
-                      label: formatter.string(from: $0.weekday))
+                                         .number(Double($0.dailyMax))])
             }
         )
 

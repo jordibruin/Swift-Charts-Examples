@@ -169,6 +169,7 @@ enum ChartType: String, Identifiable, CaseIterable {
         case .heartBeat:
             return HeartBeatOverview().makeChartDescriptor()
         case .animatingLine:
+            // This one is a little odd since the Overview type contains this
             return AnimatedChart(x: 0, isOverview: true).makeChartDescriptor()
         case .singleBar:
             return SingleBarOverview().makeChartDescriptor()
@@ -194,12 +195,7 @@ enum ChartType: String, Identifiable, CaseIterable {
             return ScatterChartOverview().makeChartDescriptor()
         case .vectorField:
             return VectorFieldOverview().makeChartDescriptor()
-            
-        default:
-            let axis = AXNumericDataAxisDescriptor(title: "", range: 0.0...0.0, gridlinePositions: [], valueDescriptionProvider: { _ in
-                return ""
-            })
-            return AXChartDescriptor(title: "", summary: nil, xAxis: axis, yAxis: axis, series: [])
+        
         }
     }
 
