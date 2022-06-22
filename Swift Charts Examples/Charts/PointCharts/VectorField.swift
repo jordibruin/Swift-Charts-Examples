@@ -6,7 +6,7 @@ import SwiftUI
 import Charts
 
 struct VectorFieldOverview: View {
-    @State private var grid = Grid(numRows: 3, numCols: 3)
+    @State private var grid = Grid(numRows: 20, numCols: 20)
     var data: [Grid.Point] { grid.points }
 
     var body: some View {
@@ -25,7 +25,7 @@ struct VectorFieldOverview: View {
 }
 
 struct VectorField: View {
-    @State private var grid = Grid(numRows: 3, numCols: 3)
+    @State private var grid = Grid(numRows: 20, numCols: 20)
     @State private var degreeOffset = 0.0
     @State private var hueOffset = 0.0
     @State private var opacity = 0.7
