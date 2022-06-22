@@ -6,8 +6,11 @@ import SwiftUI
 import Charts
 
 struct OneDimensionalBarOverview: View {
+    
+    @State var data = DataUsageData.example
+    
     var body: some View {
-        Chart(DataUsageData.example, id: \.category) { element in
+        Chart(data, id: \.category) { element in
             BarMark(
                 x: .value("Data Size", element.size)
             )
@@ -18,6 +21,7 @@ struct OneDimensionalBarOverview: View {
                 .background(Color(.systemFill))
                 .cornerRadius(8)
         }
+        .accessibilityChartDescriptor(self)
         .chartXScale(range: 0...128)
         .chartXAxis(.hidden)
         .chartYAxis(.hidden)

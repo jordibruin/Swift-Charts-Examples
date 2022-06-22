@@ -6,8 +6,11 @@ import Charts
 import SwiftUI
 
 struct TimeSheetBarOverview: View {
+    
+    @State var data = TimeSheetData.lastDay
+    
     var body: some View {
-        Chart(TimeSheetData.lastDay, id: \.clockIn) {
+        Chart(data, id: \.clockIn) {
             BarMark(
                 xStart: .value("Clocking In", $0.clockIn),
                 xEnd: .value("Clocking Out", $0.clockOut),
@@ -16,6 +19,7 @@ struct TimeSheetBarOverview: View {
             .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
             .foregroundStyle(TimeSheetBar.colors[$0.department] ?? .gray)
         }
+        .accessibilityChartDescriptor(self)
         .chartXAxis(.hidden)
         .chartYAxis(.hidden)
         .frame(height: Constants.previewChartHeight)

@@ -5,6 +5,14 @@
 import SwiftUI
 
 
+/*
+ This file collects the Accessibility descriptors used for the "Overview" versions of
+ charts. The detailed versions simply use accessibilityLabel/accessibilityValue for each Mark.
+ 
+ NOTE: Filed FB10320202 indicating some Mark types do not use label/value set on the Mark
+ */
+
+
 extension Date {
     // Used for charts where the day of the week is used: visually  M/T/W etc
     // (but we want VoiceOver to read out the full day)
@@ -15,11 +23,6 @@ extension Date {
         return formatter.string(from: self)
     }
 }
-
-/*
- This file collects the Accessibility descriptors used for the "simple" versions of
- charts
- */
 
 // TODO: This should be a protocol but since the data objects are in flux this will suffice
 private func chartDescriptor(forSalesSeries data: [(day: Date, sales: Int)]) -> AXChartDescriptor {
@@ -486,5 +489,102 @@ extension VectorFieldOverview: AXChartDescriptorRepresentable {
         }
         
         return base
+    }
+}
+
+extension OneDimensionalBarOverview: AXChartDescriptorRepresentable {
+    func makeChartDescriptor() -> AXChartDescriptor {
+        let min = data.map(\.size).min() ?? 0
+        let max = data.map(\.size).max() ?? 0
+
+        let xAxis = AXCategoricalDataAxisDescriptor(
+            title: "Category",
+            categoryOrder: data.map { $0.category }
+        )
+
+        let yAxis = AXNumericDataAxisDescriptor(
+            title: "Size",
+            range: Double(min)...Double(max),
+            gridlinePositions: []
+        ) { value in "\(String(format:"%.2f", value)) GB" }
+
+        let series = AXDataSeriesDescriptor(
+            name: "Data Usage Example",
+            isContinuous: false,
+            dataPoints: data.map {
+                .init(x: $0.category, y: $0.size)
+            }
+        )
+
+        return AXChartDescriptor(
+            title: "Data Usage by category",
+            summary: nil,
+            xAxis: xAxis,
+            yAxis: yAxis,
+            additionalAxes: [],
+            series: [series]
+        )
+    }
+}
+
+extension TimeInterval {
+    var durationDescription: String {
+        let hqualifier = (hours == 1) ? "hour" : "hours"
+        let mqualifier = (minutes == 1) ? "minute" : "minutes"
+        
+        return String(format:"%d \(hqualifier) %02d \(mqualifier)", hours, minutes)
+    }
+
+    var hours: Int {
+        Int((self/3600).truncatingRemainder(dividingBy: 3600))
+    }
+    
+    var minutes: Int {
+        Int((self/60).truncatingRemainder(dividingBy: 60))
+    }
+}
+
+extension TimeSheetBarOverview: AXChartDescriptorRepresentable {
+    func makeChartDescriptor() -> AXChartDescriptor {
+        
+        let intervals = data.map {
+            (department: $0.department,
+             duration: $0.clockOut.timeIntervalSince($0.clockIn),
+             clockIn: $0.clockIn,
+             clockOut: $0.clockOut)
+        }
+        
+        let min = intervals.map(\.duration).min() ?? 0
+        let max = intervals.map(\.duration).max() ?? 0
+
+        let xAxis = AXCategoricalDataAxisDescriptor(
+            title: "Department",
+            categoryOrder: data.map { $0.department }
+        )
+
+        let yAxis = AXNumericDataAxisDescriptor(
+            title: "Duration",
+            range: Double(min)...Double(max),
+            gridlinePositions: []
+        ) { value in "\(value.durationDescription)" }
+
+        let series = AXDataSeriesDescriptor(
+            name: "Timesheet Example",
+            isContinuous: false,
+            dataPoints: intervals.map {
+                .init(x: $0.department,
+                      y: $0.duration,
+                      label: "Clock in: \($0.clockIn.formatted(date: .omitted, time: .shortened)), Clock out: \($0.clockOut.formatted(date: .omitted, time: .shortened))")
+            }
+        )
+
+        return AXChartDescriptor(
+            title: "Timesheet by department",
+            summary: nil,
+            xAxis: xAxis,
+            yAxis: yAxis,
+            additionalAxes: [],
+            series: [series]
+        )
     }
 }

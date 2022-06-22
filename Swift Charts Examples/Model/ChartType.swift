@@ -169,7 +169,7 @@ enum ChartType: String, Identifiable, CaseIterable {
         case .heartBeat:
             return HeartBeatOverview().makeChartDescriptor()
         case .animatingLine:
-            // This one is a little odd since the Overview type contains this
+            // This one is a little odd since the Overview type contains this call
             return AnimatedChart(x: 0, isOverview: true).makeChartDescriptor()
         case .singleBar:
             return SingleBarOverview().makeChartDescriptor()
@@ -178,9 +178,9 @@ enum ChartType: String, Identifiable, CaseIterable {
         case .twoBars:
             return TwoBarsOverview().makeChartDescriptor()
         case .oneDimensionalBar:
-            fallthrough // TODO: return OneDimensionalBarOverview().makeChartDescriptor()
+            return OneDimensionalBarOverview().makeChartDescriptor()
         case .timeSheetBar:
-            fallthrough // TODO: return TimeSheetBarOverview().makeChartDescriptor()
+            return TimeSheetBarOverview().makeChartDescriptor()
         case .pyramid:
             return PyramidChartOverview().makeChartDescriptor()
         case .areaSimple:
