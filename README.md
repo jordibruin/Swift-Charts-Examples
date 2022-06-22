@@ -29,6 +29,10 @@ This repo aims to provide sample code for lots of different chart types for you 
 - [ ] Funky Gradient Chart
 - [ ] Other Charts
 - [ ] Multi-language Support
+- [ ] Screen time like bar chart with stacked colors
+- [ ] First row, second bar with the lines with blocks in the middle
+- [ ] Sleep stages chart
+- [ ] iPhone battery percentage screen with different colors and overlaid bar
 - [ ] Make all charts accessible
 
 See the [open issues](https://github.com/jordibruin/SwiftChartExamples/issues) if you think anything is missing from this list. You can also contact me on [Twitter](https://www.twitter.com/jordibruin) if you have any suggestions or feedback.
