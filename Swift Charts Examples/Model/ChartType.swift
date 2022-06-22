@@ -157,6 +157,51 @@ enum ChartType: String, Identifiable, CaseIterable {
             VectorFieldOverview()
         }
     }
+    
+    var chartDescriptor: AXChartDescriptor {
+        // This is necessary since we use images for preview/overview
+        // TODO: Use protocol coonformance to remove manual switch necessity
+        switch self {
+        case .singleLine:
+            return SingleLineOverview().makeChartDescriptor()
+        case .singleLineLollipop:
+            return SingleLineLollipop(isOverview: true).makeChartDescriptor()
+        case .heartBeat:
+            return HeartBeatOverview().makeChartDescriptor()
+        case .animatingLine:
+            fallthrough // TODO: return AnimatingLineOverview().makeChartDescriptor()
+        case .singleBar:
+            return SingleBarOverview().makeChartDescriptor()
+        case .singleBarThreshold:
+            fallthrough // TODO: return SingleBarThresholdOverview().makeChartDescriptor()
+        case .twoBars:
+            return TwoBarsOverview().makeChartDescriptor()
+        case .oneDimensionalBar:
+            fallthrough // TODO: return OneDimensionalBarOverview().makeChartDescriptor()
+        case .timeSheetBar:
+            fallthrough // TODO: return TimeSheetBarOverview().makeChartDescriptor()
+        case .pyramid:
+            return PyramidChartOverview().makeChartDescriptor()
+        case .areaSimple:
+            return AreaSimpleOverview().makeChartDescriptor()
+        case .rangeSimple:
+            return RangeSimpleOverview().makeChartDescriptor()
+        case .rangeHeartRate:
+            return HeartRateRangeChartOverview().makeChartDescriptor()
+        case .customizeableHeatMap:
+            return HeatMapOverview().makeChartDescriptor()
+        case .scatter:
+            return ScatterChartOverview().makeChartDescriptor()
+        case .vectorField:
+            return VectorFieldOverview().makeChartDescriptor()
+            
+        default:
+            let axis = AXNumericDataAxisDescriptor(title: "", range: 0.0...0.0, gridlinePositions: [], valueDescriptionProvider: { _ in
+                return ""
+            })
+            return AXChartDescriptor(title: "", summary: nil, xAxis: axis, yAxis: axis, series: [])
+        }
+    }
 
     @ViewBuilder
     var detailView: some View {

@@ -54,11 +54,15 @@ struct Grid {
             return returnColor.opacity(Double.random(in: 0.75...1.0))
         }
 
-        func angle(degreeOffset: Double) -> Double {
+        var accessibilityColorName: String {
+            UIColor(color).accessibilityName
+        }
+        
+        func angle(degreeOffset: Double, inRadians: Bool = true) -> Double {
             // around 180-360 range
             let degrees = (val / 100.0) * 180.0 + 180 + degreeOffset
             let radians = (degrees * .pi) / 180.0
-            return radians
+            return inRadians ? radians : degrees
         }
 
         func angleColor(hueOffset: Double) -> Color {

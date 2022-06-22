@@ -92,14 +92,49 @@ struct ContentView: View {
                 // workaround to address hanging UI
                 // Reported FB10335209
                 if let image = cachedChartImages[chart.id] {
-                    Image(uiImage: image)
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(maxWidth: 320)
-                        .clipShape(RoundedRectangle(cornerRadius: 10))
+                    AccessiblePreviewImage(id: chart.id, image: image)
                 }
             }
         )
+    }
+}
+
+struct AccessiblePreviewImage: View, AXChartDescriptorRepresentable {
+    
+    @State var id: String
+    @State var image: UIImage
+    
+    var body: some View {
+        Image(uiImage: image)
+            .resizable()
+            .aspectRatio(contentMode: .fit)
+            .frame(maxWidth: 320)
+            .clipShape(RoundedRectangle(cornerRadius: 10))
+            // Remove the image trait so VoiceOver doesn't attempt to describe image contents
+            .accessibilityRemoveTraits(.isImage)
+            .accessibilityChartDescriptor(self)
+    }
+    
+    func makeChartDescriptor() -> AXChartDescriptor {
+        guard let chartType = ChartType(rawValue: id) else {
+            fatalError("Unknown Chart Type")
+        }
+        
+        return chartType.chartDescriptor
+        
+        /*
+         // TODO: Something like this might be better, but the if always evaluates to false
+         if
+             let chartType = ChartType(rawValue: id),
+             let view = chartType.view as? any View & AXChartDescriptorRepresentable {
+             return view.makeChartDescriptor()
+         } else {
+             let axis = AXNumericDataAxisDescriptor(title: "", range: 0.0...0.0, gridlinePositions: [], valueDescriptionProvider: { _ in
+                 return ""
+             })
+             return AXChartDescriptor(title: "", summary: nil, xAxis: axis, yAxis: axis, series: [])
+         }
+         */
     }
 }
 
