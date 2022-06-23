@@ -35,6 +35,7 @@ struct CandleStickChart: View {
         )
     }
     @State private var selectedPrice: StockData.StockPrice?
+    @State private var annotationOffset: CGFloat = 0
     
     var body: some View {
         List {
@@ -54,6 +55,7 @@ struct CandleStickChart: View {
                             .foregroundStyle(.gray.opacity(0.3))
                             .annotation(position: .top, alignment: .center, spacing: -100) {
                                 PriceAnnotation(for: selectedPrice)
+                                    .offset(x: annotationOffset)
                             }
                     }
                 }
@@ -66,6 +68,17 @@ struct CandleStickChart: View {
                                 DragGesture()
                                     .onChanged { value in
                                         let xCurrent = value.location.x - g[proxy.plotAreaFrame].origin.x
+                                        let plotWidth = proxy.plotAreaSize.width
+                                        let upperBound = plotWidth * 0.7
+                                        let lowerBound = plotWidth * 0.4
+                                        
+                                        if (upperBound...plotWidth).contains(xCurrent) {
+                                            annotationOffset = upperBound - xCurrent
+                                        } else if (0...lowerBound).contains(xCurrent) {
+                                            annotationOffset = lowerBound - xCurrent
+                                        } else {
+                                            annotationOffset = 0
+                                        }
                                         
                                         if let currentDate: Date = proxy.value(atX: xCurrent) {
                                             let index = dateBins.index(for: currentDate)
@@ -75,7 +88,10 @@ struct CandleStickChart: View {
                                             }
                                         }
                                     }
-                                    .onEnded { _ in selectedPrice = nil }
+                                    .onEnded { _ in
+                                        selectedPrice = nil
+                                        annotationOffset = 0
+                                    }
                             )
                     }
                 }
