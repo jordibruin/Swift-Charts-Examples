@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		2E5763C628576B1B006C7C36 /* PyramidChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E5763C528576B1B006C7C36 /* PyramidChart.swift */; };
 		2E8EA801285AA53F0040C591 /* VectorField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E8EA800285AA53F0040C591 /* VectorField.swift */; };
+		52145C302864A34D00EB89D7 /* CandleStickChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52145C2F2864A34D00EB89D7 /* CandleStickChart.swift */; };
+		52145C322864A60D00EB89D7 /* StockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52145C312864A60D00EB89D7 /* StockData.swift */; };
 		5BC09FE32859526B00C2DB92 /* HeartRateRangeChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BC09FE22859526B00C2DB92 /* HeartRateRangeChart.swift */; };
 		62FF3F002857EADF0022930C /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62FF3EFF2857EADF0022930C /* Grid.swift */; };
 		62FF3F022857EB530022930C /* HeatMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62FF3F012857EB530022930C /* HeatMap.swift */; };
@@ -60,6 +62,8 @@
 		262541172856A35B00A1E2EC /* Build.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Build.xcconfig; sourceTree = "<group>"; };
 		2E5763C528576B1B006C7C36 /* PyramidChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PyramidChart.swift; sourceTree = "<group>"; };
 		2E8EA800285AA53F0040C591 /* VectorField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VectorField.swift; sourceTree = "<group>"; };
+		52145C2F2864A34D00EB89D7 /* CandleStickChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CandleStickChart.swift; sourceTree = "<group>"; };
+		52145C312864A60D00EB89D7 /* StockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockData.swift; sourceTree = "<group>"; };
 		5BC09FE22859526B00C2DB92 /* HeartRateRangeChart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeartRateRangeChart.swift; sourceTree = "<group>"; };
 		62FF3EFF2857EADF0022930C /* Grid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
 		62FF3F012857EB530022930C /* HeatMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeatMap.swift; sourceTree = "<group>"; };
@@ -230,6 +234,7 @@
 			children = (
 				C26088172856963D00B09DDB /* Data.swift */,
 				7425DF822858DF4300672F3B /* HealthData.swift */,
+				52145C312864A60D00EB89D7 /* StockData.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -251,6 +256,7 @@
 				C260882D2856B4C900B09DDB /* SingleBar.swift */,
 				FC602023285B532C0089DBDC /* SingleBarThreshold.swift */,
 				C260881F2856A34400B09DDB /* TwoBars.swift */,
+				52145C2F2864A34D00EB89D7 /* CandleStickChart.swift */,
 				2E5763C528576B1B006C7C36 /* PyramidChart.swift */,
 				934A95032857D035009E29F4 /* OneDimensionalBar.swift */,
 				84A8089C285E112E00B60AFB /* TimeSheetBar.swift */,
@@ -422,6 +428,7 @@
 				C22EB5A028568D0B000B9F9A /* ContentView.swift in Sources */,
 				C260881C28569D1B00B09DDB /* InterpolationMethod.swift in Sources */,
 				C26088202856A34400B09DDB /* TwoBars.swift in Sources */,
+				52145C302864A34D00EB89D7 /* CandleStickChart.swift in Sources */,
 				62FF3F022857EB530022930C /* HeatMap.swift in Sources */,
 				FC5466C62857E0D700315632 /* SingleLineLollipop.swift in Sources */,
 				C26088182856963D00B09DDB /* Data.swift in Sources */,
@@ -437,6 +444,7 @@
 				C26088152856960000B09DDB /* SingleLine.swift in Sources */,
 				FC602024285B532C0089DBDC /* SingleBarThreshold.swift in Sources */,
 				C26088272856A95A00B09DDB /* ChartStrideBy.swift in Sources */,
+				52145C322864A60D00EB89D7 /* StockData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -594,7 +602,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Swift Charts Examples/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 39UYTBG4RA;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -624,7 +632,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Swift Charts Examples/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 39UYTBG4RA;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
