@@ -18,6 +18,7 @@ This repo aims to provide sample code for lots of different chart types for you 
 - [x] Area Chart
 - [x] Range Chart
 - [x] Range with Max and Min Chart
+- [x] Candle Stick Chart
 - [x] Heartbeat range Chart
 - [x] Heatmap Block Chart
 - [x] Scatter Chart
@@ -112,7 +113,6 @@ Candle Stick Chart
 <img src="images/charts/range/candleStick.png" width="380">
 
 ### [Heat Maps](https://github.com/jordibruin/SwiftChartExamples/tree/main/Swift%20Charts%20Examples/Charts/HeatMap)
-
 
 Customizable Heat Map
 
