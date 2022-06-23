@@ -46,6 +46,7 @@ enum ChartType: String, Identifiable, CaseIterable {
     case singleBar
     case singleBarThreshold
     case twoBars
+    case candleStick
     case pyramid
     case oneDimensionalBar
     case timeSheetBar
@@ -82,6 +83,8 @@ enum ChartType: String, Identifiable, CaseIterable {
             return "Single Bar with Threshold Rule Mark"
         case .twoBars:
             return "Two Bars"
+        case .candleStick:
+            return "Candle Stick Chart"
         case .pyramid:
             return "Pyramid"
         case .oneDimensionalBar:
@@ -107,7 +110,7 @@ enum ChartType: String, Identifiable, CaseIterable {
         switch self {
         case .singleLine, .singleLineLollipop, .heartBeat, .animatingLine:
             return .line
-        case .singleBar, .singleBarThreshold, .twoBars, .pyramid, .oneDimensionalBar, .timeSheetBar:
+        case .singleBar, .singleBarThreshold, .twoBars, .candleStick, .pyramid, .oneDimensionalBar, .timeSheetBar:
             return .bar
         case .areaSimple:
             return .area
@@ -137,6 +140,8 @@ enum ChartType: String, Identifiable, CaseIterable {
             SingleBarThresholdOverview()
         case .twoBars:
             TwoBarsOverview()
+        case .candleStick:
+            CandleStickChartOverview()
         case .oneDimensionalBar:
             OneDimensionalBarOverview()
         case .timeSheetBar:
@@ -175,6 +180,8 @@ enum ChartType: String, Identifiable, CaseIterable {
             SingleBarThreshold()
         case .twoBars:
             TwoBars()
+        case .candleStick:
+            CandleStickChart()
         case .oneDimensionalBar:
             OneDimensionalBar()
         case .timeSheetBar:
