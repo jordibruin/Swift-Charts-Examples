@@ -18,6 +18,7 @@ This repo aims to provide sample code for lots of different chart types for you 
 - [x] Area Chart
 - [x] Range Chart
 - [x] Range with Max and Min Chart
+- [x] Candle Stick Chart
 - [x] Heartbeat range Chart
 - [x] Heatmap Block Chart
 - [x] Scatter Chart
@@ -29,13 +30,17 @@ This repo aims to provide sample code for lots of different chart types for you 
 - [ ] Funky Gradient Chart
 - [ ] Other Charts
 - [ ] Multi-language Support
+- [ ] Screen time like bar chart with stacked colors
+- [ ] First row, second bar with the lines with blocks in the middle
+- [ ] Sleep stages chart
+- [ ] iPhone battery percentage screen with different colors and overlaid bar
 - [ ] Make all charts accessible
 
 See the [open issues](https://github.com/jordibruin/SwiftChartExamples/issues) if you think anything is missing from this list. You can also contact me on [Twitter](https://www.twitter.com/jordibruin) if you have any suggestions or feedback.
 
 ## How to add a new chart
 
-Each chart needs a preview chart as well as a detail view. The preview chart is used in the home screen of the app for easier navigation. Look at the Simple Chart Simple code to see what the format should be for the preview charts. On the detail view, make sure you add some customisation options in a separate section from the chart.
+Each chart needs a preview chart as well as a detail view. The preview chart is used in the home screen of the app for easier navigation. Look at the Simple Line Chart code to see what the format should be for the preview charts. On the detail view, make sure you add some customisation options in a separate section from the chart. If you have any questions feel free to create an [issue](https://github.com/jordibruin/SwiftChartExamples/issues).
 
 <img src="images/charts_wwdc_slide.png">
 Source: https://developer.apple.com/videos/play/wwdc2022/10137/
@@ -102,6 +107,10 @@ Range Chart
 Heart Rate Range Chart
 
 <img src="images/charts/range/rangeHeartRate.png" width="380">
+
+Candle Stick Chart
+
+<img src="images/charts/range/candleStick.png" width="380">
 
 ### [Heat Maps](https://github.com/jordibruin/SwiftChartExamples/tree/main/Swift%20Charts%20Examples/Charts/HeatMap)
 
