@@ -23,6 +23,7 @@ This repo aims to provide sample code for lots of different chart types for you 
 - [x] Heatmap Block Chart
 - [x] Scatter Chart
 - [x] Vector Field
+- [x] UV Index Chart
 
 ## Todo
 - [ ] Cumulative line Chart
@@ -127,3 +128,7 @@ Scatter Chart
 Vector Field
 
 <img src="images/charts/point/vectorField.png" width="380">
+
+UV Index
+
+<img src="images/charts/weather/uvIndex.png" width="380">
