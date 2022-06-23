@@ -107,7 +107,12 @@ Heart Rate Range Chart
 
 <img src="images/charts/range/rangeHeartRate.png" width="380">
 
+Candle Stick Chart
+
+<img src="images/charts/range/candleStick.png" width="380">
+
 ### [Heat Maps](https://github.com/jordibruin/SwiftChartExamples/tree/main/Swift%20Charts%20Examples/Charts/HeatMap)
+
 
 Customizable Heat Map
 

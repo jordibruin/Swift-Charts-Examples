@@ -24,7 +24,7 @@ struct SingleLineLollipop: View {
                     chart
                 }
                 Section {
-                    Text("Tap and drag over the chart to move the lollipop")
+                    Text("**Hold and drag** over the chart to view and move the lollipop")
                         .font(.callout)
                 }
             }
