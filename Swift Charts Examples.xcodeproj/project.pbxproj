@@ -129,6 +129,7 @@
 			children = (
 				88B3E5CF2857493B00840CAA /* RangeSimple.swift */,
 				5BC09FE22859526B00C2DB92 /* HeartRateRangeChart.swift */,
+				52145C2F2864A34D00EB89D7 /* CandleStickChart.swift */,
 			);
 			path = RangeCharts;
 			sourceTree = "<group>";
@@ -256,7 +257,6 @@
 				C260882D2856B4C900B09DDB /* SingleBar.swift */,
 				FC602023285B532C0089DBDC /* SingleBarThreshold.swift */,
 				C260881F2856A34400B09DDB /* TwoBars.swift */,
-				52145C2F2864A34D00EB89D7 /* CandleStickChart.swift */,
 				2E5763C528576B1B006C7C36 /* PyramidChart.swift */,
 				934A95032857D035009E29F4 /* OneDimensionalBar.swift */,
 				84A8089C285E112E00B60AFB /* TimeSheetBar.swift */,

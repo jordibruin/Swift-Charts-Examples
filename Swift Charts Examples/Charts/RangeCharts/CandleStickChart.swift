@@ -10,12 +10,18 @@ struct CandleStickChartOverview: View {
     
     var body: some View {
         Chart(currentPrices) { (price: StockData.StockPrice) in
-            CandleStickMark(
-                timestamp: .value("Date", price.timestamp),
-                open: .value("Open", price.open),
-                high: .value("High", price.high),
-                low: .value("Low", price.low),
-                close: .value("Close", price.close)
+            BarMark(
+                x: .value("Date", price.timestamp),
+                yStart: .value("Open", price.open),
+                yEnd: .value("Close", price.close),
+                width: 8
+            )
+            .foregroundStyle(price.open < price.close ? .blue : .red)
+            BarMark(
+                x: .value("Date", price.timestamp),
+                yStart: .value("High", price.high),
+                yEnd: .value("Low", price.low),
+                width: 2
             )
             .foregroundStyle(price.open < price.close ? .blue : .red)
         }
@@ -98,9 +104,10 @@ struct CandleStickChart: View {
             }
             Section {
                 Text("**Hold and drag** over the chart to view and move the lollipop")
+                    .font(.callout)
             }
         }
-        .navigationTitle("Candle Stick Chart")
+        .navigationTitle(ChartType.candleStick.title)
         .navigationBarTitleDisplayMode(.inline)
     }
 }
