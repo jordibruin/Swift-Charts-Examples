@@ -67,6 +67,11 @@ Animating Line
 
 <img src="images/charts/line/animatingLine.png" width="380">
 
+UV Index
+
+<img src="images/charts/weather/uvIndex.png" width="380">
+
+
 ### [Bar Charts](https://github.com/jordibruin/SwiftChartExamples/tree/main/Swift%20Charts%20Examples/Charts/BarCharts)
 
 Single Bar
@@ -129,6 +134,3 @@ Vector Field
 
 <img src="images/charts/point/vectorField.png" width="380">
 
-UV Index
-
-<img src="images/charts/weather/uvIndex.png" width="380">
