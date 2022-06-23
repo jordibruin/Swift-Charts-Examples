@@ -52,7 +52,7 @@ struct CandleStickChart: View {
                     if let selectedPrice {
                         RuleMark(x: .value("Selected Date", selectedPrice.timestamp))
                             .foregroundStyle(.gray.opacity(0.3))
-                            .annotation(position: .top, alignment: .center) {
+                            .annotation(position: .top, alignment: .center, spacing: -100) {
                                 PriceAnnotation(for: selectedPrice)
                             }
                     }
@@ -80,7 +80,12 @@ struct CandleStickChart: View {
                     }
                 }
             }
+            Section {
+                Text("**Hold and drag** over the chart to view and move the lollipop")
+            }
         }
+        .navigationTitle("Candle Stick Chart")
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 
