@@ -386,3 +386,53 @@ enum TimeSheetData {
         (department: "Vegetables", clockIn: date(year: 2022, month: 6, day: 17, hour: 19, minutes: 33), clockOut: date(year: 2022, month: 6, day: 17, hour: 21, minutes: 01))
     ]
 }
+
+// MARK: - Weather Data
+
+enum WeatherData {
+	static let hourlyUVIndex: [(date: Date, uvIndex: Int)] = [
+		(.startOfDay.addingTimeInterval(3600*0), 0),
+		(.startOfDay.addingTimeInterval(3600*1), 0),
+		(.startOfDay.addingTimeInterval(3600*2), 0),
+		(.startOfDay.addingTimeInterval(3600*3), 0),
+		(.startOfDay.addingTimeInterval(3600*4), 0),
+		(.startOfDay.addingTimeInterval(3600*5), 0),
+		(.startOfDay.addingTimeInterval(3600*6), 0),
+		(.startOfDay.addingTimeInterval(3600*7), 1),
+		(.startOfDay.addingTimeInterval(3600*8), 4),
+		(.startOfDay.addingTimeInterval(3600*9), 6),
+		(.startOfDay.addingTimeInterval(3600*10), 9),
+		(.startOfDay.addingTimeInterval(3600*11), 12),
+		(.startOfDay.addingTimeInterval(3600*12), 12),
+		(.startOfDay.addingTimeInterval(3600*13), 11),
+		(.startOfDay.addingTimeInterval(3600*14), 9),
+		(.startOfDay.addingTimeInterval(3600*15), 6),
+		(.startOfDay.addingTimeInterval(3600*16), 3),
+		(.startOfDay.addingTimeInterval(3600*17), 1),
+		(.startOfDay.addingTimeInterval(3600*18), 0),
+		(.startOfDay.addingTimeInterval(3600*19), 0),
+		(.startOfDay.addingTimeInterval(3600*20), 0),
+		(.startOfDay.addingTimeInterval(3600*21), 0),
+		(.startOfDay.addingTimeInterval(3600*22), 0),
+		(.startOfDay.addingTimeInterval(3600*23), 0)
+	]
+}
+
+extension Date {
+	static var startOfDay: Date {
+		return Calendar.current.startOfDay(for: .now)
+	}
+}
+
+extension Date {
+	func nearestHour() -> Date? {
+		var components = NSCalendar.current.dateComponents([.minute, .second, .nanosecond], from: self)
+		let minute = components.minute ?? 0
+		let second = components.second ?? 0
+		let nanosecond = components.nanosecond ?? 0
+		components.minute = minute >= 30 ? 60 - minute : -minute
+		components.second = -second
+		components.nanosecond = -nanosecond
+		return Calendar.current.date(byAdding: components, to: self)
+	}
+}

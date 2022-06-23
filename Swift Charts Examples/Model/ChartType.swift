@@ -12,6 +12,7 @@ enum ChartCategory: String, CaseIterable, Hashable, Identifiable {
     case range
     case heatMap
     case point
+	case weather
   
     var id: String { self.rawValue }
     
@@ -31,6 +32,8 @@ enum ChartCategory: String, CaseIterable, Hashable, Identifiable {
             return "checkerboard.rectangle"
         case .point:
             return "point.3.connected.trianglepath.dotted"
+		case .weather:
+			return "cloud.sun.fill"
         }
     }
 }
@@ -64,6 +67,9 @@ enum ChartType: String, Identifiable, CaseIterable {
     // Point Charts
     case scatter
     case vectorField
+
+	// Weather
+	case uvIndex
 
     var id: String { self.rawValue }
 
@@ -103,6 +109,8 @@ enum ChartType: String, Identifiable, CaseIterable {
             return "Scatter Chart"
         case .vectorField:
             return "Vector Field"
+		case .uvIndex:
+			return "UV Index"
         }
     }
 
@@ -120,6 +128,8 @@ enum ChartType: String, Identifiable, CaseIterable {
             return .heatMap
         case .scatter, .vectorField:
             return .point
+		case .uvIndex:
+			return .weather
         }
     }
 
@@ -160,6 +170,8 @@ enum ChartType: String, Identifiable, CaseIterable {
             ScatterChartOverview()
         case .vectorField:
             VectorFieldOverview()
+		case .uvIndex:
+			UVIndex(isOverview: true)
         }
     }
 
@@ -200,6 +212,8 @@ enum ChartType: String, Identifiable, CaseIterable {
             ScatterChart()
         case .vectorField:
             VectorField()
+		case .uvIndex:
+			UVIndex()
         }
     }
 }
