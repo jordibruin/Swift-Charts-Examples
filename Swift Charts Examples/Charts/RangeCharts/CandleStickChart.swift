@@ -94,7 +94,7 @@ struct CandleStickChart: View {
                                 let boxOffset = max(0, min(geo.size.width - boxWidth, lineX - boxWidth / 2))
 
                                 Rectangle()
-                                    .fill(.gray.opacity(0.3))
+                                    .fill(.gray.opacity(0.5))
                                     .frame(width: 2, height: lineHeight)
                                     .position(x: lineX, y: lineHeight / 2)
 
@@ -199,6 +199,7 @@ struct PriceAnnotation: View {
         }
         .lineLimit(1)
         .font(.headline)
+        .padding(.vertical)
     }
 }
 
