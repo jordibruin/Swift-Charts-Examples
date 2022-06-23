@@ -6,7 +6,7 @@ import SwiftUI
 import Charts
 
 struct CandleStickChartOverview: View {
-    private let currentPrices: [StockData.StockPrice] = StockData.appleFirst7Months
+    let currentPrices: [StockData.StockPrice] = StockData.appleFirst7Months
     
     var body: some View {
         Chart(currentPrices) { (price: StockData.StockPrice) in
@@ -25,6 +25,7 @@ struct CandleStickChartOverview: View {
             )
             .foregroundStyle(price.open < price.close ? .blue : .red)
         }
+        .accessibilityChartDescriptor(self)
         .chartXAxis(.hidden)
         .chartYAxis(.hidden)
         .chartYScale(domain: 35...45)
@@ -54,7 +55,9 @@ struct CandleStickChart: View {
                         low: .value("Low", price.low),
                         close: .value("Close", price.close)
                     )
-                    .foregroundStyle(price.open < price.close ? .blue : .red)
+                    .accessibilityLabel("\(price.timestamp.formatted(date: .complete, time: .omitted)): \(price.accessibilityTrendSummary)")
+                    .accessibilityValue(price.accessibilityDescription)
+                    .foregroundStyle(price.isClosingHigher ? .blue : .red)
                     
                     if let selectedPrice {
                         RuleMark(x: .value("Selected Date", selectedPrice.timestamp))
@@ -120,18 +123,23 @@ struct CandleStickMark: ChartContent {
     let close: PlottableValue<Decimal>
     
     var body: some ChartContent {
-        BarMark(
-            x: timestamp,
-            yStart: open,
-            yEnd: close,
-            width: 4
-        )
-        BarMark(
-            x: timestamp,
-            yStart: high,
-            yEnd: low,
-            width: 1
-        )
+        // Composite ChartContent MUST be grouped into a plot for accessibility to work
+        Plot {
+            BarMark(
+                x: timestamp,
+                yStart: open,
+                yEnd: close,
+                width: 4
+            )
+            
+            BarMark(
+                x: timestamp,
+                yStart: high,
+                yEnd: low,
+                width: 1
+            )
+        }
+        
     }
 }
 

@@ -303,6 +303,74 @@ extension HeartRateRangeChartOverview: AXChartDescriptorRepresentable {
     }
 }
 
+extension CandleStickChartOverview: AXChartDescriptorRepresentable {
+    func makeChartDescriptor() -> AXChartDescriptor {
+        
+        let dateStringConverter: ((Date) -> (String)) = { date in
+            date.formatted(date: .abbreviated, time: .omitted)
+        }
+        
+        // These closures help find the min/max for each axis
+        let lowestValue: ((KeyPath<StockData.StockPrice, Decimal>) -> (Double)) = { path in
+            return currentPrices.map { $0[keyPath: path]} .min()?.asDouble ?? 0
+        }
+        let highestValue: ((KeyPath<StockData.StockPrice, Decimal>) -> (Double)) = { path in
+            return currentPrices.map { $0[keyPath: path]} .max()?.asDouble ?? 0
+        }
+        
+        let xAxis = AXCategoricalDataAxisDescriptor(
+            title: "Date",
+            categoryOrder: currentPrices.map { dateStringConverter($0.timestamp) }
+        )
+        
+        // Add axes for each data point captured in the candlestick
+        let closeAxis = AXNumericDataAxisDescriptor(
+            title: "Closing Price",
+            range: 0...highestValue(\.close),
+            gridlinePositions: []
+        ) { value in "Closing: \(value.formatted(.currency(code: "USD")))" }
+        
+        let openAxis = AXNumericDataAxisDescriptor(
+            title: "Opening Price",
+            range: lowestValue(\.open)...highestValue(\.open),
+            gridlinePositions: []
+        ) { value in "Opening: \(value.formatted(.currency(code: "USD")))" }
+        
+        let highAxis = AXNumericDataAxisDescriptor(
+            title: "Highest Price",
+            range: lowestValue(\.high)...highestValue(\.high),
+            gridlinePositions: []
+        ) { value in "High: \(value.formatted(.currency(code: "USD")))" }
+        
+        let lowAxis = AXNumericDataAxisDescriptor(
+            title: "Lowest Price",
+            range: lowestValue(\.low)...highestValue(\.low),
+            gridlinePositions: []
+        ) { value in "Low: \(value.formatted(.currency(code: "USD")))" }
+        
+        let series = AXDataSeriesDescriptor(
+            name: "Apple Stock Price",
+            isContinuous: false,
+            dataPoints: currentPrices.map {
+                .init(x: dateStringConverter($0.timestamp),
+                      y: $0.close.asDouble,
+                      additionalValues: [.number($0.open.asDouble),
+                                         .number($0.high.asDouble),
+                                         .number($0.low.asDouble)])
+            }
+        )
+        
+        return AXChartDescriptor(
+            title: "Apple Stock Price",
+            summary: nil,
+            xAxis: xAxis,
+            yAxis: closeAxis,
+            additionalAxes: [openAxis, highAxis, lowAxis],
+            series: [series]
+        )
+    }
+}
+
 extension HeatMapOverview: AXChartDescriptorRepresentable {
     func makeChartDescriptor() -> AXChartDescriptor {
         return chartDescriptor(forGrid: data)

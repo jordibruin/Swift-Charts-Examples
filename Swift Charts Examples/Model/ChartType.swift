@@ -184,6 +184,8 @@ enum ChartType: String, Identifiable, CaseIterable {
             return TwoBarsOverview().makeChartDescriptor()
         case .oneDimensionalBar:
             return OneDimensionalBarOverview().makeChartDescriptor()
+        case .candleStick:
+            return CandleStickChartOverview().makeChartDescriptor()
         case .timeSheetBar:
             return TimeSheetBarOverview().makeChartDescriptor()
         case .pyramid:

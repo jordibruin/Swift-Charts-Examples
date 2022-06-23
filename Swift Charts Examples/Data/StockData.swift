@@ -4,6 +4,29 @@
 
 import Foundation
 
+private extension Decimal {
+    var currency: String { self.formatted(.currency(code: "USD")) }
+}
+
+extension Decimal {
+    var asDouble: Double { Double(truncating: self as NSNumber) }
+}
+
+extension StockData.StockPrice {
+    
+    var isClosingHigher: Bool {
+        self.open < self.close
+    }
+    
+    var accessibilityTrendSummary: String {
+        "Price movement: \(isClosingHigher ? "up" : "down")"
+    }
+    
+    var accessibilityDescription: String {
+        return "Open: \(self.open.currency), Close: \(self.close.currency), High: \(self.high.currency), Low: \(self.low.currency)"
+    }
+}
+
 enum StockData {
     struct StockPrice: Identifiable {
         let timestamp: Date
