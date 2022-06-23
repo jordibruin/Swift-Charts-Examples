@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		2E5763C628576B1B006C7C36 /* PyramidChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E5763C528576B1B006C7C36 /* PyramidChart.swift */; };
 		2E8EA801285AA53F0040C591 /* VectorField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E8EA800285AA53F0040C591 /* VectorField.swift */; };
+		4EB65CFB2864E074009D49AA /* UVIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB65CFA2864E074009D49AA /* UVIndex.swift */; };
 		52145C302864A34D00EB89D7 /* CandleStickChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52145C2F2864A34D00EB89D7 /* CandleStickChart.swift */; };
 		52145C322864A60D00EB89D7 /* StockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52145C312864A60D00EB89D7 /* StockData.swift */; };
 		5BC09FE32859526B00C2DB92 /* HeartRateRangeChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BC09FE22859526B00C2DB92 /* HeartRateRangeChart.swift */; };
@@ -21,6 +22,7 @@
 		934A95042857D035009E29F4 /* OneDimensionalBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934A95032857D035009E29F4 /* OneDimensionalBar.swift */; };
 		9691226F28594EC5001FCF65 /* ScatterChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9691226E28594EC5001FCF65 /* ScatterChart.swift */; };
 		97665180285BB9C80079660D /* AccessibilityChartDescriptors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9766517F285BB9C80079660D /* AccessibilityChartDescriptors.swift */; };
+		97A7B09528651B5B0069FFFE /* AccessibilityHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97A7B09428651B5B0069FFFE /* AccessibilityHelpers.swift */; };
 		C22EB59E28568D0B000B9F9A /* Swift_Charts_ExamplesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C22EB59D28568D0B000B9F9A /* Swift_Charts_ExamplesApp.swift */; };
 		C22EB5A028568D0B000B9F9A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C22EB59F28568D0B000B9F9A /* ContentView.swift */; };
 		C22EB5A228568D0C000B9F9A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C22EB5A128568D0C000B9F9A /* Assets.xcassets */; };
@@ -63,6 +65,7 @@
 		262541172856A35B00A1E2EC /* Build.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Build.xcconfig; sourceTree = "<group>"; };
 		2E5763C528576B1B006C7C36 /* PyramidChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PyramidChart.swift; sourceTree = "<group>"; };
 		2E8EA800285AA53F0040C591 /* VectorField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VectorField.swift; sourceTree = "<group>"; };
+		4EB65CFA2864E074009D49AA /* UVIndex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UVIndex.swift; sourceTree = "<group>"; };
 		52145C2F2864A34D00EB89D7 /* CandleStickChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CandleStickChart.swift; sourceTree = "<group>"; };
 		52145C312864A60D00EB89D7 /* StockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockData.swift; sourceTree = "<group>"; };
 		5BC09FE22859526B00C2DB92 /* HeartRateRangeChart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeartRateRangeChart.swift; sourceTree = "<group>"; };
@@ -75,6 +78,7 @@
 		934A95032857D035009E29F4 /* OneDimensionalBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneDimensionalBar.swift; sourceTree = "<group>"; };
 		9691226E28594EC5001FCF65 /* ScatterChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScatterChart.swift; sourceTree = "<group>"; };
 		9766517F285BB9C80079660D /* AccessibilityChartDescriptors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccessibilityChartDescriptors.swift; sourceTree = "<group>"; };
+		97A7B09428651B5B0069FFFE /* AccessibilityHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccessibilityHelpers.swift; sourceTree = "<group>"; };
 		C22EB59A28568D0B000B9F9A /* Swift Charts Examples.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Swift Charts Examples.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C22EB59D28568D0B000B9F9A /* Swift_Charts_ExamplesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Swift_Charts_ExamplesApp.swift; sourceTree = "<group>"; };
 		C22EB59F28568D0B000B9F9A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -126,6 +130,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4EB65CF92864E065009D49AA /* WeatherCharts */ = {
+			isa = PBXGroup;
+			children = (
+				4EB65CFA2864E074009D49AA /* UVIndex.swift */,
+			);
+			path = WeatherCharts;
+			sourceTree = "<group>";
+		};
 		88B3E5CC285748E400840CAA /* RangeCharts */ = {
 			isa = PBXGroup;
 			children = (
@@ -213,12 +225,14 @@
 			isa = PBXGroup;
 			children = (
 				9766517F285BB9C80079660D /* AccessibilityChartDescriptors.swift */,
+				97A7B09428651B5B0069FFFE /* AccessibilityHelpers.swift */,
 				C26088192856968400B09DDB /* LineCharts */,
 				C260881D2856A32C00B09DDB /* BarCharts */,
 				C26088282856B3AE00B09DDB /* AreaCharts */,
 				88B3E5CC285748E400840CAA /* RangeCharts */,
 				FC56C9A82857B8790044DDED /* HeatMap */,
 				9691226D28594EB4001FCF65 /* PointCharts */,
+				4EB65CF92864E065009D49AA /* WeatherCharts */,
 			);
 			path = Charts;
 			sourceTree = "<group>";
@@ -426,9 +440,11 @@
 				934A95042857D035009E29F4 /* OneDimensionalBar.swift in Sources */,
 				97665180285BB9C80079660D /* AccessibilityChartDescriptors.swift in Sources */,
 				C260882B2856B3C500B09DDB /* AreaSimple.swift in Sources */,
+				4EB65CFB2864E074009D49AA /* UVIndex.swift in Sources */,
 				7425DF832858DF4300672F3B /* HealthData.swift in Sources */,
 				C23072892860D8FA00DA1CED /* AnimatingLine.swift in Sources */,
 				88B3E5D02857493B00840CAA /* RangeSimple.swift in Sources */,
+				97A7B09528651B5B0069FFFE /* AccessibilityHelpers.swift in Sources */,
 				9691226F28594EC5001FCF65 /* ScatterChart.swift in Sources */,
 				C22EB5A028568D0B000B9F9A /* ContentView.swift in Sources */,
 				C260881C28569D1B00B09DDB /* InterpolationMethod.swift in Sources */,

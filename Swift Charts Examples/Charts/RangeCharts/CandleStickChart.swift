@@ -58,50 +58,60 @@ struct CandleStickChart: View {
                     .accessibilityLabel("\(price.timestamp.formatted(date: .complete, time: .omitted)): \(price.accessibilityTrendSummary)")
                     .accessibilityValue(price.accessibilityDescription)
                     .foregroundStyle(price.isClosingHigher ? .blue : .red)
-                    
-                    if let selectedPrice {
-                        RuleMark(x: .value("Selected Date", selectedPrice.timestamp))
-                            .foregroundStyle(.gray.opacity(0.3))
-                            .annotation(position: .top, alignment: .center, spacing: -100) {
-                                PriceAnnotation(for: selectedPrice)
-                                    .offset(x: annotationOffset)
-                            }
-                    }
                 }
                 .frame(height: Constants.detailChartHeight)
                 .chartYAxis { AxisMarks(preset: .extended) }
                 .chartOverlay { proxy in
-                    GeometryReader { g in
+                    GeometryReader { geo in
                         Rectangle().fill(.clear).contentShape(Rectangle())
                             .gesture(
-                                DragGesture()
-                                    .onChanged { value in
-                                        let xCurrent = value.location.x - g[proxy.plotAreaFrame].origin.x
-                                        let plotWidth = proxy.plotAreaSize.width
-                                        let upperBound = plotWidth * 0.7
-                                        let lowerBound = plotWidth * 0.4
-                                        
-                                        if (upperBound...plotWidth).contains(xCurrent) {
-                                            annotationOffset = upperBound - xCurrent
-                                        } else if (0...lowerBound).contains(xCurrent) {
-                                            annotationOffset = lowerBound - xCurrent
+                                SpatialTapGesture()
+                                    .onEnded { value in
+                                        let element = findElement(location: value.location, proxy: proxy, geometry: geo)
+                                        if selectedPrice?.timestamp == element?.timestamp {
+                                            // If tapping the same element, clear the selection.
+                                            selectedPrice = nil
                                         } else {
-                                            annotationOffset = 0
+                                            selectedPrice = element
                                         }
-                                        
-                                        if let currentDate: Date = proxy.value(atX: xCurrent) {
-                                            let index = dateBins.index(for: currentDate)
-                                            
-                                            if currentPrices.indices.contains(index) {
-                                                selectedPrice = currentPrices[index]
+                                    }
+                                    .exclusively(
+                                        before: DragGesture()
+                                            .onChanged { value in
+                                                selectedPrice = findElement(location: value.location, proxy: proxy, geometry: geo)
                                             }
-                                        }
-                                    }
-                                    .onEnded { _ in
-                                        selectedPrice = nil
-                                        annotationOffset = 0
-                                    }
+                                    )
                             )
+                    }
+                }
+                .chartOverlay { proxy in
+                    ZStack(alignment: .topLeading) {
+                        GeometryReader { geo in
+                            if let selectedPrice {
+                                let dateInterval = Calendar.current.dateInterval(of: .day, for: selectedPrice.timestamp)!
+                                let startPositionX1 = proxy.position(forX: dateInterval.start) ?? 0
+
+                                let lineX = startPositionX1 + geo[proxy.plotAreaFrame].origin.x
+                                let lineHeight = geo[proxy.plotAreaFrame].maxY
+                                let boxWidth: CGFloat = 220
+                                let boxOffset = max(0, min(geo.size.width - boxWidth, lineX - boxWidth / 2))
+
+                                Rectangle()
+                                    .fill(.gray.opacity(0.5))
+                                    .frame(width: 2, height: lineHeight)
+                                    .position(x: lineX, y: lineHeight / 2)
+
+                                PriceAnnotation(for: selectedPrice)
+                                    .frame(width: boxWidth, alignment: .leading)
+                                    .background {
+                                        RoundedRectangle(cornerRadius: 13)
+                                            .foregroundStyle(.thickMaterial)
+                                            .padding(.horizontal, -8)
+                                            .padding(.vertical, -4)
+                                    }
+                                    .offset(x: boxOffset)
+                            }
+                        }
                     }
                 }
             }
@@ -112,6 +122,26 @@ struct CandleStickChart: View {
         }
         .navigationTitle(ChartType.candleStick.title)
         .navigationBarTitleDisplayMode(.inline)
+    }
+
+    private func findElement(location: CGPoint, proxy: ChartProxy, geometry: GeometryProxy) -> StockData.StockPrice? {
+        let relativeXPosition = location.x - geometry[proxy.plotAreaFrame].origin.x
+        if let date = proxy.value(atX: relativeXPosition) as Date? {
+            // Find the closest date element.
+            var minDistance: TimeInterval = .infinity
+            var index: Int? = nil
+            for dataIndex in currentPrices.indices {
+                let nthSalesDataDistance = currentPrices[dataIndex].timestamp.distance(to: date)
+                if abs(nthSalesDataDistance) < minDistance {
+                    minDistance = abs(nthSalesDataDistance)
+                    index = dataIndex
+                }
+            }
+            if let index {
+                return currentPrices[index]
+            }
+        }
+        return nil
     }
 }
 
@@ -151,33 +181,33 @@ struct PriceAnnotation: View {
     }
     
     var body: some View {
-        VStack(spacing: 4) {
+        VStack(alignment: .center, spacing: 4) {
             Text(price.timestamp.formatted(date: .abbreviated, time: .omitted))
                 .foregroundColor(.secondary)
             
             HStack {
+                Spacer()
                 Text("O:").foregroundColor(.secondary)
                 Text(price.open.formatted(.currency(code: "USD")))
                 
                 Text("C:").foregroundColor(.secondary)
                 Text(price.close.formatted(.currency(code: "USD")))
+                Spacer()
             }
             
             HStack {
+                Spacer()
                 Text("H:").foregroundColor(.secondary)
                 Text(price.high.formatted(.currency(code: "USD")))
                 
                 Text("L:").foregroundColor(.secondary)
                 Text(price.low.formatted(.currency(code: "USD")))
+                Spacer()
             }
         }
         .lineLimit(1)
         .font(.headline)
-        .padding()
-        .background(
-            RoundedRectangle(cornerRadius: 13)
-                .foregroundStyle(.thickMaterial)
-        )
+        .padding(.vertical)
     }
 }
 
