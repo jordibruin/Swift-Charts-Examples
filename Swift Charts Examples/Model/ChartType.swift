@@ -215,7 +215,7 @@ enum ChartType: String, Identifiable, CaseIterable {
         case .vectorField:
             return VectorFieldOverview().makeChartDescriptor()
         case .uvIndex:
-            return VectorFieldOverview().makeChartDescriptor()
+            return UVIndex(isOverview: true).makeChartDescriptor()
         }
     }
 

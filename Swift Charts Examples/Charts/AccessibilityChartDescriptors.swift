@@ -483,3 +483,43 @@ extension TimeSheetBarOverview: AXChartDescriptorRepresentable {
         )
     }
 }
+
+extension UVIndex: AXChartDescriptorRepresentable {
+    func makeChartDescriptor() -> AXChartDescriptor {
+        let min = data.map(\.uvIndex).min() ?? 0
+        let max = data.map(\.uvIndex).max() ?? 0
+
+        // A closure that takes a date and converts it to a label for axes
+        let dateTupleStringConverter: (((date: Date, uvIndex: Int)) -> (String)) = { dataPoint in
+            dataPoint.date.formatted(date: .omitted, time: .complete)
+        }
+        
+        let xAxis = AXCategoricalDataAxisDescriptor(
+            title: "Time of day",
+            categoryOrder: data.map { dateTupleStringConverter($0) }
+        )
+
+        let yAxis = AXNumericDataAxisDescriptor(
+            title: "UV Index value",
+            range: Double(min)...Double(max),
+            gridlinePositions: []
+        ) { value in "\(Int(value))" }
+
+        let series = AXDataSeriesDescriptor(
+            name: "UV Index",
+            isContinuous: true,
+            dataPoints: data.map {
+                .init(x: dateTupleStringConverter($0), y: Double($0.uvIndex))
+            }
+        )
+
+        return AXChartDescriptor(
+            title: "UV Index",
+            summary: nil,
+            xAxis: xAxis,
+            yAxis: yAxis,
+            additionalAxes: [],
+            series: [series]
+        )
+    }
+}
