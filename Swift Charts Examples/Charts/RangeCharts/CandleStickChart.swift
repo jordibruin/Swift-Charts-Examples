@@ -34,15 +34,8 @@ struct CandleStickChartOverview: View {
 
 struct CandleStickChart: View {
     private let currentPrices: [StockData.StockPrice] = StockData.apple
-    private var dateBins: DateBins {
-        .init(
-            unit: .month,
-            range: currentPrices[0].timestamp...currentPrices[currentPrices.count - 1].timestamp
-        )
-    }
     @State private var selectedPrice: StockData.StockPrice?
-    @State private var annotationOffset: CGFloat = 0
-    
+
     var body: some View {
         List {
             Section {

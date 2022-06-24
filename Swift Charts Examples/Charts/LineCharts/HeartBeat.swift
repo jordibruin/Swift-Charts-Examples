@@ -29,7 +29,6 @@ struct HeartBeat: View {
     @State private var lineWidth = 2.0
     @State private var interpolationMethod: ChartInterpolationMethod = .cardinal
     @State private var chartColor: Color = .pink
-    @State private var showSymbols = false
     
     var body: some View {
         List {
