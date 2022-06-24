@@ -40,6 +40,8 @@
 		C260882E2856B4C900B09DDB /* SingleBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C260882D2856B4C900B09DDB /* SingleBar.swift */; };
 		FC4ECCF02865DE6E0008905E /* MultiLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4ECCEF2865DE6E0008905E /* MultiLine.swift */; };
 		FC4ECCF22865E3170008905E /* StackedArea.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4ECCF12865E3170008905E /* StackedArea.swift */; };
+		FC4ECCFA2865FEBC0008905E /* GitHubData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4ECCF92865FEBC0008905E /* GitHubData.swift */; };
+		FC4ECCFC286601650008905E /* GitHubContributionsGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4ECCFB286601650008905E /* GitHubContributionsGraph.swift */; };
 		FC5466C62857E0D700315632 /* SingleLineLollipop.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5466C52857E0D700315632 /* SingleLineLollipop.swift */; };
 		FC602024285B532C0089DBDC /* SingleBarThreshold.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC602023285B532C0089DBDC /* SingleBarThreshold.swift */; };
 /* End PBXBuildFile section */
@@ -100,6 +102,8 @@
 		C260882D2856B4C900B09DDB /* SingleBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleBar.swift; sourceTree = "<group>"; };
 		FC4ECCEF2865DE6E0008905E /* MultiLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiLine.swift; sourceTree = "<group>"; };
 		FC4ECCF12865E3170008905E /* StackedArea.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackedArea.swift; sourceTree = "<group>"; };
+		FC4ECCF92865FEBC0008905E /* GitHubData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubData.swift; sourceTree = "<group>"; };
+		FC4ECCFB286601650008905E /* GitHubContributionsGraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubContributionsGraph.swift; sourceTree = "<group>"; };
 		FC5466C52857E0D700315632 /* SingleLineLollipop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleLineLollipop.swift; sourceTree = "<group>"; };
 		FC602023285B532C0089DBDC /* SingleBarThreshold.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleBarThreshold.swift; sourceTree = "<group>"; };
 		FC8C2FE02859E64B00C334A9 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -242,6 +246,7 @@
 				7425DF822858DF4300672F3B /* HealthData.swift */,
 				52145C312864A60D00EB89D7 /* StockData.swift */,
 				62FF3EFF2857EADF0022930C /* Grid.swift */,
+				FC4ECCF92865FEBC0008905E /* GitHubData.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -293,6 +298,7 @@
 			isa = PBXGroup;
 			children = (
 				62FF3F012857EB530022930C /* HeatMap.swift */,
+				FC4ECCFB286601650008905E /* GitHubContributionsGraph.swift */,
 			);
 			path = HeatMap;
 			sourceTree = "<group>";
@@ -428,6 +434,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FC4ECCF02865DE6E0008905E /* MultiLine.swift in Sources */,
+				FC4ECCFC286601650008905E /* GitHubContributionsGraph.swift in Sources */,
 				C26088252856A45800B09DDB /* Square.swift in Sources */,
 				934A95042857D035009E29F4 /* OneDimensionalBar.swift in Sources */,
 				C260882B2856B3C500B09DDB /* AreaSimple.swift in Sources */,
@@ -456,6 +463,7 @@
 				C26088152856960000B09DDB /* SingleLine.swift in Sources */,
 				FC602024285B532C0089DBDC /* SingleBarThreshold.swift in Sources */,
 				C26088272856A95A00B09DDB /* ChartStrideBy.swift in Sources */,
+				FC4ECCFA2865FEBC0008905E /* GitHubData.swift in Sources */,
 				52145C322864A60D00EB89D7 /* StockData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
