@@ -131,6 +131,10 @@ Customizable Heat Map
 
 <img src="images/charts/heatMap/customizeableHeatMap.png" width="380">
 
+GitHub Contributions Graph
+
+<img src="images/charts/heatMap/gitContributions.png" width="380">
+
 ### [Point Charts](https://github.com/jordibruin/SwiftChartExamples/tree/main/Swift%20Charts%20Examples/Charts/PointCharts)
 
 Scatter Chart

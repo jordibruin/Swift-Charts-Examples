@@ -63,6 +63,7 @@ enum ChartType: String, Identifiable, CaseIterable {
 
     // HeatMap Charts
     case customizeableHeatMap
+    case gitContributions
 
     // Point Charts
     case scatter
@@ -108,11 +109,12 @@ enum ChartType: String, Identifiable, CaseIterable {
             return "Candle Stick Chart"
         case .customizeableHeatMap:
             return "Customizable Heat Map"
+        case .gitContributions:
+            return "GitHub Contributions Graph"
         case .scatter:
             return "Scatter Chart"
         case .vectorField:
             return "Vector Field"
-        
         }
     }
 
@@ -126,7 +128,7 @@ enum ChartType: String, Identifiable, CaseIterable {
             return .area
         case .rangeSimple, .rangeHeartRate, .candleStick:
             return .range
-        case .customizeableHeatMap:
+        case .customizeableHeatMap, .gitContributions:
             return .heatMap
         case .scatter, .vectorField:
             return .point
@@ -172,6 +174,8 @@ enum ChartType: String, Identifiable, CaseIterable {
             HeartRateRangeChartOverview()
         case .customizeableHeatMap:
             HeatMapOverview()
+        case .gitContributions:
+            GitHubContributionsGraph(isOverview: true)
         case .scatter:
             ScatterChartOverview()
         case .vectorField:
@@ -218,6 +222,8 @@ enum ChartType: String, Identifiable, CaseIterable {
             HeartRateRangeChart()
         case .customizeableHeatMap:
             HeatMap()
+        case .gitContributions:
+            GitHubContributionsGraph()
         case .scatter:
             ScatterChart()
         case .vectorField:
