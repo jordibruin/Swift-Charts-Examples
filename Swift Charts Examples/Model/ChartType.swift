@@ -45,6 +45,7 @@ enum ChartType: String, Identifiable, CaseIterable {
     case heartBeat
     case animatingLine
     case gradientLine
+    case multiLine
 
     // Bar Charts
     case singleBar
@@ -85,6 +86,8 @@ enum ChartType: String, Identifiable, CaseIterable {
             return "Heart Beat / ECG Chart"
         case .gradientLine:
             return "Line with changing gradient"
+        case .multiLine:
+            return "Line Charts"
         case .singleBar:
             return "Single Bar"
         case .singleBarThreshold:
@@ -117,7 +120,7 @@ enum ChartType: String, Identifiable, CaseIterable {
 
     var category: ChartCategory {
         switch self {
-        case .singleLine, .singleLineLollipop, .heartBeat, .animatingLine, .gradientLine:
+        case .singleLine, .singleLineLollipop, .heartBeat, .animatingLine, .gradientLine, .multiLine:
             return .line
         case .singleBar, .singleBarThreshold, .twoBars, .pyramid, .oneDimensionalBar, .timeSheetBar:
             return .bar
@@ -143,6 +146,10 @@ enum ChartType: String, Identifiable, CaseIterable {
             HeartBeatOverview()
         case .animatingLine:
             AnimatingLineOverview()
+        case .gradientLine:
+            GradientLine(isOverview: true)
+        case .multiLine:
+            MultiLine(isOverview: true)
         case .singleBar:
             SingleBarOverview()
         case .singleBarThreshold:
@@ -169,8 +176,6 @@ enum ChartType: String, Identifiable, CaseIterable {
             ScatterChartOverview()
         case .vectorField:
             VectorFieldOverview()
-		case .gradientLine:
-            GradientLine(isOverview: true)
         }
     }
 
@@ -185,6 +190,10 @@ enum ChartType: String, Identifiable, CaseIterable {
             HeartBeat()
         case .animatingLine:
             AnimatingLine()
+        case .gradientLine:
+            GradientLine()
+        case .multiLine:
+            MultiLine(isOverview: false)
         case .singleBar:
             SingleBar()
         case .singleBarThreshold:
@@ -211,8 +220,6 @@ enum ChartType: String, Identifiable, CaseIterable {
             ScatterChart()
         case .vectorField:
             VectorField()
-		case .gradientLine:
-            GradientLine()
         }
     }
 }
