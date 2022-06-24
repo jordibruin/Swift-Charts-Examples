@@ -57,6 +57,7 @@ enum ChartType: String, Identifiable, CaseIterable {
 
     // Area Charts
     case areaSimple
+    case stackedArea
 
     // Range Charts
     case rangeSimple
@@ -69,8 +70,6 @@ enum ChartType: String, Identifiable, CaseIterable {
     // Point Charts
     case scatter
     case vectorField
-
-    
 
     var id: String { self.rawValue }
 
@@ -102,6 +101,8 @@ enum ChartType: String, Identifiable, CaseIterable {
             return "Time Sheet Bar"
         case .areaSimple:
             return "Area Chart"
+        case .stackedArea:
+            return "Stacked Area Chart"
         case .rangeSimple:
             return "Range Chart"
         case .rangeHeartRate:
@@ -124,7 +125,7 @@ enum ChartType: String, Identifiable, CaseIterable {
             return .line
         case .singleBar, .singleBarThreshold, .twoBars, .pyramid, .oneDimensionalBar, .timeSheetBar:
             return .bar
-        case .areaSimple:
+        case .areaSimple, .stackedArea:
             return .area
         case .rangeSimple, .rangeHeartRate, .candleStick:
             return .range
@@ -166,6 +167,8 @@ enum ChartType: String, Identifiable, CaseIterable {
             PyramidChartOverview()
         case .areaSimple:
             AreaSimpleOverview()
+        case .stackedArea:
+            StackedArea(isOverview: true)
         case .rangeSimple:
             RangeSimpleOverview()
         case .rangeHeartRate:
@@ -210,6 +213,8 @@ enum ChartType: String, Identifiable, CaseIterable {
             PyramidChart()
         case .areaSimple:
             AreaSimple()
+        case .stackedArea:
+            StackedArea(isOverview: false)
         case .rangeSimple:
             RangeSimple()
         case .rangeHeartRate:

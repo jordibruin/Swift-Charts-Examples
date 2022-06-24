@@ -107,6 +107,10 @@ Area Chart
 
 <img src="images/charts/area/areaSimple.png" width="380">
 
+Stacked Area Chart
+
+<img src="images/charts/area/stackedArea.png" width="380">
+
 ### [Range Charts](https://github.com/jordibruin/SwiftChartExamples/tree/main/Swift%20Charts%20Examples/Charts/RangeCharts)
 
 Range Chart
