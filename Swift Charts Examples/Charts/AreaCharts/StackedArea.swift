@@ -5,11 +5,11 @@
 import SwiftUI
 import Charts
 
-struct MultiLine: View {
+struct StackedArea: View {
     var isOverview: Bool = false
 
     let data = LocationData.last30Days
-    
+
     var body: some View {
         if isOverview {
             chart
@@ -20,19 +20,18 @@ struct MultiLine: View {
                     chart
                 }
             }
-            .navigationBarTitle(ChartType.multiLine.title, displayMode: .inline)
+            .navigationBarTitle(ChartType.stackedArea.title, displayMode: .inline)
         }
     }
 
     private var chart: some View {
         Chart(data) { series in
             ForEach(series.sales, id: \.weekday) { element in
-                LineMark(
+                AreaMark(
                     x: .value("Date", element.weekday),
-                    y: .value("Sales", element.sales)
+                    y: .value("Sales", element.sales),
+                    stacking: .center
                 )
-                .accessibilityLabel("\(series.city) \(element.weekday.formatted(date: .abbreviated, time: .standard))")
-                .accessibilityValue("\(element.sales) sold")
                 .interpolationMethod(.cardinal)
                 .foregroundStyle(by: .value("City", series.city))
             }
@@ -40,13 +39,14 @@ struct MultiLine: View {
         .chartXAxis(isOverview ? .hidden : .automatic)
         .chartYAxis(isOverview ? .hidden : .automatic)
         .chartLegend(isOverview ? .hidden : .automatic)
+        .chartForegroundStyleScale(range: Gradient(colors: [.yellow, .blue]))
         .frame(height: isOverview ? Constants.previewChartHeight : Constants.detailChartHeight)
     }
 }
 
-struct MultiLine_Previews: PreviewProvider {
+struct StackedArea_Previews: PreviewProvider {
     static var previews: some View {
-        MultiLine(isOverview: true)
-        MultiLine()
+        StackedArea(isOverview: true)
+        StackedArea()
     }
 }

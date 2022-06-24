@@ -52,6 +52,12 @@ extension AreaSimpleOverview: AXChartDescriptorRepresentable {
     }
 }
 
+extension StackedArea: AXChartDescriptorRepresentable {
+    func makeChartDescriptor() -> AXChartDescriptor {
+        return chartDescriptor(forLocationSeries: data)
+    }
+}
+
 extension TwoBarsOverview: AXChartDescriptorRepresentable {
     func makeChartDescriptor() -> AXChartDescriptor {
         return chartDescriptor(forLocationSeries: data)
@@ -398,7 +404,6 @@ extension VectorFieldOverview: AXChartDescriptorRepresentable {
                     .init(x: Double($0.x),
                           y: Double($0.y),
                           additionalValues: [
-                            .category($0.accessibilityColorName),
                           ],
                           label: "Angle: \(Int($0.angle(degreeOffset: 0, inRadians: false))) degrees")
                 })

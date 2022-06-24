@@ -34,30 +34,6 @@ struct Grid {
         let y: Int
         let val: Double
 
-        var color: Color {
-            var returnColor: Color = .red
-            switch val {
-            case _ where val < 20.0:
-                returnColor = .blue
-            case 20..<40:
-                returnColor = .green
-            case 40..<60:
-                returnColor = .yellow
-            case 60..<80:
-                returnColor = .orange
-            case _ where val >= 80:
-                returnColor = .red
-            default:
-                returnColor = .red
-            }
-
-            return returnColor.opacity(Double.random(in: 0.75...1.0))
-        }
-
-        var accessibilityColorName: String {
-            UIColor(color).accessibilityName
-        }
-        
         func angle(degreeOffset: Double, inRadians: Bool = true) -> Double {
             // around 180-360 range
             let degrees = (val / 100.0) * 180.0 + 180 + degreeOffset

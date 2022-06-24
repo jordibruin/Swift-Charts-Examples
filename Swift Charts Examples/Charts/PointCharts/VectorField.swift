@@ -38,7 +38,7 @@ struct VectorField: View {
                     PointMark(x: .value("x", point.x),
                               y: .value("y", point.y))
                     .accessibilityLabel("\(point.x)")
-                    .accessibilityValue("Y: \(point.y), Color: \(point.accessibilityColorName), Angle: \(point.angle(degreeOffset: degreeOffset))")
+                    .accessibilityValue("Y: \(point.y), Angle: \(point.angle(degreeOffset: degreeOffset))")
                     .symbol(Arrow(angle: CGFloat(point.angle(degreeOffset: degreeOffset)), size: size))
                     .foregroundStyle(point.angleColor(hueOffset: hueOffset))
                     .opacity(opacity)

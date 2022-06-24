@@ -41,6 +41,7 @@
 		C260882B2856B3C500B09DDB /* AreaSimple.swift in Sources */ = {isa = PBXBuildFile; fileRef = C260882A2856B3C500B09DDB /* AreaSimple.swift */; };
 		C260882E2856B4C900B09DDB /* SingleBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C260882D2856B4C900B09DDB /* SingleBar.swift */; };
 		FC4ECCF02865DE6E0008905E /* MultiLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4ECCEF2865DE6E0008905E /* MultiLine.swift */; };
+		FC4ECCF22865E3170008905E /* StackedArea.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4ECCF12865E3170008905E /* StackedArea.swift */; };
 		FC5466C62857E0D700315632 /* SingleLineLollipop.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5466C52857E0D700315632 /* SingleLineLollipop.swift */; };
 		FC602024285B532C0089DBDC /* SingleBarThreshold.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC602023285B532C0089DBDC /* SingleBarThreshold.swift */; };
 /* End PBXBuildFile section */
@@ -102,6 +103,7 @@
 		C260882A2856B3C500B09DDB /* AreaSimple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreaSimple.swift; sourceTree = "<group>"; };
 		C260882D2856B4C900B09DDB /* SingleBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleBar.swift; sourceTree = "<group>"; };
 		FC4ECCEF2865DE6E0008905E /* MultiLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiLine.swift; sourceTree = "<group>"; };
+		FC4ECCF12865E3170008905E /* StackedArea.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackedArea.swift; sourceTree = "<group>"; };
 		FC5466C52857E0D700315632 /* SingleLineLollipop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleLineLollipop.swift; sourceTree = "<group>"; };
 		FC602023285B532C0089DBDC /* SingleBarThreshold.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleBarThreshold.swift; sourceTree = "<group>"; };
 		FC8C2FE02859E64B00C334A9 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -236,7 +238,6 @@
 				C26088122856935B00B09DDB /* ChartType.swift */,
 				C260881B28569D1B00B09DDB /* InterpolationMethod.swift */,
 				C26088262856A95A00B09DDB /* ChartStrideBy.swift */,
-				62FF3EFF2857EADF0022930C /* Grid.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -247,6 +248,7 @@
 				C26088172856963D00B09DDB /* Data.swift */,
 				7425DF822858DF4300672F3B /* HealthData.swift */,
 				52145C312864A60D00EB89D7 /* StockData.swift */,
+				62FF3EFF2857EADF0022930C /* Grid.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -289,6 +291,7 @@
 			isa = PBXGroup;
 			children = (
 				C260882A2856B3C500B09DDB /* AreaSimple.swift */,
+				FC4ECCF12865E3170008905E /* StackedArea.swift */,
 			);
 			path = AreaCharts;
 			sourceTree = "<group>";
@@ -441,6 +444,7 @@
 				C23072892860D8FA00DA1CED /* AnimatingLine.swift in Sources */,
 				88B3E5D02857493B00840CAA /* RangeSimple.swift in Sources */,
 				97A7B09528651B5B0069FFFE /* AccessibilityHelpers.swift in Sources */,
+				FC4ECCF22865E3170008905E /* StackedArea.swift in Sources */,
 				9691226F28594EC5001FCF65 /* ScatterChart.swift in Sources */,
 				C22EB5A028568D0B000B9F9A /* ContentView.swift in Sources */,
 				C260881C28569D1B00B09DDB /* InterpolationMethod.swift in Sources */,

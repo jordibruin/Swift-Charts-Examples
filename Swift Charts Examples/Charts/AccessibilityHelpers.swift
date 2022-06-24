@@ -165,7 +165,7 @@ func chartDescriptor(forGrid data: [Grid.Point]) -> AXChartDescriptor {
         dataPoints: data.map {
             .init(x: Double($0.x),
                   y: Double($0.y),
-                  additionalValues: [.category($0.accessibilityColorName)])
+                  additionalValues: [.category($0.val.formatted(.number))])
         }
     )
 
