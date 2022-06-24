@@ -44,6 +44,7 @@ enum ChartType: String, Identifiable, CaseIterable {
     case singleLineLollipop
     case heartBeat
     case animatingLine
+    case gradientLine
 
     // Bar Charts
     case singleBar
@@ -68,8 +69,7 @@ enum ChartType: String, Identifiable, CaseIterable {
     case scatter
     case vectorField
 
-	// Weather
-	case uvIndex
+    
 
     var id: String { self.rawValue }
 
@@ -83,6 +83,8 @@ enum ChartType: String, Identifiable, CaseIterable {
             return "Animating Line"
         case .heartBeat:
             return "Heart Beat / ECG Chart"
+        case .gradientLine:
+            return "Line with changing gradient"
         case .singleBar:
             return "Single Bar"
         case .singleBarThreshold:
@@ -109,14 +111,13 @@ enum ChartType: String, Identifiable, CaseIterable {
             return "Scatter Chart"
         case .vectorField:
             return "Vector Field"
-		case .uvIndex:
-			return "UV Index"
+        
         }
     }
 
     var category: ChartCategory {
         switch self {
-        case .singleLine, .singleLineLollipop, .heartBeat, .animatingLine:
+        case .singleLine, .singleLineLollipop, .heartBeat, .animatingLine, .gradientLine:
             return .line
         case .singleBar, .singleBarThreshold, .twoBars, .pyramid, .oneDimensionalBar, .timeSheetBar:
             return .bar
@@ -128,8 +129,6 @@ enum ChartType: String, Identifiable, CaseIterable {
             return .heatMap
         case .scatter, .vectorField:
             return .point
-		case .uvIndex:
-			return .weather
         }
     }
 
@@ -170,8 +169,8 @@ enum ChartType: String, Identifiable, CaseIterable {
             ScatterChartOverview()
         case .vectorField:
             VectorFieldOverview()
-		case .uvIndex:
-			UVIndex(isOverview: true)
+		case .gradientLine:
+            GradientLine(isOverview: true)
         }
     }
 
@@ -212,8 +211,8 @@ enum ChartType: String, Identifiable, CaseIterable {
             ScatterChart()
         case .vectorField:
             VectorField()
-		case .uvIndex:
-			UVIndex()
+		case .gradientLine:
+            GradientLine()
         }
     }
 }

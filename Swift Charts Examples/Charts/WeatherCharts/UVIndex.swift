@@ -5,7 +5,7 @@
 import SwiftUI
 import Charts
 
-struct UVIndex: View {
+struct GradientLine: View {
 
 	@State var isOverview = false
 	@State private var selectedDate: Date?
@@ -17,7 +17,8 @@ struct UVIndex: View {
 			List {
 				chart
 			}
-			.navigationTitle(ChartType.uvIndex.title)
+			.navigationTitle(ChartType.gradientLine.title)
+            .navigationBarTitleDisplayMode(.inline)
 		}
 	}
 
@@ -144,8 +145,8 @@ struct UVIndex: View {
 	}
 }
 
-struct UVIndex_Previews: PreviewProvider {
+struct GradientLine_Previews: PreviewProvider {
 	static var previews: some View {
-		UVIndex()
+        GradientLine()
 	}
 }
