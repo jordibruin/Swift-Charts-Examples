@@ -16,10 +16,11 @@ struct HeatMapOverview: View {
                 yStart: .value("yStart", point.y),
                 yEnd: .value("yEnd", point.y + 1)
             )
-            .foregroundStyle(point.color)
+            .foregroundStyle(by: .value("Value", point.val))
         }
         .chartXAxis(.hidden)
         .chartYAxis(.hidden)
+        .chartForegroundStyleScale(range: Gradient(colors: [.blue, .green, .yellow, .orange, .red]))
         .aspectRatio(contentMode: .fit)
     }
 }
@@ -33,20 +34,19 @@ struct HeatMap: View {
     @State private var grid = Grid(numRows: 10, numCols: 10)
     @State private var showColors = true
     @State private var showValues = false
-    
-    var body: some View {
-		if isOverview {
-			chart
-		} else {
-			List {
-				Section {
-					chart
-				}
-				customisation
-			}
-			.navigationBarTitle(ChartType.customizeableHeatMap.title, displayMode: .inline)
-		}
 
+    var body: some View {
+  		if isOverview {
+  			chart
+  		} else {
+  			List {
+  				Section {
+  					chart
+  				}
+  				customisation
+  			}
+  			.navigationBarTitle(ChartType.customizeableHeatMap.title, displayMode: .inline)
+  		}
     }
 
 	private var chart: some View {

@@ -12,10 +12,9 @@ enum ChartCategory: String, CaseIterable, Hashable, Identifiable {
     case range
     case heatMap
     case point
-	case weather
-  
+
     var id: String { self.rawValue }
-    
+
     var sfSymbolName: String {
         switch self {
         case .all:
@@ -32,8 +31,6 @@ enum ChartCategory: String, CaseIterable, Hashable, Identifiable {
             return "checkerboard.rectangle"
         case .point:
             return "point.3.connected.trianglepath.dotted"
-		case .weather:
-			return "cloud.sun.fill"
         }
     }
 }
@@ -45,6 +42,7 @@ enum ChartType: String, Identifiable, CaseIterable {
     case heartBeat
     case animatingLine
     case gradientLine
+    case multiLine
 
     // Bar Charts
     case singleBar
@@ -56,6 +54,7 @@ enum ChartType: String, Identifiable, CaseIterable {
 
     // Area Charts
     case areaSimple
+    case stackedArea
 
     // Range Charts
     case rangeSimple
@@ -64,12 +63,11 @@ enum ChartType: String, Identifiable, CaseIterable {
 
     // HeatMap Charts
     case customizeableHeatMap
+    case gitContributions
 
     // Point Charts
     case scatter
     case vectorField
-
-    
 
     var id: String { self.rawValue }
 
@@ -85,6 +83,8 @@ enum ChartType: String, Identifiable, CaseIterable {
             return "Heart Beat / ECG Chart"
         case .gradientLine:
             return "Line with changing gradient"
+        case .multiLine:
+            return "Line Charts"
         case .singleBar:
             return "Single Bar"
         case .singleBarThreshold:
@@ -99,6 +99,8 @@ enum ChartType: String, Identifiable, CaseIterable {
             return "Time Sheet Bar"
         case .areaSimple:
             return "Area Chart"
+        case .stackedArea:
+            return "Stacked Area Chart"
         case .rangeSimple:
             return "Range Chart"
         case .rangeHeartRate:
@@ -107,25 +109,26 @@ enum ChartType: String, Identifiable, CaseIterable {
             return "Candle Stick Chart"
         case .customizeableHeatMap:
             return "Customizable Heat Map"
+        case .gitContributions:
+            return "GitHub Contributions Graph"
         case .scatter:
             return "Scatter Chart"
         case .vectorField:
             return "Vector Field"
-        
         }
     }
 
     var category: ChartCategory {
         switch self {
-        case .singleLine, .singleLineLollipop, .heartBeat, .animatingLine, .gradientLine:
+        case .singleLine, .singleLineLollipop, .heartBeat, .animatingLine, .gradientLine, .multiLine:
             return .line
         case .singleBar, .singleBarThreshold, .twoBars, .pyramid, .oneDimensionalBar, .timeSheetBar:
             return .bar
-        case .areaSimple:
+        case .areaSimple, .stackedArea:
             return .area
         case .rangeSimple, .rangeHeartRate, .candleStick:
             return .range
-        case .customizeableHeatMap:
+        case .customizeableHeatMap, .gitContributions:
             return .heatMap
         case .scatter, .vectorField:
             return .point
@@ -161,12 +164,16 @@ enum ChartType: String, Identifiable, CaseIterable {
             PyramidChart(isOverview: true)
         case .areaSimple:
 			AreaSimple(isOverview: true)
+      case .stackedArea:
+          StackedArea(isOverview: true)
         case .rangeSimple:
             RangeSimple(isOverview: true)
         case .rangeHeartRate:
             HeartRateRangeChart(isOverview: true)
         case .customizeableHeatMap:
 			HeatMap(isOverview: true)
+      case .gitContributions:
+          GitHubContributionsGraph(isOverview: true)
         case .scatter:
 			ScatterChart(isOverview: true)
         case .vectorField:
@@ -181,7 +188,7 @@ enum ChartType: String, Identifiable, CaseIterable {
         case .singleLine:
             SingleLine(isOverview: false)
         case .singleLineLollipop:
-            SingleLineLollipop(isOverview: false)
+            SingleLineLollipop()
         case .heartBeat:
             HeartBeat(isOverview: false)
         case .animatingLine:
@@ -204,12 +211,16 @@ enum ChartType: String, Identifiable, CaseIterable {
             PyramidChart(isOverview: false)
         case .areaSimple:
             AreaSimple(isOverview: false)
+            case .stackedArea:
+                StackedArea(isOverview: false)
         case .rangeSimple:
             RangeSimple(isOverview: false)
         case .rangeHeartRate:
             HeartRateRangeChart(isOverview: false)
         case .customizeableHeatMap:
             HeatMap(isOverview: false)
+            case .gitContributions:
+                GitHubContributionsGraph(isOverview: false)
         case .scatter:
 			ScatterChart(isOverview: false)
         case .vectorField:
