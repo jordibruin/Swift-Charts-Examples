@@ -12,7 +12,6 @@ enum ChartCategory: String, CaseIterable, Hashable, Identifiable {
     case range
     case heatMap
     case point
-	case weather
   
     var id: String { self.rawValue }
     
@@ -32,8 +31,6 @@ enum ChartCategory: String, CaseIterable, Hashable, Identifiable {
             return "checkerboard.rectangle"
         case .point:
             return "point.3.connected.trianglepath.dotted"
-		case .weather:
-			return "cloud.sun.fill"
         }
     }
 }
