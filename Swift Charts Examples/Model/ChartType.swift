@@ -188,7 +188,7 @@ enum ChartType: String, Identifiable, CaseIterable {
         case .singleLine:
             SingleLine()
         case .singleLineLollipop:
-            SingleLineLollipop(isOverview: false)
+            SingleLineLollipop()
         case .heartBeat:
             HeartBeat()
         case .animatingLine:
@@ -196,7 +196,7 @@ enum ChartType: String, Identifiable, CaseIterable {
         case .gradientLine:
             GradientLine()
         case .multiLine:
-            MultiLine(isOverview: false)
+            MultiLine()
         case .singleBar:
             SingleBar()
         case .singleBarThreshold:
@@ -214,7 +214,7 @@ enum ChartType: String, Identifiable, CaseIterable {
         case .areaSimple:
             AreaSimple()
         case .stackedArea:
-            StackedArea(isOverview: false)
+            StackedArea()
         case .rangeSimple:
             RangeSimple()
         case .rangeHeartRate:

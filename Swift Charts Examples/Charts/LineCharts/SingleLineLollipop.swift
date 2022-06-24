@@ -6,7 +6,7 @@ import SwiftUI
 import Charts
 
 struct SingleLineLollipop: View {
-    @State var isOverview: Bool
+    var isOverview: Bool = false
 
     @State private var lineWidth = 2.0
     @State private var interpolationMethod: ChartInterpolationMethod = .cardinal
@@ -137,6 +137,6 @@ struct SingleLineLollipop: View {
 struct SingleLineLollipop_Previews: PreviewProvider {
     static var previews: some View {
         SingleLineLollipop(isOverview: true)
-        SingleLineLollipop(isOverview: false)
+        SingleLineLollipop()
     }
 }

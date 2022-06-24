@@ -14,6 +14,7 @@ enum StockData {
         
         var id: Date { timestamp }
     }
+
     static var apple: [StockPrice] {
         var prices: [StockPrice] = []
         for index in AppleStock.timestamps.indices {
@@ -29,6 +30,7 @@ enum StockData {
         }
         return prices
     }
+
     static var appleFirst7Months: [StockPrice] {
         var prices: [StockPrice] = []
         for index in 0...7 {
@@ -44,6 +46,7 @@ enum StockData {
         }
         return prices
     }
+
     enum AppleStock {
         static let timestamps: [TimeInterval] = [
             1498881600,
@@ -108,6 +111,7 @@ enum StockData {
             1654056000,
             1655496005
         ]
+
         static let highs: [Decimal] = [
             38.497501373291016,
             41.130001068115234,
@@ -171,6 +175,7 @@ enum StockData {
             151.74000549316406,
             133.07899475097656
         ]
+
         static let closes: [Decimal] = [
             37.182498931884766,
             41.0,
@@ -234,6 +239,7 @@ enum StockData {
             131.55999755859375,
             131.55999755859375
         ]
+
         static let opens: [Decimal] = [
             36.220001220703125,
             37.275001525878906,
@@ -297,6 +303,7 @@ enum StockData {
             149.89999389648438,
             130.06500244140625
         ]
+
         static let lows: [Decimal] = [
             35.602500915527344,
             37.102500915527344,

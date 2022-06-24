@@ -6,7 +6,6 @@ import Foundation
 import Charts
 
 enum ChartStrideBy: Identifiable, CaseIterable {
-    
     case second
     case minute
     case hour
@@ -38,6 +37,7 @@ enum ChartStrideBy: Identifiable, CaseIterable {
             return "Year"
         }
     }
+    
     var time: Calendar.Component {
         switch self {
         case .second:

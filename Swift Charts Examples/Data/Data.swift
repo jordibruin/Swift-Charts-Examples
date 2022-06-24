@@ -291,8 +291,6 @@ struct DataUsageData {
         .init(category: "Photos", size: 8.2),
         .init(category: "iOS", size: 5.7),
         .init(category: "System Data", size: 2.6)
-//        .init(category: "Photos", size: )
-
     ]
 }
 
@@ -316,7 +314,7 @@ enum HeartRateData {
 
         (weekday: date(year: 2022, month: 7, day: 6), dailyAverage: 136, dailyMin: 96, dailyMax: 203),
 
-        (weekday: date(year: 2022, month: 7, day: 7), dailyAverage: 134, dailyMin: 98, dailyMax: 200),
+        (weekday: date(year: 2022, month: 7, day: 7), dailyAverage: 134, dailyMin: 98, dailyMax: 200)
     ]
 
     // MARK: - Static constants
@@ -420,7 +418,7 @@ enum WeatherData {
 
 extension Date {
 	static var startOfDay: Date {
-		return Calendar.current.startOfDay(for: .now)
+		Calendar.current.startOfDay(for: .now)
 	}
 }
 
