@@ -24,48 +24,62 @@ struct RangeSimpleOverview: View {
 }
 
 struct RangeSimple: View {
+
+	var isOverview: Bool
+
     @State private var barWidth = 10.0
     @State private var chartColor: Color = .blue
     @State private var isShowingPoints = false
     
     var body: some View {
-        List {
-            Section {
-                Chart(SalesData.last12Months, id: \.month) {
-                    BarMark(
-                        x: .value("Month", $0.month, unit: .month),
-                        yStart: .value("Sales Min", $0.dailyMin),
-                        yEnd: .value("Sales Max", $0.dailyMax),
-                        width: .fixed(barWidth)
-                    )
-                    .clipShape(Capsule())
-                    .foregroundStyle(chartColor.gradient)
-                    
-                    if isShowingPoints {
-                        PointMark(
-                            x: .value("Month", $0.month, unit: .month),
-                            y: .value("Sales Min", $0.dailyMin)
-                        )
-                        .offset(y: -(5 + barWidth / 4))
-                        .foregroundStyle(.yellow.gradient)
-                        .symbolSize(barWidth * 5)
-                        
-                        PointMark(
-                            x: .value("Month", $0.month, unit: .month),
-                            y: .value("Sales Max", $0.dailyMax)
-                        )
-                        .offset(y: 5 + barWidth / 4)
-                        .foregroundStyle(.yellow.gradient)
-                        .symbolSize(barWidth * 5)
-                    }
-                }
-                .frame(height: Constants.detailChartHeight)
-            }
-            customisation
-        }
-        .navigationBarTitle(ChartType.rangeSimple.title, displayMode: .inline)
+		if isOverview {
+			chart
+		} else {
+			List {
+				Section {
+					chart
+				}
+
+				customisation
+			}
+			.navigationBarTitle(ChartType.rangeSimple.title, displayMode: .inline)
+		}
     }
-    
+
+	private var chart: some View {
+		Chart(SalesData.last12Months, id: \.month) {
+			BarMark(
+				x: .value("Month", $0.month, unit: .month),
+				yStart: .value("Sales Min", $0.dailyMin),
+				yEnd: .value("Sales Max", $0.dailyMax),
+				width: .fixed(barWidth)
+			)
+			.clipShape(Capsule())
+			.foregroundStyle(chartColor.gradient)
+
+			if isShowingPoints {
+				PointMark(
+					x: .value("Month", $0.month, unit: .month),
+					y: .value("Sales Min", $0.dailyMin)
+				)
+				.offset(y: -(5 + barWidth / 4))
+				.foregroundStyle(.yellow.gradient)
+				.symbolSize(barWidth * 5)
+
+				PointMark(
+					x: .value("Month", $0.month, unit: .month),
+					y: .value("Sales Max", $0.dailyMax)
+				)
+				.offset(y: 5 + barWidth / 4)
+				.foregroundStyle(.yellow.gradient)
+				.symbolSize(barWidth * 5)
+			}
+		}
+		.chartYAxis(isOverview ? .hidden : .automatic)
+		.chartXAxis(isOverview ? .hidden : .automatic)
+		.frame(height: isOverview ? Constants.previewChartHeight : Constants.detailChartHeight)
+	}
+
     private var customisation: some View {
         Section {
             Stepper(value: $barWidth, in: 5.0...20.0) {
@@ -84,7 +98,7 @@ struct RangeSimple: View {
 
 struct RangeSimple_Previews: PreviewProvider {
     static var previews: some View {
-        RangeSimpleOverview()
-        RangeSimple()
+        RangeSimple(isOverview: true)
+		RangeSimple(isOverview: false)
     }
 }

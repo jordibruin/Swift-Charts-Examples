@@ -246,9 +246,9 @@
 			isa = PBXGroup;
 			children = (
 				C26088142856960000B09DDB /* SingleLine.swift */,
-				C23072882860D8FA00DA1CED /* AnimatingLine.swift */,
 				FC5466C52857E0D700315632 /* SingleLineLollipop.swift */,
 				88242C252858C17A00DDD8D0 /* HeartBeat.swift */,
+				C23072882860D8FA00DA1CED /* AnimatingLine.swift */,
 				4EB65CFA2864E074009D49AA /* GradientLine.swift */,
 			);
 			path = LineCharts;

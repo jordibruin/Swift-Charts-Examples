@@ -6,7 +6,8 @@ import SwiftUI
 import Charts
 
 struct SingleLineLollipop: View {
-    @State var isOverview: Bool
+
+	var isOverview: Bool
 
     @State private var lineWidth = 2.0
     @State private var interpolationMethod: ChartInterpolationMethod = .cardinal
@@ -23,6 +24,7 @@ struct SingleLineLollipop: View {
                 Section {
                     chart
                 }
+				
                 Section {
                     Text("**Hold and drag** over the chart to view and move the lollipop")
                         .font(.callout)

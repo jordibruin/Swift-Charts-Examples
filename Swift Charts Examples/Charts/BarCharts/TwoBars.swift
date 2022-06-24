@@ -5,29 +5,9 @@
 import SwiftUI
 import Charts
 
-struct TwoBarsOverview: View {
-    var body: some View {
-        Chart {
-            ForEach(LocationData.last7Days) { series in
-                ForEach(series.sales, id: \.weekday) { element in
-                    BarMark(
-                        x: .value("Day", element.weekday, unit: .day),
-                        y: .value("Sales", element.sales)
-                    )
-                    .accessibilityLabel("\(element.weekday.formatted())")
-                    .accessibilityValue("\(element.sales)")
-                    .foregroundStyle(by: .value("City", series.city))
-                }
-            }
-        }
-        .chartXAxis(.hidden)
-        .chartYAxis(.hidden)
-        .chartLegend(.hidden)
-        .frame(height: Constants.previewChartHeight)
-    }
-}
-
 struct TwoBars: View {
+	var isOverview: Bool
+
     @State private var barWidth = 13.0
     @State private var interpolationMethod: ChartInterpolationMethod = .cardinal
     @State private var strideBy: ChartStrideBy = .day
@@ -35,39 +15,49 @@ struct TwoBars: View {
     @State var showBarsStacked = true
 
     var body: some View {
-        List {
-            Section {
-                Chart(LocationData.last7Days) { series in
-                    ForEach(series.sales, id: \.weekday) { element in
-                        BarMark(
-                            x: .value("Day", element.weekday, unit: .day),
-                            y: .value("Sales", element.sales),
-                            width: .fixed(barWidth)
-                        )
-                        .accessibilityLabel("\(element.weekday.formatted())")
-                        .accessibilityValue("\(element.sales)")
-                        .foregroundStyle(by: .value("City", series.city))
-                    }
-                    .symbol(by: .value("City", series.city))
-                    .interpolationMethod(.catmullRom)
-                    .position(by: .value("City", showBarsStacked ? "Common" : series.city))
-                }
-                .chartXAxis {
-                    AxisMarks(values: .stride(by: strideBy.time)) { _ in
-                        AxisTick()
-                        AxisGridLine()
-                        AxisValueLabel(format: .dateTime.weekday(.abbreviated), centered: true)
-                    }
-                }
-                .chartLegend(showLegend ? .visible : .hidden)
-                .chartLegend(position: .top)
-                .frame(height: Constants.detailChartHeight)
-            }
-            
-            customisation
-        }
-        .navigationBarTitle(ChartType.twoBars.title, displayMode: .inline)
+		if isOverview {
+			chart
+		} else {
+			List {
+				Section {
+					chart
+				}
+
+				customisation
+			}
+			.navigationBarTitle(ChartType.twoBars.title, displayMode: .inline)
+		}
     }
+
+	private var chart: some View {
+		Chart(LocationData.last7Days) { series in
+			ForEach(series.sales, id: \.weekday) { element in
+				BarMark(
+					x: .value("Day", element.weekday, unit: .day),
+					y: .value("Sales", element.sales),
+					width: .fixed(barWidth)
+				)
+				.accessibilityLabel("\(element.weekday.formatted())")
+				.accessibilityValue("\(element.sales)")
+				.foregroundStyle(by: .value("City", series.city))
+			}
+			.symbol(by: .value("City", series.city))
+			.interpolationMethod(.catmullRom)
+			.position(by: .value("City", showBarsStacked ? "Common" : series.city))
+		}
+		.chartXAxis {
+			AxisMarks(values: .stride(by: strideBy.time)) { _ in
+				AxisTick()
+				AxisGridLine()
+				AxisValueLabel(format: .dateTime.weekday(.abbreviated), centered: true)
+			}
+		}
+		.chartLegend((showLegend && !isOverview) ? .visible : .hidden)
+		.chartLegend(position: .top)
+		.chartYAxis(isOverview ? .hidden : .automatic)
+		.chartXAxis(isOverview ? .hidden : .automatic)
+		.frame(height: isOverview ? Constants.previewChartHeight : Constants.detailChartHeight)
+	}
     
     private var customisation: some View {
         Section {
@@ -87,7 +77,7 @@ struct TwoBars: View {
 
 struct TwoBars_Previews: PreviewProvider {
     static var previews: some View {
-        TwoBarsOverview()
-        TwoBars()
+        TwoBars(isOverview: true)
+		TwoBars(isOverview: false)
     }
 }
