@@ -497,7 +497,7 @@ extension GradientLine: AXChartDescriptorRepresentable {
 
         // A closure that takes a date and converts it to a label for axes
         let dateTupleStringConverter: (((date: Date, uvIndex: Int)) -> (String)) = { dataPoint in
-            dataPoint.date.formatted(date: .omitted, time: .complete)
+            dataPoint.date.formatted(date: .omitted, time: .standard)
         }
         
         let xAxis = AXCategoricalDataAxisDescriptor(

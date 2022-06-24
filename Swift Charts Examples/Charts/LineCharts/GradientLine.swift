@@ -5,6 +5,8 @@
 import SwiftUI
 import Charts
 
+// TODO: Convert to spaces after review. This file uses tabs while the rest of this project uses space.
+
 struct GradientLine: View {
 	@State var isOverview = false
 	@State private var selectedDate: Date?
@@ -151,7 +153,7 @@ struct GradientLine: View {
                             y: .value("uvIndex", hour.uvIndex)
                         )
                     }
-                    .accessibilityLabel(hour.date.formatted(date: .omitted, time: .complete))
+                    .accessibilityLabel(hour.date.formatted(date: .omitted, time: .standard))
                     .accessibilityValue("\(hour.uvIndex)")
                 }
                 .accessibilityHidden(isOverview)
