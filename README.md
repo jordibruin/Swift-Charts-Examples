@@ -3,32 +3,8 @@ This repo aims to provide sample code for lots of different chart types for you 
 
 <img width="1511" alt="image" src="https://user-images.githubusercontent.com/170948/173253882-1a80b934-a0b9-4acb-a290-a299ae3fdd7d.png">
 
-## Included Charts
-
-- [x] Basis project setup
-- [x] Simple Line chart
-- [x] Line chart with lollipop
-- [x] Heartbeat Chart
-- [x] Animating Line chart
-- [x] Simple Bar chart
-- [x] Simple dual bar chart
-- [x] Pyramid Chart
-- [x] One dimensional bar
-- [x] Time Sheet Bar
-- [x] Area Chart
-- [x] Range Chart
-- [x] Range with Max and Min Chart
-- [x] Candle Stick Chart
-- [x] Heartbeat range Chart
-- [x] Heatmap Block Chart
-- [x] Scatter Chart
-- [x] Vector Field
-- [x] UV Index Chart
-
 ## Todo
-- [ ] Cumulative line Chart
 - [ ] Distribution line + Point Chart
-- [ ] Funky Gradient Chart
 - [ ] Other Charts
 - [ ] Multi-language Support
 - [ ] Screen time like bar chart with stacked colors
