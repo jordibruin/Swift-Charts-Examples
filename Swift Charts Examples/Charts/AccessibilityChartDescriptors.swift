@@ -27,6 +27,12 @@ extension SingleLineLollipop: AXChartDescriptorRepresentable {
     }
 }
 
+extension MultiLine: AXChartDescriptorRepresentable {
+    func makeChartDescriptor() -> AXChartDescriptor {
+        return chartDescriptor(forLocationSeries: data)
+    }
+}
+
 extension SingleBarOverview: AXChartDescriptorRepresentable {
     func makeChartDescriptor() -> AXChartDescriptor {
         chartDescriptor(forSalesSeries: data)
@@ -484,7 +490,7 @@ extension TimeSheetBarOverview: AXChartDescriptorRepresentable {
     }
 }
 
-extension UVIndex: AXChartDescriptorRepresentable {
+extension GradientLine: AXChartDescriptorRepresentable {
     func makeChartDescriptor() -> AXChartDescriptor {
         let min = data.map(\.uvIndex).min() ?? 0
         let max = data.map(\.uvIndex).max() ?? 0

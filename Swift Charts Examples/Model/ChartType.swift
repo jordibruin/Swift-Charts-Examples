@@ -44,6 +44,8 @@ enum ChartType: String, Identifiable, CaseIterable {
     case singleLineLollipop
     case heartBeat
     case animatingLine
+    case gradientLine
+    case multiLine
 
     // Bar Charts
     case singleBar
@@ -68,8 +70,7 @@ enum ChartType: String, Identifiable, CaseIterable {
     case scatter
     case vectorField
 
-	// Weather
-	case uvIndex
+    
 
     var id: String { self.rawValue }
 
@@ -83,6 +84,10 @@ enum ChartType: String, Identifiable, CaseIterable {
             return "Animating Line"
         case .heartBeat:
             return "Heart Beat / ECG Chart"
+        case .gradientLine:
+            return "Line with changing gradient"
+        case .multiLine:
+            return "Line Charts"
         case .singleBar:
             return "Single Bar"
         case .singleBarThreshold:
@@ -109,14 +114,13 @@ enum ChartType: String, Identifiable, CaseIterable {
             return "Scatter Chart"
         case .vectorField:
             return "Vector Field"
-		case .uvIndex:
-			return "UV Index"
+        
         }
     }
 
     var category: ChartCategory {
         switch self {
-        case .singleLine, .singleLineLollipop, .heartBeat, .animatingLine:
+        case .singleLine, .singleLineLollipop, .heartBeat, .animatingLine, .gradientLine, .multiLine:
             return .line
         case .singleBar, .singleBarThreshold, .twoBars, .pyramid, .oneDimensionalBar, .timeSheetBar:
             return .bar
@@ -128,8 +132,6 @@ enum ChartType: String, Identifiable, CaseIterable {
             return .heatMap
         case .scatter, .vectorField:
             return .point
-		case .uvIndex:
-			return .weather
         }
     }
 
@@ -144,6 +146,10 @@ enum ChartType: String, Identifiable, CaseIterable {
             HeartBeatOverview()
         case .animatingLine:
             AnimatingLineOverview()
+        case .gradientLine:
+            GradientLine(isOverview: true)
+        case .multiLine:
+            MultiLine(isOverview: true)
         case .singleBar:
             SingleBarOverview()
         case .singleBarThreshold:
@@ -170,8 +176,6 @@ enum ChartType: String, Identifiable, CaseIterable {
             ScatterChartOverview()
         case .vectorField:
             VectorFieldOverview()
-		case .uvIndex:
-			UVIndex(isOverview: true)
         }
     }
     
@@ -183,6 +187,8 @@ enum ChartType: String, Identifiable, CaseIterable {
             return SingleLineOverview().makeChartDescriptor()
         case .singleLineLollipop:
             return SingleLineLollipop(isOverview: true).makeChartDescriptor()
+        case .multiLine:
+            return MultiLine(isOverview: true).makeChartDescriptor()
         case .heartBeat:
             return HeartBeatOverview().makeChartDescriptor()
         case .animatingLine:
@@ -214,8 +220,8 @@ enum ChartType: String, Identifiable, CaseIterable {
             return ScatterChartOverview().makeChartDescriptor()
         case .vectorField:
             return VectorFieldOverview().makeChartDescriptor()
-        case .uvIndex:
-            return UVIndex(isOverview: true).makeChartDescriptor()
+        case .gradientLine:
+            return GradientLine(isOverview: true).makeChartDescriptor()
         }
     }
 
@@ -230,6 +236,10 @@ enum ChartType: String, Identifiable, CaseIterable {
             HeartBeat()
         case .animatingLine:
             AnimatingLine()
+        case .gradientLine:
+            GradientLine()
+        case .multiLine:
+            MultiLine(isOverview: false)
         case .singleBar:
             SingleBar()
         case .singleBarThreshold:
@@ -256,8 +266,6 @@ enum ChartType: String, Identifiable, CaseIterable {
             ScatterChart()
         case .vectorField:
             VectorField()
-		case .uvIndex:
-			UVIndex()
         }
     }
 }
