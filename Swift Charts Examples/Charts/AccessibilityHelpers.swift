@@ -87,7 +87,7 @@ func chartDescriptor(forLocationSeries data: [LocationData.Series]) -> AXChartDe
             dataPoints: dataPoint.sales.map { data in
                     .init(x: dateStringConverter(data.weekday),
                           y: Double(data.sales),
-                          label: "\(dataPoint.city): \(data.weekday.weekdayString)")
+                          label: "\(data.weekday.weekdayString)")
             }
         )
     }

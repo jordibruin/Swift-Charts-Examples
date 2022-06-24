@@ -38,7 +38,7 @@ struct SingleBar: View {
                         y: .value("Sales", $0.sales),
                         width: .fixed(barWidth)
                     )
-                    .accessibilityLabel($0.day.formatted())
+                    .accessibilityLabel($0.day.formatted(date: .complete, time: .omitted))
                     .accessibilityValue("\($0.sales) sold")
                     .foregroundStyle(chartColor.gradient)
                 }

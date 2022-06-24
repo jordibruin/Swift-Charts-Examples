@@ -17,8 +17,6 @@ struct ScatterChartOverview: View {
                         x: .value("Day", element.weekday, unit: .day),
                         y: .value("Sales", element.sales)
                     )
-                    .accessibilityLabel("\(element.weekday.formatted())")
-                    .accessibilityValue("\(element.sales)")
                 }
                 .foregroundStyle(by: .value("City", series.city))
                 .symbol(by: .value("City", series.city))
@@ -46,7 +44,7 @@ struct ScatterChart: View {
                                 x: .value("Day", element.weekday, unit: .day),
                                 y: .value("Sales", element.sales)
                             )
-                            .accessibilityLabel("\(element.weekday.weekdayString)")
+                            .accessibilityLabel("\(series.city), \(element.weekday.formatted(date: .complete, time: .omitted))")
                             .accessibilityValue("\(element.sales) sold")
                         }
                         .foregroundStyle(by: .value("City", series.city))

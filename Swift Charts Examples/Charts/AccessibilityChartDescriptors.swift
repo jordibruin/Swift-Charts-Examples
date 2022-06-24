@@ -163,7 +163,7 @@ extension HeartBeatOverview: AXChartDescriptorRepresentable {
         ) { value in "\(value) mV" }
 
         let series = AXDataSeriesDescriptor(
-            name: "ECG from \(Date().formatted())",
+            name: "ECG data",
             isContinuous: true,
             dataPoints: data.enumerated().map {
                 .init(x: Double($0), y: $1)

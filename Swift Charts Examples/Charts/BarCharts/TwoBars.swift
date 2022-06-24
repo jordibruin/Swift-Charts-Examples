@@ -17,7 +17,7 @@ struct TwoBarsOverview: View {
                         x: .value("Day", element.weekday, unit: .day),
                         y: .value("Sales", element.sales)
                     )
-                    .accessibilityLabel("\(element.weekday.formatted())")
+                    .accessibilityLabel("\(element.weekday.formatted(date: .complete, time: .omitted))")
                     .accessibilityValue("\(element.sales)")
                     .foregroundStyle(by: .value("City", series.city))
                 }

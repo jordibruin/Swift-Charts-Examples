@@ -43,7 +43,7 @@ struct RangeSimple: View {
                         yEnd: .value("Sales Max", $0.dailyMax),
                         width: .fixed(barWidth)
                     )
-                    .accessibilityLabel("\($0.month.formatted())")
+                    .accessibilityLabel("\($0.month.formatted(.dateTime.month(.wide)))")
                     .accessibilityValue("Sales: \($0.sales), Min: \($0.dailyMin), Max: \($0.dailyMax)")
                     .clipShape(Capsule())
                     .foregroundStyle(chartColor.gradient)

@@ -40,7 +40,7 @@ struct SingleLine: View {
                         x: .value("Date", $0.day),
                         y: .value("Sales", $0.sales)
                     )
-                    .accessibilityLabel($0.day.formatted())
+                    .accessibilityLabel($0.day.formatted(date: .complete, time: .omitted))
                     .accessibilityValue("\($0.sales) sold")
                     .lineStyle(StrokeStyle(lineWidth: lineWidth))
                     .foregroundStyle(chartColor.gradient)
