@@ -67,9 +67,9 @@ Animating Line
 
 <img src="images/charts/line/animatingLine.png" width="380">
 
-UV Index
+Line with changing gradient
 
-<img src="images/charts/weather/uvIndex.png" width="380">
+<img src="images/charts/line/gradientLine.png" width="380">
 
 
 ### [Bar Charts](https://github.com/jordibruin/SwiftChartExamples/tree/main/Swift%20Charts%20Examples/Charts/BarCharts)

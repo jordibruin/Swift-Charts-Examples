@@ -6,7 +6,6 @@ import SwiftUI
 import Charts
 
 struct GradientLine: View {
-
 	@State var isOverview = false
 	@State private var selectedDate: Date?
 
@@ -17,8 +16,7 @@ struct GradientLine: View {
 			List {
 				chart
 			}
-			.navigationTitle(ChartType.gradientLine.title)
-            .navigationBarTitleDisplayMode(.inline)
+            .navigationBarTitle(ChartType.gradientLine.title, displayMode: .inline)
 		}
 	}
 
@@ -45,7 +43,7 @@ struct GradientLine: View {
 								y: .value("uvIndex", hour.uvIndex)
 							)
 							.interpolationMethod(.cardinal)
-							.foregroundStyle(.black.opacity(0.2))
+							.foregroundStyle(.black.opacity(0.4))
 
 							LineMark(
 								x: .value("hour", hour.date),
@@ -147,6 +145,7 @@ struct GradientLine: View {
 
 struct GradientLine_Previews: PreviewProvider {
 	static var previews: some View {
+        GradientLine(isOverview: true)
         GradientLine()
 	}
 }
