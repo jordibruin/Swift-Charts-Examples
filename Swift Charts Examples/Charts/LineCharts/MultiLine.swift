@@ -30,6 +30,7 @@ struct MultiLine: View {
                     x: .value("Date", element.weekday),
                     y: .value("Sales", element.sales)
                 )
+                .interpolationMethod(.cardinal)
                 .foregroundStyle(by: .value("City", series.city))
             }
         }
