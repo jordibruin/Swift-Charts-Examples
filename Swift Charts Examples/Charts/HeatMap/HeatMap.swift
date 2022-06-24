@@ -16,10 +16,11 @@ struct HeatMapOverview: View {
                 yStart: .value("yStart", point.y),
                 yEnd: .value("yEnd", point.y + 1)
             )
-            .foregroundStyle(point.color)
+            .foregroundStyle(by: .value("Value", point.val))
         }
         .chartXAxis(.hidden)
         .chartYAxis(.hidden)
+        .chartForegroundStyleScale(range: Gradient(colors: [.blue, .green, .yellow, .orange, .red]))
         .aspectRatio(contentMode: .fit)
     }
 }
@@ -35,32 +36,19 @@ struct HeatMap: View {
         List {
             Section {
                 Chart(grid.points) { point in
-                    if showColors {
-                        RectangleMark(
-                            xStart: PlottableValue.value("xStart", point.x),
-                            xEnd: PlottableValue.value("xEnd", point.x + 1),
-                            yStart: PlottableValue.value("yStart", point.y),
-                            yEnd: PlottableValue.value("yEnd", point.y + 1)
-                        )
-                        .foregroundStyle(point.color)
-                        // does not compile when annotations are paired with both `chartYAxis` and `chartXAxis`
-                        // Reported FB10250889
+                    RectangleMark(
+                        xStart: PlottableValue.value("xStart", point.x),
+                        xEnd: PlottableValue.value("xEnd", point.x + 1),
+                        yStart: PlottableValue.value("yStart", point.y),
+                        yEnd: PlottableValue.value("yEnd", point.y + 1)
+                    )
+                    .foregroundStyle(by: .value("Value", point.val))
+                    // Reported FB10250889
 //                        .annotation(position: .overlay) {
 //                            Text(showValues ? String(format: "%.0f", point.val) : "")
 //                        }
-                    } else {
-                        RectangleMark(
-                            xStart: PlottableValue.value("xStart", point.x),
-                            xEnd: PlottableValue.value("xEnd", point.x + 1),
-                            yStart: PlottableValue.value("yStart", point.y),
-                            yEnd: PlottableValue.value("yEnd", point.y + 1)
-                        )
-                        .foregroundStyle(by: .value("Value", point.val))
-//                        .annotation(position: .overlay) {
-//                            Text(showValues ? String(format: "%.0f", point.val) : "")
-//                        }
-                    }
                 }
+                .chartForegroundStyleScale(range: Gradient(colors: showColors ? [.blue, .green, .yellow, .orange, .red] : [.clear, .blue]))
                 .chartYAxis {
                     AxisMarks(values: .automatic(desiredCount: grid.numRows,
                                                  roundLowerBound: false,

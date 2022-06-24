@@ -231,7 +231,6 @@
 				C26088122856935B00B09DDB /* ChartType.swift */,
 				C260881B28569D1B00B09DDB /* InterpolationMethod.swift */,
 				C26088262856A95A00B09DDB /* ChartStrideBy.swift */,
-				62FF3EFF2857EADF0022930C /* Grid.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -242,6 +241,7 @@
 				C26088172856963D00B09DDB /* Data.swift */,
 				7425DF822858DF4300672F3B /* HealthData.swift */,
 				52145C312864A60D00EB89D7 /* StockData.swift */,
+				62FF3EFF2857EADF0022930C /* Grid.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
