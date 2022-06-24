@@ -11,6 +11,10 @@ func date(year: Int, month: Int, day: Int = 1, hour: Int = 0, minutes: Int = 0, 
 enum Constants {
     static let previewChartHeight: CGFloat = 100
     static let detailChartHeight: CGFloat = 300
+
+	static func heightForOverviewState(isOverview: Bool) -> CGFloat {
+		return isOverview ? Self.previewChartHeight : Self.detailChartHeight
+	}
 }
 
 /// Data for the daily and monthly sales charts.

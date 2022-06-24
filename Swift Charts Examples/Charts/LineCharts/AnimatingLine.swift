@@ -6,15 +6,6 @@
 import SwiftUI
 import Charts
 
-struct AnimatingLineOverview: View {
-	@State private var x: Double = -0.4
-
-	var body: some View {
-		AnimatedChart(x: x, isOverview: true)
-			.frame(height: Constants.previewChartHeight)
-	}
-}
-
 struct AnimatingLine: View {
 
 	var isOverview: Bool

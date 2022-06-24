@@ -6,6 +6,7 @@ import SwiftUI
 import Charts
 
 struct TwoBars: View {
+	
 	var isOverview: Bool
 
     @State private var barWidth = 13.0

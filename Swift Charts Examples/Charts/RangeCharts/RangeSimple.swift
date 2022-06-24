@@ -5,24 +5,6 @@
 import SwiftUI
 import Charts
 
-struct RangeSimpleOverview: View {
-    var body: some View {
-        Chart(SalesData.last12Months, id: \.month) {
-            BarMark(
-                x: .value("Month", $0.month, unit: .month),
-                yStart: .value("Sales Min", $0.dailyMin),
-                yEnd: .value("Sales Max", $0.dailyMax),
-                width: .fixed(10)
-            )
-            .foregroundStyle(.blue.gradient)
-            .clipShape(Capsule())
-        }
-        .chartXAxis(.hidden)
-        .chartYAxis(.hidden)
-        .frame(height: Constants.previewChartHeight)
-    }
-}
-
 struct RangeSimple: View {
 
 	var isOverview: Bool

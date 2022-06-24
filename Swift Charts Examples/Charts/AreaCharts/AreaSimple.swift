@@ -5,23 +5,8 @@
 import SwiftUI
 import Charts
 
-struct AreaSimpleOverview: View {
-    var body: some View {
-        Chart(SalesData.last30Days, id: \.day) {
-            AreaMark(
-                x: .value("Day", $0.day, unit: .day),
-                y: .value("Sales", $0.sales)
-            )
-            .foregroundStyle(Gradient(colors: [.blue, .blue.opacity(0.5)]))
-            .interpolationMethod(.cardinal)
-        }
-        .chartXAxis(.hidden)
-        .chartYAxis(.hidden)
-        .frame(height: Constants.previewChartHeight)
-    }
-}
-
 struct AreaSimple: View {
+
 	var isOverview: Bool
 
     @State private var lineWidth = 2.0

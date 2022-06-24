@@ -6,7 +6,8 @@ import SwiftUI
 import Charts
 
 struct StackedArea: View {
-    var isOverview: Bool = false
+
+    var isOverview: Bool
 
     private let data = LocationData.last30Days
 
@@ -46,6 +47,6 @@ struct StackedArea: View {
 struct StackedArea_Previews: PreviewProvider {
     static var previews: some View {
         StackedArea(isOverview: true)
-        StackedArea()
+        StackedArea(isOverview: false)
     }
 }

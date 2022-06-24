@@ -6,6 +6,7 @@ import SwiftUI
 import Charts
 
 struct VectorField: View {
+	
 	var isOverview: Bool
 
     @State private var grid = Grid(numRows: 20, numCols: 20)
