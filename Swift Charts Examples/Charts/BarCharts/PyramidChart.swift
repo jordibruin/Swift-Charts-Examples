@@ -7,7 +7,7 @@ import Charts
 
 struct PyramidChart: View {
 
-	var isOverview: Bool
+	var isOverview: Bool = false
 
     @State private var data = PopulationByAgeData.example
     @State var leftColor: Color = .green
@@ -126,6 +126,6 @@ struct PyramidChart: View {
 struct PyramidChart_Previews: PreviewProvider {
     static var previews: some View {
         PyramidChart(isOverview: true)
-		PyramidChart(isOverview: false)
+		PyramidChart()
     }
 }

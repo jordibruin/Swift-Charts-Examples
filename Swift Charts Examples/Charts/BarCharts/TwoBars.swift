@@ -7,7 +7,7 @@ import Charts
 
 struct TwoBars: View {
 	
-	var isOverview: Bool
+	var isOverview: Bool = false
 
     @State private var barWidth = 13.0
     @State private var interpolationMethod: ChartInterpolationMethod = .cardinal
@@ -79,6 +79,6 @@ struct TwoBars: View {
 struct TwoBars_Previews: PreviewProvider {
     static var previews: some View {
         TwoBars(isOverview: true)
-		TwoBars(isOverview: false)
+		TwoBars()
     }
 }

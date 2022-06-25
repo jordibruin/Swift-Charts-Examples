@@ -15,7 +15,7 @@ struct SingleLine: View {
 	@State private var chartColor: Color = .blue
 	@State private var showSymbols = false
 
-	init(isOverview: Bool) {
+	init(isOverview: Bool = false) {
 		self.isOverview = isOverview
 		self.data = SalesData.last30Days.map { Sale(day: $0.day, sales: isOverview ? $0.sales : 0)}
 	}
@@ -86,6 +86,6 @@ struct SingleLine: View {
 struct SingleLine_Previews: PreviewProvider {
 	static var previews: some View {
 		SingleLine(isOverview: true)
-		SingleLine(isOverview: false)
+		SingleLine()
 	}
 }

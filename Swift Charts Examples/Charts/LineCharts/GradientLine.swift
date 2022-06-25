@@ -7,7 +7,7 @@ import Charts
 
 struct GradientLine: View {
 	
-	var isOverview: Bool
+	var isOverview: Bool = false
 
 	@State private var selectedDate: Date?
 
@@ -149,6 +149,6 @@ struct GradientLine: View {
 struct GradientLine_Previews: PreviewProvider {
 	static var previews: some View {
         GradientLine(isOverview: true)
-        GradientLine(isOverview: false)
+        GradientLine()
 	}
 }

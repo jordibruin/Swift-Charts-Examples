@@ -8,7 +8,7 @@ import Charts
 
 struct AnimatingLine: View {
 
-	var isOverview: Bool
+	var isOverview: Bool = false
 
 	@State private var x: Double = -1
 
@@ -58,7 +58,7 @@ struct AnimatingLine: View {
 
 struct AnimatingLine_Previews: PreviewProvider {
 	static var previews: some View {
-		AnimatingLine(isOverview: false)
+		AnimatingLine()
 		AnimatingLine(isOverview: true)
 	}
 }

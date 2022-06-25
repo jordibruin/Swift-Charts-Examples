@@ -7,7 +7,7 @@ import Charts
 
 struct OneDimensionalBar: View {
 
-	var isOverview: Bool
+	var isOverview: Bool = false
 
     @State private var showLegend = true
     
@@ -76,6 +76,6 @@ struct OneDimensionalBar: View {
 struct OneDimensionalBar_Previews: PreviewProvider {
     static var previews: some View {
         OneDimensionalBar(isOverview: true)
-		OneDimensionalBar(isOverview: false)
+		OneDimensionalBar()
     }
 }

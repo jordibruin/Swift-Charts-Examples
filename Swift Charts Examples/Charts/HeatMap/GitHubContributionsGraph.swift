@@ -7,7 +7,7 @@ import Charts
 
 struct GitHubContributionsGraph: View {
 	
-    var isOverview: Bool
+    var isOverview: Bool = false
 
     private let data = GitHubData.contributions.suffix(7 * 20 - 1)
 
@@ -68,6 +68,6 @@ struct GitHubContributionsGraph: View {
 struct GitHubContributionsGraph_Previews: PreviewProvider {
     static var previews: some View {
         GitHubContributionsGraph(isOverview: true)
-        GitHubContributionsGraph(isOverview: false)
+        GitHubContributionsGraph()
     }
 }

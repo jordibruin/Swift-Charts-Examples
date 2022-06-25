@@ -7,13 +7,13 @@ import Charts
 
 struct SingleBar: View {
 
-	var isOverview: Bool
+	var isOverview: Bool = false
 
     @State private var barWidth = 7.0
     @State private var chartColor: Color = .blue
     @State private var data: [Sale]
 
-	init(isOverview: Bool) {
+	init(isOverview: Bool = false) {
 		self.isOverview = isOverview
 		self.data = SalesData.last30Days.map { Sale(day: $0.day, sales: isOverview ? $0.sales : 0) }
 	}
@@ -73,6 +73,6 @@ struct SingleBar: View {
 struct SingleBar_Previews: PreviewProvider {
     static var previews: some View {
         SingleBar(isOverview: true)
-		SingleBar(isOverview: false)
+		SingleBar()
     }
 }

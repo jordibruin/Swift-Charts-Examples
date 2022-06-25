@@ -7,7 +7,7 @@ import Charts
 
 struct VectorField: View {
 	
-	var isOverview: Bool
+	var isOverview: Bool = false
 
     @State private var grid = Grid(numRows: 20, numCols: 20)
     @State private var degreeOffset = 0.0
@@ -121,6 +121,6 @@ struct Arrow: ChartSymbolShape {
 struct VectorField_Previews: PreviewProvider {
     static var previews: some View {
         VectorField(isOverview: true)
-		VectorField(isOverview: false)
+		VectorField()
     }
 }

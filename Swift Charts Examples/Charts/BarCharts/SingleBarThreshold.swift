@@ -7,7 +7,7 @@ import Charts
 
 struct SingleBarThreshold: View {
 
-	var isOverview: Bool
+	var isOverview: Bool = false
     
     @State private var threshold = 150.0
     @State var belowColor: Color = .blue
@@ -88,6 +88,6 @@ struct SingleBarThreshold: View {
 struct SingleBarThreshold_Previews: PreviewProvider {
     static var previews: some View {
         SingleBarThreshold(isOverview: true)
-		SingleBarThreshold(isOverview: false)
+		SingleBarThreshold()
     }
 }

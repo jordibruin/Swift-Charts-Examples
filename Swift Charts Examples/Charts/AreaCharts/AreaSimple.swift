@@ -16,7 +16,7 @@ struct AreaSimple: View {
     @State private var gradientRange = 0.5
     @State private var data: [Sale]
 
-	init(isOverview: Bool) {
+	init(isOverview: Bool = false) {
 		self.isOverview = isOverview
 		self.data = SalesData.last30Days.map { Sale(day: $0.day, sales: isOverview ? $0.sales : 0) }
 	}
@@ -113,6 +113,6 @@ struct AreaSimple: View {
 struct AreaSimple_Previews: PreviewProvider {
     static var previews: some View {
         AreaSimple(isOverview: true)
-		AreaSimple(isOverview: false)
+		AreaSimple()
     }
 }

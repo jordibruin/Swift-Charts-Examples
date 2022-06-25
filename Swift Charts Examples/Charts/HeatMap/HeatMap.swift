@@ -7,7 +7,7 @@ import Charts
 
 struct HeatMap: View {
 
-	var isOverview: Bool
+	var isOverview: Bool = false
 
 	@State private var numRows = 10
 	@State private var numCols = 10
@@ -103,6 +103,6 @@ struct HeatMap: View {
 struct HeatMap_Previews: PreviewProvider {
 	static var previews: some View {
 		HeatMap(isOverview: true)
-		HeatMap(isOverview: false)
+		HeatMap()
 	}
 }

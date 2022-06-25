@@ -187,47 +187,47 @@ enum ChartType: String, Identifiable, CaseIterable {
 	var detailView: some View {
 		switch self {
 		case .singleLine:
-			SingleLine(isOverview: false)
+			SingleLine()
 		case .singleLineLollipop:
-			SingleLineLollipop(isOverview: false)
+			SingleLineLollipop()
 		case .heartBeat:
-			HeartBeat(isOverview: false)
+			HeartBeat()
 		case .animatingLine:
-			AnimatingLine(isOverview: false)
+			AnimatingLine()
 		case .gradientLine:
-			GradientLine(isOverview: false)
+			GradientLine()
 		case .multiLine:
-			MultiLine(isOverview: false)
+			MultiLine()
 		case .singleBar:
-			SingleBar(isOverview: false)
+			SingleBar()
 		case .singleBarThreshold:
-			SingleBarThreshold(isOverview: false)
+			SingleBarThreshold()
 		case .twoBars:
-			TwoBars(isOverview: false)
+			TwoBars()
 		case .candleStick:
-			CandleStickChart(isOverview: false)
+			CandleStickChart()
 		case .oneDimensionalBar:
-			OneDimensionalBar(isOverview: false)
+			OneDimensionalBar()
 		case .timeSheetBar:
-			TimeSheetBar(isOverview: false)
+			TimeSheetBar()
 		case .pyramid:
-			PyramidChart(isOverview: false)
+			PyramidChart()
 		case .areaSimple:
-			AreaSimple(isOverview: false)
+			AreaSimple()
 		case .stackedArea:
-			StackedArea(isOverview: false)
+			StackedArea()
 		case .rangeSimple:
-			RangeSimple(isOverview: false)
+			RangeSimple()
 		case .rangeHeartRate:
-			HeartRateRangeChart(isOverview: false)
+			HeartRateRangeChart()
 		case .customizeableHeatMap:
-			HeatMap(isOverview: false)
+			HeatMap()
 		case .gitContributions:
-			GitHubContributionsGraph(isOverview: false)
+			GitHubContributionsGraph()
 		case .scatter:
-			ScatterChart(isOverview: false)
+			ScatterChart()
 		case .vectorField:
-			VectorField(isOverview: false)
+			VectorField()
 		}
 	}
 }

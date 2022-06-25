@@ -12,7 +12,7 @@ struct CandleStickChart: View {
     private var currentPrices: [StockData.StockPrice]
     @State private var selectedPrice: StockData.StockPrice?
 
-	init(isOverview: Bool) {
+	init(isOverview: Bool = false) {
 		self.isOverview = isOverview
 		self.currentPrices = isOverview ? StockData.appleFirst7Months : StockData.apple
 	}
@@ -193,6 +193,6 @@ struct PriceAnnotation: View {
 struct CandleStickChart_Previews: PreviewProvider {
     static var previews: some View {
 		CandleStickChart(isOverview: true)
-        CandleStickChart(isOverview: false)
+        CandleStickChart()
     }
 }
