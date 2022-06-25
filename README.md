@@ -77,6 +77,10 @@ Time Sheet Bar
 
 <img src="images/charts/bar/timeSheetBar.png" width="380">
 
+Sound Bar
+
+<img src="images/charts/bar/soundBar.png" width="380">
+
 ### [Area Charts](https://github.com/jordibruin/SwiftChartExamples/tree/main/Swift%20Charts%20Examples/Charts/AreaCharts)
 
 Area Chart
