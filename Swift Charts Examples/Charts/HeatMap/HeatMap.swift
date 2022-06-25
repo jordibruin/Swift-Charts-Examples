@@ -5,12 +5,31 @@
 import SwiftUI
 import Charts
 
-struct HeatMapOverview: View {
-    @State private var grid = Grid(numRows: 10, numCols: 10)
-    var data: [Grid.Point] { grid.points }
+protocol AccessibleGradientGrid {
+    var grid: Grid { get set }
+    var gradientColors: [Color] { get set }
+}
 
+extension AccessibleGradientGrid {
+    var bins: NumberBins<Double> {
+        let values = grid.points.map { $0.val }
+        let min = values.min() ?? 0
+        let max = values.max() ?? 0
+        return NumberBins(range: min-1...max+1, count: gradientColors.count)
+    }
+    var accessibilityColorNames: [String] {
+        return gradientColors.map { UIColor($0).accessibilityName }
+    }
+}
+
+struct HeatMapOverview: View, AccessibleGradientGrid {
+    @State var grid = Grid(numRows: 10, numCols: 10)
+    
+    var gradientColors: [Color] = [.blue, .green, .yellow, .orange, .red]
+    
+    
     var body: some View {
-        Chart(data) { point in
+        Chart(grid.points) { point in
             RectangleMark(
                 xStart: .value("xStart", point.x),
                 xEnd: .value("xEnd", point.x + 1),
@@ -22,38 +41,51 @@ struct HeatMapOverview: View {
         .accessibilityChartDescriptor(self)
         .chartXAxis(.hidden)
         .chartYAxis(.hidden)
-        .chartForegroundStyleScale(range: Gradient(colors: [.blue, .green, .yellow, .orange, .red]))
+        .chartForegroundStyleScale(range: Gradient(colors: gradientColors))
         .aspectRatio(contentMode: .fit)
     }
 }
 
-struct HeatMap: View {
+struct HeatMap: View, AccessibleGradientGrid {
+    @State var grid = Grid(numRows: 10, numCols: 10)
+    var gradientColors: [Color] = [.blue, .green, .yellow, .orange, .red]
+    var monotoneColors: [Color] = [.clear, .blue]
+
     @State private var numRows = 10
     @State private var numCols = 10
-    @State private var grid = Grid(numRows: 10, numCols: 10)
     @State private var showColors = true
     @State private var showValues = false
+    
+    func accessibilityColorName(for point: Grid.Point) -> String {
+        let bins = bins
+        let color = gradientColors[bins.index(for: point.val) ]
+        
+        return UIColor(color).accessibilityName
+    }
     
     var body: some View {
         List {
             Section {
                 Chart(grid.points) { point in
-                    RectangleMark(
-                        xStart: PlottableValue.value("xStart", point.x),
-                        xEnd: PlottableValue.value("xEnd", point.x + 1),
-                        yStart: PlottableValue.value("yStart", point.y),
-                        yEnd: PlottableValue.value("yEnd", point.y + 1)
-                    )
-                    // TODO: Using foregroundStyle hides the encoding from accessibility
-                    .accessibilityLabel("\(point.x)")
-                    .accessibilityValue("Y: \(point.y), value: \(point.val.formatted(.number))")
-                    .foregroundStyle(by: .value("Value", point.val))
+                    // Using accessibilityLabel on the RectangleMark does not work as expected
+                    Plot {
+                        RectangleMark(
+                            xStart: PlottableValue.value("xStart", point.x),
+                            xEnd: PlottableValue.value("xEnd", point.x + 1),
+                            yStart: PlottableValue.value("yStart", point.y),
+                            yEnd: PlottableValue.value("yEnd", point.y + 1)
+                        )
+                        // TODO: Using foregroundStyle hides the encoding from accessibility
+                        .foregroundStyle(by: .value("Value", point.val))
+                    }
+                    .accessibilityLabel("Point: (\(point.x), \(point.y))")
+                    .accessibilityValue("Color: \(accessibilityColorName(for: point))")
                     // Reported FB10250889
 //                        .annotation(position: .overlay) {
 //                            Text(showValues ? String(format: "%.0f", point.val) : "")
 //                        }
                 }
-                .chartForegroundStyleScale(range: Gradient(colors: showColors ? [.blue, .green, .yellow, .orange, .red] : [.clear, .blue]))
+                .chartForegroundStyleScale(range: Gradient(colors: showColors ? gradientColors : monotoneColors))
                 .chartYAxis {
                     AxisMarks(values: .automatic(desiredCount: grid.numRows,
                                                  roundLowerBound: false,

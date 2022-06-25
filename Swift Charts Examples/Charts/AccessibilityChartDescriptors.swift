@@ -385,7 +385,73 @@ extension CandleStickChartOverview: AXChartDescriptorRepresentable {
 
 extension HeatMapOverview: AXChartDescriptorRepresentable {
     func makeChartDescriptor() -> AXChartDescriptor {
-        return chartDescriptor(forGrid: data)
+       
+        // The general approach here is to create a Series for each category/bin/group/gradient
+        
+        // Create an array of elements, each of which is an array of points.
+        // The outer arrays indices line up with the gradientColors, so each nested list contains
+        // points categorized as a color
+        // Doing this allows VoiceOver to create a different "note"
+        // for each data point that shares an X/Y values
+        let bin = self.bins
+        let data = grid.points
+        var categories = Array(repeating: Array<Grid.Point>(),
+                               count: gradientColors.count)
+        data.forEach { point in
+            categories[bin.index(for: point.val)].append(point)
+        }
+        
+        // Limits for each axis
+        let xmin = data.map(\.x).min() ?? 0
+        let xmax = data.map(\.x).max() ?? 0
+        let ymin = data.map(\.y).min() ?? 0
+        let ymax = data.map(\.y).max() ?? 0
+        let vmin = data.map(\.val).min() ?? 0
+        let vmax = data.map(\.val).max() ?? 0
+        
+        // Create the axes
+        let xAxis = AXNumericDataAxisDescriptor(
+            title: "Horizontal Position",
+            range: Double(xmin)...Double(xmax),
+            gridlinePositions: Array(stride(from: xmin, to: xmax, by: 1)).map { Double($0) }
+        ) { "X: \($0)" }
+
+        let yAxis = AXNumericDataAxisDescriptor(
+            title: "Vertical Position",
+            range: Double(ymin)...Double(ymax),
+            gridlinePositions: Array(stride(from: ymin, to: ymax, by: 1)).map { Double($0) }
+        ) { "Y: \($0)" }
+        
+        let valueAxis = AXNumericDataAxisDescriptor(
+            title: "Value based Color",
+            range: Double(vmin)...Double(vmax),
+            gridlinePositions: []
+        ) { "Color: \($0)" }
+        
+        // Finally create the series with the color category as a 3rd axes
+        let series: [AXDataSeriesDescriptor] = categories.enumerated().map { idx, colorSeries in
+            let dataPoints = colorSeries.map { point in
+                return AXDataPoint(x: Double(point.x),
+                                   y: Double(point.y),
+                                   additionalValues: [.category(accessibilityColorNames[idx])],
+                                   label: nil)
+            }
+            
+            return AXDataSeriesDescriptor(name: accessibilityColorNames[idx],
+                                          isContinuous: false,
+                                          dataPoints: dataPoints)
+            
+        }
+
+        return AXChartDescriptor(
+            title: "Grid Data",
+            summary: nil,
+            xAxis: xAxis,
+            yAxis: yAxis,
+            additionalAxes: [valueAxis],
+            series: series
+        )
+        
     }
 }
 
