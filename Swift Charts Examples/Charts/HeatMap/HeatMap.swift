@@ -65,7 +65,7 @@ struct HeatMap: View {
 		}
 		.chartYAxis(isOverview ? .hidden : .automatic)
 		.chartXAxis(isOverview ? .hidden : .automatic)
-		.frame(height: isOverview ? Constants.previewChartHeight : Constants.detailChartHeight)
+		.aspectRatio(contentMode: .fit)
 	}
 
 	private var customisation: some View {

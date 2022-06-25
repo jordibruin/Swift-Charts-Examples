@@ -62,7 +62,7 @@ struct PyramidChart: View {
 		.chartLegend(isOverview ? .hidden : .automatic)
 		.chartYAxis(isOverview ? .hidden : .automatic)
 		.chartXAxis(isOverview ? .hidden : .automatic)
-		.frame(height: isOverview ? Constants.previewChartHeight : Constants.detailChartHeight)
+		.frame(height: isOverview ? 200 : 340)
 	}
     
     private var customisation: some View {
