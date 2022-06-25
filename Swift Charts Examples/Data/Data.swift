@@ -13,7 +13,7 @@ enum Constants {
     static let detailChartHeight: CGFloat = 300
 
 	static func heightForOverviewState(isOverview: Bool) -> CGFloat {
-		return isOverview ? Self.previewChartHeight : Self.detailChartHeight
+	isOverview ? Self.previewChartHeight : Self.detailChartHeight
 	}
 }
 
