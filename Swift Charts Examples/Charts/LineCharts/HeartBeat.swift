@@ -67,11 +67,14 @@ struct HeartBeat: View {
     
     private var customisation: some View {
         Section {
-            Stepper(value: $lineWidth, in: 1.0...10.0) {
-                HStack {
+            VStack(alignment: .leading) {
+                Text("Line Width: \(lineWidth, specifier: "%.1f")")
+                Slider(value: $lineWidth, in: 1...10) {
                     Text("Line Width")
-                    Spacer()
-                    Text("\(String(format: "%.0f", lineWidth))")
+                } minimumValueLabel: {
+                    Text("1")
+                } maximumValueLabel: {
+                    Text("10")
                 }
             }
             

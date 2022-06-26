@@ -63,13 +63,16 @@ struct SingleLine: View {
 
 	private var customisation: some View {
 		Section {
-			Stepper(value: $lineWidth, in: 1.0...20.0) {
-				HStack {
-					Text("Line Width")
-					Spacer()
-					Text("\(String(format: "%.0f",lineWidth))")
-				}
-			}
+            VStack(alignment: .leading) {
+                Text("Line Width: \(lineWidth, specifier: "%.1f")")
+                Slider(value: $lineWidth, in: 1...20) {
+                    Text("Line Width")
+                } minimumValueLabel: {
+                    Text("1")
+                } maximumValueLabel: {
+                    Text("20")
+                }
+            }
 
 			Picker("Interpolation Method", selection: $interpolationMethod) {
 				ForEach(ChartInterpolationMethod.allCases) { Text($0.mode.description).tag($0) }

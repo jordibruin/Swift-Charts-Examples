@@ -77,10 +77,10 @@ struct PyramidChart: View {
             Section {
                 VStack(alignment: .leading) {
                     Text("Bar Height: \(barHeight, specifier: "%.1f")")
-                    Slider(value: $barHeight, in: 0...25) {
+                    Slider(value: $barHeight, in: 1...25) {
                         Text("Bar Height")
                     } minimumValueLabel: {
-                        Text("0")
+                        Text("1")
                     } maximumValueLabel: {
                         Text("25")
                     }

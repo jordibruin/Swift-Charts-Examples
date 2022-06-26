@@ -29,11 +29,14 @@ struct HeartRateRangeChart: View {
     
     private var customisation: some View {
         Section {
-            Stepper(value: $barWidth, in: 5.0...20.0) {
-                HStack {
+            VStack(alignment: .leading) {
+                Text("Bar Width: \(barWidth, specifier: "%.1f")")
+                Slider(value: $barWidth, in: 5...20) {
                     Text("Bar Width")
-                    Spacer()
-                    Text("\(String(format: "%.0f", barWidth))")
+                } minimumValueLabel: {
+                    Text("5")
+                } maximumValueLabel: {
+                    Text("20")
                 }
             }
             

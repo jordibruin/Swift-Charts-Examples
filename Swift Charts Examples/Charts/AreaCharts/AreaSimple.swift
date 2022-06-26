@@ -78,11 +78,14 @@ struct AreaSimple: View {
 
     private var customisation: some View {
         Section {
-            Stepper(value: $lineWidth, in: 1.0...20.0) {
-                HStack {
+            VStack(alignment: .leading) {
+                Text("Line Width: \(lineWidth, specifier: "%.1f")")
+                Slider(value: $lineWidth, in: 1...20) {
                     Text("Line Width")
-                    Spacer()
-                    Text("\(String(format: "%.0f", lineWidth))")
+                } minimumValueLabel: {
+                    Text("1")
+                } maximumValueLabel: {
+                    Text("20")
                 }
             }
             
@@ -94,15 +97,15 @@ struct AreaSimple: View {
             Toggle("Show Gradient", isOn: $showGradient.animation())
 
             if showGradient {
-                HStack {
+                VStack(alignment: .leading) {
+                    Text("Gradiant Opacity Range: \(String(format: "%.1f", gradientRange))")
                     Slider(value: $gradientRange) {
-                        Text("Gradient Range")
+                        Text("Gradiant Opacity Range")
                     } minimumValueLabel: {
-                        Text("Min")
+                        Text("0")
                     } maximumValueLabel: {
-                        Text("Max")
+                        Text("1")
                     }
-                    Text("\(String(format: "%.1f", gradientRange))")
                 }
             }
         }
