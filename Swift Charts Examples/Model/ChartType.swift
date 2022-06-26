@@ -43,6 +43,7 @@ enum ChartType: String, Identifiable, CaseIterable {
 	case animatingLine
 	case gradientLine
 	case multiLine
+	case linePoint
 
     // Bar Charts
     case singleBar
@@ -86,6 +87,8 @@ enum ChartType: String, Identifiable, CaseIterable {
             return "Line with changing gradient"
         case .multiLine:
             return "Line Charts"
+		case .linePoint:
+			return "Line Point"
         case .singleBar:
             return "Single Bar"
         case .singleBarThreshold:
@@ -123,7 +126,7 @@ enum ChartType: String, Identifiable, CaseIterable {
 
     var category: ChartCategory {
         switch self {
-        case .singleLine, .singleLineLollipop, .heartBeat, .animatingLine, .gradientLine, .multiLine:
+		case .singleLine, .singleLineLollipop, .heartBeat, .animatingLine, .gradientLine, .multiLine, .linePoint:
             return .line
         case .singleBar, .singleBarThreshold, .twoBars, .pyramid, .oneDimensionalBar, .timeSheetBar, .soundBar:
             return .bar
@@ -161,6 +164,8 @@ enum ChartType: String, Identifiable, CaseIterable {
             GradientLine(isOverview: isOverview)
         case .multiLine:
             MultiLine(isOverview: isOverview)
+		case .linePoint:
+			LinePlot(isOverview: isOverview)
         case .singleBar:
             SingleBar(isOverview: isOverview)
         case .singleBarThreshold:

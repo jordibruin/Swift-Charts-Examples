@@ -10,6 +10,8 @@
 		2E5763C628576B1B006C7C36 /* PyramidChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E5763C528576B1B006C7C36 /* PyramidChart.swift */; };
 		2E8EA801285AA53F0040C591 /* VectorField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E8EA800285AA53F0040C591 /* VectorField.swift */; };
 		4EB65CFB2864E074009D49AA /* GradientLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB65CFA2864E074009D49AA /* GradientLine.swift */; };
+		4EE24CB52868E19500F6D487 /* LinePlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE24CB42868E19500F6D487 /* LinePlot.swift */; };
+		4EE24CB72868E8D200F6D487 /* Point.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE24CB62868E8D200F6D487 /* Point.swift */; };
 		52145C302864A34D00EB89D7 /* CandleStickChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52145C2F2864A34D00EB89D7 /* CandleStickChart.swift */; };
 		52145C322864A60D00EB89D7 /* StockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52145C312864A60D00EB89D7 /* StockData.swift */; };
 		5BC09FE32859526B00C2DB92 /* HeartRateRangeChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BC09FE22859526B00C2DB92 /* HeartRateRangeChart.swift */; };
@@ -70,6 +72,8 @@
 		2E5763C528576B1B006C7C36 /* PyramidChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PyramidChart.swift; sourceTree = "<group>"; };
 		2E8EA800285AA53F0040C591 /* VectorField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VectorField.swift; sourceTree = "<group>"; };
 		4EB65CFA2864E074009D49AA /* GradientLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientLine.swift; sourceTree = "<group>"; };
+		4EE24CB42868E19500F6D487 /* LinePlot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinePlot.swift; sourceTree = "<group>"; };
+		4EE24CB62868E8D200F6D487 /* Point.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Point.swift; sourceTree = "<group>"; };
 		52145C2F2864A34D00EB89D7 /* CandleStickChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CandleStickChart.swift; sourceTree = "<group>"; };
 		52145C312864A60D00EB89D7 /* StockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockData.swift; sourceTree = "<group>"; };
 		5BC09FE22859526B00C2DB92 /* HeartRateRangeChart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeartRateRangeChart.swift; sourceTree = "<group>"; };
@@ -250,6 +254,7 @@
 				7425DF822858DF4300672F3B /* HealthData.swift */,
 				52145C312864A60D00EB89D7 /* StockData.swift */,
 				62FF3EFF2857EADF0022930C /* Grid.swift */,
+				4EE24CB62868E8D200F6D487 /* Point.swift */,
 				FC4ECCF92865FEBC0008905E /* GitHubData.swift */,
 			);
 			path = Data;
@@ -264,6 +269,7 @@
 				C23072882860D8FA00DA1CED /* AnimatingLine.swift */,
 				4EB65CFA2864E074009D49AA /* GradientLine.swift */,
 				FC4ECCEF2865DE6E0008905E /* MultiLine.swift */,
+				4EE24CB42868E19500F6D487 /* LinePlot.swift */,
 			);
 			path = LineCharts;
 			sourceTree = "<group>";
@@ -445,6 +451,7 @@
 				934A95042857D035009E29F4 /* OneDimensionalBar.swift in Sources */,
 				C260882B2856B3C500B09DDB /* AreaSimple.swift in Sources */,
 				4EB65CFB2864E074009D49AA /* GradientLine.swift in Sources */,
+				4EE24CB52868E19500F6D487 /* LinePlot.swift in Sources */,
 				7425DF832858DF4300672F3B /* HealthData.swift in Sources */,
 				C23072892860D8FA00DA1CED /* AnimatingLine.swift in Sources */,
 				88B3E5D02857493B00840CAA /* RangeSimple.swift in Sources */,
@@ -470,6 +477,7 @@
 				C26088132856935B00B09DDB /* ChartType.swift in Sources */,
 				C26088152856960000B09DDB /* SingleLine.swift in Sources */,
 				FC602024285B532C0089DBDC /* SingleBarThreshold.swift in Sources */,
+				4EE24CB72868E8D200F6D487 /* Point.swift in Sources */,
 				C26088272856A95A00B09DDB /* ChartStrideBy.swift in Sources */,
 				FC4ECCFA2865FEBC0008905E /* GitHubData.swift in Sources */,
 				52145C322864A60D00EB89D7 /* StockData.swift in Sources */,
@@ -630,7 +638,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Swift Charts Examples/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = KP46H3A6P5;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -661,7 +669,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Swift Charts Examples/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = KP46H3A6P5;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -689,7 +697,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 8Q7TMPA46J;
+				DEVELOPMENT_TEAM = KP46H3A6P5;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.goodsnooze.Swift-Charts-ExamplesTests";
@@ -708,7 +716,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 8Q7TMPA46J;
+				DEVELOPMENT_TEAM = KP46H3A6P5;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.goodsnooze.Swift-Charts-ExamplesTests";
@@ -726,7 +734,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 8Q7TMPA46J;
+				DEVELOPMENT_TEAM = KP46H3A6P5;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.goodsnooze.Swift-Charts-ExamplesUITests";
@@ -744,7 +752,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 8Q7TMPA46J;
+				DEVELOPMENT_TEAM = KP46H3A6P5;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.goodsnooze.Swift-Charts-ExamplesUITests";
