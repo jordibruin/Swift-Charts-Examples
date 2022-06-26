@@ -6,7 +6,6 @@ import Charts
 import SwiftUI
 
 struct TimeSheetBar: View {
-
 	var isOverview: Bool = false
 
     private let monday = TimeSheetData.lastDay

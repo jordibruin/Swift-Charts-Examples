@@ -6,7 +6,6 @@ import SwiftUI
 import Charts
 
 struct PyramidChart: View {
-
 	var isOverview: Bool = false
 
     @State private var data = PopulationByAgeData.example

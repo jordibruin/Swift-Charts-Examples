@@ -6,7 +6,6 @@ import SwiftUI
 import Charts
 
 struct GradientLine: View {
-	
 	var isOverview: Bool = false
 
 	@State private var selectedDate: Date?
@@ -25,7 +24,7 @@ struct GradientLine: View {
 		}
 	}
 
-	var chart: some View {
+	private var chart: some View {
 		Chart {
 			RectangleMark(
 				xStart: .value("hour", Calendar.current.startOfDay(for: Date())),

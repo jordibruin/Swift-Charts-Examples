@@ -6,7 +6,6 @@ import SwiftUI
 import Charts
 
 struct HeatMap: View {
-
 	var isOverview: Bool = false
 
 	@State private var numRows = 10

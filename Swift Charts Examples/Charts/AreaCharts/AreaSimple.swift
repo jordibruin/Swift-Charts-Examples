@@ -6,7 +6,6 @@ import SwiftUI
 import Charts
 
 struct AreaSimple: View {
-
 	var isOverview: Bool
 
     @State private var lineWidth = 2.0

@@ -78,10 +78,10 @@ enum ChartType: String, Identifiable, CaseIterable {
             return "Line Chart"
         case .singleLineLollipop:
             return "Line Chart with Lollipop"
-        case .animatingLine:
-            return "Animating Line"
         case .heartBeat:
             return "Heart Beat / ECG Chart"
+        case .animatingLine:
+            return "Animating Line"
         case .gradientLine:
             return "Line with changing gradient"
         case .multiLine:
@@ -138,103 +138,61 @@ enum ChartType: String, Identifiable, CaseIterable {
         }
     }
 
-    @ViewBuilder
     var view: some View {
-        switch self {
-        case .singleLine:
-            SingleLine(isOverview: true)
-        case .singleLineLollipop:
-            SingleLineLollipop(isOverview: true)
-        case .heartBeat:
-            HeartBeat(isOverview: true)
-        case .animatingLine:
-            AnimatingLine(isOverview: true)
-        case .gradientLine:
-            GradientLine(isOverview: true)
-        case .multiLine:
-            MultiLine(isOverview: true)
-        case .singleBar:
-            SingleBar(isOverview: true)
-        case .singleBarThreshold:
-            SingleBarThreshold(isOverview: true)
-        case .twoBars:
-            TwoBars(isOverview: true)
-        case .candleStick:
-            CandleStickChart(isOverview: true)
-        case .oneDimensionalBar:
-            OneDimensionalBar(isOverview: true)
-        case .timeSheetBar:
-            TimeSheetBar(isOverview: true)
-        case .soundBar:
-            SoundBars(isOverview: true)
-        case .pyramid:
-            PyramidChart(isOverview: true)
-        case .areaSimple:
-            AreaSimple(isOverview: true)
-        case .stackedArea:
-            StackedArea(isOverview: true)
-        case .rangeSimple:
-            RangeSimple(isOverview: true)
-        case .rangeHeartRate:
-            HeartRateRangeChart(isOverview: true)
-        case .customizeableHeatMap:
-            HeatMap(isOverview: true)
-        case .gitContributions:
-            GitHubContributionsGraph(isOverview: true)
-        case .scatter:
-            ScatterChart(isOverview: true)
-        case .vectorField:
-            VectorField(isOverview: true)
-        }
+        overviewOrDetailView(isOverview: true)
+    }
+
+    var detailView: some View {
+        overviewOrDetailView(isOverview: false)
     }
 
     @ViewBuilder
-    var detailView: some View {
+    private func overviewOrDetailView(isOverview: Bool) -> some View {
         switch self {
         case .singleLine:
-            SingleLine()
+            SingleLine(isOverview: isOverview)
         case .singleLineLollipop:
-            SingleLineLollipop()
+            SingleLineLollipop(isOverview: isOverview)
         case .heartBeat:
-            HeartBeat()
+            HeartBeat(isOverview: isOverview)
         case .animatingLine:
-            AnimatingLine()
+            AnimatingLine(isOverview: isOverview)
         case .gradientLine:
-            GradientLine()
+            GradientLine(isOverview: isOverview)
         case .multiLine:
-            MultiLine()
+            MultiLine(isOverview: isOverview)
         case .singleBar:
-            SingleBar()
+            SingleBar(isOverview: isOverview)
         case .singleBarThreshold:
-            SingleBarThreshold()
+            SingleBarThreshold(isOverview: isOverview)
         case .twoBars:
-            TwoBars()
-        case .candleStick:
-            CandleStickChart()
-        case .oneDimensionalBar:
-            OneDimensionalBar()
-        case .timeSheetBar:
-            TimeSheetBar()
-        case .soundBar:
-            SoundBars()
+            TwoBars(isOverview: isOverview)
         case .pyramid:
-            PyramidChart()
+            PyramidChart(isOverview: isOverview)
+        case .oneDimensionalBar:
+            OneDimensionalBar(isOverview: isOverview)
+        case .timeSheetBar:
+            TimeSheetBar(isOverview: isOverview)
+        case .soundBar:
+            SoundBars(isOverview: isOverview)
         case .areaSimple:
-            AreaSimple()
+            AreaSimple(isOverview: isOverview)
         case .stackedArea:
-            StackedArea()
+            StackedArea(isOverview: isOverview)
         case .rangeSimple:
-            RangeSimple()
+            RangeSimple(isOverview: isOverview)
         case .rangeHeartRate:
-            HeartRateRangeChart()
+            HeartRateRangeChart(isOverview: isOverview)
+        case .candleStick:
+            CandleStickChart(isOverview: isOverview)
         case .customizeableHeatMap:
-            HeatMap()
+            HeatMap(isOverview: isOverview)
         case .gitContributions:
-            GitHubContributionsGraph()
+            GitHubContributionsGraph(isOverview: isOverview)
         case .scatter:
-            ScatterChart()
+            ScatterChart(isOverview: isOverview)
         case .vectorField:
-            VectorField()
+            VectorField(isOverview: isOverview)
         }
     }
 }

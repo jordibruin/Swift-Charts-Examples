@@ -6,7 +6,6 @@ import SwiftUI
 import Charts
 
 struct SingleLine: View {
-
 	var isOverview: Bool
 
 	@State private var data: [Sale]

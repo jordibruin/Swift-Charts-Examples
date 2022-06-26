@@ -6,7 +6,6 @@ import SwiftUI
 import Charts
 
 struct GitHubContributionsGraph: View {
-	
     var isOverview: Bool = false
 
     private let data = GitHubData.contributions.suffix(7 * 20 - 1)

@@ -6,7 +6,6 @@ import SwiftUI
 import Charts
 
 struct RangeSimple: View {
-
 	var isOverview: Bool = false
 
     @State private var barWidth = 10.0

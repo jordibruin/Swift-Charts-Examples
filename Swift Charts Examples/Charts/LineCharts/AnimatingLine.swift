@@ -2,12 +2,10 @@
 // Copyright © 2022 Swift Charts Examples.
 // Open Source - MIT License
 
-
 import SwiftUI
 import Charts
 
 struct AnimatingLine: View {
-
 	var isOverview: Bool = false
 
 	@State private var x: Double = -1

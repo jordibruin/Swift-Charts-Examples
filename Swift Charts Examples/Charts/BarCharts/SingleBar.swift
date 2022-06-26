@@ -6,7 +6,6 @@ import SwiftUI
 import Charts
 
 struct SingleBar: View {
-
 	var isOverview: Bool = false
 
     @State private var barWidth = 7.0

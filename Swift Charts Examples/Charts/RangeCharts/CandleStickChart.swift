@@ -6,7 +6,6 @@ import SwiftUI
 import Charts
 
 struct CandleStickChart: View {
-
 	var isOverview: Bool
 
     private var currentPrices: [StockData.StockPrice]

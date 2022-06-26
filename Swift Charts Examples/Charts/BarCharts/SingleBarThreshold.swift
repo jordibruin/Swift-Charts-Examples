@@ -6,7 +6,6 @@ import SwiftUI
 import Charts
 
 struct SingleBarThreshold: View {
-
 	var isOverview: Bool = false
     
     @State private var threshold = 150.0

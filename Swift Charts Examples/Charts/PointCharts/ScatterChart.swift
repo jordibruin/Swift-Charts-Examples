@@ -6,7 +6,6 @@ import SwiftUI
 import Charts
 
 struct ScatterChart: View {
-
 	var isOverview: Bool = false
 
     @State private var pointSize = 10.0

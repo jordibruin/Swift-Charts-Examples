@@ -6,7 +6,6 @@ import SwiftUI
 import Charts
 
 struct OneDimensionalBar: View {
-
 	var isOverview: Bool = false
 
     @State private var showLegend = true

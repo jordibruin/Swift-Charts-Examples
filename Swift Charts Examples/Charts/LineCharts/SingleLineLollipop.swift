@@ -6,7 +6,6 @@ import SwiftUI
 import Charts
 
 struct SingleLineLollipop: View {
-
 	var isOverview: Bool = false
 
     @State private var lineWidth = 2.0
