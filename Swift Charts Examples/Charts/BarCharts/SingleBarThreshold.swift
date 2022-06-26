@@ -6,7 +6,7 @@ import SwiftUI
 import Charts
 
 struct SingleBarThreshold: View {
-	var isOverview: Bool = false
+	var isOverview: Bool
     
     @State private var threshold = 150.0
     @State var belowColor: Color = .blue
@@ -87,6 +87,6 @@ struct SingleBarThreshold: View {
 struct SingleBarThreshold_Previews: PreviewProvider {
     static var previews: some View {
         SingleBarThreshold(isOverview: true)
-		SingleBarThreshold()
+		SingleBarThreshold(isOverview: false)
     }
 }

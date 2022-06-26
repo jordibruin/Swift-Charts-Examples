@@ -6,7 +6,7 @@ import SwiftUI
 import Charts
 
 struct HeartRateRangeChart: View {
-	var isOverview: Bool = false
+	var isOverview: Bool
 
     @State private var barWidth = 10.0
     @State private var chartColor: Color = .red
@@ -82,6 +82,6 @@ struct HeartRateRangeChart: View {
 struct HeartRateRangeChart_Previews: PreviewProvider {
     static var previews: some View {
         HeartRateRangeChart(isOverview: true)
-		HeartRateRangeChart()
+		HeartRateRangeChart(isOverview: false)
     }
 }

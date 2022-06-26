@@ -6,7 +6,7 @@ import SwiftUI
 import Charts
 
 struct GitHubContributionsGraph: View {
-    var isOverview: Bool = false
+    var isOverview: Bool
 
     private let data = GitHubData.contributions.suffix(7 * 20 - 1)
 
@@ -67,6 +67,6 @@ struct GitHubContributionsGraph: View {
 struct GitHubContributionsGraph_Previews: PreviewProvider {
     static var previews: some View {
         GitHubContributionsGraph(isOverview: true)
-        GitHubContributionsGraph()
+        GitHubContributionsGraph(isOverview: false)
     }
 }

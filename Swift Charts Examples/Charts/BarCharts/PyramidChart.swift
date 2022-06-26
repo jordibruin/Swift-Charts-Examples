@@ -6,7 +6,7 @@ import SwiftUI
 import Charts
 
 struct PyramidChart: View {
-	var isOverview: Bool = false
+	var isOverview: Bool
 
     @State private var data = PopulationByAgeData.example
     @State var leftColor: Color = .green
@@ -125,6 +125,6 @@ struct PyramidChart: View {
 struct PyramidChart_Previews: PreviewProvider {
     static var previews: some View {
         PyramidChart(isOverview: true)
-		PyramidChart()
+		PyramidChart(isOverview: false)
     }
 }

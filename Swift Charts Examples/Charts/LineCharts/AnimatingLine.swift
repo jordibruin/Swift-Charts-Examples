@@ -6,7 +6,7 @@ import SwiftUI
 import Charts
 
 struct AnimatingLine: View {
-	var isOverview: Bool = false
+	var isOverview: Bool
 
     @State private var x: Double = -0.4
 
@@ -64,8 +64,8 @@ struct AnimatingLine: View {
 
 struct AnimatingLine_Previews: PreviewProvider {
 	static var previews: some View {
-		AnimatingLine()
-		AnimatingLine(isOverview: true)
+        AnimatingLine(isOverview: true)
+        AnimatingLine(isOverview: false)
 	}
 }
 
@@ -74,7 +74,7 @@ struct AnimatedChart: View, Animatable {
 	var isOverview = false
 	var animatableData: Double = 0
 
-	init(x: Double, isOverview: Bool = false) {
+	init(x: Double, isOverview: Bool) {
 		self.animatableData = x
 		self.isOverview = isOverview
 	}

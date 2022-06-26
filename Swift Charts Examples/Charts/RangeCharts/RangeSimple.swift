@@ -6,7 +6,7 @@ import SwiftUI
 import Charts
 
 struct RangeSimple: View {
-	var isOverview: Bool = false
+	var isOverview: Bool
 
     @State private var barWidth = 10.0
     @State private var chartColor: Color = .blue
@@ -80,6 +80,6 @@ struct RangeSimple: View {
 struct RangeSimple_Previews: PreviewProvider {
     static var previews: some View {
         RangeSimple(isOverview: true)
-		RangeSimple()
+		RangeSimple(isOverview: false)
     }
 }

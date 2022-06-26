@@ -6,7 +6,7 @@ import SwiftUI
 import Charts
 
 struct HeartBeat: View {
-	var isOverview: Bool = false
+	var isOverview: Bool
 
     @State private var lineWidth = 2.0
     @State private var interpolationMethod: ChartInterpolationMethod = .cardinal
@@ -87,7 +87,7 @@ struct HeartBeat: View {
 struct HeartBeat_Previews: PreviewProvider {
     static var previews: some View {
         HeartBeat(isOverview: true)
-		HeartBeat()
+		HeartBeat(isOverview: false)
     }
 }
 

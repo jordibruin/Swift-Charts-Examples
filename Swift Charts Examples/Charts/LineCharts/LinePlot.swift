@@ -14,7 +14,7 @@ struct LinePlot: View {
 	@State private var plotChartColor: Color = .blue
 	@State private var lineChartColor: Color = .red
 
-	init(isOverview: Bool = false) {
+	init(isOverview: Bool) {
 		self.isOverview = isOverview
 		self.linePoints = .createLineSinPoints()
 		self.plotPoints = .createPlotSinPoints(yRange: isOverview ? 0..<5 : 0..<10)
@@ -69,6 +69,6 @@ struct LinePlot: View {
 struct LinePlotPoints_Previews: PreviewProvider {
     static var previews: some View {
 		LinePlot(isOverview: true)
-        LinePlot()
+        LinePlot(isOverview: false)
     }
 }

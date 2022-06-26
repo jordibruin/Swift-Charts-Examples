@@ -6,7 +6,7 @@ import SwiftUI
 import Charts
 
 struct SoundBars: View {
-    var isOverview: Bool = false
+    var isOverview: Bool
 
     @ObservedObject private var mic = MicrophoneMonitor()
     @State private var data: [Sample] = Sample.overviewSample
@@ -69,6 +69,6 @@ struct SoundBars: View {
 struct SoundBars_Previews: PreviewProvider {
     static var previews: some View {
         SoundBars(isOverview: true)
-        SoundBars()
+        SoundBars(isOverview: false)
     }
 }

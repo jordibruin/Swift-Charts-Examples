@@ -6,7 +6,7 @@ import SwiftUI
 import Charts
 
 struct OneDimensionalBar: View {
-	var isOverview: Bool = false
+	var isOverview: Bool
 
     @State private var showLegend = true
     
@@ -75,6 +75,6 @@ struct OneDimensionalBar: View {
 struct OneDimensionalBar_Previews: PreviewProvider {
     static var previews: some View {
         OneDimensionalBar(isOverview: true)
-		OneDimensionalBar()
+		OneDimensionalBar(isOverview: false)
     }
 }

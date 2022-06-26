@@ -6,13 +6,13 @@ import SwiftUI
 import Charts
 
 struct SingleBar: View {
-	var isOverview: Bool = false
+	var isOverview: Bool
 
     @State private var barWidth = 7.0
     @State private var chartColor: Color = .blue
     @State private var data: [Sale]
 
-	init(isOverview: Bool = false) {
+	init(isOverview: Bool) {
 		self.isOverview = isOverview
 		self.data = SalesData.last30Days.map { Sale(day: $0.day, sales: isOverview ? $0.sales : 0) }
 	}
@@ -72,6 +72,6 @@ struct SingleBar: View {
 struct SingleBar_Previews: PreviewProvider {
     static var previews: some View {
         SingleBar(isOverview: true)
-		SingleBar()
+		SingleBar(isOverview: false)
     }
 }

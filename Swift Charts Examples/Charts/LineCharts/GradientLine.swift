@@ -6,7 +6,7 @@ import SwiftUI
 import Charts
 
 struct GradientLine: View {
-	var isOverview: Bool = false
+	var isOverview: Bool
 
 	@State private var selectedDate: Date?
 
@@ -148,6 +148,6 @@ struct GradientLine: View {
 struct GradientLine_Previews: PreviewProvider {
 	static var previews: some View {
         GradientLine(isOverview: true)
-        GradientLine()
+        GradientLine(isOverview: false)
 	}
 }

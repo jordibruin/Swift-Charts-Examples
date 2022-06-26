@@ -6,7 +6,7 @@ import Charts
 import SwiftUI
 
 struct TimeSheetBar: View {
-	var isOverview: Bool = false
+	var isOverview: Bool
 
     private let monday = TimeSheetData.lastDay
     private let startOfOpeningHours = date(year: 2022, month: 6, day: 13, hour: 05, minutes: 00)
@@ -172,7 +172,6 @@ struct EventChart: View {
 struct TimeSheetBar_Previews: PreviewProvider {
     static var previews: some View {
 		TimeSheetBar(isOverview: true)
-        TimeSheetBar()
-            .previewInterfaceOrientation(.landscapeLeft)
+        TimeSheetBar(isOverview: false)
     }
 }

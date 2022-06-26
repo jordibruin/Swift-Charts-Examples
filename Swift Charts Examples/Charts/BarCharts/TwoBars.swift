@@ -6,7 +6,7 @@ import SwiftUI
 import Charts
 
 struct TwoBars: View {
-	var isOverview: Bool = false
+	var isOverview: Bool
 
     @State private var barWidth = 13.0
     @State private var interpolationMethod: ChartInterpolationMethod = .cardinal
@@ -78,6 +78,6 @@ struct TwoBars: View {
 struct TwoBars_Previews: PreviewProvider {
     static var previews: some View {
         TwoBars(isOverview: true)
-		TwoBars()
+		TwoBars(isOverview: false)
     }
 }

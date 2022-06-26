@@ -6,7 +6,7 @@ import SwiftUI
 import Charts
 
 struct MultiLine: View {
-    var isOverview: Bool = false
+    var isOverview: Bool
 
     private let data = LocationData.last30Days
     
@@ -44,6 +44,6 @@ struct MultiLine: View {
 struct MultiLine_Previews: PreviewProvider {
     static var previews: some View {
         MultiLine(isOverview: true)
-        MultiLine()
+        MultiLine(isOverview: false)
     }
 }

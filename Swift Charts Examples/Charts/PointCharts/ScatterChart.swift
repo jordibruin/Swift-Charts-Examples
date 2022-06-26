@@ -6,7 +6,7 @@ import SwiftUI
 import Charts
 
 struct ScatterChart: View {
-	var isOverview: Bool = false
+	var isOverview: Bool
 
     @State private var pointSize = 10.0
     @State private var showLegend = false
@@ -68,6 +68,6 @@ struct ScatterChart: View {
 struct ScatterChart_Previews: PreviewProvider {
 	static var previews: some View {
         ScatterChart(isOverview: true)
-		ScatterChart()
+		ScatterChart(isOverview: false)
     }
 }
