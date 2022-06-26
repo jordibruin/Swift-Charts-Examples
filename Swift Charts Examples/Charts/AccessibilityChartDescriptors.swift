@@ -457,27 +457,72 @@ extension HeatMapOverview: AXChartDescriptorRepresentable {
 
 extension VectorFieldOverview: AXChartDescriptorRepresentable {
     func makeChartDescriptor() -> AXChartDescriptor {
-        let base = chartDescriptor(forGrid: data)
-  
-        // Add the vector field's angle to the grid based series
-        if
-            let series = base.series.first,
-            let name = series.name {
-            let modifiedSeries = AXDataSeriesDescriptor(
-                name: name,
-                isContinuous: series.isContinuous,
-                dataPoints: data.map {
-                    .init(x: Double($0.x),
-                          y: Double($0.y),
-                          additionalValues: [
-                          ],
-                          label: "Angle: \(Int($0.angle(degreeOffset: 0, inRadians: false))) degrees")
-                })
-
-            base.series = [modifiedSeries]
+        
+        // The general approach here is to create a Series for each angle based color
+        let data = grid.points
+    
+        var unorderedColorGroups: [String: [Grid.Point]] = [:]
+        data.forEach { point in
+            let colorName = UIColor(point.angleColor(hueOffset: 0)).accessibilityName
+            if
+                unorderedColorGroups.keys.contains(colorName),
+                var pointList = unorderedColorGroups[colorName] {
+                pointList.append(point)
+                unorderedColorGroups[colorName] = pointList
+            } else {
+                unorderedColorGroups[colorName] = [point]
+            }
         }
         
-        return base
+        // Limits for each axis
+        let xmin = data.map(\.x).min() ?? 0
+        let xmax = data.map(\.x).max() ?? 0
+        let ymin = data.map(\.y).min() ?? 0
+        let ymax = data.map(\.y).max() ?? 0
+        let vmin = data.map(\.val).min() ?? 0
+        let vmax = data.map(\.val).max() ?? 0
+        
+        // Create the axes
+        let xAxis = AXNumericDataAxisDescriptor(
+            title: "Horizontal Position",
+            range: Double(xmin)...Double(xmax),
+            gridlinePositions: Array(stride(from: xmin, to: xmax, by: 1)).map { Double($0) }
+        ) { "X: \($0)" }
+
+        let yAxis = AXNumericDataAxisDescriptor(
+            title: "Vertical Position",
+            range: Double(ymin)...Double(ymax),
+            gridlinePositions: Array(stride(from: ymin, to: ymax, by: 1)).map { Double($0) }
+        ) { "Y: \($0)" }
+        
+        let valueAxis = AXNumericDataAxisDescriptor(
+            title: "Value based Color",
+            range: Double(vmin)...Double(vmax),
+            gridlinePositions: []
+        ) { "Color: \($0)" }
+        
+        // Finally create the series with the color category as a 3rd axes
+        let series: [AXDataSeriesDescriptor] = unorderedColorGroups.map { (colorName, points) in
+            let dataPoints = points.map { point in
+                AXDataPoint(x: Double(point.x),
+                            y: Double(point.y),
+                            additionalValues: [.category(colorName)],
+                            label: nil)
+            }
+            
+            return AXDataSeriesDescriptor(name: colorName,
+                                          isContinuous: false,
+                                          dataPoints: dataPoints)
+        }
+        
+        return AXChartDescriptor(
+            title: "Vector Field Data",
+            summary: nil,
+            xAxis: xAxis,
+            yAxis: yAxis,
+            additionalAxes: [valueAxis],
+            series: series
+        )
     }
 }
 

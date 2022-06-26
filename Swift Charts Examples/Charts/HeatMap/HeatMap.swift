@@ -67,7 +67,9 @@ struct HeatMap: View, AccessibleGradientGrid {
         List {
             Section {
                 Chart(grid.points) { point in
-                    // Using accessibilityLabel on the RectangleMark does not work as expected
+                    // Use accessibility modifiers on the Plot,
+                    // otherwise modifier order may prevent accessibility being actually set
+                    // Using accessibilityLabel on the RectangleMark does not work as expected in this case
                     Plot {
                         RectangleMark(
                             xStart: PlottableValue.value("xStart", point.x),

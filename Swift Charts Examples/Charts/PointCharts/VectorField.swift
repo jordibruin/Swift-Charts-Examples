@@ -6,11 +6,10 @@ import SwiftUI
 import Charts
 
 struct VectorFieldOverview: View {
-    @State private var grid = Grid(numRows: 20, numCols: 20)
-    var data: [Grid.Point] { grid.points }
+    @State var grid = Grid(numRows: 20, numCols: 20)
 
     var body: some View {
-        Chart(data) { point in
+        Chart(grid.points) { point in
             PointMark(x: .value("x", point.x),
                       y: .value("y", point.y))
             .symbol(Arrow(angle: CGFloat(point.angle(degreeOffset: 0)), size: 50))
@@ -35,13 +34,17 @@ struct VectorField: View {
         List {
             Section {
                 Chart(grid.points) { point in
-                    PointMark(x: .value("x", point.x),
-                              y: .value("y", point.y))
-                    .accessibilityLabel("\(point.x)")
-                    .accessibilityValue("Y: \(point.y), Angle: \(point.angle(degreeOffset: degreeOffset))")
-                    .symbol(Arrow(angle: CGFloat(point.angle(degreeOffset: degreeOffset)), size: size))
-                    .foregroundStyle(point.angleColor(hueOffset: hueOffset))
-                    .opacity(opacity)
+                    // Use accessibility modifiers on the Plot,
+                    // otherwise modifier order may prevent accessibility being actually set
+                    Plot {
+                        PointMark(x: .value("x", point.x),
+                                  y: .value("y", point.y))
+                        .symbol(Arrow(angle: CGFloat(point.angle(degreeOffset: degreeOffset)), size: size))
+                        .foregroundStyle(point.angleColor(hueOffset: hueOffset))
+                        .opacity(opacity)
+                    }
+                    .accessibilityLabel("Point: (\(point.x), \(point.y))")
+                    .accessibilityValue("Angle: \(Int(point.angle(degreeOffset: degreeOffset, inRadians: false))) degrees, Color: \(UIColor(point.angleColor(hueOffset: degreeOffset)).accessibilityName)")
                 }
                 .aspectRatio(contentMode: .fit)
             }
