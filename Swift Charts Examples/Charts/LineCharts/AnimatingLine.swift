@@ -8,7 +8,7 @@ import Charts
 struct AnimatingLine: View {
 	var isOverview: Bool = false
 
-	@State private var x: Double = -1
+    @State private var x: Double = -0.4
 
 	var body: some View {
 		if isOverview {
@@ -22,6 +22,14 @@ struct AnimatingLine: View {
 
 				customisation
 			}
+            .onAppear {
+                if !isOverview {
+                    x = -1
+                    withAnimation(.linear(duration: 2)) {
+                        x = 1
+                    }
+                }
+            }
 			.navigationBarTitle(ChartType.animatingLine.title, displayMode: .inline)
 		}
 	}

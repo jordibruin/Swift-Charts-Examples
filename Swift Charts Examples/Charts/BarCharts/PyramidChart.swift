@@ -35,7 +35,7 @@ struct PyramidChart: View {
 					xStart: .value("Percentage", 0),
 					xEnd: .value("Percentage", series.sex == "Male" ? element.percentage : element.percentage * -1),
 					y: .value("AgeRange", element.ageRange),
-					height: .fixed(barHeight)
+                    height: isOverview ? .automatic : .fixed(barHeight)
 				)
 				.accessibilityLabel("\(element.ageRange)")
 				.accessibilityValue("\(element.percentage)")

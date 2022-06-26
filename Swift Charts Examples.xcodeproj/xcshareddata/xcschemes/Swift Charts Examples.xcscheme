@@ -28,6 +28,16 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "C22EB5AA28568D0C000B9F9A"
+               BuildableName = "Swift Charts ExamplesTests.xctest"
+               BlueprintName = "Swift Charts ExamplesTests"
+               ReferencedContainer = "container:Swift Charts Examples.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction

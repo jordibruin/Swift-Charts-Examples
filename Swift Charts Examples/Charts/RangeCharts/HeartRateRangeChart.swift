@@ -47,7 +47,7 @@ struct HeartRateRangeChart: View {
 				x: .value("Day", $0.weekday, unit: .day),
 				yStart: .value("BPM Min", $0.dailyMin),
 				yEnd: .value("BPM Max", $0.dailyMax),
-				width: .fixed(barWidth)
+                width: .fixed(isOverview ? 8 : barWidth)
 			)
 			.clipShape(Capsule())
 			.foregroundStyle(chartColor.gradient)

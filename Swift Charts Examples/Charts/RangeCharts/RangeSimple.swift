@@ -33,7 +33,7 @@ struct RangeSimple: View {
 				x: .value("Month", $0.month, unit: .month),
 				yStart: .value("Sales Min", $0.dailyMin),
 				yEnd: .value("Sales Max", $0.dailyMax),
-				width: .fixed(barWidth)
+                width: .fixed(isOverview ? 10 : barWidth)
 			)
 			.clipShape(Capsule())
 			.foregroundStyle(chartColor.gradient)

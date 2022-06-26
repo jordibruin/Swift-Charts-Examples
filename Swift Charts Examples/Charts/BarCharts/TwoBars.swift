@@ -35,7 +35,7 @@ struct TwoBars: View {
 				BarMark(
 					x: .value("Day", element.weekday, unit: .day),
 					y: .value("Sales", element.sales),
-					width: .fixed(barWidth)
+                    width: isOverview ? .automatic : .fixed(barWidth)
 				)
 				.accessibilityLabel("\(element.weekday.formatted())")
 				.accessibilityValue("\(element.sales)")

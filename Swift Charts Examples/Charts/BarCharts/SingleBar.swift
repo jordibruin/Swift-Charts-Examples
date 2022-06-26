@@ -46,7 +46,7 @@ struct SingleBar: View {
 			BarMark(
 				x: .value("Date", $0.day),
 				y: .value("Sales", $0.sales),
-				width: .fixed(barWidth)
+                width: isOverview ? .automatic : .fixed(barWidth)
 			)
 			.foregroundStyle(chartColor.gradient)
 		}
