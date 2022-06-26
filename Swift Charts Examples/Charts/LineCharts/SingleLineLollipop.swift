@@ -6,7 +6,8 @@ import SwiftUI
 import Charts
 
 struct SingleLineLollipop: View {
-    var isOverview: Bool = false
+
+	var isOverview: Bool = false
 
     @State private var lineWidth = 2.0
     @State private var interpolationMethod: ChartInterpolationMethod = .cardinal
@@ -23,6 +24,7 @@ struct SingleLineLollipop: View {
                 Section {
                     chart
                 }
+
                 Section {
                     Text("**Hold and drag** over the chart to view and move the lollipop")
                         .font(.callout)
@@ -67,7 +69,6 @@ struct SingleLineLollipop: View {
                     )
             }
         }
-        .frame(height: isOverview ? Constants.previewChartHeight : Constants.detailChartHeight)
         .chartBackground { proxy in
             ZStack(alignment: .topLeading) {
                 GeometryReader { geo in
@@ -111,6 +112,7 @@ struct SingleLineLollipop: View {
         }
         .chartXAxis(isOverview ? .hidden : .automatic)
         .chartYAxis(isOverview ? .hidden : .automatic)
+		.frame(height: isOverview ? Constants.previewChartHeight : Constants.detailChartHeight)
     }
 
     private func findElement(location: CGPoint, proxy: ChartProxy, geometry: GeometryProxy) -> (day: Date, sales: Int)? {

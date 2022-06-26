@@ -5,44 +5,44 @@
 import SwiftUI
 
 enum ChartCategory: String, CaseIterable, Hashable, Identifiable {
-    case all
-    case line
-    case bar
-    case area
-    case range
-    case heatMap
-    case point
-  
-    var id: String { self.rawValue }
-    
-    var sfSymbolName: String {
-        switch self {
-        case .all:
-            return ""
-        case .line:
-            return "chart.xyaxis.line"
-        case .bar:
-            return "chart.bar.fill"
-        case .area:
-            return "triangle.fill"
-        case .range:
-            return "trapezoid.and.line.horizontal.fill"
-        case .heatMap:
-            return "checkerboard.rectangle"
-        case .point:
-            return "point.3.connected.trianglepath.dotted"
-        }
-    }
+	case all
+	case line
+	case bar
+	case area
+	case range
+	case heatMap
+	case point
+
+	var id: String { self.rawValue }
+
+	var sfSymbolName: String {
+		switch self {
+		case .all:
+			return ""
+		case .line:
+			return "chart.xyaxis.line"
+		case .bar:
+			return "chart.bar.fill"
+		case .area:
+			return "triangle.fill"
+		case .range:
+			return "trapezoid.and.line.horizontal.fill"
+		case .heatMap:
+			return "checkerboard.rectangle"
+		case .point:
+			return "point.3.connected.trianglepath.dotted"
+		}
+	}
 }
 
 enum ChartType: String, Identifiable, CaseIterable {
-    // Line Charts
-    case singleLine
-    case singleLineLollipop
-    case heartBeat
-    case animatingLine
-    case gradientLine
-    case multiLine
+	// Line Charts
+	case singleLine
+	case singleLineLollipop
+	case heartBeat
+	case animatingLine
+	case gradientLine
+	case multiLine
 
     // Bar Charts
     case singleBar
@@ -53,24 +53,24 @@ enum ChartType: String, Identifiable, CaseIterable {
     case timeSheetBar
     case soundBar
 
-    // Area Charts
-    case areaSimple
-    case stackedArea
+	// Area Charts
+	case areaSimple
+	case stackedArea
 
-    // Range Charts
-    case rangeSimple
-    case rangeHeartRate
-    case candleStick
+	// Range Charts
+	case rangeSimple
+	case rangeHeartRate
+	case candleStick
 
-    // HeatMap Charts
-    case customizeableHeatMap
-    case gitContributions
+	// HeatMap Charts
+	case customizeableHeatMap
+	case gitContributions
 
-    // Point Charts
-    case scatter
-    case vectorField
+	// Point Charts
+	case scatter
+	case vectorField
 
-    var id: String { self.rawValue }
+	var id: String { self.rawValue }
 
     var title: String {
         switch self {
@@ -142,49 +142,49 @@ enum ChartType: String, Identifiable, CaseIterable {
     var view: some View {
         switch self {
         case .singleLine:
-            SingleLineOverview()
+            SingleLine(isOverview: true)
         case .singleLineLollipop:
             SingleLineLollipop(isOverview: true)
         case .heartBeat:
-            HeartBeatOverview()
+            HeartBeat(isOverview: true)
         case .animatingLine:
-            AnimatingLineOverview()
+            AnimatingLine(isOverview: true)
         case .gradientLine:
             GradientLine(isOverview: true)
         case .multiLine:
             MultiLine(isOverview: true)
         case .singleBar:
-            SingleBarOverview()
+            SingleBar(isOverview: true)
         case .singleBarThreshold:
-            SingleBarThresholdOverview()
+            SingleBarThreshold(isOverview: true)
         case .twoBars:
-            TwoBarsOverview()
+            TwoBars(isOverview: true)
         case .candleStick:
-            CandleStickChartOverview()
+            CandleStickChart(isOverview: true)
         case .oneDimensionalBar:
-            OneDimensionalBarOverview()
+            OneDimensionalBar(isOverview: true)
         case .timeSheetBar:
-            TimeSheetBarOverview()
+            TimeSheetBar(isOverview: true)
         case .soundBar:
             SoundBars(isOverview: true)
         case .pyramid:
-            PyramidChartOverview()
+            PyramidChart(isOverview: true)
         case .areaSimple:
-            AreaSimpleOverview()
+            AreaSimple(isOverview: true)
         case .stackedArea:
             StackedArea(isOverview: true)
         case .rangeSimple:
-            RangeSimpleOverview()
+            RangeSimple(isOverview: true)
         case .rangeHeartRate:
-            HeartRateRangeChartOverview()
+            HeartRateRangeChart(isOverview: true)
         case .customizeableHeatMap:
-            HeatMapOverview()
+            HeatMap(isOverview: true)
         case .gitContributions:
             GitHubContributionsGraph(isOverview: true)
         case .scatter:
-            ScatterChartOverview()
+            ScatterChart(isOverview: true)
         case .vectorField:
-            VectorFieldOverview()
+            VectorField(isOverview: true)
         }
     }
 

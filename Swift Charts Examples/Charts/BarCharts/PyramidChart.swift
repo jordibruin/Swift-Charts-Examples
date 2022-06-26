@@ -5,76 +5,67 @@
 import SwiftUI
 import Charts
 
-struct PyramidChartOverview: View {
-    var body: some View {
-        Chart {
-            ForEach(PopulationByAgeData.example) { series in
-                ForEach(series.population, id: \.percentage) { element in
-                    BarMark(
-                        xStart: .value("Percentage", 0),
-                        xEnd: .value("Percentage", series.sex == "Male" ? element.percentage : element.percentage * -1),
-                        y: .value("AgeRange", element.ageRange)
-                    )
-                }
-                .foregroundStyle(by: .value("Sex", series.sex))
-            }
-        }
-        .chartXAxis(.hidden)
-        .chartYAxis(.hidden)
-        .chartLegend(.hidden)
-        .frame(height: 200)
-    }
-}
-
 struct PyramidChart: View {
+
+	var isOverview: Bool = false
+
     @State private var data = PopulationByAgeData.example
-    
     @State var leftColor: Color = .green
     @State var rightColor: Color = .blue
-    
     @State var barHeight: CGFloat = 10.0
     
     var body: some View {
-        List {
-            Section {
-                Chart(data) { series in
-                    ForEach(series.population, id: \.percentage) { element in
-                        BarMark(
-                            xStart: .value("Percentage", 0),
-                            xEnd: .value("Percentage", series.sex == "Male" ? element.percentage : element.percentage * -1),
-                            y: .value("AgeRange", element.ageRange),
-                            height: .fixed(barHeight)
-                        )
-                        .accessibilityLabel("\(element.ageRange)")
-                        .accessibilityValue("\(element.percentage)")
-                    }
-                    .foregroundStyle(series.sex == "Male" ? rightColor.gradient : leftColor.gradient)
-                    .interpolationMethod(.catmullRom)
-                }
-                .chartYAxis {
-                    AxisMarks(preset: .aligned, position: .automatic) { _ in
-                        AxisValueLabel(centered: true)
-                    }
-                }
-                .chartXAxis {
-                    AxisMarks(preset: .aligned, position: .automatic) { value in
-                        let rawValue = value.as(Int.self)!
-                        let percentage = abs(Double(rawValue) / 100)
-                        
-                        AxisGridLine()
-                        AxisValueLabel(percentage.formatted(.percent))
-                    }
-                }
-                .chartLegend(position: .top, alignment: .center)
-                .frame(height: 340)
-            }
-            
-            customization
-        }
-        .navigationBarTitle(ChartType.pyramid.title, displayMode: .inline)
+		if isOverview {
+			chart
+		} else {
+			List {
+				Section {
+					chart
+				}
+
+				customisation
+			}
+			.navigationBarTitle(ChartType.pyramid.title, displayMode: .inline)
+		}
     }
+
+	private var chart: some View {
+		Chart(data) { series in
+			ForEach(series.population, id: \.percentage) { element in
+				BarMark(
+					xStart: .value("Percentage", 0),
+					xEnd: .value("Percentage", series.sex == "Male" ? element.percentage : element.percentage * -1),
+					y: .value("AgeRange", element.ageRange),
+					height: .fixed(barHeight)
+				)
+				.accessibilityLabel("\(element.ageRange)")
+				.accessibilityValue("\(element.percentage)")
+			}
+			.foregroundStyle(series.sex == "Male" ? rightColor.gradient : leftColor.gradient)
+			.interpolationMethod(.catmullRom)
+		}
+		.chartYAxis {
+			AxisMarks(preset: .aligned, position: .automatic) { _ in
+				AxisValueLabel(centered: true)
+			}
+		}
+		.chartXAxis {
+			AxisMarks(preset: .aligned, position: .automatic) { value in
+				let rawValue = value.as(Int.self)!
+				let percentage = abs(Double(rawValue) / 100)
+
+				AxisGridLine()
+				AxisValueLabel(percentage.formatted(.percent))
+			}
+		}
+		.chartLegend(position: .top, alignment: .center)
+		.chartLegend(isOverview ? .hidden : .automatic)
+		.chartYAxis(isOverview ? .hidden : .automatic)
+		.chartXAxis(isOverview ? .hidden : .automatic)
+		.frame(height: isOverview ? 200 : 340)
+	}
     
-    var customization: some View {
+    private var customisation: some View {
         Group {
             Section {
                 Button("Generate random data") {
@@ -134,7 +125,7 @@ struct PyramidChart: View {
 
 struct PyramidChart_Previews: PreviewProvider {
     static var previews: some View {
-        PyramidChartOverview()
-        PyramidChart()
+        PyramidChart(isOverview: true)
+		PyramidChart()
     }
 }
