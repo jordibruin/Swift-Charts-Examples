@@ -4,7 +4,6 @@ This repo aims to provide sample code for lots of different chart types for you 
 <img width="1511" alt="image" src="https://user-images.githubusercontent.com/170948/173253882-1a80b934-a0b9-4acb-a290-a299ae3fdd7d.png">
 
 ## Todo
-- [ ] Distribution line + Point Chart
 - [ ] Other Charts
 - [ ] Multi-language Support
 - [ ] Screen time like bar chart with stacked colors
@@ -50,6 +49,10 @@ Line with changing gradient
 Line Charts
 
 <img src="images/charts/line/multiLine.png" width="380">
+
+Line Point
+
+<img src="images/charts/line/linePoint.png" width="380">
 
 ### [Bar Charts](https://github.com/jordibruin/SwiftChartExamples/tree/main/Swift%20Charts%20Examples/Charts/BarCharts)
 
