@@ -44,13 +44,14 @@ enum ChartType: String, Identifiable, CaseIterable {
 	case gradientLine
 	case multiLine
 
-	// Bar Charts
-	case singleBar
-	case singleBarThreshold
-	case twoBars
-	case pyramid
-	case oneDimensionalBar
-	case timeSheetBar
+    // Bar Charts
+    case singleBar
+    case singleBarThreshold
+    case twoBars
+    case pyramid
+    case oneDimensionalBar
+    case timeSheetBar
+    case soundBar
 
 	// Area Charts
 	case areaSimple
@@ -71,163 +72,169 @@ enum ChartType: String, Identifiable, CaseIterable {
 
 	var id: String { self.rawValue }
 
-	var title: String {
-		switch self {
-		case .singleLine:
-			return "Line Chart"
-		case .singleLineLollipop:
-			return "Line Chart with Lollipop"
-		case .animatingLine:
-			return "Animating Line"
-		case .heartBeat:
-			return "Heart Beat / ECG Chart"
-		case .gradientLine:
-			return "Line with changing gradient"
-		case .multiLine:
-			return "Line Charts"
-		case .singleBar:
-			return "Single Bar"
-		case .singleBarThreshold:
-			return "Single Bar with Threshold Rule Mark"
-		case .twoBars:
-			return "Two Bars"
-		case .pyramid:
-			return "Pyramid"
-		case .oneDimensionalBar:
-			return "One Dimensional Bar"
-		case .timeSheetBar:
-			return "Time Sheet Bar"
-		case .areaSimple:
-			return "Area Chart"
-		case .stackedArea:
-			return "Stacked Area Chart"
-		case .rangeSimple:
-			return "Range Chart"
-		case .rangeHeartRate:
-			return "Heart Rate Range Chart"
-		case .candleStick:
-			return "Candle Stick Chart"
-		case .customizeableHeatMap:
-			return "Customizable Heat Map"
-		case .gitContributions:
-			return "GitHub Contributions Graph"
-		case .scatter:
-			return "Scatter Chart"
-		case .vectorField:
-			return "Vector Field"
-		}
-	}
+    var title: String {
+        switch self {
+        case .singleLine:
+            return "Line Chart"
+        case .singleLineLollipop:
+            return "Line Chart with Lollipop"
+        case .animatingLine:
+            return "Animating Line"
+        case .heartBeat:
+            return "Heart Beat / ECG Chart"
+        case .gradientLine:
+            return "Line with changing gradient"
+        case .multiLine:
+            return "Line Charts"
+        case .singleBar:
+            return "Single Bar"
+        case .singleBarThreshold:
+            return "Single Bar with Threshold Rule Mark"
+        case .twoBars:
+            return "Two Bars"
+        case .pyramid:
+            return "Pyramid"
+        case .oneDimensionalBar:
+            return "One Dimensional Bar"
+        case .timeSheetBar:
+            return "Time Sheet Bar"
+        case .soundBar:
+            return "Sound Bar"
+        case .areaSimple:
+            return "Area Chart"
+        case .stackedArea:
+            return "Stacked Area Chart"
+        case .rangeSimple:
+            return "Range Chart"
+        case .rangeHeartRate:
+            return "Heart Rate Range Chart"
+        case .candleStick:
+            return "Candle Stick Chart"
+        case .customizeableHeatMap:
+            return "Customizable Heat Map"
+        case .gitContributions:
+            return "GitHub Contributions Graph"
+        case .scatter:
+            return "Scatter Chart"
+        case .vectorField:
+            return "Vector Field"
+        }
+    }
 
-	var category: ChartCategory {
-		switch self {
-		case .singleLine, .singleLineLollipop, .heartBeat, .animatingLine, .gradientLine, .multiLine:
-			return .line
-		case .singleBar, .singleBarThreshold, .twoBars, .pyramid, .oneDimensionalBar, .timeSheetBar:
-			return .bar
-		case .areaSimple, .stackedArea:
-			return .area
-		case .rangeSimple, .rangeHeartRate, .candleStick:
-			return .range
-		case .customizeableHeatMap, .gitContributions:
-			return .heatMap
-		case .scatter, .vectorField:
-			return .point
-		}
-	}
+    var category: ChartCategory {
+        switch self {
+        case .singleLine, .singleLineLollipop, .heartBeat, .animatingLine, .gradientLine, .multiLine:
+            return .line
+        case .singleBar, .singleBarThreshold, .twoBars, .pyramid, .oneDimensionalBar, .timeSheetBar, .soundBar:
+            return .bar
+        case .areaSimple, .stackedArea:
+            return .area
+        case .rangeSimple, .rangeHeartRate, .candleStick:
+            return .range
+        case .customizeableHeatMap, .gitContributions:
+            return .heatMap
+        case .scatter, .vectorField:
+            return .point
+        }
+    }
 
-	@ViewBuilder
-	var view: some View {
-		switch self {
-		case .singleLine:
-			SingleLine(isOverview: true)
-		case .singleLineLollipop:
-			SingleLineLollipop(isOverview: true)
-		case .heartBeat:
-			HeartBeat(isOverview: true)
-		case .animatingLine:
-			AnimatingLine(isOverview: true)
-		case .gradientLine:
-			GradientLine(isOverview: true)
-		case .multiLine:
-			MultiLine(isOverview: true)
-		case .singleBar:
-			SingleBar(isOverview: true)
-		case .singleBarThreshold:
-			SingleBarThreshold(isOverview: true)
-		case .twoBars:
-			TwoBars(isOverview: true)
-		case .candleStick:
-			CandleStickChart(isOverview: true)
-		case .oneDimensionalBar:
-			OneDimensionalBar(isOverview: true)
-		case .timeSheetBar:
-			TimeSheetBar(isOverview: true)
-		case .pyramid:
-			PyramidChart(isOverview: true)
-		case .areaSimple:
-			AreaSimple(isOverview: true)
-		case .stackedArea:
-			StackedArea(isOverview: true)
-		case .rangeSimple:
-			RangeSimple(isOverview: true)
-		case .rangeHeartRate:
-			HeartRateRangeChart(isOverview: true)
-		case .customizeableHeatMap:
-			HeatMap(isOverview: true)
-		case .gitContributions:
-			GitHubContributionsGraph(isOverview: true)
-		case .scatter:
-			ScatterChart(isOverview: true)
-		case .vectorField:
-			VectorField(isOverview: true)
-		}
-	}
+    @ViewBuilder
+    var view: some View {
+        switch self {
+        case .singleLine:
+            SingleLine(isOverview: true)
+        case .singleLineLollipop:
+            SingleLineLollipop(isOverview: true)
+        case .heartBeat:
+            HeartBeat(isOverview: true)
+        case .animatingLine:
+            AnimatingLine(isOverview: true)
+        case .gradientLine:
+            GradientLine(isOverview: true)
+        case .multiLine:
+            MultiLine(isOverview: true)
+        case .singleBar:
+            SingleBar(isOverview: true)
+        case .singleBarThreshold:
+            SingleBarThreshold(isOverview: true)
+        case .twoBars:
+            TwoBars(isOverview: true)
+        case .candleStick:
+            CandleStickChart(isOverview: true)
+        case .oneDimensionalBar:
+            OneDimensionalBar(isOverview: true)
+        case .timeSheetBar:
+            TimeSheetBar(isOverview: true)
+        case .soundBar:
+            SoundBars(isOverview: true)
+        case .pyramid:
+            PyramidChart(isOverview: true)
+        case .areaSimple:
+            AreaSimple(isOverview: true)
+        case .stackedArea:
+            StackedArea(isOverview: true)
+        case .rangeSimple:
+            RangeSimple(isOverview: true)
+        case .rangeHeartRate:
+            HeartRateRangeChart(isOverview: true)
+        case .customizeableHeatMap:
+            HeatMap(isOverview: true)
+        case .gitContributions:
+            GitHubContributionsGraph(isOverview: true)
+        case .scatter:
+            ScatterChart(isOverview: true)
+        case .vectorField:
+            VectorField(isOverview: true)
+        }
+    }
 
-	@ViewBuilder
-	var detailView: some View {
-		switch self {
-		case .singleLine:
-			SingleLine()
-		case .singleLineLollipop:
-			SingleLineLollipop()
-		case .heartBeat:
-			HeartBeat()
-		case .animatingLine:
-			AnimatingLine()
-		case .gradientLine:
-			GradientLine()
-		case .multiLine:
-			MultiLine()
-		case .singleBar:
-			SingleBar()
-		case .singleBarThreshold:
-			SingleBarThreshold()
-		case .twoBars:
-			TwoBars()
-		case .candleStick:
-			CandleStickChart()
-		case .oneDimensionalBar:
-			OneDimensionalBar()
-		case .timeSheetBar:
-			TimeSheetBar()
-		case .pyramid:
-			PyramidChart()
-		case .areaSimple:
-			AreaSimple()
-		case .stackedArea:
-			StackedArea()
-		case .rangeSimple:
-			RangeSimple()
-		case .rangeHeartRate:
-			HeartRateRangeChart()
-		case .customizeableHeatMap:
-			HeatMap()
-		case .gitContributions:
-			GitHubContributionsGraph()
-		case .scatter:
-			ScatterChart()
-		case .vectorField:
-			VectorField()
-		}
-	}
+    @ViewBuilder
+    var detailView: some View {
+        switch self {
+        case .singleLine:
+            SingleLine()
+        case .singleLineLollipop:
+            SingleLineLollipop()
+        case .heartBeat:
+            HeartBeat()
+        case .animatingLine:
+            AnimatingLine()
+        case .gradientLine:
+            GradientLine()
+        case .multiLine:
+            MultiLine()
+        case .singleBar:
+            SingleBar()
+        case .singleBarThreshold:
+            SingleBarThreshold()
+        case .twoBars:
+            TwoBars()
+        case .candleStick:
+            CandleStickChart()
+        case .oneDimensionalBar:
+            OneDimensionalBar()
+        case .timeSheetBar:
+            TimeSheetBar()
+        case .soundBar:
+            SoundBars()
+        case .pyramid:
+            PyramidChart()
+        case .areaSimple:
+            AreaSimple()
+        case .stackedArea:
+            StackedArea()
+        case .rangeSimple:
+            RangeSimple()
+        case .rangeHeartRate:
+            HeartRateRangeChart()
+        case .customizeableHeatMap:
+            HeatMap()
+        case .gitContributions:
+            GitHubContributionsGraph()
+        case .scatter:
+            ScatterChart()
+        case .vectorField:
+            VectorField()
+        }
+    }
 }

@@ -42,6 +42,8 @@
 		FC4ECCF22865E3170008905E /* StackedArea.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4ECCF12865E3170008905E /* StackedArea.swift */; };
 		FC4ECCFA2865FEBC0008905E /* GitHubData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4ECCF92865FEBC0008905E /* GitHubData.swift */; };
 		FC4ECCFC286601650008905E /* GitHubContributionsGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4ECCFB286601650008905E /* GitHubContributionsGraph.swift */; };
+		FC4ECCFE286753ED0008905E /* SoundBars.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4ECCFD286753ED0008905E /* SoundBars.swift */; };
+		FC4ECD00286754C20008905E /* MicrophoneMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4ECCFF286754C20008905E /* MicrophoneMonitor.swift */; };
 		FC5466C62857E0D700315632 /* SingleLineLollipop.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5466C52857E0D700315632 /* SingleLineLollipop.swift */; };
 		FC602024285B532C0089DBDC /* SingleBarThreshold.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC602023285B532C0089DBDC /* SingleBarThreshold.swift */; };
 /* End PBXBuildFile section */
@@ -104,6 +106,8 @@
 		FC4ECCF12865E3170008905E /* StackedArea.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackedArea.swift; sourceTree = "<group>"; };
 		FC4ECCF92865FEBC0008905E /* GitHubData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubData.swift; sourceTree = "<group>"; };
 		FC4ECCFB286601650008905E /* GitHubContributionsGraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubContributionsGraph.swift; sourceTree = "<group>"; };
+		FC4ECCFD286753ED0008905E /* SoundBars.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundBars.swift; sourceTree = "<group>"; };
+		FC4ECCFF286754C20008905E /* MicrophoneMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MicrophoneMonitor.swift; sourceTree = "<group>"; };
 		FC5466C52857E0D700315632 /* SingleLineLollipop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleLineLollipop.swift; sourceTree = "<group>"; };
 		FC602023285B532C0089DBDC /* SingleBarThreshold.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleBarThreshold.swift; sourceTree = "<group>"; };
 		FC8C2FE02859E64B00C334A9 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -273,6 +277,7 @@
 				2E5763C528576B1B006C7C36 /* PyramidChart.swift */,
 				934A95032857D035009E29F4 /* OneDimensionalBar.swift */,
 				84A8089C285E112E00B60AFB /* TimeSheetBar.swift */,
+				FC4ECCFD286753ED0008905E /* SoundBars.swift */,
 			);
 			path = BarCharts;
 			sourceTree = "<group>";
@@ -281,6 +286,7 @@
 			isa = PBXGroup;
 			children = (
 				C26088242856A45800B09DDB /* Square.swift */,
+				FC4ECCFF286754C20008905E /* MicrophoneMonitor.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -443,6 +449,7 @@
 				C23072892860D8FA00DA1CED /* AnimatingLine.swift in Sources */,
 				88B3E5D02857493B00840CAA /* RangeSimple.swift in Sources */,
 				FC4ECCF22865E3170008905E /* StackedArea.swift in Sources */,
+				FC4ECD00286754C20008905E /* MicrophoneMonitor.swift in Sources */,
 				9691226F28594EC5001FCF65 /* ScatterChart.swift in Sources */,
 				C22EB5A028568D0B000B9F9A /* ContentView.swift in Sources */,
 				C260881C28569D1B00B09DDB /* InterpolationMethod.swift in Sources */,
@@ -451,6 +458,7 @@
 				62FF3F022857EB530022930C /* HeatMap.swift in Sources */,
 				FC5466C62857E0D700315632 /* SingleLineLollipop.swift in Sources */,
 				C26088182856963D00B09DDB /* Data.swift in Sources */,
+				FC4ECCFE286753ED0008905E /* SoundBars.swift in Sources */,
 				84A8089D285E112E00B60AFB /* TimeSheetBar.swift in Sources */,
 				88242C262858C17A00DDD8D0 /* HeartBeat.swift in Sources */,
 				C260882E2856B4C900B09DDB /* SingleBar.swift in Sources */,
@@ -626,6 +634,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "To show micrphone input as a graph";
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -656,6 +665,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "To show micrphone input as a graph";
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
