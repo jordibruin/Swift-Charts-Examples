@@ -43,17 +43,17 @@ struct RangeSimple: View {
 					x: .value("Month", $0.month, unit: .month),
 					y: .value("Sales Min", $0.dailyMin)
 				)
-				.offset(y: -(5 + barWidth / 4))
+				.offset(y: -(barWidth / 2))
 				.foregroundStyle(.yellow.gradient)
-				.symbolSize(barWidth * 5)
+				.symbolSize(CGSize(width: barWidth * 2/3, height: barWidth * 2/3))
 
 				PointMark(
 					x: .value("Month", $0.month, unit: .month),
 					y: .value("Sales Max", $0.dailyMax)
 				)
-				.offset(y: 5 + barWidth / 4)
+				.offset(y: barWidth / 2)
 				.foregroundStyle(.yellow.gradient)
-				.symbolSize(barWidth * 5)
+				.symbolSize(CGSize(width: barWidth * 2/3, height: barWidth * 2/3))
 			}
 		}
 		.chartYAxis(isOverview ? .hidden : .automatic)
