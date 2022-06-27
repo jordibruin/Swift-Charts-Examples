@@ -16,16 +16,31 @@ struct SoundBars: View {
             chart
         } else {
             List {
-                Section {
-                    chart
+                
+                Group {
+                    Section {
+                        chart
+                    }
+                    Section {
+                        Text("Make some noise to see the data fluctuate...\nE.g. Speak, click fingers, clap hands")
+                            .font(.callout)
+                        
+                        Button {
+                            mic.toggle()
+                        } label: {
+                            Text("Toggle Recorder")
+                        }
+
+                    }
                 }
-                Section {
-                    Text("Make some noise to see the data fluctuate...\nE.g. Speak, click fingers, clap hands")
-                        .font(.callout)
+                .accessibilityAction(.magicTap) {
+                    mic.toggle()
                 }
+                
             }
             .navigationBarTitle(ChartType.soundBar.title, displayMode: .inline)
             .onAppear {
+                mic.resumeMonitoring()
                 mic.onUpdate = {
                     withAnimation {
                         data.append(Sample(sample: mic.sample))
@@ -34,6 +49,9 @@ struct SoundBars: View {
                         }
                     }
                 }
+            }
+            .onDisappear {
+                mic.stopMonitoring()
             }
         }
     }
@@ -46,7 +64,11 @@ struct SoundBars: View {
                 y: .value("Value", sample.sample),
                 stacking: .center
             )
+            .accessibilityLabel("Index: \(index)")
+            .accessibilityValue("Level: \((sample.sample/2.0).formatted(.percent.precision(.fractionLength(2))))")
         }
+        .accessibilityAddTraits(.updatesFrequently)
+        .accessibilityChartDescriptor(self)
         .chartYScale(domain: -1...1)
         .chartXAxis(isOverview ? .hidden : .automatic)
         .chartYAxis(isOverview ? .hidden : .automatic)
@@ -65,6 +87,51 @@ struct SoundBars: View {
         }()
     }
 }
+
+// MARK: - Accessibility
+
+extension SoundBars: AXChartDescriptorRepresentable {
+    func makeChartDescriptor() -> AXChartDescriptor {
+        let min = data.map(\.sample).min() ?? 0
+        let max = data.map(\.sample).max() ?? 0
+        
+        let xAxis = AXNumericDataAxisDescriptor(
+            title: "Sample time",
+            range: Double(0)...Double(data.count),
+            gridlinePositions: []
+        ) { value in
+            "\(value)s"
+        }
+
+        let yAxis = AXNumericDataAxisDescriptor(
+            title: "Audio Level",
+            range: Double(min)...Double(max),
+            gridlinePositions: []
+        ) { value in
+            "\((value/2.0).formatted(.percent.precision(.fractionLength(2))))"
+        }
+
+        let series = AXDataSeriesDescriptor(
+            name: "Audio Level Series",
+            isContinuous: false,
+            dataPoints: data.enumerated().map {
+                .init(x: Double($0.0),
+                      y: Double($0.1.sample))
+            }
+        )
+
+        return AXChartDescriptor(
+            title: "Audio Level Series",
+            summary: nil,
+            xAxis: xAxis,
+            yAxis: yAxis,
+            additionalAxes: [],
+            series: [series]
+        )
+    }
+}
+
+// MARK: - Preview
 
 struct SoundBars_Previews: PreviewProvider {
     static var previews: some View {

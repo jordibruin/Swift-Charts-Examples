@@ -6,7 +6,7 @@ import SwiftUI
 
 /*
  This file collects functions used by
- the Accessibility descriptors of charts.
+ the Accessibility descriptors of charts for data that is re-used across chart types.
  
  The detailed versions simply use accessibilityLabel/accessibilityValue for each Mark.
   

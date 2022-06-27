@@ -189,9 +189,10 @@ enum ChartType: String, Identifiable, CaseIterable {
             return VectorField(isOverview: true).makeChartDescriptor()
         case .gradientLine:
             return GradientLine(isOverview: true).makeChartDescriptor()
+        case .soundBar:
+            return SoundBars(isOverview: true).makeChartDescriptor()
         case .linePoint: fallthrough
         case .gitContributions: fallthrough
-        case .soundBar: fallthrough
         default:
             return GradientLine(isOverview: true).makeChartDescriptor()
 
