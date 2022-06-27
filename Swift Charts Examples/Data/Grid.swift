@@ -22,27 +22,9 @@ struct Grid {
                 let maxValue = numRows + numCols - 2
                 let variance = Double.random(in: 0..<20) - 10
                 let value = (Double(rowIndex + colIndex) * 100)/Double(maxValue) + variance
-                let point = Point(x: colIndex, y: rowIndex, val: value)
+                let point = Point(x: Double(colIndex), y: Double(rowIndex), val: value)
                 points.append(point)
             }
-        }
-    }
-    
-    struct Point: Hashable, Identifiable {
-        let id = UUID()
-        let x: Int
-        let y: Int
-        let val: Double
-
-        func angle(degreeOffset: Double, inRadians: Bool = true) -> Double {
-            // around 180-360 range
-            let degrees = (val / 100.0) * 180.0 + 180 + degreeOffset
-            let radians = (degrees * .pi) / 180.0
-            return inRadians ? radians : degrees
-        }
-
-        func angleColor(hueOffset: Double) -> Color {
-            Color(hue: ((val / 100.0) * 360.0 + hueOffset)/360.0, saturation: 1, brightness: 1)
         }
     }
 }

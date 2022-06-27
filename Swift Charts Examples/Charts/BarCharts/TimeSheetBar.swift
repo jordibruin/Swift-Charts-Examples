@@ -5,51 +5,49 @@
 import Charts
 import SwiftUI
 
-struct TimeSheetBarOverview: View {
-    
-    @State var data = TimeSheetData.lastDay
-    
-    var body: some View {
-        Chart(data, id: \.clockIn) {
-            BarMark(
-                xStart: .value("Clocking In", $0.clockIn),
-                xEnd: .value("Clocking Out", $0.clockOut),
-                y: .value("Department", $0.department)
-            )
-            .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
-            .foregroundStyle(TimeSheetBar.colors[$0.department] ?? .gray)
-        }
-        .accessibilityChartDescriptor(self)
-        .chartXAxis(.hidden)
-        .chartYAxis(.hidden)
-        .frame(height: Constants.previewChartHeight)
-    }
-}
-
 struct TimeSheetBar: View {
-    private let monday = TimeSheetData.lastDay
+	var isOverview: Bool
+
+    private let data = TimeSheetData.lastDay
     private let startOfOpeningHours = date(year: 2022, month: 6, day: 13, hour: 05, minutes: 00)
     private let endOfOpeningsHours = date(year: 2022, month: 6, day: 13, hour: 22, minutes: 00)
     private let weekStart = date(year: 2022, month: 6, day: 13, hour: 05, minutes: 00)
     private let weekEnd = date(year: 2022, month: 6, day: 18, hour: 20, minutes: 00)
 
     var body: some View {
-        List {
-            Section("Monday \(monday[0].clockIn.formatted(date: .abbreviated, time: .omitted))") {
-                EventChart(headerTitle: "Day total: \(TimeSheetBar.getEventsTotalDuration(monday))",
-                           events: monday,
-                           chartXScaleRangeStart: startOfOpeningHours,
-                           chartXScaleRangeEnd: endOfOpeningsHours)
-            }
+		if isOverview {
+			Chart(data, id: \.clockIn) {
+				BarMark(
+					xStart: .value("Clocking In", $0.clockIn),
+					xEnd: .value("Clocking Out", $0.clockOut),
+					y: .value("Department", $0.department)
+				)
+				.clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
+				.foregroundStyle(TimeSheetBar.colors[$0.department] ?? .gray)
+			}
+            .accessibilityChartDescriptor(self)
+			.chartXAxis(.hidden)
+			.chartYAxis(.hidden)
+			.frame(height: Constants.previewChartHeight)
+		} else {
+			List {
+				Section("Monday \(data[0].clockIn.formatted(date: .abbreviated, time: .omitted))") {
+					EventChart(headerTitle: "Day total: \(TimeSheetBar.getEventsTotalDuration(data))",
+							   events: data,
+							   chartXScaleRangeStart: startOfOpeningHours,
+							   chartXScaleRangeEnd: endOfOpeningsHours)
+				}
 
-            Section("Week 24 - 2022") {
-                EventChart(headerTitle: "Week total: \(TimeSheetBar.getEventsTotalDuration(TimeSheetData.lastWeek))",
-                           events: TimeSheetData.lastWeek,
-                           chartXScaleRangeStart: weekStart,
-                           chartXScaleRangeEnd: weekEnd)
-            }
-        }
-        .navigationBarTitle(ChartType.timeSheetBar.title, displayMode: .inline)
+				Section("Week 24 - 2022") {
+					EventChart(headerTitle: "Week total: \(TimeSheetBar.getEventsTotalDuration(TimeSheetData.lastWeek))",
+							   events: TimeSheetData.lastWeek,
+							   chartXScaleRangeStart: weekStart,
+							   chartXScaleRangeEnd: weekEnd)
+				}
+			}
+			.navigationBarTitle(ChartType.timeSheetBar.title, displayMode: .inline)
+		}
+
     }
 
     static let colors: [String: Color] = [
@@ -98,6 +96,8 @@ struct EventChart: View {
                         xEnd: .value("Clocking Out", event.clockOut),
                         y: .value("Department", event.department)
                     )
+                    .accessibilityLabel("Department: \(event.department)")
+                    .accessibilityValue("Clock in: \(event.clockIn.formatted(date: .abbreviated, time: .standard)), Clock out: \(event.clockOut.formatted(date: .abbreviated, time: .standard))")
                     .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
                     .foregroundStyle(getForegroundColor(department: event.department))
 
@@ -172,10 +172,66 @@ struct EventChart: View {
     }
 }
 
+// MARK: - Accessibility
+
+extension TimeSheetBar: AXChartDescriptorRepresentable {
+    func makeChartDescriptor() -> AXChartDescriptor {
+        
+        let intervals = data.map {
+            (department: $0.department,
+             duration: $0.clockOut.timeIntervalSince($0.clockIn),
+             clockIn: $0.clockIn,
+             clockOut: $0.clockOut)
+        }
+        
+        let min = intervals.map(\.duration).min() ?? 0
+        let max = intervals.map(\.duration).max() ?? 0
+
+        let xAxis = AXCategoricalDataAxisDescriptor(
+            title: "Department",
+            categoryOrder: data.map { $0.department }
+        )
+
+        let yAxis = AXNumericDataAxisDescriptor(
+            title: "Duration",
+            range: Double(min)...Double(max),
+            gridlinePositions: []
+        ) { value in "\(value.durationDescription)" }
+
+        let series = AXDataSeriesDescriptor(
+            name: "Timesheet Example",
+            isContinuous: false,
+            dataPoints: intervals.map {
+                .init(x: $0.department,
+                      y: $0.duration,
+                      label: "Clock in: \($0.clockIn.formatted(date: .omitted, time: .shortened)), Clock out: \($0.clockOut.formatted(date: .omitted, time: .shortened))")
+            }
+        )
+
+        return AXChartDescriptor(
+            title: "Timesheet by department",
+            summary: nil,
+            xAxis: xAxis,
+            yAxis: yAxis,
+            additionalAxes: [],
+            series: [series]
+        )
+    }
+}
+
+// MARK: - Accessibility
+
+extension StackedArea: AXChartDescriptorRepresentable {
+    func makeChartDescriptor() -> AXChartDescriptor {
+        return chartDescriptor(forLocationSeries: data)
+    }
+}
+
+// MARK: - Preview
+
 struct TimeSheetBar_Previews: PreviewProvider {
     static var previews: some View {
-        TimeSheetBar()
-            .previewInterfaceOrientation(.landscapeLeft)
-        TimeSheetBarOverview()
+		TimeSheetBar(isOverview: true)
+        TimeSheetBar(isOverview: false)
     }
 }

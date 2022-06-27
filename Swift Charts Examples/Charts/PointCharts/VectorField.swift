@@ -5,53 +5,51 @@
 import SwiftUI
 import Charts
 
-struct VectorFieldOverview: View {
-    @State var grid = Grid(numRows: 20, numCols: 20)
-
-    var body: some View {
-        Chart(grid.points) { point in
-            PointMark(x: .value("x", point.x),
-                      y: .value("y", point.y))
-            .symbol(Arrow(angle: CGFloat(point.angle(degreeOffset: 0)), size: 50))
-            .foregroundStyle(point.angleColor(hueOffset: 0))
-            .opacity(0.7)
-        }
-        .accessibilityChartDescriptor(self)
-        .chartXAxis(.hidden)
-        .chartYAxis(.hidden)
-        .aspectRatio(contentMode: .fit)
-    }
-}
-
 struct VectorField: View {
-    @State private var grid = Grid(numRows: 20, numCols: 20)
+	var isOverview: Bool
+
+    @State var grid = Grid(numRows: 20, numCols: 20)
+    
     @State private var degreeOffset = 0.0
     @State private var hueOffset = 0.0
     @State private var opacity = 0.7
     @State private var size = 50.0
     
     var body: some View {
-        List {
-            Section {
-                Chart(grid.points) { point in
-                    // Use accessibility modifiers on the Plot,
-                    // otherwise modifier order may prevent accessibility being actually set
-                    Plot {
-                        PointMark(x: .value("x", point.x),
-                                  y: .value("y", point.y))
-                        .symbol(Arrow(angle: CGFloat(point.angle(degreeOffset: degreeOffset)), size: size))
-                        .foregroundStyle(point.angleColor(hueOffset: hueOffset))
-                        .opacity(opacity)
-                    }
-                    .accessibilityLabel("Point: (\(point.x), \(point.y))")
-                    .accessibilityValue("Angle: \(Int(point.angle(degreeOffset: degreeOffset, inRadians: false))) degrees, Color: \(UIColor(point.angleColor(hueOffset: degreeOffset)).accessibilityName)")
-                }
-                .aspectRatio(contentMode: .fit)
-            }
-            customisation
-        }
-        .navigationBarTitle(ChartType.vectorField.title, displayMode: .inline)
+		if isOverview {
+			chart
+		} else {
+			List {
+				Section {
+				   chart
+				}
+
+				customisation
+			}
+			.navigationBarTitle(ChartType.vectorField.title, displayMode: .inline)
+		}
     }
+
+	private var chart: some View {
+		Chart(grid.points) { point in
+            // Use accessibility modifiers on the Plot,
+            // otherwise modifier order may prevent accessibility being actually set
+            Plot {
+                PointMark(x: .value("x", point.x),
+                          y: .value("y", point.y))
+                .symbol(Arrow(angle: CGFloat(point.angle(degreeOffset: degreeOffset)), size: size))
+                .foregroundStyle(point.angleColor(hueOffset: hueOffset))
+                .opacity(opacity)
+            }
+            .accessibilityLabel("Point: (\(point.x), \(point.y))")
+            .accessibilityValue("Angle: \(Int(point.angle(degreeOffset: degreeOffset, inRadians: false))) degrees, Color: \(UIColor(point.angleColor(hueOffset: degreeOffset)).accessibilityName)")
+            .accessibilityHidden(isOverview)
+		}
+        .accessibilityChartDescriptor(self)
+		.chartYAxis(isOverview ? .hidden : .automatic)
+		.chartXAxis(isOverview ? .hidden : .automatic)
+		.aspectRatio(contentMode: .fit)
+	}
 
     private var customisation: some View {
         Section {
@@ -128,8 +126,86 @@ struct Arrow: ChartSymbolShape {
     }
 }
 
+// MARK: - Accessibility
+
+extension VectorField: AXChartDescriptorRepresentable {
+    func makeChartDescriptor() -> AXChartDescriptor {
+        
+        // The general approach here is to create a Series for each angle based color
+        let data = grid.points
+    
+        // Create a dictionary mapping color names to points they apply to
+        // i.e. [Colorname(String) : list of points that are categorized as Colorname]
+        var unorderedColorGroups: [String: [Point]] = [:]
+        data.forEach { point in
+            let colorName = UIColor(point.angleColor(hueOffset: 0)).accessibilityName
+            if
+                unorderedColorGroups.keys.contains(colorName),
+                var pointList = unorderedColorGroups[colorName] {
+                pointList.append(point)
+                unorderedColorGroups[colorName] = pointList
+            } else {
+                unorderedColorGroups[colorName] = [point]
+            }
+        }
+        
+        // Limits for each axis
+        let xmin = data.map(\.x).min() ?? 0
+        let xmax = data.map(\.x).max() ?? 0
+        let ymin = data.map(\.y).min() ?? 0
+        let ymax = data.map(\.y).max() ?? 0
+        let vmin = data.map(\.val).min() ?? 0
+        let vmax = data.map(\.val).max() ?? 0
+        
+        // Create the axes
+        let xAxis = AXNumericDataAxisDescriptor(
+            title: "Horizontal Position",
+            range: Double(xmin)...Double(xmax),
+            gridlinePositions: Array(stride(from: xmin, to: xmax, by: 1)).map { Double($0) }
+        ) { "X: \($0)" }
+
+        let yAxis = AXNumericDataAxisDescriptor(
+            title: "Vertical Position",
+            range: Double(ymin)...Double(ymax),
+            gridlinePositions: Array(stride(from: ymin, to: ymax, by: 1)).map { Double($0) }
+        ) { "Y: \($0)" }
+        
+        let valueAxis = AXNumericDataAxisDescriptor(
+            title: "Value based Color",
+            range: Double(vmin)...Double(vmax),
+            gridlinePositions: []
+        ) { "Color: \($0)" }
+        
+        // Finally create the series with the color category as a 3rd axes
+        let series: [AXDataSeriesDescriptor] = unorderedColorGroups.map { (colorName, points) in
+            let dataPoints = points.map { point in
+                AXDataPoint(x: Double(point.x),
+                            y: Double(point.y),
+                            additionalValues: [.category(colorName)],
+                            label: nil)
+            }
+            
+            return AXDataSeriesDescriptor(name: colorName,
+                                          isContinuous: false,
+                                          dataPoints: dataPoints)
+        }
+        
+        return AXChartDescriptor(
+            title: "Vector Field Data",
+            summary: nil,
+            xAxis: xAxis,
+            yAxis: yAxis,
+            additionalAxes: [valueAxis],
+            series: series
+        )
+    }
+}
+
+// MARK: - Preview
+
 struct VectorField_Previews: PreviewProvider {
     static var previews: some View {
-        VectorField()
+        VectorField(isOverview: true)
+		VectorField(isOverview: false)
     }
 }

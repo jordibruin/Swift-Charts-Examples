@@ -5,117 +5,110 @@
 import SwiftUI
 import Charts
 
-struct CandleStickChartOverview: View {
-    let currentPrices: [StockData.StockPrice] = StockData.appleFirst7Months
-    
-    var body: some View {
-        Chart(currentPrices) { (price: StockData.StockPrice) in
-            BarMark(
-                x: .value("Date", price.timestamp),
-                yStart: .value("Open", price.open),
-                yEnd: .value("Close", price.close),
-                width: 8
-            )
-            .foregroundStyle(price.open < price.close ? .blue : .red)
-            BarMark(
-                x: .value("Date", price.timestamp),
-                yStart: .value("High", price.high),
-                yEnd: .value("Low", price.low),
-                width: 2
-            )
-            .foregroundStyle(price.open < price.close ? .blue : .red)
-        }
-        .accessibilityChartDescriptor(self)
-        .chartXAxis(.hidden)
-        .chartYAxis(.hidden)
-        .chartYScale(domain: 35...45)
-        .frame(height: Constants.previewChartHeight)
-    }
-}
-
 struct CandleStickChart: View {
-    private let currentPrices: [StockData.StockPrice] = StockData.apple
+	var isOverview: Bool
+
+    var currentPrices: [StockData.StockPrice]
     @State private var selectedPrice: StockData.StockPrice?
 
+	init(isOverview: Bool) {
+		self.isOverview = isOverview
+		self.currentPrices = isOverview ? StockData.appleFirst7Months : StockData.apple
+	}
+
     var body: some View {
-        List {
-            Section {
-                Chart(currentPrices) { (price: StockData.StockPrice) in
-                    CandleStickMark(
-                        timestamp: .value("Date", price.timestamp),
-                        open: .value("Open", price.open),
-                        high: .value("High", price.high),
-                        low: .value("Low", price.low),
-                        close: .value("Close", price.close)
-                    )
-                    .accessibilityLabel("\(price.timestamp.formatted(date: .complete, time: .omitted)): \(price.accessibilityTrendSummary)")
-                    .accessibilityValue(price.accessibilityDescription)
-                    .foregroundStyle(price.isClosingHigher ? .blue : .red)
-                }
-                .frame(height: Constants.detailChartHeight)
-                .chartYAxis { AxisMarks(preset: .extended) }
-                .chartOverlay { proxy in
-                    GeometryReader { geo in
-                        Rectangle().fill(.clear).contentShape(Rectangle())
-                            .gesture(
-                                SpatialTapGesture()
-                                    .onEnded { value in
-                                        let element = findElement(location: value.location, proxy: proxy, geometry: geo)
-                                        if selectedPrice?.timestamp == element?.timestamp {
-                                            // If tapping the same element, clear the selection.
-                                            selectedPrice = nil
-                                        } else {
-                                            selectedPrice = element
-                                        }
-                                    }
-                                    .exclusively(
-                                        before: DragGesture()
-                                            .onChanged { value in
-                                                selectedPrice = findElement(location: value.location, proxy: proxy, geometry: geo)
-                                            }
-                                    )
-                            )
-                    }
-                }
-                .chartOverlay { proxy in
-                    ZStack(alignment: .topLeading) {
-                        GeometryReader { geo in
-                            if let selectedPrice {
-                                let dateInterval = Calendar.current.dateInterval(of: .day, for: selectedPrice.timestamp)!
-                                let startPositionX1 = proxy.position(forX: dateInterval.start) ?? 0
+		if isOverview {
+			chart
+				.chartYScale(domain: 35...45)
+		} else {
+			List {
+				Section {
+					chart
+				}
+				Section {
+					Text("**Hold and drag** over the chart to view and move the lollipop")
+						.font(.callout)
+				}
+			}
+			.navigationTitle(ChartType.candleStick.title)
+		}
 
-                                let lineX = startPositionX1 + geo[proxy.plotAreaFrame].origin.x
-                                let lineHeight = geo[proxy.plotAreaFrame].maxY
-                                let boxWidth: CGFloat = 220
-                                let boxOffset = max(0, min(geo.size.width - boxWidth, lineX - boxWidth / 2))
-
-                                Rectangle()
-                                    .fill(.gray.opacity(0.5))
-                                    .frame(width: 2, height: lineHeight)
-                                    .position(x: lineX, y: lineHeight / 2)
-
-                                PriceAnnotation(for: selectedPrice)
-                                    .frame(width: boxWidth, alignment: .leading)
-                                    .background {
-                                        RoundedRectangle(cornerRadius: 13)
-                                            .foregroundStyle(.thickMaterial)
-                                            .padding(.horizontal, -8)
-                                            .padding(.vertical, -4)
-                                    }
-                                    .offset(x: boxOffset)
-                            }
-                        }
-                    }
-                }
-            }
-            Section {
-                Text("**Hold and drag** over the chart to view and move the lollipop")
-                    .font(.callout)
-            }
-        }
-        .navigationTitle(ChartType.candleStick.title)
-        .navigationBarTitleDisplayMode(.inline)
     }
+
+	private var chart: some View {
+		Chart(currentPrices) { (price: StockData.StockPrice) in
+			CandleStickMark(
+				isOverview: isOverview,
+				timestamp: .value("Date", price.timestamp),
+				open: .value("Open", price.open),
+				high: .value("High", price.high),
+				low: .value("Low", price.low),
+				close: .value("Close", price.close)
+			)
+            .accessibilityLabel("\(price.timestamp.formatted(date: .complete, time: .omitted)): \(price.accessibilityTrendSummary)")
+            .accessibilityValue(price.accessibilityDescription)
+            .accessibilityHidden(isOverview)
+			.foregroundStyle(price.open < price.close ? .blue : .red)
+		}
+		.chartYAxis { AxisMarks(preset: .extended) }
+		.chartOverlay { proxy in
+			GeometryReader { geo in
+				Rectangle().fill(.clear).contentShape(Rectangle())
+					.gesture(
+						SpatialTapGesture()
+							.onEnded { value in
+								let element = findElement(location: value.location, proxy: proxy, geometry: geo)
+								if selectedPrice?.timestamp == element?.timestamp {
+									// If tapping the same element, clear the selection.
+									selectedPrice = nil
+								} else {
+									selectedPrice = element
+								}
+							}
+							.exclusively(
+								before: DragGesture()
+									.onChanged { value in
+										selectedPrice = findElement(location: value.location, proxy: proxy, geometry: geo)
+									}
+							)
+					)
+			}
+		}
+		.chartOverlay { proxy in
+			ZStack(alignment: .topLeading) {
+				GeometryReader { geo in
+					if let selectedPrice {
+						let dateInterval = Calendar.current.dateInterval(of: .day, for: selectedPrice.timestamp)!
+						let startPositionX1 = proxy.position(forX: dateInterval.start) ?? 0
+
+						let lineX = startPositionX1 + geo[proxy.plotAreaFrame].origin.x
+						let lineHeight = geo[proxy.plotAreaFrame].maxY
+						let boxWidth: CGFloat = 220
+						let boxOffset = max(0, min(geo.size.width - boxWidth, lineX - boxWidth / 2))
+
+						Rectangle()
+							.fill(.gray.opacity(0.5))
+							.frame(width: 2, height: lineHeight)
+							.position(x: lineX, y: lineHeight / 2)
+
+						PriceAnnotation(for: selectedPrice)
+							.frame(width: boxWidth, alignment: .leading)
+							.background {
+								RoundedRectangle(cornerRadius: 13)
+									.foregroundStyle(.thickMaterial)
+									.padding(.horizontal, -8)
+									.padding(.vertical, -4)
+							}
+							.offset(x: boxOffset)
+					}
+				}
+			}
+		}
+        .accessibilityChartDescriptor(self)
+		.chartYAxis(isOverview ? .hidden : .automatic)
+		.chartXAxis(isOverview ? .hidden : .automatic)
+		.frame(height: isOverview ? Constants.previewChartHeight : Constants.detailChartHeight)
+	}
 
     private func findElement(location: CGPoint, proxy: ChartProxy, geometry: GeometryProxy) -> StockData.StockPrice? {
         let relativeXPosition = location.x - geometry[proxy.plotAreaFrame].origin.x
@@ -139,6 +132,7 @@ struct CandleStickChart: View {
 }
 
 struct CandleStickMark: ChartContent {
+	let isOverview: Bool
     let timestamp: PlottableValue<Date>
     let open: PlottableValue<Decimal>
     let high: PlottableValue<Decimal>
@@ -146,25 +140,95 @@ struct CandleStickMark: ChartContent {
     let close: PlottableValue<Decimal>
     
     var body: some ChartContent {
-        // Composite ChartContent MUST be grouped into a plot for accessibility to work
         Plot {
+            // Composite ChartContent MUST be grouped into a plot for accessibility to work
             BarMark(
                 x: timestamp,
                 yStart: open,
                 yEnd: close,
-                width: 4
+                width: isOverview ? 8 : 4
             )
-            
             BarMark(
                 x: timestamp,
                 yStart: high,
                 yEnd: low,
-                width: 1
+                width: isOverview ? 2 : 1
             )
         }
-        
     }
 }
+
+// MARK: - Accessibility
+
+extension CandleStickChart: AXChartDescriptorRepresentable {
+    func makeChartDescriptor() -> AXChartDescriptor {
+        
+        let dateStringConverter: ((Date) -> (String)) = { date in
+            date.formatted(date: .abbreviated, time: .omitted)
+        }
+        
+        // These closures help find the min/max for each axis
+        let lowestValue: ((KeyPath<StockData.StockPrice, Decimal>) -> (Double)) = { path in
+            return currentPrices.map { $0[keyPath: path]} .min()?.asDouble ?? 0
+        }
+        let highestValue: ((KeyPath<StockData.StockPrice, Decimal>) -> (Double)) = { path in
+            return currentPrices.map { $0[keyPath: path]} .max()?.asDouble ?? 0
+        }
+        
+        let xAxis = AXCategoricalDataAxisDescriptor(
+            title: "Date",
+            categoryOrder: currentPrices.map { dateStringConverter($0.timestamp) }
+        )
+        
+        // Add axes for each data point captured in the candlestick
+        let closeAxis = AXNumericDataAxisDescriptor(
+            title: "Closing Price",
+            range: 0...highestValue(\.close),
+            gridlinePositions: []
+        ) { value in "Closing: \(value.formatted(.currency(code: "USD")))" }
+        
+        let openAxis = AXNumericDataAxisDescriptor(
+            title: "Opening Price",
+            range: lowestValue(\.open)...highestValue(\.open),
+            gridlinePositions: []
+        ) { value in "Opening: \(value.formatted(.currency(code: "USD")))" }
+        
+        let highAxis = AXNumericDataAxisDescriptor(
+            title: "Highest Price",
+            range: lowestValue(\.high)...highestValue(\.high),
+            gridlinePositions: []
+        ) { value in "High: \(value.formatted(.currency(code: "USD")))" }
+        
+        let lowAxis = AXNumericDataAxisDescriptor(
+            title: "Lowest Price",
+            range: lowestValue(\.low)...highestValue(\.low),
+            gridlinePositions: []
+        ) { value in "Low: \(value.formatted(.currency(code: "USD")))" }
+        
+        let series = AXDataSeriesDescriptor(
+            name: "Apple Stock Price",
+            isContinuous: false,
+            dataPoints: currentPrices.map {
+                .init(x: dateStringConverter($0.timestamp),
+                      y: $0.close.asDouble,
+                      additionalValues: [.number($0.open.asDouble),
+                                         .number($0.high.asDouble),
+                                         .number($0.low.asDouble)])
+            }
+        )
+        
+        return AXChartDescriptor(
+            title: "Apple Stock Price",
+            summary: nil,
+            xAxis: xAxis,
+            yAxis: closeAxis,
+            additionalAxes: [openAxis, highAxis, lowAxis],
+            series: [series]
+        )
+    }
+}
+
+// MARK: - Preview
 
 struct PriceAnnotation: View {
     private var price: StockData.StockPrice
@@ -206,7 +270,7 @@ struct PriceAnnotation: View {
 
 struct CandleStickChart_Previews: PreviewProvider {
     static var previews: some View {
-        CandleStickChartOverview()
-        CandleStickChart()
+		CandleStickChart(isOverview: true)
+        CandleStickChart(isOverview: false)
     }
 }

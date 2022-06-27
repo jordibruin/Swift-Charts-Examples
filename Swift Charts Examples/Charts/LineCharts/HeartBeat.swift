@@ -5,82 +5,79 @@
 import SwiftUI
 import Charts
 
-struct HeartBeatOverview: View {
-
-    var data = HealthData.ecgSample
-
-    var body: some View {
-        Chart {
-            ForEach(Array(data.enumerated()), id: \.element) { index, element in
-                LineMark(
-                    x: .value("Index", index),
-                    y: .value("Unit", element)
-                )
-                .foregroundStyle(.pink.gradient)
-                .interpolationMethod(.cardinal)
-            }
-        }
-        .accessibilityChartDescriptor(self)
-        .chartXAxis(.hidden)
-        .chartYAxis(.hidden)
-        .frame(height: Constants.previewChartHeight)
-    }
-}
-
 struct HeartBeat: View {
+	var isOverview: Bool
+
+    @State var data = HealthData.ecgSample
     @State private var lineWidth = 2.0
     @State private var interpolationMethod: ChartInterpolationMethod = .cardinal
     @State private var chartColor: Color = .pink
     
     var body: some View {
-        List {
-            Section {
-                Chart {
-                    ForEach(Array(HealthData.ecgSample.enumerated()), id: \.element) { index, element in
-                        LineMark(
-                            x: .value("Index", index),
-                            y: .value("Unit", element)
-                        )
-                        .lineStyle(StrokeStyle(lineWidth: lineWidth))
-                        .foregroundStyle(chartColor.gradient)
-                        .interpolationMethod(interpolationMethod.mode)
-                        .accessibilityLabel("Index")
-                        .accessibilityValue("\(element)")
-                    }
-                }
-                .chartYAxis {
-                    AxisMarks(preset: .aligned, position: .automatic) { value in
-                        let rawValue = value.as(Double.self)! / 100
-                        let formattedValue = rawValue.formatted()
-                        
-                        AxisGridLine()
-                        AxisValueLabel(formattedValue)
-                    }
-                }
-                .chartXAxis {
-                    AxisMarks(preset: .aligned, position: .automatic) { value in
-                        let rawValue = value.as(Int.self)! / 100
-                        let formattedValue = rawValue.formatted()
-                        
-                        AxisGridLine()
-                        AxisValueLabel(formattedValue)
-                    }
-                }
-                .frame(height: Constants.detailChartHeight)
-            }
-            
-            customisation
-        }
-        .navigationBarTitle(ChartType.heartBeat.title, displayMode: .inline)
+		if isOverview {
+			chart
+				.allowsHitTesting(false)
+		} else {
+			List {
+				Section {
+					chart
+				}
+
+				customisation
+			}
+			.navigationBarTitle(ChartType.heartBeat.title, displayMode: .inline)
+		}
     }
+
+	private var chart: some View {
+		Chart {
+			ForEach(Array(data.enumerated()), id: \.element) { index, element in
+				LineMark(
+					x: .value("Index", index),
+					y: .value("Unit", element)
+				)
+				.lineStyle(StrokeStyle(lineWidth: lineWidth))
+				.foregroundStyle(chartColor.gradient)
+				.interpolationMethod(interpolationMethod.mode)
+				.accessibilityLabel("\(index)s")
+				.accessibilityValue("\(element) mV")
+                .accessibilityHidden(isOverview)
+			}
+		}
+		.chartYAxis {
+			AxisMarks(preset: .aligned, position: .automatic) { value in
+				let rawValue = value.as(Double.self)! / 100
+				let formattedValue = rawValue.formatted()
+
+				AxisGridLine()
+				AxisValueLabel(formattedValue)
+			}
+		}
+		.chartXAxis {
+			AxisMarks(preset: .aligned, position: .automatic) { value in
+				let rawValue = value.as(Int.self)! / 100
+				let formattedValue = rawValue.formatted()
+
+				AxisGridLine()
+				AxisValueLabel(formattedValue)
+			}
+		}
+        .accessibilityChartDescriptor(self)
+		.chartYAxis(isOverview ? .hidden : .automatic)
+		.chartXAxis(isOverview ? .hidden : .automatic)
+		.frame(height: isOverview ? Constants.previewChartHeight : Constants.detailChartHeight)
+	}
     
     private var customisation: some View {
         Section {
-            Stepper(value: $lineWidth, in: 1.0...10.0) {
-                HStack {
+            VStack(alignment: .leading) {
+                Text("Line Width: \(lineWidth, specifier: "%.1f")")
+                Slider(value: $lineWidth, in: 1...10) {
                     Text("Line Width")
-                    Spacer()
-                    Text("\(String(format: "%.0f", lineWidth))")
+                } minimumValueLabel: {
+                    Text("1")
+                } maximumValueLabel: {
+                    Text("10")
                 }
             }
             
@@ -93,10 +90,53 @@ struct HeartBeat: View {
     }
 }
 
+// MARK: - Accessibility
+
+extension HeartBeat: AXChartDescriptorRepresentable {
+    func makeChartDescriptor() -> AXChartDescriptor {
+        let min = data.min() ?? 0.0
+        let max = data.max() ?? 0.0
+
+        // Set the units when creating the axes
+        // so users can scrub and pause to narrow on a data point
+        let xAxis = AXNumericDataAxisDescriptor(
+            title: "Time",
+            range: Double(0)...Double(data.count),
+            gridlinePositions: []
+        ) { value in "\(value)s" }
+
+
+        let yAxis = AXNumericDataAxisDescriptor(
+            title: "Millivolts",
+            range: Double(min)...Double(max),
+            gridlinePositions: []
+        ) { value in "\(value) mV" }
+
+        let series = AXDataSeriesDescriptor(
+            name: "ECG data",
+            isContinuous: true,
+            dataPoints: data.enumerated().map {
+                .init(x: Double($0), y: $1)
+            }
+        )
+
+        return AXChartDescriptor(
+            title: "ElectroCardiogram (ECG)",
+            summary: nil,
+            xAxis: xAxis,
+            yAxis: yAxis,
+            additionalAxes: [],
+            series: [series]
+        )
+    }
+}
+
+// MARK: - Preview
+
 struct HeartBeat_Previews: PreviewProvider {
     static var previews: some View {
-        HeartBeatOverview()
-        HeartBeat()
+        HeartBeat(isOverview: true)
+		HeartBeat(isOverview: false)
     }
 }
 

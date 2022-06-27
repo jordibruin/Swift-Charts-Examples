@@ -6,14 +6,13 @@ import SwiftUI
 import Charts
 
 struct MultiLine: View {
-    var isOverview: Bool = false
+    var isOverview: Bool
 
     let data = LocationData.last30Days
     
     var body: some View {
         if isOverview {
             chart
-                .accessibilityChartDescriptor(self)
         } else {
             List {
                 Section {
@@ -33,10 +32,12 @@ struct MultiLine: View {
                 )
                 .accessibilityLabel("\(series.city) \(element.weekday.formatted(date: .abbreviated, time: .standard))")
                 .accessibilityValue("\(element.sales) sold")
+                .accessibilityHidden(isOverview)
                 .interpolationMethod(.cardinal)
                 .foregroundStyle(by: .value("City", series.city))
             }
         }
+        .accessibilityChartDescriptor(self)
         .chartXAxis(isOverview ? .hidden : .automatic)
         .chartYAxis(isOverview ? .hidden : .automatic)
         .chartLegend(isOverview ? .hidden : .automatic)
@@ -44,9 +45,19 @@ struct MultiLine: View {
     }
 }
 
+// MARK: - Accessibility
+
+extension MultiLine: AXChartDescriptorRepresentable {
+    func makeChartDescriptor() -> AXChartDescriptor {
+        return chartDescriptor(forLocationSeries: data)
+    }
+}
+
+// MARK: - Preview
+
 struct MultiLine_Previews: PreviewProvider {
     static var previews: some View {
         MultiLine(isOverview: true)
-        MultiLine()
+        MultiLine(isOverview: false)
     }
 }

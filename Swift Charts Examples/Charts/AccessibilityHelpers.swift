@@ -4,6 +4,15 @@
 
 import SwiftUI
 
+/*
+ This file collects functions used by
+ the Accessibility descriptors of charts.
+ 
+ The detailed versions simply use accessibilityLabel/accessibilityValue for each Mark.
+  
+ NOTE: Filed FB10320202 indicating some Mark types do not use label/value set on the Mark
+ */
+
 extension TimeInterval {
     var durationDescription: String {
         let hqualifier = (hours == 1) ? "hour" : "hours"
@@ -33,12 +42,12 @@ extension Date {
 }
 
 // TODO: This should be a protocol but since the data objects are in flux this will suffice
-func chartDescriptor(forSalesSeries data: [(day: Date, sales: Int)]) -> AXChartDescriptor {
+func chartDescriptor(forSalesSeries data: [Sale]) -> AXChartDescriptor {
     let min = data.map(\.sales).min() ?? 0
     let max = data.map(\.sales).max() ?? 0
 
     // A closure that takes a date and converts it to a label for axes
-    let dateTupleStringConverter: (((day: Date, sales: Int)) -> (String)) = { dataPoint in
+    let dateTupleStringConverter: ((Sale) -> (String)) = { dataPoint in
         dataPoint.day.formatted(date: .abbreviated, time: .omitted)
     }
     

@@ -47,7 +47,7 @@ enum SalesData {
         (day: date(year: 2022, month: 6, day: 4), sales: 214),
         (day: date(year: 2022, month: 6, day: 5), sales: 250),
         (day: date(year: 2022, month: 6, day: 6), sales: 146)
-    ]
+    ].map { Sale(day: $0.day, sales: $0.sales) }
 
     /// Total sales for the last 30 days.
     static var last30DaysTotal: Int {
