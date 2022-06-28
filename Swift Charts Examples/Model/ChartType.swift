@@ -193,10 +193,8 @@ enum ChartType: String, Identifiable, CaseIterable {
             return SoundBars(isOverview: true).makeChartDescriptor()
         case .linePoint:
             return LinePlot(isOverview: true).makeChartDescriptor()
-        case .gitContributions: fallthrough
-        default:
-            return GradientLine(isOverview: true).makeChartDescriptor()
-
+        case .gitContributions:
+            return GitHubContributionsGraph(isOverview: true).makeChartDescriptor()
         }
     }
 
