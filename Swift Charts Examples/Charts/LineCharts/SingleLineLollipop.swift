@@ -13,6 +13,7 @@ struct SingleLineLollipop: View {
     @State private var chartColor: Color = .blue
     @State private var showSymbols = true
     @State private var selectedElement: (day: Date, sales: Int)? = (SalesData.last30Days[10].day, SalesData.last30Days[10].sales)
+    @State private var showLollipop = true
 
     var body: some View {
         if isOverview {
@@ -27,6 +28,7 @@ struct SingleLineLollipop: View {
                 Section {
                     Text("**Hold and drag** over the chart to view and move the lollipop")
                         .font(.callout)
+                    Toggle("Lollipop", isOn: $showLollipop)
                 }
             }
             .navigationBarTitle(ChartType.singleLineLollipop.title, displayMode: .inline)
@@ -71,7 +73,8 @@ struct SingleLineLollipop: View {
         .chartBackground { proxy in
             ZStack(alignment: .topLeading) {
                 GeometryReader { geo in
-                    if let selectedElement {
+                    if showLollipop,
+                       let selectedElement {
                         let dateInterval = Calendar.current.dateInterval(of: .day, for: selectedElement.day)!
                         let startPositionX1 = proxy.position(forX: dateInterval.start) ?? 0
 
