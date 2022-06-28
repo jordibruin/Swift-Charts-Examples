@@ -46,6 +46,7 @@ struct LinePlot: View {
                 }
                 .accessibilityLabel("Plot Series")
                 .accessibilityValue("X: \(point.x), Y: \(point.y)")
+                .accessibilityHidden(isOverview)
 			}
 			.foregroundStyle(plotChartColor.opacity(0.2))
 
@@ -58,6 +59,7 @@ struct LinePlot: View {
                 }
                 .accessibilityLabel("Line Series")
                 .accessibilityValue("X: \(point.x), Y: \(point.y)")
+                .accessibilityHidden(isOverview)
 			}
 			.foregroundStyle(lineChartColor)
 		}

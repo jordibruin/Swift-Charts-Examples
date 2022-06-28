@@ -34,15 +34,17 @@ struct TwoBars: View {
 	private var chart: some View {
 		Chart(data) { series in
 			ForEach(series.sales, id: \.weekday) { element in
-				BarMark(
-					x: .value("Day", element.weekday, unit: .day),
-					y: .value("Sales", element.sales),
-                    width: isOverview ? .automatic : .fixed(barWidth)
-				)
+                Plot {
+                    BarMark(
+                        x: .value("Day", element.weekday, unit: .day),
+                        y: .value("Sales", element.sales),
+                        width: isOverview ? .automatic : .fixed(barWidth)
+                    )
+                    .foregroundStyle(by: .value("City", series.city))
+                }
                 .accessibilityLabel("\(series.city) \(element.weekday.weekdayString)")
                 .accessibilityValue("\(element.sales) sold")
                 .accessibilityHidden(isOverview)
-				.foregroundStyle(by: .value("City", series.city))
 			}
 			.symbol(by: .value("City", series.city))
 			.interpolationMethod(.catmullRom)

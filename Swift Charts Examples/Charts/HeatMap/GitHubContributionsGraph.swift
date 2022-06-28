@@ -39,6 +39,7 @@ struct GitHubContributionsGraph: View {
             }
             .accessibilityLabel("\(contribution.date.formatted(date: .complete, time: .omitted))")
             .accessibilityValue("\(contribution.level) contributions")
+            .accessibilityHidden(isOverview)
         }
         .chartForegroundStyleScale(range: Gradient(colors: [.white, .green]))
         .accessibilityChartDescriptor(self)

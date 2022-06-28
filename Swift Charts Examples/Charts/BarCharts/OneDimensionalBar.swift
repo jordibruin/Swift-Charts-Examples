@@ -44,14 +44,17 @@ struct OneDimensionalBar: View {
     }
 
 	private var chart: some View {
-		Chart(data, id: \.category) { element in
-			BarMark(
-				x: .value("Data Size", element.size)
-			)
+        Chart(data, id: \.category) { element in
+            Plot {
+                BarMark(
+                    x: .value("Data Size", element.size)
+                )
+                .foregroundStyle(by: .value("Data Category", element.category))
+            }
             .accessibilityLabel(element.category)
             .accessibilityValue("\(element.size, specifier: "%.1f") GB")
-			.foregroundStyle(by: .value("Data Category", element.category))
-		}
+            .accessibilityHidden(isOverview)
+        }
 		.chartPlotStyle { plotArea in
 			plotArea
 				.background(Color(.systemFill))

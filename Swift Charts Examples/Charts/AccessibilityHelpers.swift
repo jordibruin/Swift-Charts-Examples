@@ -42,20 +42,35 @@ extension Date {
 }
 
 // TODO: This should be a protocol but since the data objects are in flux this will suffice
-func chartDescriptor(forSalesSeries data: [Sale]) -> AXChartDescriptor {
-    let min = data.map(\.sales).min() ?? 0
+func chartDescriptor(forSalesSeries data: [Sale],
+                     saleThreshold: Double? = nil,
+                     isContinuous: Bool = false) -> AXChartDescriptor {
+    
+    // Since we're measuring a tangible quantity,
+    // keeping an independant minimum prevents visual scaling in the Rotor Chart Details View
+    let min = 0 // data.map(\.sales).min() ??
     let max = data.map(\.sales).max() ?? 0
 
     // A closure that takes a date and converts it to a label for axes
     let dateTupleStringConverter: ((Sale) -> (String)) = { dataPoint in
-        dataPoint.day.formatted(date: .abbreviated, time: .omitted)
+        
+        let dateDescription = dataPoint.day.formatted(date: .complete, time: .omitted)
+        
+        if let threshold = saleThreshold {
+            let isAbove = dataPoint.isAbove(threshold: threshold)
+            
+            return "\(dateDescription): \(isAbove ? "Above" : "Below") threshold"
+        }
+        
+        return dateDescription
     }
     
-    let xAxis = AXCategoricalDataAxisDescriptor(
-        title: "Days",
-        categoryOrder: data.map { dateTupleStringConverter($0) }
-    )
-
+    let xAxis = AXNumericDataAxisDescriptor(
+        title: "Date index",
+        range: Double(0)...Double(data.count),
+        gridlinePositions: []
+    ) { "Day \(Int($0) + 1)" }
+    
     let yAxis = AXNumericDataAxisDescriptor(
         title: "Sales",
         range: Double(min)...Double(max),
@@ -64,9 +79,11 @@ func chartDescriptor(forSalesSeries data: [Sale]) -> AXChartDescriptor {
 
     let series = AXDataSeriesDescriptor(
         name: "Daily sale quantity",
-        isContinuous: false,
-        dataPoints: data.map {
-            .init(x: dateTupleStringConverter($0), y: Double($0.sales), label: "\($0.day.weekdayString)")
+        isContinuous: isContinuous,
+        dataPoints: data.enumerated().map { (idx, point) in
+            .init(x: Double(idx),
+                  y: Double(point.sales),
+                  label: dateTupleStringConverter(point))
         }
     )
 

@@ -5,6 +5,12 @@
 import SwiftUI
 import Charts
 
+extension Sale {
+    func isAbove(threshold: Double) -> Bool {
+        self.sales > Int(threshold)
+    }
+}
+
 struct SingleBarThreshold: View {
 	var isOverview: Bool
     
@@ -30,14 +36,16 @@ struct SingleBarThreshold: View {
 
 	private var chart: some View {
 		Chart(data, id: \.day) {
+            
 			BarMark(
 				x: .value("Date", $0.day),
 				y: .value("Sales", $0.sales)
 			)
             .accessibilityLabel($0.day.formatted(date: .complete, time: .omitted))
-            .accessibilityValue("\($0.sales) sold")
+            .accessibilityValue("\($0.sales) sold. \($0.isAbove(threshold: threshold) ? "Above" : "Below") threshold")
             .accessibilityHidden(isOverview)
-			.foregroundStyle($0.sales > Int(threshold) ? aboveColor.gradient :  belowColor.gradient)
+			.foregroundStyle($0.isAbove(threshold: threshold) ? aboveColor.gradient :  belowColor.gradient)
+            
 			RuleMark(
 				y: .value("Threshold", threshold)
 			)
@@ -45,6 +53,7 @@ struct SingleBarThreshold: View {
 			.foregroundStyle(.red)
 			.annotation(position: .top, alignment: .leading) {
 				Text("\(threshold, specifier: "%.0f")")
+                    .accessibilityLabel("Sale threshold: \(Int(threshold))")
 					.font(.title2.bold())
 					.foregroundColor(.primary)
 					.background {
@@ -93,8 +102,7 @@ struct SingleBarThreshold: View {
 
 extension SingleBarThreshold: AXChartDescriptorRepresentable {
     func makeChartDescriptor() -> AXChartDescriptor {
-        // TODO: The threshold chart should indicate to VoiceOver users when a datapoint is above threshold
-        chartDescriptor(forSalesSeries: data)
+        chartDescriptor(forSalesSeries: data, saleThreshold: threshold)
     }
 }
 

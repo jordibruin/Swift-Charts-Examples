@@ -66,6 +66,7 @@ struct SoundBars: View {
             )
             .accessibilityLabel("Index: \(index)")
             .accessibilityValue("Level: \((sample.sample/2.0).formatted(.percent.precision(.fractionLength(2))))")
+            .accessibilityHidden(isOverview)
         }
         .accessibilityAddTraits(.updatesFrequently)
         .accessibilityChartDescriptor(self)

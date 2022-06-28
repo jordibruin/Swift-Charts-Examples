@@ -91,42 +91,46 @@ struct EventChart: View {
 
             Chart {
                 ForEach(events, id: \.clockIn) { event in
-                    BarMark(
-                        xStart: .value("Clocking In", event.clockIn),
-                        xEnd: .value("Clocking Out", event.clockOut),
-                        y: .value("Department", event.department)
-                    )
+                    Plot {
+                        BarMark(
+                            xStart: .value("Clocking In", event.clockIn),
+                            xEnd: .value("Clocking Out", event.clockOut),
+                            y: .value("Department", event.department)
+                        )
+                        .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
+                        .foregroundStyle(getForegroundColor(department: event.department))
+                        
+                        
+                        if let selectedEvent, selectedEvent == event {
+                            RuleMark(x: .value("Event Middle", getEventMiddle(start: selectedEvent.clockIn, end: selectedEvent.clockOut)))
+                                .lineStyle(.init(lineWidth: 2, miterLimit: 2, dash: [2], dashPhase: 5))
+                                .offset(x: (plotWidth / getEventMiddle(start: selectedEvent.clockIn, end: selectedEvent.clockOut))) // Align with middle of bar
+                                .annotation(position: .top) {
+                                    VStack(alignment: .leading, spacing: 6) {
+                                        Text("Clocked in \(selectedEvent.clockIn.formatted(date: .abbreviated, time: .shortened))")
+                                            .font(.caption)
+                                            .foregroundColor(.gray)
+                                        
+                                        Text("Clocked out \(selectedEvent.clockOut.formatted(date: .abbreviated, time: .shortened))")
+                                            .font(.caption)
+                                            .foregroundColor(.gray)
+                                        
+                                        Text("Duration: \(TimeSheetBar.getEventsTotalDuration([selectedEvent]))")
+                                            .font(.body.bold())
+                                            .foregroundColor(.black)
+                                    }
+                                    .padding(.horizontal, 10)
+                                    .padding(.vertical, 4)
+                                    .background {
+                                        RoundedRectangle(cornerRadius: 6, style: .continuous)
+                                            .fill(.white.shadow(.drop(radius: 2)))
+                                    }
+                                }
+                        }
+                        
+                    }
                     .accessibilityLabel("Department: \(event.department)")
                     .accessibilityValue("Clock in: \(event.clockIn.formatted(date: .abbreviated, time: .standard)), Clock out: \(event.clockOut.formatted(date: .abbreviated, time: .standard))")
-                    .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
-                    .foregroundStyle(getForegroundColor(department: event.department))
-
-                    if let selectedEvent, selectedEvent == event {
-                        RuleMark(x: .value("Event Middle", getEventMiddle(start: selectedEvent.clockIn, end: selectedEvent.clockOut)))
-                            .lineStyle(.init(lineWidth: 2, miterLimit: 2, dash: [2], dashPhase: 5))
-                            .offset(x: (plotWidth / getEventMiddle(start: selectedEvent.clockIn, end: selectedEvent.clockOut))) // Align with middle of bar
-                            .annotation(position: .top) {
-                                VStack(alignment: .leading, spacing: 6) {
-                                    Text("Clocked in \(selectedEvent.clockIn.formatted(date: .abbreviated, time: .shortened))")
-                                        .font(.caption)
-                                        .foregroundColor(.gray)
-
-                                    Text("Clocked out \(selectedEvent.clockOut.formatted(date: .abbreviated, time: .shortened))")
-                                        .font(.caption)
-                                        .foregroundColor(.gray)
-
-                                    Text("Duration: \(TimeSheetBar.getEventsTotalDuration([selectedEvent]))")
-                                        .font(.body.bold())
-                                        .foregroundColor(.black)
-                                }
-                                .padding(.horizontal, 10)
-                                .padding(.vertical, 4)
-                                .background {
-                                    RoundedRectangle(cornerRadius: 6, style: .continuous)
-                                        .fill(.white.shadow(.drop(radius: 2)))
-                                }
-                            }
-                    }
                 }
             }
             .padding(.top, 40)

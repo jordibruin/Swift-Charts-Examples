@@ -42,15 +42,27 @@ struct SingleLine: View {
 				x: .value("Date", $0.day),
 				y: .value("Sales", $0.sales)
 			)
-            .accessibilityLabel($0.day.formatted(date: .complete, time: .omitted))
-            .accessibilityValue("\($0.sales) sold")
-            .accessibilityHidden(isOverview)
 			.lineStyle(StrokeStyle(lineWidth: lineWidth))
 			.foregroundStyle(chartColor.gradient)
 			.interpolationMethod(interpolationMethod.mode)
 			.symbol(Circle().strokeBorder(lineWidth: lineWidth))
 			.symbolSize(showSymbols ? 60 : 0)
 		}
+        // LineMarks do not seem to verbalize accessibilityLabel/Value as of Beta 2
+        // Using a representation fixes the above, keeping screen coordinates
+        .accessibilityRepresentation {
+            Chart(data, id: \.day) { dataPoint in
+                Plot {
+                    PointMark(
+                        x: .value("Date", dataPoint.day),
+                        y: .value("Sales", dataPoint.sales)
+                    )
+                }
+                .accessibilityLabel(dataPoint.day.formatted(date: .complete, time: .omitted))
+                .accessibilityValue("\(dataPoint.sales) sold")
+                .accessibilityHidden(isOverview)
+            }
+        }
         .accessibilityChartDescriptor(self)
 		.chartYAxis(isOverview ? .hidden : .automatic)
 		.chartXAxis(isOverview ? .hidden : .automatic)
@@ -94,7 +106,7 @@ struct SingleLine: View {
 
 extension SingleLine: AXChartDescriptorRepresentable {
     func makeChartDescriptor() -> AXChartDescriptor {
-        return chartDescriptor(forSalesSeries: data)
+        return chartDescriptor(forSalesSeries: data, isContinuous: true)
     }
 }
 

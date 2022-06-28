@@ -27,18 +27,32 @@ struct PyramidChart: View {
 			.navigationBarTitle(ChartType.pyramid.title, displayMode: .inline)
 		}
     }
-
+    
+    /// Takes the age ranges and adds a more audio friendy description
+    /// For example: ```"0-10"``` returns ```"0 to 10"```
+    /// - Parameter ageRange: random data set's age range label
+    /// - Returns: String description of the input age range
+    private func description(for ageRange: String) -> String {
+        let ages = ageRange.split(by: "-")
+        
+        guard ages.count == 2 else { return ageRange }
+        
+        return ages.joined(separator: " to ")
+    }
+    
 	private var chart: some View {
 		Chart(data) { series in
 			ForEach(series.population, id: \.percentage) { element in
-				BarMark(
-					xStart: .value("Percentage", 0),
-					xEnd: .value("Percentage", series.sex == "Male" ? element.percentage : element.percentage * -1),
-					y: .value("AgeRange", element.ageRange),
-                    height: isOverview ? .automatic : .fixed(barHeight)
-				)
-                .accessibilityLabel("\(series.sex) Ages: \(element.ageRange)")
-                .accessibilityValue("\(element.percentage)")
+                Plot {
+                    BarMark(
+                        xStart: .value("Percentage", 0),
+                        xEnd: .value("Percentage", series.sex == "Male" ? element.percentage : element.percentage * -1),
+                        y: .value("AgeRange", element.ageRange),
+                        height: isOverview ? .automatic : .fixed(barHeight)
+                    )
+                }
+                .accessibilityLabel("\(series.sex); Ages: \(description(for: element.ageRange)) years")
+                .accessibilityValue("\(element.percentage.formatted(.percent))")
                 .accessibilityHidden(isOverview)
 			}
 			.foregroundStyle(series.sex == "Male" ? rightColor.gradient : leftColor.gradient)
@@ -138,7 +152,7 @@ extension PyramidChart: AXChartDescriptorRepresentable {
                 name: "\($0.sex)",
                 isContinuous: false,
                 dataPoints: $0.population.map { data in
-                        .init(x: "\(data.ageRange)",
+                        .init(x: "\(description(for: data.ageRange))",
                               y: Double(data.percentage))
                 }
             )
@@ -166,14 +180,14 @@ extension PyramidChart: AXChartDescriptorRepresentable {
 
         let xAxis = AXCategoricalDataAxisDescriptor(
             title: "Age Ranges",
-            categoryOrder: ranges.map { $0 }
+            categoryOrder: ranges.map { description(for: $0) }
         )
 
         let yAxis = AXNumericDataAxisDescriptor(
             title: "Population percentage",
             range: Double(min)...Double(max),
             gridlinePositions: []
-        ) { value in "\(value)%" }
+        ) { value in "\((value/100.0).formatted(.percent))" }
 
         return AXChartDescriptor(
             title: "Population by age",

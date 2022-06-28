@@ -43,7 +43,6 @@ struct SingleLineLollipop: View {
             )
             .accessibilityLabel($0.day.formatted(date: .complete, time: .omitted))
             .accessibilityValue("\($0.sales) sold")
-            .accessibilityHidden(isOverview)
             .lineStyle(StrokeStyle(lineWidth: lineWidth))
             .foregroundStyle(chartColor.gradient)
             .interpolationMethod(interpolationMethod.mode)
