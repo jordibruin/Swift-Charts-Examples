@@ -310,7 +310,7 @@ extension HealthData.HeartRate {
 		.init(creationDate: date(year: 2022, month: 6, day: 12, hour: 23, minutes: 47), min: 64, max: 64, average: 64),
 		.init(creationDate: date(year: 2022, month: 6, day: 12, hour: 23, minutes: 52), min: 64, max: 64, average: 64),
 		.init(creationDate: date(year: 2022, month: 6, day: 12, hour: 23, minutes: 54), min: 64, max: 64, average: 64),
-		.init(creationDate: date(year: 2022, month: 6, day: 12, hour: 23, minutes: 58), min: 62, max: 62, average: 62),
+		.init(creationDate: date(year: 2022, month: 6, day: 12, hour: 23, minutes: 58), min: 62, max: 62, average: 62)
 	]
 }
 

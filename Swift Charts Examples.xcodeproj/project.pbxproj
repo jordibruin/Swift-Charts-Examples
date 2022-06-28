@@ -9,6 +9,11 @@
 /* Begin PBXBuildFile section */
 		2E5763C628576B1B006C7C36 /* PyramidChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E5763C528576B1B006C7C36 /* PyramidChart.swift */; };
 		2E8EA801285AA53F0040C591 /* VectorField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E8EA800285AA53F0040C591 /* VectorField.swift */; };
+		4EB65CFB2864E074009D49AA /* GradientLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB65CFA2864E074009D49AA /* GradientLine.swift */; };
+		4EE24CB52868E19500F6D487 /* LinePlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE24CB42868E19500F6D487 /* LinePlot.swift */; };
+		4EE24CB72868E8D200F6D487 /* Point.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE24CB62868E8D200F6D487 /* Point.swift */; };
+		52145C302864A34D00EB89D7 /* CandleStickChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52145C2F2864A34D00EB89D7 /* CandleStickChart.swift */; };
+		52145C322864A60D00EB89D7 /* StockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52145C312864A60D00EB89D7 /* StockData.swift */; };
 		5BC09FE32859526B00C2DB92 /* HeartRateRangeChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BC09FE22859526B00C2DB92 /* HeartRateRangeChart.swift */; };
 		62FF3F002857EADF0022930C /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62FF3EFF2857EADF0022930C /* Grid.swift */; };
 		62FF3F022857EB530022930C /* HeatMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62FF3F012857EB530022930C /* HeatMap.swift */; };
@@ -35,6 +40,12 @@
 		C26088272856A95A00B09DDB /* ChartStrideBy.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26088262856A95A00B09DDB /* ChartStrideBy.swift */; };
 		C260882B2856B3C500B09DDB /* AreaSimple.swift in Sources */ = {isa = PBXBuildFile; fileRef = C260882A2856B3C500B09DDB /* AreaSimple.swift */; };
 		C260882E2856B4C900B09DDB /* SingleBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C260882D2856B4C900B09DDB /* SingleBar.swift */; };
+		FC4ECCF02865DE6E0008905E /* MultiLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4ECCEF2865DE6E0008905E /* MultiLine.swift */; };
+		FC4ECCF22865E3170008905E /* StackedArea.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4ECCF12865E3170008905E /* StackedArea.swift */; };
+		FC4ECCFA2865FEBC0008905E /* GitHubData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4ECCF92865FEBC0008905E /* GitHubData.swift */; };
+		FC4ECCFC286601650008905E /* GitHubContributionsGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4ECCFB286601650008905E /* GitHubContributionsGraph.swift */; };
+		FC4ECCFE286753ED0008905E /* SoundBars.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4ECCFD286753ED0008905E /* SoundBars.swift */; };
+		FC4ECD00286754C20008905E /* MicrophoneMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4ECCFF286754C20008905E /* MicrophoneMonitor.swift */; };
 		FC5466C62857E0D700315632 /* SingleLineLollipop.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5466C52857E0D700315632 /* SingleLineLollipop.swift */; };
 		FC602024285B532C0089DBDC /* SingleBarThreshold.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC602023285B532C0089DBDC /* SingleBarThreshold.swift */; };
 /* End PBXBuildFile section */
@@ -60,6 +71,11 @@
 		262541172856A35B00A1E2EC /* Build.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Build.xcconfig; sourceTree = "<group>"; };
 		2E5763C528576B1B006C7C36 /* PyramidChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PyramidChart.swift; sourceTree = "<group>"; };
 		2E8EA800285AA53F0040C591 /* VectorField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VectorField.swift; sourceTree = "<group>"; };
+		4EB65CFA2864E074009D49AA /* GradientLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientLine.swift; sourceTree = "<group>"; };
+		4EE24CB42868E19500F6D487 /* LinePlot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinePlot.swift; sourceTree = "<group>"; };
+		4EE24CB62868E8D200F6D487 /* Point.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Point.swift; sourceTree = "<group>"; };
+		52145C2F2864A34D00EB89D7 /* CandleStickChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CandleStickChart.swift; sourceTree = "<group>"; };
+		52145C312864A60D00EB89D7 /* StockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockData.swift; sourceTree = "<group>"; };
 		5BC09FE22859526B00C2DB92 /* HeartRateRangeChart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeartRateRangeChart.swift; sourceTree = "<group>"; };
 		62FF3EFF2857EADF0022930C /* Grid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
 		62FF3F012857EB530022930C /* HeatMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeatMap.swift; sourceTree = "<group>"; };
@@ -90,6 +106,12 @@
 		C26088262856A95A00B09DDB /* ChartStrideBy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartStrideBy.swift; sourceTree = "<group>"; };
 		C260882A2856B3C500B09DDB /* AreaSimple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreaSimple.swift; sourceTree = "<group>"; };
 		C260882D2856B4C900B09DDB /* SingleBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleBar.swift; sourceTree = "<group>"; };
+		FC4ECCEF2865DE6E0008905E /* MultiLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiLine.swift; sourceTree = "<group>"; };
+		FC4ECCF12865E3170008905E /* StackedArea.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackedArea.swift; sourceTree = "<group>"; };
+		FC4ECCF92865FEBC0008905E /* GitHubData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubData.swift; sourceTree = "<group>"; };
+		FC4ECCFB286601650008905E /* GitHubContributionsGraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubContributionsGraph.swift; sourceTree = "<group>"; };
+		FC4ECCFD286753ED0008905E /* SoundBars.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundBars.swift; sourceTree = "<group>"; };
+		FC4ECCFF286754C20008905E /* MicrophoneMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MicrophoneMonitor.swift; sourceTree = "<group>"; };
 		FC5466C52857E0D700315632 /* SingleLineLollipop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleLineLollipop.swift; sourceTree = "<group>"; };
 		FC602023285B532C0089DBDC /* SingleBarThreshold.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleBarThreshold.swift; sourceTree = "<group>"; };
 		FC8C2FE02859E64B00C334A9 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -125,6 +147,7 @@
 			children = (
 				88B3E5CF2857493B00840CAA /* RangeSimple.swift */,
 				5BC09FE22859526B00C2DB92 /* HeartRateRangeChart.swift */,
+				52145C2F2864A34D00EB89D7 /* CandleStickChart.swift */,
 			);
 			path = RangeCharts;
 			sourceTree = "<group>";
@@ -220,7 +243,6 @@
 				C26088122856935B00B09DDB /* ChartType.swift */,
 				C260881B28569D1B00B09DDB /* InterpolationMethod.swift */,
 				C26088262856A95A00B09DDB /* ChartStrideBy.swift */,
-				62FF3EFF2857EADF0022930C /* Grid.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -230,6 +252,10 @@
 			children = (
 				C26088172856963D00B09DDB /* Data.swift */,
 				7425DF822858DF4300672F3B /* HealthData.swift */,
+				52145C312864A60D00EB89D7 /* StockData.swift */,
+				62FF3EFF2857EADF0022930C /* Grid.swift */,
+				4EE24CB62868E8D200F6D487 /* Point.swift */,
+				FC4ECCF92865FEBC0008905E /* GitHubData.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -238,9 +264,12 @@
 			isa = PBXGroup;
 			children = (
 				C26088142856960000B09DDB /* SingleLine.swift */,
-				C23072882860D8FA00DA1CED /* AnimatingLine.swift */,
 				FC5466C52857E0D700315632 /* SingleLineLollipop.swift */,
 				88242C252858C17A00DDD8D0 /* HeartBeat.swift */,
+				C23072882860D8FA00DA1CED /* AnimatingLine.swift */,
+				4EB65CFA2864E074009D49AA /* GradientLine.swift */,
+				FC4ECCEF2865DE6E0008905E /* MultiLine.swift */,
+				4EE24CB42868E19500F6D487 /* LinePlot.swift */,
 			);
 			path = LineCharts;
 			sourceTree = "<group>";
@@ -254,6 +283,7 @@
 				2E5763C528576B1B006C7C36 /* PyramidChart.swift */,
 				934A95032857D035009E29F4 /* OneDimensionalBar.swift */,
 				84A8089C285E112E00B60AFB /* TimeSheetBar.swift */,
+				FC4ECCFD286753ED0008905E /* SoundBars.swift */,
 			);
 			path = BarCharts;
 			sourceTree = "<group>";
@@ -262,6 +292,7 @@
 			isa = PBXGroup;
 			children = (
 				C26088242856A45800B09DDB /* Square.swift */,
+				FC4ECCFF286754C20008905E /* MicrophoneMonitor.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -270,6 +301,7 @@
 			isa = PBXGroup;
 			children = (
 				C260882A2856B3C500B09DDB /* AreaSimple.swift */,
+				FC4ECCF12865E3170008905E /* StackedArea.swift */,
 			);
 			path = AreaCharts;
 			sourceTree = "<group>";
@@ -278,6 +310,7 @@
 			isa = PBXGroup;
 			children = (
 				62FF3F012857EB530022930C /* HeatMap.swift */,
+				FC4ECCFB286601650008905E /* GitHubContributionsGraph.swift */,
 			);
 			path = HeatMap;
 			sourceTree = "<group>";
@@ -412,19 +445,27 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC4ECCF02865DE6E0008905E /* MultiLine.swift in Sources */,
+				FC4ECCFC286601650008905E /* GitHubContributionsGraph.swift in Sources */,
 				C26088252856A45800B09DDB /* Square.swift in Sources */,
 				934A95042857D035009E29F4 /* OneDimensionalBar.swift in Sources */,
 				C260882B2856B3C500B09DDB /* AreaSimple.swift in Sources */,
+				4EB65CFB2864E074009D49AA /* GradientLine.swift in Sources */,
+				4EE24CB52868E19500F6D487 /* LinePlot.swift in Sources */,
 				7425DF832858DF4300672F3B /* HealthData.swift in Sources */,
 				C23072892860D8FA00DA1CED /* AnimatingLine.swift in Sources */,
 				88B3E5D02857493B00840CAA /* RangeSimple.swift in Sources */,
+				FC4ECCF22865E3170008905E /* StackedArea.swift in Sources */,
+				FC4ECD00286754C20008905E /* MicrophoneMonitor.swift in Sources */,
 				9691226F28594EC5001FCF65 /* ScatterChart.swift in Sources */,
 				C22EB5A028568D0B000B9F9A /* ContentView.swift in Sources */,
 				C260881C28569D1B00B09DDB /* InterpolationMethod.swift in Sources */,
 				C26088202856A34400B09DDB /* TwoBars.swift in Sources */,
+				52145C302864A34D00EB89D7 /* CandleStickChart.swift in Sources */,
 				62FF3F022857EB530022930C /* HeatMap.swift in Sources */,
 				FC5466C62857E0D700315632 /* SingleLineLollipop.swift in Sources */,
 				C26088182856963D00B09DDB /* Data.swift in Sources */,
+				FC4ECCFE286753ED0008905E /* SoundBars.swift in Sources */,
 				84A8089D285E112E00B60AFB /* TimeSheetBar.swift in Sources */,
 				88242C262858C17A00DDD8D0 /* HeartBeat.swift in Sources */,
 				C260882E2856B4C900B09DDB /* SingleBar.swift in Sources */,
@@ -436,7 +477,10 @@
 				C26088132856935B00B09DDB /* ChartType.swift in Sources */,
 				C26088152856960000B09DDB /* SingleLine.swift in Sources */,
 				FC602024285B532C0089DBDC /* SingleBarThreshold.swift in Sources */,
+				4EE24CB72868E8D200F6D487 /* Point.swift in Sources */,
 				C26088272856A95A00B09DDB /* ChartStrideBy.swift in Sources */,
+				FC4ECCFA2865FEBC0008905E /* GitHubData.swift in Sources */,
+				52145C322864A60D00EB89D7 /* StockData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -598,6 +642,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "To show micrphone input as a graph";
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -628,6 +673,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "To show micrphone input as a graph";
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -651,7 +697,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 8Q7TMPA46J;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.goodsnooze.Swift-Charts-ExamplesTests";
@@ -670,7 +716,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 8Q7TMPA46J;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.goodsnooze.Swift-Charts-ExamplesTests";
@@ -688,7 +734,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 8Q7TMPA46J;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.goodsnooze.Swift-Charts-ExamplesUITests";
@@ -706,7 +752,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 8Q7TMPA46J;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.goodsnooze.Swift-Charts-ExamplesUITests";

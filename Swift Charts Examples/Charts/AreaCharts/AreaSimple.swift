@@ -5,29 +5,20 @@
 import SwiftUI
 import Charts
 
-struct AreaSimpleOverview: View {
-    var body: some View {
-        Chart(SalesData.last30Days, id: \.day) {
-            AreaMark(
-                x: .value("Day", $0.day, unit: .day),
-                y: .value("Sales", $0.sales)
-            )
-            .foregroundStyle(Gradient(colors: [.blue, .blue.opacity(0.5)]))
-            .interpolationMethod(.cardinal)
-        }
-        .chartXAxis(.hidden)
-        .chartYAxis(.hidden)
-        .frame(height: Constants.previewChartHeight)
-    }
-}
-
 struct AreaSimple: View {
+	var isOverview: Bool
+
     @State private var lineWidth = 2.0
     @State private var interpolationMethod: ChartInterpolationMethod = .cardinal
     @State private var chartColor: Color = .blue
     @State private var showGradient = true
     @State private var gradientRange = 0.5
-    @State private var data: [Sale] = SalesData.last30Days.map { Sale(day: $0.day, sales: 0) }
+    @State private var data: [Sale]
+
+	init(isOverview: Bool) {
+		self.isOverview = isOverview
+		self.data = SalesData.last30Days.map { Sale(day: $0.day, sales: isOverview ? $0.sales : 0) }
+	}
 
     private var gradient: Gradient {
         var colors = [chartColor]
@@ -38,47 +29,63 @@ struct AreaSimple: View {
     }
 
     var body: some View {
-        List {
-            Section {
-                Chart(data, id: \.day) {
-                    AreaMark(
-                        x: .value("Date", $0.day),
-                        y: .value("Sales", $0.sales)
-                    )
-                    .foregroundStyle(gradient)
-                    .interpolationMethod(interpolationMethod.mode)
-
-                    LineMark(
-                        x: .value("Date", $0.day),
-                        y: .value("Sales", $0.sales)
-                    )
-                    .lineStyle(StrokeStyle(lineWidth: lineWidth))
-                    .interpolationMethod(interpolationMethod.mode)
-                    .foregroundStyle(chartColor)
-                }
-                .frame(height: Constants.detailChartHeight)
-            }
-            customisation
-        }
-        .navigationBarTitle(ChartType.areaSimple.title, displayMode: .inline)
-        .onAppear {
-            for index in data.indices {
-                DispatchQueue.main.asyncAfter(deadline: .now() + Double(index) * 0.02) {
-                    withAnimation(.interactiveSpring(response: 0.8, dampingFraction: 0.8, blendDuration: 0.8)) {
-                        data[index].sales = SalesData.last30Days[index].sales
-                    }
-                }
-            }
-        }
+		if isOverview {
+			chart
+		} else {
+			List {
+				Section {
+					chart
+				}
+				
+				customisation
+			}
+			.navigationBarTitle(ChartType.areaSimple.title, displayMode: .inline)
+			.onAppear {
+				for index in data.indices {
+					DispatchQueue.main.asyncAfter(deadline: .now() + Double(index) * 0.02) {
+						withAnimation(.interactiveSpring(response: 0.8, dampingFraction: 0.8, blendDuration: 0.8)) {
+							data[index].sales = SalesData.last30Days[index].sales
+						}
+					}
+				}
+			}
+		}
     }
-    
+
+	private var chart: some View {
+		Chart(data, id: \.day) {
+			AreaMark(
+				x: .value("Date", $0.day),
+				y: .value("Sales", $0.sales)
+			)
+			.foregroundStyle(gradient)
+			.interpolationMethod(interpolationMethod.mode)
+
+			if !isOverview {
+				LineMark(
+					x: .value("Date", $0.day),
+					y: .value("Sales", $0.sales)
+				)
+				.lineStyle(StrokeStyle(lineWidth: lineWidth))
+				.interpolationMethod(interpolationMethod.mode)
+				.foregroundStyle(chartColor)
+			}
+		}
+		.chartYAxis(isOverview ? .hidden : .automatic)
+		.chartXAxis(isOverview ? .hidden : .automatic)
+		.frame(height: isOverview ? Constants.previewChartHeight : Constants.detailChartHeight)
+	}
+
     private var customisation: some View {
         Section {
-            Stepper(value: $lineWidth, in: 1.0...20.0) {
-                HStack {
+            VStack(alignment: .leading) {
+                Text("Line Width: \(lineWidth, specifier: "%.1f")")
+                Slider(value: $lineWidth, in: 1...20) {
                     Text("Line Width")
-                    Spacer()
-                    Text("\(String(format: "%.0f", lineWidth))")
+                } minimumValueLabel: {
+                    Text("1")
+                } maximumValueLabel: {
+                    Text("20")
                 }
             }
             
@@ -90,15 +97,15 @@ struct AreaSimple: View {
             Toggle("Show Gradient", isOn: $showGradient.animation())
 
             if showGradient {
-                HStack {
+                VStack(alignment: .leading) {
+                    Text("Gradiant Opacity Range: \(String(format: "%.1f", gradientRange))")
                     Slider(value: $gradientRange) {
-                        Text("Gradient Range")
+                        Text("Gradiant Opacity Range")
                     } minimumValueLabel: {
-                        Text("Min")
+                        Text("0")
                     } maximumValueLabel: {
-                        Text("Max")
+                        Text("1")
                     }
-                    Text("\(String(format: "%.1f", gradientRange))")
                 }
             }
         }
@@ -107,7 +114,7 @@ struct AreaSimple: View {
 
 struct AreaSimple_Previews: PreviewProvider {
     static var previews: some View {
-        AreaSimpleOverview()
-        AreaSimple()
+        AreaSimple(isOverview: true)
+		AreaSimple(isOverview: false)
     }
 }

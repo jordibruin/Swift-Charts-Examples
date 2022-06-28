@@ -5,24 +5,9 @@
 import SwiftUI
 import Charts
 
-struct VectorFieldOverview: View {
-    @State private var grid = Grid(numRows: 20, numCols: 20)
-    
-    var body: some View {
-        Chart(grid.points) { point in
-            PointMark(x: .value("x", point.x),
-                      y: .value("y", point.y))
-            .symbol(Arrow(angle: CGFloat(point.angle(degreeOffset: 0)), size: 50))
-            .foregroundStyle(point.angleColor(hueOffset: 0))
-            .opacity(0.7)
-        }
-        .chartXAxis(.hidden)
-        .chartYAxis(.hidden)
-        .aspectRatio(contentMode: .fit)
-    }
-}
-
 struct VectorField: View {
+	var isOverview: Bool
+
     @State private var grid = Grid(numRows: 20, numCols: 20)
     @State private var degreeOffset = 0.0
     @State private var hueOffset = 0.0
@@ -30,21 +15,32 @@ struct VectorField: View {
     @State private var size = 50.0
     
     var body: some View {
-        List {
-            Section {
-                Chart(grid.points) { point in
-                    PointMark(x: .value("x", point.x),
-                              y: .value("y", point.y))
-                    .symbol(Arrow(angle: CGFloat(point.angle(degreeOffset: degreeOffset)), size: size))
-                    .foregroundStyle(point.angleColor(hueOffset: hueOffset))
-                    .opacity(opacity)
-                }
-                .aspectRatio(contentMode: .fit)
-            }
-            customisation
-        }
-        .navigationBarTitle(ChartType.vectorField.title, displayMode: .inline)
+		if isOverview {
+			chart
+		} else {
+			List {
+				Section {
+				   chart
+				}
+
+				customisation
+			}
+			.navigationBarTitle(ChartType.vectorField.title, displayMode: .inline)
+		}
     }
+
+	private var chart: some View {
+		Chart(grid.points) { point in
+			PointMark(x: .value("x", point.x),
+					  y: .value("y", point.y))
+			.symbol(Arrow(angle: CGFloat(point.angle(degreeOffset: degreeOffset)), size: size))
+			.foregroundStyle(point.angleColor(hueOffset: hueOffset))
+			.opacity(opacity)
+		}
+		.chartYAxis(isOverview ? .hidden : .automatic)
+		.chartXAxis(isOverview ? .hidden : .automatic)
+		.aspectRatio(contentMode: .fit)
+	}
 
     private var customisation: some View {
         Section {
@@ -123,6 +119,7 @@ struct Arrow: ChartSymbolShape {
 
 struct VectorField_Previews: PreviewProvider {
     static var previews: some View {
-        VectorField()
+        VectorField(isOverview: true)
+		VectorField(isOverview: false)
     }
 }
