@@ -6,7 +6,6 @@ This repo aims to provide sample code for lots of different chart types for you 
 ## Todo
 - [ ] Other Charts
 - [ ] Multi-language Support
-- [ ] Screen time like bar chart with stacked colors
 - [ ] First row, second bar with the lines with blocks in the middle
 - [ ] Sleep stages chart
 - [ ] iPhone battery percentage screen with different colors and overlaid bar
