@@ -6,13 +6,13 @@ import SwiftUI
 
 enum ChartCategory: String, CaseIterable, Hashable, Identifiable {
 	case all
-	case line
-	case bar
-	case area
-	case range
-	case heatMap
-	case point
-	case apple
+    case apple
+    case line
+    case bar
+    case area
+    case range
+    case heatMap
+    case point
 
 	var id: String { self.rawValue }
 
@@ -20,67 +20,71 @@ enum ChartCategory: String, CaseIterable, Hashable, Identifiable {
 		switch self {
 		case .all:
 			return ""
-		case .line:
-			return "chart.xyaxis.line"
-		case .bar:
-			return "chart.bar.fill"
-		case .area:
-			return "triangle.fill"
-		case .range:
-			return "trapezoid.and.line.horizontal.fill"
-		case .heatMap:
-			return "checkerboard.rectangle"
-		case .point:
-			return "point.3.connected.trianglepath.dotted"
-		case .apple:
-			return "applelogo"
+        case .apple:
+            return "applelogo"
+        case .line:
+            return "chart.xyaxis.line"
+        case .bar:
+            return "chart.bar.fill"
+        case .area:
+            return "triangle.fill"
+        case .range:
+            return "trapezoid.and.line.horizontal.fill"
+        case .heatMap:
+            return "checkerboard.rectangle"
+        case .point:
+            return "point.3.connected.trianglepath.dotted"
 		}
 	}
 }
 
 enum ChartType: String, Identifiable, CaseIterable {
-	// Line Charts
-	case singleLine
-	case singleLineLollipop
-	case heartBeat
-	case animatingLine
-	case gradientLine
-	case multiLine
-	case linePoint
+    // Apple
+    case oneDimensionalBar
+    case screenTime
+
+    // Line Charts
+    case singleLine
+    case singleLineLollipop
+    case heartBeat
+    case animatingLine
+    case gradientLine
+    case multiLine
+    case linePoint
 
     // Bar Charts
     case singleBar
     case singleBarThreshold
     case twoBars
     case pyramid
-    case oneDimensionalBar
     case timeSheetBar
     case soundBar
 
-	// Area Charts
-	case areaSimple
-	case stackedArea
+    // Area Charts
+    case areaSimple
+    case stackedArea
 
-	// Range Charts
-	case rangeSimple
-	case rangeHeartRate
-	case candleStick
+    // Range Charts
+    case rangeSimple
+    case rangeHeartRate
+    case candleStick
 
-	// HeatMap Charts
-	case customizeableHeatMap
-	case gitContributions
+    // HeatMap Charts
+    case customizeableHeatMap
+    case gitContributions
 
-	// Point Charts
-	case scatter
-	case vectorField
-
-	// Apple
-	case screenTime
+    // Point Charts
+    case scatter
+    case vectorField
 
 	var id: String { self.rawValue }
 
     var title: String {
         switch self {
+        case .oneDimensionalBar:
+            return "iPhone Storage"
+        case .screenTime:
+            return "Screen Time"
         case .singleLine:
             return "Line Chart"
         case .singleLineLollipop:
@@ -93,8 +97,8 @@ enum ChartType: String, Identifiable, CaseIterable {
             return "Line with changing gradient"
         case .multiLine:
             return "Line Charts"
-		case .linePoint:
-			return "Line Point"
+        case .linePoint:
+            return "Line Point"
         case .singleBar:
             return "Single Bar"
         case .singleBarThreshold:
@@ -103,8 +107,6 @@ enum ChartType: String, Identifiable, CaseIterable {
             return "Two Bars"
         case .pyramid:
             return "Pyramid"
-        case .oneDimensionalBar:
-            return "One Dimensional Bar"
         case .timeSheetBar:
             return "Time Sheet Bar"
         case .soundBar:
@@ -127,16 +129,16 @@ enum ChartType: String, Identifiable, CaseIterable {
             return "Scatter Chart"
         case .vectorField:
             return "Vector Field"
-		case .screenTime:
-			return "Screen Time"
         }
     }
 
     var category: ChartCategory {
         switch self {
-		case .singleLine, .singleLineLollipop, .heartBeat, .animatingLine, .gradientLine, .multiLine, .linePoint:
+        case .screenTime, .oneDimensionalBar:
+            return .apple
+        case .singleLine, .singleLineLollipop, .heartBeat, .animatingLine, .gradientLine, .multiLine, .linePoint:
             return .line
-        case .singleBar, .singleBarThreshold, .twoBars, .pyramid, .oneDimensionalBar, .timeSheetBar, .soundBar:
+        case .singleBar, .singleBarThreshold, .twoBars, .pyramid, .timeSheetBar, .soundBar:
             return .bar
         case .areaSimple, .stackedArea:
             return .area
@@ -146,8 +148,6 @@ enum ChartType: String, Identifiable, CaseIterable {
             return .heatMap
         case .scatter, .vectorField:
             return .point
-		case .screenTime:
-			return .apple
         }
     }
 
@@ -162,6 +162,10 @@ enum ChartType: String, Identifiable, CaseIterable {
     @ViewBuilder
     private func overviewOrDetailView(isOverview: Bool) -> some View {
         switch self {
+        case .oneDimensionalBar:
+            OneDimensionalBar(isOverview: isOverview)
+        case .screenTime:
+            ScreenTime(isOverview: isOverview)
         case .singleLine:
             SingleLine(isOverview: isOverview)
         case .singleLineLollipop:
@@ -184,8 +188,6 @@ enum ChartType: String, Identifiable, CaseIterable {
             TwoBars(isOverview: isOverview)
         case .pyramid:
             PyramidChart(isOverview: isOverview)
-        case .oneDimensionalBar:
-            OneDimensionalBar(isOverview: isOverview)
         case .timeSheetBar:
             TimeSheetBar(isOverview: isOverview)
         case .soundBar:
@@ -208,8 +210,6 @@ enum ChartType: String, Identifiable, CaseIterable {
             ScatterChart(isOverview: isOverview)
         case .vectorField:
             VectorField(isOverview: isOverview)
-		case .screenTime:
-			ScreenTime(isOverview: isOverview)
         }
     }
 }

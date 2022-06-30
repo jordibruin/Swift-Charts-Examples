@@ -22,6 +22,12 @@ final class ChartScreenshotGenerator: XCTestCase {
                 let view = chart.view
                     .padding(10)
                     .frame(width: 360)
+                    .background {
+                        if chart.category == .apple {
+                            RoundedRectangle(cornerRadius: 10)
+                                .foregroundColor(.white)
+                        }
+                    }
                 let renderer = ImageRenderer(content: view)
                 renderer.scale = UIScreen.main.scale
                 let pngData = try XCTUnwrap(renderer.uiImage?.pngData(), "Failed to generate PNG data for chart '\(chart.title)'")

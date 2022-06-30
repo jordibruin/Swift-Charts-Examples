@@ -18,7 +18,15 @@ struct OneDimensionalBar: View {
 
     var body: some View {
 		if isOverview {
-			chart
+            VStack {
+                HStack {
+                    Text("iPhone")
+                    Spacer()
+                    Text("\(totalSize, specifier: "%.1f") GB of 128 GB Used")
+                        .foregroundColor(.secondary)
+                }
+                chart
+            }
 		} else {
 			List {
 				Section {
@@ -29,9 +37,7 @@ struct OneDimensionalBar: View {
 							Text("\(totalSize, specifier: "%.1f") GB of 128 GB Used")
 								.foregroundColor(.secondary)
 						}
-
 						chart
-
 					}
 				}
 
@@ -59,10 +65,8 @@ struct OneDimensionalBar: View {
 		.chartXScale(range: 0...128)
 		.chartYScale(range: .plotDimension(endPadding: -8))
 		.chartLegend(position: .bottom, spacing: -8)
-		.chartLegend((showLegend && !isOverview) ? .visible : .hidden)
-		.chartYAxis(isOverview ? .hidden : .automatic)
-		.chartXAxis(isOverview ? .hidden : .automatic)
-		.frame(height: isOverview ? 32 : 64)
+		.chartLegend(showLegend ? .visible : .hidden)
+		.frame(height: 50)
 	}
     
     private var customisation: some View {

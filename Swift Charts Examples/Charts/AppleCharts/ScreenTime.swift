@@ -6,21 +6,19 @@ import SwiftUI
 import Charts
 
 struct ScreenTime: View {
-
 	var isOverview: Bool
 
-	init(isOverview: Bool) {
-		self.isOverview = isOverview
-	}
-
-	private var weekData = ScreenTimeValue.week.makeDayValues()
+    @State private var weekData = ScreenTimeValue.week.makeDayValues()
 	@State private var selectedDate: Date = date(year: 2022, month: 06, day: 20)
 
 	var body: some View {
 		ZStack {
 			if isOverview {
-				dayChart
-					.frame(height: Constants.previewChartHeight)
+                VStack {
+                    weekChart
+                    dayChart
+                }
+                .frame(height: 300)
 			} else {
 				List {
 					Section {
@@ -78,8 +76,6 @@ struct ScreenTime: View {
 			}
 		}
 		.chartLegend(.hidden)
-		.chartYAxis(isOverview ? .hidden : .automatic)
-		.chartXAxis(isOverview ? .hidden : .automatic)
 		.chartOverlay { proxy in
 			GeometryReader { geo in
 				Rectangle().fill(.clear).contentShape(Rectangle())
@@ -124,9 +120,6 @@ struct ScreenTime: View {
 				}
 			}
 		}
-		.chartLegend(isOverview ? .hidden : .automatic)
-		.chartYAxis(isOverview ? .hidden : .automatic)
-		.chartXAxis(isOverview ? .hidden : .automatic)
 	}
 
 	private func getDayValue() -> [ScreenTimeValue] {

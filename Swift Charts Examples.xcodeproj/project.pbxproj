@@ -149,6 +149,7 @@
 		4E8ED994286C8EBB0055786A /* AppleCharts */ = {
 			isa = PBXGroup;
 			children = (
+				934A95032857D035009E29F4 /* OneDimensionalBar.swift */,
 				4E8ED990286C88880055786A /* ScreenTime.swift */,
 			);
 			path = AppleCharts;
@@ -295,7 +296,6 @@
 				FC602023285B532C0089DBDC /* SingleBarThreshold.swift */,
 				C260881F2856A34400B09DDB /* TwoBars.swift */,
 				2E5763C528576B1B006C7C36 /* PyramidChart.swift */,
-				934A95032857D035009E29F4 /* OneDimensionalBar.swift */,
 				84A8089C285E112E00B60AFB /* TimeSheetBar.swift */,
 				FC4ECCFD286753ED0008905E /* SoundBars.swift */,
 			);

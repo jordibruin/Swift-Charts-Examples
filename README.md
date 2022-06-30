@@ -23,6 +23,16 @@ Source: https://developer.apple.com/videos/play/wwdc2022/10137/
 
 ## Chart Types
 
+### [Apple](https://github.com/jordibruin/SwiftChartExamples/tree/main/Swift%20Charts%20Examples/Charts/AppleCharts)
+
+iPhone Storage
+
+<img src="images/charts/apple/oneDimensionalBar.png" width="380">
+
+Screen Time
+
+<img src="images/charts/apple/screenTime.png" width="380">
+
 ### [Line Charts](https://github.com/jordibruin/SwiftChartExamples/tree/main/Swift%20Charts%20Examples/Charts/LineCharts)
 
 Line Chart
@@ -70,10 +80,6 @@ Two Bars
 Pyramid
 
 <img src="images/charts/bar/pyramid.png" width="380">
-
-One Dimensional Bar
-
-<img src="images/charts/bar/oneDimensionalBar.png" width="380">
 
 Time Sheet Bar
 
@@ -126,4 +132,3 @@ Scatter Chart
 Vector Field
 
 <img src="images/charts/point/vectorField.png" width="380">
-
