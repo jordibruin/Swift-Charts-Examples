@@ -434,3 +434,11 @@ extension Date {
 		return Calendar.current.date(byAdding: components, to: self)
 	}
 }
+
+extension Array {
+	func appending(contentsOf: [Element]) -> Array {
+		var a = Array(self)
+		a.append(contentsOf: contentsOf)
+		return a
+	}
+}
