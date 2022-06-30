@@ -6,7 +6,6 @@ This repo aims to provide sample code for lots of different chart types for you 
 ## Todo
 - [ ] Other Charts
 - [ ] Multi-language Support
-- [ ] Screen time like bar chart with stacked colors
 - [ ] First row, second bar with the lines with blocks in the middle
 - [ ] Sleep stages chart
 - [ ] iPhone battery percentage screen with different colors and overlaid bar
@@ -23,6 +22,16 @@ Source: https://developer.apple.com/videos/play/wwdc2022/10137/
 
 
 ## Chart Types
+
+### [Apple](https://github.com/jordibruin/SwiftChartExamples/tree/main/Swift%20Charts%20Examples/Charts/AppleCharts)
+
+iPhone Storage
+
+<img src="images/charts/apple/oneDimensionalBar.png" width="380">
+
+Screen Time
+
+<img src="images/charts/apple/screenTime.png" width="380">
 
 ### [Line Charts](https://github.com/jordibruin/SwiftChartExamples/tree/main/Swift%20Charts%20Examples/Charts/LineCharts)
 
@@ -71,10 +80,6 @@ Two Bars
 Pyramid
 
 <img src="images/charts/bar/pyramid.png" width="380">
-
-One Dimensional Bar
-
-<img src="images/charts/bar/oneDimensionalBar.png" width="380">
 
 Time Sheet Bar
 
@@ -127,4 +132,3 @@ Scatter Chart
 Vector Field
 
 <img src="images/charts/point/vectorField.png" width="380">
-

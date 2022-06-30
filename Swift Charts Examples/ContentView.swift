@@ -16,6 +16,12 @@ struct ContentView: View {
             let view = chart.view
                 .padding(10)
                 .frame(width: 300)
+                .background {
+                    if chart.category == .apple {
+                        RoundedRectangle(cornerRadius: 10)
+                            .foregroundColor(.white)
+                    }
+                }
             let renderer = ImageRenderer(content: view)
             renderer.scale = UIScreen.main.scale
             if let image = renderer.uiImage {
