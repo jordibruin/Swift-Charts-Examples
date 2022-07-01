@@ -4,12 +4,12 @@ This repo aims to provide sample code for lots of different chart types for you 
 <img width="1511" alt="image" src="https://user-images.githubusercontent.com/170948/173253882-1a80b934-a0b9-4acb-a290-a299ae3fdd7d.png">
 
 ## Todo
-- [ ] Other Charts
+- [ ] Add missing Charts
 - [ ] Multi-language Support
 - [ ] First row, second bar with the lines with blocks in the middle
 - [ ] Sleep stages chart
 - [ ] iPhone battery percentage screen with different colors and overlaid bar
-- [ ] Make all charts accessible
+- [ ] Make all charts (even more) accessible
 
 See the [open issues](https://github.com/jordibruin/SwiftChartExamples/issues) if you think anything is missing from this list. You can also contact me on [Twitter](https://www.twitter.com/jordibruin) if you have any suggestions or feedback.
 
