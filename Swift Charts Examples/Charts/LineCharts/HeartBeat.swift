@@ -8,6 +8,7 @@ import Charts
 struct HeartBeat: View {
 	var isOverview: Bool
 
+    @State var data = HealthData.ecgSample
     @State private var lineWidth = 2.0
     @State private var interpolationMethod: ChartInterpolationMethod = .cardinal
     @State private var chartColor: Color = .pink
@@ -30,7 +31,7 @@ struct HeartBeat: View {
 
 	private var chart: some View {
 		Chart {
-			ForEach(Array(HealthData.ecgSample.enumerated()), id: \.element) { index, element in
+			ForEach(Array(data.enumerated()), id: \.element) { index, element in
 				LineMark(
 					x: .value("Index", index),
 					y: .value("Unit", element)
@@ -38,8 +39,9 @@ struct HeartBeat: View {
 				.lineStyle(StrokeStyle(lineWidth: lineWidth))
 				.foregroundStyle(chartColor.gradient)
 				.interpolationMethod(interpolationMethod.mode)
-				.accessibilityLabel("Index")
-				.accessibilityValue("\(element)")
+				.accessibilityLabel("\(index)s")
+				.accessibilityValue("\(element) mV")
+                .accessibilityHidden(isOverview)
 			}
 		}
 		.chartYAxis {
@@ -60,6 +62,7 @@ struct HeartBeat: View {
 				AxisValueLabel(formattedValue)
 			}
 		}
+        .accessibilityChartDescriptor(self)
 		.chartYAxis(isOverview ? .hidden : .automatic)
 		.chartXAxis(isOverview ? .hidden : .automatic)
 		.frame(height: isOverview ? Constants.previewChartHeight : Constants.detailChartHeight)
@@ -86,6 +89,49 @@ struct HeartBeat: View {
         }
     }
 }
+
+// MARK: - Accessibility
+
+extension HeartBeat: AXChartDescriptorRepresentable {
+    func makeChartDescriptor() -> AXChartDescriptor {
+        let min = data.min() ?? 0.0
+        let max = data.max() ?? 0.0
+
+        // Set the units when creating the axes
+        // so users can scrub and pause to narrow on a data point
+        let xAxis = AXNumericDataAxisDescriptor(
+            title: "Time",
+            range: Double(0)...Double(data.count),
+            gridlinePositions: []
+        ) { value in "\(value)s" }
+
+
+        let yAxis = AXNumericDataAxisDescriptor(
+            title: "Millivolts",
+            range: Double(min)...Double(max),
+            gridlinePositions: []
+        ) { value in "\(value) mV" }
+
+        let series = AXDataSeriesDescriptor(
+            name: "ECG data",
+            isContinuous: true,
+            dataPoints: data.enumerated().map {
+                .init(x: Double($0), y: $1)
+            }
+        )
+
+        return AXChartDescriptor(
+            title: "ElectroCardiogram (ECG)",
+            summary: nil,
+            xAxis: xAxis,
+            yAxis: yAxis,
+            additionalAxes: [],
+            series: [series]
+        )
+    }
+}
+
+// MARK: - Preview
 
 struct HeartBeat_Previews: PreviewProvider {
     static var previews: some View {

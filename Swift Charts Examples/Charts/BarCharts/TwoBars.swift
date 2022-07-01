@@ -8,6 +8,8 @@ import Charts
 struct TwoBars: View {
 	var isOverview: Bool
 
+    var data = LocationData.last7Days
+    
     @State private var barWidth = 13.0
     @State private var interpolationMethod: ChartInterpolationMethod = .cardinal
     @State private var strideBy: ChartStrideBy = .day
@@ -30,16 +32,19 @@ struct TwoBars: View {
     }
 
 	private var chart: some View {
-		Chart(LocationData.last7Days) { series in
+		Chart(data) { series in
 			ForEach(series.sales, id: \.weekday) { element in
-				BarMark(
-					x: .value("Day", element.weekday, unit: .day),
-					y: .value("Sales", element.sales),
-                    width: isOverview ? .automatic : .fixed(barWidth)
-				)
-				.accessibilityLabel("\(element.weekday.formatted())")
-				.accessibilityValue("\(element.sales)")
-				.foregroundStyle(by: .value("City", series.city))
+                Plot {
+                    BarMark(
+                        x: .value("Day", element.weekday, unit: .day),
+                        y: .value("Sales", element.sales),
+                        width: isOverview ? .automatic : .fixed(barWidth)
+                    )
+                    .foregroundStyle(by: .value("City", series.city))
+                }
+                .accessibilityLabel("\(series.city) \(element.weekday.weekdayString)")
+                .accessibilityValue("\(element.sales) sold")
+                .accessibilityHidden(isOverview)
 			}
 			.symbol(by: .value("City", series.city))
 			.interpolationMethod(.catmullRom)
@@ -54,6 +59,9 @@ struct TwoBars: View {
 		}
 		.chartLegend((showLegend && !isOverview) ? .visible : .hidden)
 		.chartLegend(position: .top)
+        // For the simple overview chart,
+        // skip individual labels and only set the chartDescriptor
+        .accessibilityChartDescriptor(self)
 		.chartYAxis(isOverview ? .hidden : .automatic)
 		.chartXAxis(isOverview ? .hidden : .automatic)
 		.frame(height: isOverview ? Constants.previewChartHeight : Constants.detailChartHeight)
@@ -77,6 +85,16 @@ struct TwoBars: View {
         }
     }
 }
+
+// MARK: - Accessibility
+
+extension TwoBars: AXChartDescriptorRepresentable {
+    func makeChartDescriptor() -> AXChartDescriptor {
+        return chartDescriptor(forLocationSeries: data)
+    }
+}
+
+// MARK: - Preview
 
 struct TwoBars_Previews: PreviewProvider {
     static var previews: some View {

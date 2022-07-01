@@ -8,13 +8,13 @@ import Charts
 struct SingleBar: View {
 	var isOverview: Bool
 
+    @State var data: [Sale] = SalesData.last30Days
+
     @State private var barWidth = 7.0
     @State private var chartColor: Color = .blue
-    @State private var data: [Sale]
 
 	init(isOverview: Bool) {
 		self.isOverview = isOverview
-		self.data = SalesData.last30Days.map { Sale(day: $0.day, sales: isOverview ? $0.sales : 0) }
 	}
     
     var body: some View {
@@ -48,8 +48,12 @@ struct SingleBar: View {
 				y: .value("Sales", $0.sales),
                 width: isOverview ? .automatic : .fixed(barWidth)
 			)
+            .accessibilityLabel($0.day.formatted(date: .complete, time: .omitted))
+            .accessibilityValue("\($0.sales) sold")
+            .accessibilityHidden(isOverview)
 			.foregroundStyle(chartColor.gradient)
 		}
+        .accessibilityChartDescriptor(self)
 		.chartXAxis(isOverview ? .hidden : .automatic)
 		.chartYAxis(isOverview ? .hidden : .automatic)
 		.frame(height: isOverview ? Constants.previewChartHeight : Constants.detailChartHeight)
@@ -71,6 +75,16 @@ struct SingleBar: View {
         }
     }
 }
+
+// MARK: - Accessibility
+
+extension SingleBar: AXChartDescriptorRepresentable {
+    func makeChartDescriptor() -> AXChartDescriptor {
+        chartDescriptor(forSalesSeries: data)
+    }
+}
+
+// MARK: - Preview
 
 struct SingleBar_Previews: PreviewProvider {
     static var previews: some View {

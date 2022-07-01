@@ -25,6 +25,7 @@
 		88B3E5D02857493B00840CAA /* RangeSimple.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B3E5CF2857493B00840CAA /* RangeSimple.swift */; };
 		934A95042857D035009E29F4 /* OneDimensionalBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934A95032857D035009E29F4 /* OneDimensionalBar.swift */; };
 		9691226F28594EC5001FCF65 /* ScatterChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9691226E28594EC5001FCF65 /* ScatterChart.swift */; };
+		97A7B09528651B5B0069FFFE /* AccessibilityHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97A7B09428651B5B0069FFFE /* AccessibilityHelpers.swift */; };
 		C22EB59E28568D0B000B9F9A /* Swift_Charts_ExamplesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C22EB59D28568D0B000B9F9A /* Swift_Charts_ExamplesApp.swift */; };
 		C22EB5A028568D0B000B9F9A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C22EB59F28568D0B000B9F9A /* ContentView.swift */; };
 		C22EB5A228568D0C000B9F9A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C22EB5A128568D0C000B9F9A /* Assets.xcassets */; };
@@ -89,6 +90,7 @@
 		88B3E5CF2857493B00840CAA /* RangeSimple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RangeSimple.swift; sourceTree = "<group>"; };
 		934A95032857D035009E29F4 /* OneDimensionalBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneDimensionalBar.swift; sourceTree = "<group>"; };
 		9691226E28594EC5001FCF65 /* ScatterChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScatterChart.swift; sourceTree = "<group>"; };
+		97A7B09428651B5B0069FFFE /* AccessibilityHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccessibilityHelpers.swift; sourceTree = "<group>"; };
 		C22EB59A28568D0B000B9F9A /* Swift Charts Examples.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Swift Charts Examples.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C22EB59D28568D0B000B9F9A /* Swift_Charts_ExamplesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Swift_Charts_ExamplesApp.swift; sourceTree = "<group>"; };
 		C22EB59F28568D0B000B9F9A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -185,6 +187,7 @@
 				C22EB59B28568D0B000B9F9A /* Products */,
 			);
 			sourceTree = "<group>";
+			usesTabs = 0;
 		};
 		C22EB59B28568D0B000B9F9A /* Products */ = {
 			isa = PBXGroup;
@@ -240,6 +243,7 @@
 		C22EB5C828568EB5000B9F9A /* Charts */ = {
 			isa = PBXGroup;
 			children = (
+				97A7B09428651B5B0069FFFE /* AccessibilityHelpers.swift */,
 				C26088192856968400B09DDB /* LineCharts */,
 				C260881D2856A32C00B09DDB /* BarCharts */,
 				C26088282856B3AE00B09DDB /* AreaCharts */,
@@ -469,6 +473,7 @@
 				7425DF832858DF4300672F3B /* HealthData.swift in Sources */,
 				C23072892860D8FA00DA1CED /* AnimatingLine.swift in Sources */,
 				88B3E5D02857493B00840CAA /* RangeSimple.swift in Sources */,
+				97A7B09528651B5B0069FFFE /* AccessibilityHelpers.swift in Sources */,
 				FC4ECCF22865E3170008905E /* StackedArea.swift in Sources */,
 				4E8ED991286C88880055786A /* ScreenTime.swift in Sources */,
 				FC4ECD00286754C20008905E /* MicrophoneMonitor.swift in Sources */,

@@ -62,13 +62,6 @@ struct AnimatingLine: View {
 	}
 }
 
-struct AnimatingLine_Previews: PreviewProvider {
-	static var previews: some View {
-        AnimatingLine(isOverview: true)
-        AnimatingLine(isOverview: false)
-	}
-}
-
 struct AnimatedChart: View, Animatable {
 
 	var isOverview = false
@@ -79,7 +72,7 @@ struct AnimatedChart: View, Animatable {
 		self.isOverview = isOverview
 	}
 
-	private let samples = stride(from: -1, through: 1, by: 0.01).map {
+	let samples = stride(from: -1, through: 1, by: 0.01).map {
 		Sample(x: $0, y: pow($0, 3))
 	}
 
@@ -91,6 +84,9 @@ struct AnimatedChart: View, Animatable {
 					x: .value("x", sample.x),
 					y: .value("y", sample.y)
 				)
+                .accessibilityLabel("\(sample.x)")
+                .accessibilityValue("\(sample.y)")
+                .accessibilityHidden(isOverview)
 			}
 
 			PointMark(
@@ -98,6 +94,7 @@ struct AnimatedChart: View, Animatable {
 				y: .value("y", pow(animatableData, 3))
 			)
 		}
+        .accessibilityChartDescriptor(self)
 		.chartXAxis(isOverview ? .hidden : .automatic)
 		.chartYAxis(isOverview ? .hidden : .automatic)
 		.frame(height: isOverview ? Constants.previewChartHeight : Constants.detailChartHeight)
@@ -110,3 +107,39 @@ struct AnimatedChart: View, Animatable {
 		var id: some Hashable { x }
 	}
 }
+
+// MARK: - Accessibility
+
+extension AnimatedChart: AXChartDescriptorRepresentable {
+    func makeChartDescriptor() -> AXChartDescriptor {
+        let xAxis = AXNumericDataAxisDescriptor(title: "Position",
+                                                range: -1...1,
+                                                gridlinePositions: []) { String(format: "%.2f", $0) }
+        
+        let yAxis = AXNumericDataAxisDescriptor(title: "Value",
+                                                range: -1...1,
+                                                gridlinePositions: []) { String(format: "%.2f", $0) }
+        
+        let series = AXDataSeriesDescriptor(name: "Data",
+                                            isContinuous: true, dataPoints: self.samples.map {
+            .init(x: $0.x, y: $0.y)
+        })
+        
+        return AXChartDescriptor(title: "Animated Change in Data",
+                                 summary: nil,
+                                 xAxis: xAxis,
+                                 yAxis: yAxis,
+                                 additionalAxes: [],
+                                 series: [series])
+    }
+}
+
+// MARK: - Preview
+
+struct AnimatingLine_Previews: PreviewProvider {
+    static var previews: some View {
+        AnimatingLine(isOverview: true)
+        AnimatingLine(isOverview: false)
+    }
+}
+

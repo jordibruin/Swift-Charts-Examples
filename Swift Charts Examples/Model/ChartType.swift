@@ -154,6 +154,59 @@ enum ChartType: String, Identifiable, CaseIterable {
     var view: some View {
         overviewOrDetailView(isOverview: true)
     }
+    
+    var chartDescriptor: AXChartDescriptor {
+        // This is necessary since we use images for preview/overview
+        // TODO: Use protocol coonformance to remove manual switch necessity
+        switch self {
+        case .singleLine:
+            return SingleLine(isOverview: true).makeChartDescriptor()
+        case .singleLineLollipop:
+            return SingleLineLollipop(isOverview: true).makeChartDescriptor()
+        case .multiLine:
+            return MultiLine(isOverview: true).makeChartDescriptor()
+        case .heartBeat:
+            return HeartBeat(isOverview: true).makeChartDescriptor()
+        case .animatingLine:
+            return AnimatedChart(x: 0, isOverview: true).makeChartDescriptor()
+        case .singleBar:
+            return SingleBar(isOverview: true).makeChartDescriptor()
+        case .singleBarThreshold:
+            return SingleBarThreshold(isOverview: true).makeChartDescriptor()
+        case .twoBars:
+            return TwoBars(isOverview: true).makeChartDescriptor()
+        case .oneDimensionalBar:
+            return OneDimensionalBar(isOverview: true).makeChartDescriptor()
+        case .candleStick:
+            return CandleStickChart(isOverview: true).makeChartDescriptor()
+        case .timeSheetBar:
+            return TimeSheetBar(isOverview: true).makeChartDescriptor()
+        case .pyramid:
+            return PyramidChart(isOverview: true).makeChartDescriptor()
+        case .areaSimple:
+            return AreaSimple(isOverview: true).makeChartDescriptor()
+        case .stackedArea:
+            return StackedArea(isOverview: true).makeChartDescriptor()
+        case .rangeSimple:
+            return RangeSimple(isOverview: true).makeChartDescriptor()
+        case .rangeHeartRate:
+            return HeartRateRangeChart(isOverview: true).makeChartDescriptor()
+        case .customizeableHeatMap:
+            return HeatMap(isOverview: true).makeChartDescriptor()
+        case .scatter:
+            return ScatterChart(isOverview: true).makeChartDescriptor()
+        case .vectorField:
+            return VectorField(isOverview: true).makeChartDescriptor()
+        case .gradientLine:
+            return GradientLine(isOverview: true).makeChartDescriptor()
+        case .soundBar:
+            return SoundBars(isOverview: true).makeChartDescriptor()
+        case .linePoint:
+            return LinePlot(isOverview: true).makeChartDescriptor()
+        case .gitContributions:
+            return GitHubContributionsGraph(isOverview: true).makeChartDescriptor()
+        }
+    }
 
     var detailView: some View {
         overviewOrDetailView(isOverview: false)

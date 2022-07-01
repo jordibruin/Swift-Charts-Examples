@@ -10,12 +10,12 @@ struct Point: Hashable, Identifiable {
 	let y: Double
 	let val: Double
 
-	func angle(degreeOffset: Double) -> Double {
-		// around 180-360 range
-		let degrees = (val / 100.0) * 180.0 + 180 + degreeOffset
-		let radians = (degrees * .pi) / 180.0
-		return radians
-	}
+    func angle(degreeOffset: Double, inRadians: Bool = true) -> Double {
+        // around 180-360 range
+        let degrees = (val / 100.0) * 180.0 + 180 + degreeOffset
+        let radians = (degrees * .pi) / 180.0
+        return inRadians ? radians : degrees
+    }
 
 	func angleColor(hueOffset: Double) -> Color {
 		Color(hue: ((val / 100.0) * 360.0 + hueOffset)/360.0, saturation: 1, brightness: 1)

@@ -8,12 +8,12 @@ import Charts
 struct AreaSimple: View {
 	var isOverview: Bool
 
+    @State var data: [Sale]
     @State private var lineWidth = 2.0
     @State private var interpolationMethod: ChartInterpolationMethod = .cardinal
     @State private var chartColor: Color = .blue
     @State private var showGradient = true
     @State private var gradientRange = 0.5
-    @State private var data: [Sale]
 
 	init(isOverview: Bool) {
 		self.isOverview = isOverview
@@ -66,11 +66,15 @@ struct AreaSimple: View {
 					x: .value("Date", $0.day),
 					y: .value("Sales", $0.sales)
 				)
+                .accessibilityLabel($0.day.formatted(date: .complete, time: .omitted))
+                .accessibilityValue("\($0.sales) sold")
+                .accessibilityHidden(isOverview)
 				.lineStyle(StrokeStyle(lineWidth: lineWidth))
 				.interpolationMethod(interpolationMethod.mode)
 				.foregroundStyle(chartColor)
 			}
 		}
+        .accessibilityChartDescriptor(self)
 		.chartYAxis(isOverview ? .hidden : .automatic)
 		.chartXAxis(isOverview ? .hidden : .automatic)
 		.frame(height: isOverview ? Constants.previewChartHeight : Constants.detailChartHeight)
@@ -111,6 +115,16 @@ struct AreaSimple: View {
         }
     }
 }
+
+// MARK: - Accessibility
+
+extension AreaSimple: AXChartDescriptorRepresentable {
+    func makeChartDescriptor() -> AXChartDescriptor {
+        return chartDescriptor(forSalesSeries: data)
+    }
+}
+
+// MARK: - Preview
 
 struct AreaSimple_Previews: PreviewProvider {
     static var previews: some View {

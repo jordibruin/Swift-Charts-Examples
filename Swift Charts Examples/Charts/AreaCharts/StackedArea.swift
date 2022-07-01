@@ -8,11 +8,12 @@ import Charts
 struct StackedArea: View {
     var isOverview: Bool
 
-    private let data = LocationData.last30Days
+    let data = LocationData.last30Days
 
     var body: some View {
         if isOverview {
             chart
+                .accessibilityChartDescriptor(self)
         } else {
             List {
                 Section {

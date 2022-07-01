@@ -5,9 +5,17 @@
 import SwiftUI
 import Charts
 
+extension Sale {
+    func isAbove(threshold: Double) -> Bool {
+        self.sales > Int(threshold)
+    }
+}
+
 struct SingleBarThreshold: View {
 	var isOverview: Bool
     
+    @State var data = SalesData.last30Days
+
     @State private var threshold = 150.0
     @State var belowColor: Color = .blue
     @State var aboveColor: Color = .orange
@@ -20,7 +28,6 @@ struct SingleBarThreshold: View {
 				Section {
 					chart
 				}
-
 				customisation
 			}
 			.navigationBarTitle(ChartType.singleBarThreshold.title, displayMode: .inline)
@@ -28,12 +35,17 @@ struct SingleBarThreshold: View {
     }
 
 	private var chart: some View {
-		Chart(SalesData.last30Days, id: \.day) {
+		Chart(data, id: \.day) {
+            
 			BarMark(
 				x: .value("Date", $0.day),
 				y: .value("Sales", $0.sales)
 			)
-			.foregroundStyle($0.sales > Int(threshold) ? aboveColor.gradient :  belowColor.gradient)
+            .accessibilityLabel($0.day.formatted(date: .complete, time: .omitted))
+            .accessibilityValue("\($0.sales) sold. \($0.isAbove(threshold: threshold) ? "Above" : "Below") threshold")
+            .accessibilityHidden(isOverview)
+			.foregroundStyle($0.isAbove(threshold: threshold) ? aboveColor.gradient :  belowColor.gradient)
+            
 			RuleMark(
 				y: .value("Threshold", threshold)
 			)
@@ -41,6 +53,7 @@ struct SingleBarThreshold: View {
 			.foregroundStyle(.red)
 			.annotation(position: .top, alignment: .leading) {
 				Text("\(threshold, specifier: "%.0f")")
+                    .accessibilityLabel("Sale threshold: \(Int(threshold))")
 					.font(.title2.bold())
 					.foregroundColor(.primary)
 					.background {
@@ -56,6 +69,7 @@ struct SingleBarThreshold: View {
 					.padding(.bottom, 4)
 			}
 		}
+        .accessibilityChartDescriptor(self)
 		.chartYAxis(isOverview ? .hidden : .automatic)
 		.chartXAxis(isOverview ? .hidden : .automatic)
 		.frame(height: isOverview ? Constants.previewChartHeight : Constants.detailChartHeight)
@@ -83,6 +97,16 @@ struct SingleBarThreshold: View {
         }
     }
 }
+
+// MARK: - Accessibility
+
+extension SingleBarThreshold: AXChartDescriptorRepresentable {
+    func makeChartDescriptor() -> AXChartDescriptor {
+        chartDescriptor(forSalesSeries: data, saleThreshold: threshold)
+    }
+}
+
+// MARK: - Preview
 
 struct SingleBarThreshold_Previews: PreviewProvider {
     static var previews: some View {

@@ -8,7 +8,7 @@ import Charts
 struct PyramidChart: View {
 	var isOverview: Bool
 
-    @State private var data = PopulationByAgeData.example
+    @State var data = PopulationByAgeData.example
     @State var leftColor: Color = .green
     @State var rightColor: Color = .blue
     @State var barHeight: CGFloat = 10.0
@@ -27,18 +27,33 @@ struct PyramidChart: View {
 			.navigationBarTitle(ChartType.pyramid.title, displayMode: .inline)
 		}
     }
-
+    
+    /// Takes the age ranges and adds a more audio friendy description
+    /// For example: ```"0-10"``` returns ```"0 to 10"```
+    /// - Parameter ageRange: random data set's age range label
+    /// - Returns: String description of the input age range
+    private func description(for ageRange: String) -> String {
+        let ages = ageRange.split(by: "-")
+        
+        guard ages.count == 2 else { return ageRange }
+        
+        return ages.joined(separator: " to ")
+    }
+    
 	private var chart: some View {
 		Chart(data) { series in
 			ForEach(series.population, id: \.percentage) { element in
-				BarMark(
-					xStart: .value("Percentage", 0),
-					xEnd: .value("Percentage", series.sex == "Male" ? element.percentage : element.percentage * -1),
-					y: .value("AgeRange", element.ageRange),
-                    height: isOverview ? .automatic : .fixed(barHeight)
-				)
-				.accessibilityLabel("\(element.ageRange)")
-				.accessibilityValue("\(element.percentage)")
+                Plot {
+                    BarMark(
+                        xStart: .value("Percentage", 0),
+                        xEnd: .value("Percentage", series.sex == "Male" ? element.percentage : element.percentage * -1),
+                        y: .value("AgeRange", element.ageRange),
+                        height: isOverview ? .automatic : .fixed(barHeight)
+                    )
+                }
+                .accessibilityLabel("\(series.sex); Ages: \(description(for: element.ageRange)) years")
+                .accessibilityValue("\(element.percentage.formatted(.percent))")
+                .accessibilityHidden(isOverview)
 			}
 			.foregroundStyle(series.sex == "Male" ? rightColor.gradient : leftColor.gradient)
 			.interpolationMethod(.catmullRom)
@@ -59,6 +74,7 @@ struct PyramidChart: View {
 		}
 		.chartLegend(position: .top, alignment: .center)
 		.chartLegend(isOverview ? .hidden : .automatic)
+        .accessibilityChartDescriptor(self)
 		.chartYAxis(isOverview ? .hidden : .automatic)
 		.chartXAxis(isOverview ? .hidden : .automatic)
 		.frame(height: isOverview ? 200 : 340)
@@ -121,6 +137,70 @@ struct PyramidChart: View {
         ]
     }
 }
+
+// MARK: - Accessibility
+
+// TODO: This is virtually the same as TwoBarsOverview's chartDescriptor. Use a protocol?
+extension PyramidChart: AXChartDescriptorRepresentable {
+    func makeChartDescriptor() -> AXChartDescriptor {
+
+        // Create a descriptor for each Series object
+        // as that allows auditory comparison with VoiceOver
+        // much like the chart does visually and allows individual city charts to be played
+        let series = data.map {
+            AXDataSeriesDescriptor(
+                name: "\($0.sex)",
+                isContinuous: false,
+                dataPoints: $0.population.map { data in
+                        .init(x: "\(description(for: data.ageRange))",
+                              y: Double(data.percentage))
+                }
+            )
+        }
+
+        // Get the minimum/maximum within each series
+        // and then the limits of the resulting list
+        // to pass in as the Y axis limits
+        let limits: [(Int, Int)] = data.map { seriesData in
+            let percentages = seriesData.population.map { $0.percentage }
+            let localMin = percentages.min() ?? 0
+            let localMax = percentages.max() ?? 0
+            return (localMin, localMax)
+        }
+
+        let min = limits.map { $0.0 }.min() ?? 0
+        let max = limits.map { $0.1 }.max() ?? 0
+
+        // Get the unique age ranges to mark the x-axis
+        // and then sort them
+        let uniqueRanges = Set( data
+            .map { $0.population.map { $0.ageRange } }
+            .joined() )
+        let ranges = Array(uniqueRanges).sorted()
+
+        let xAxis = AXCategoricalDataAxisDescriptor(
+            title: "Age Ranges",
+            categoryOrder: ranges.map { description(for: $0) }
+        )
+
+        let yAxis = AXNumericDataAxisDescriptor(
+            title: "Population percentage",
+            range: Double(min)...Double(max),
+            gridlinePositions: []
+        ) { value in "\((value/100.0).formatted(.percent))" }
+
+        return AXChartDescriptor(
+            title: "Population by age",
+            summary: nil,
+            xAxis: xAxis,
+            yAxis: yAxis,
+            additionalAxes: [],
+            series: series
+        )
+    }
+}
+
+// MARK: - Preview
 
 struct PyramidChart_Previews: PreviewProvider {
     static var previews: some View {

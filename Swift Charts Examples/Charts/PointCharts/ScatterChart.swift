@@ -8,6 +8,7 @@ import Charts
 struct ScatterChart: View {
 	var isOverview: Bool
 
+    @State var data = LocationData.last30Days
     @State private var pointSize = 10.0
     @State private var showLegend = false
     
@@ -29,14 +30,15 @@ struct ScatterChart: View {
 
 	private var chart: some View {
 		Chart {
-			ForEach(LocationData.last30Days) { series in
+			ForEach(data) { series in
 				ForEach(series.sales, id: \.weekday) { element in
 					PointMark(
 						x: .value("Day", element.weekday, unit: .day),
 						y: .value("Sales", element.sales)
 					)
-					.accessibilityLabel("\(element.weekday.formatted())")
-					.accessibilityValue("\(element.sales)")
+                    .accessibilityLabel("\(series.city), \(element.weekday.formatted(date: .complete, time: .omitted))")
+                    .accessibilityValue("\(element.sales) sold")
+                    .accessibilityHidden(isOverview)
 				}
 				.foregroundStyle(by: .value("City", series.city))
 				.symbol(by: .value("City", series.city))
@@ -48,6 +50,7 @@ struct ScatterChart: View {
 		.chartYAxis(isOverview ? .hidden : .automatic)
 		.chartXAxis(isOverview ? .hidden : .automatic)
 		.frame(height: isOverview ? Constants.previewChartHeight : Constants.detailChartHeight)
+        .accessibilityChartDescriptor(self)
 	}
 
     private var customisation: some View {
@@ -64,6 +67,16 @@ struct ScatterChart: View {
         }
     }
 }
+
+// MARK: - Accessibility
+
+extension ScatterChart: AXChartDescriptorRepresentable {
+    func makeChartDescriptor() -> AXChartDescriptor {
+        return chartDescriptor(forLocationSeries: data)
+    }
+}
+
+// MARK: - Preview
 
 struct ScatterChart_Previews: PreviewProvider {
 	static var previews: some View {

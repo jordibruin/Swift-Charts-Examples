@@ -8,7 +8,7 @@ import Charts
 struct CandleStickChart: View {
 	var isOverview: Bool
 
-    private var currentPrices: [StockData.StockPrice]
+    var currentPrices: [StockData.StockPrice]
     @State private var selectedPrice: StockData.StockPrice?
 
 	init(isOverview: Bool) {
@@ -45,6 +45,9 @@ struct CandleStickChart: View {
 				low: .value("Low", price.low),
 				close: .value("Close", price.close)
 			)
+            .accessibilityLabel("\(price.timestamp.formatted(date: .complete, time: .omitted)): \(price.accessibilityTrendSummary)")
+            .accessibilityValue(price.accessibilityDescription)
+            .accessibilityHidden(isOverview)
 			.foregroundStyle(price.open < price.close ? .blue : .red)
 		}
 		.chartYAxis { AxisMarks(preset: .extended) }
@@ -101,6 +104,7 @@ struct CandleStickChart: View {
 				}
 			}
 		}
+        .accessibilityChartDescriptor(self)
 		.chartYAxis(isOverview ? .hidden : .automatic)
 		.chartXAxis(isOverview ? .hidden : .automatic)
 		.frame(height: isOverview ? Constants.previewChartHeight : Constants.detailChartHeight)
@@ -136,20 +140,95 @@ struct CandleStickMark: ChartContent {
     let close: PlottableValue<Decimal>
     
     var body: some ChartContent {
-        BarMark(
-            x: timestamp,
-            yStart: open,
-            yEnd: close,
-			width: isOverview ? 8 : 4
+        Plot {
+            // Composite ChartContent MUST be grouped into a plot for accessibility to work
+            BarMark(
+                x: timestamp,
+                yStart: open,
+                yEnd: close,
+                width: isOverview ? 8 : 4
+            )
+            BarMark(
+                x: timestamp,
+                yStart: high,
+                yEnd: low,
+                width: isOverview ? 2 : 1
+            )
+        }
+    }
+}
+
+// MARK: - Accessibility
+
+extension CandleStickChart: AXChartDescriptorRepresentable {
+    func makeChartDescriptor() -> AXChartDescriptor {
+        
+        let dateStringConverter: ((Date) -> (String)) = { date in
+            date.formatted(date: .abbreviated, time: .omitted)
+        }
+        
+        // These closures help find the min/max for each axis
+        let lowestValue: ((KeyPath<StockData.StockPrice, Decimal>) -> (Double)) = { path in
+            return currentPrices.map { $0[keyPath: path]} .min()?.asDouble ?? 0
+        }
+        let highestValue: ((KeyPath<StockData.StockPrice, Decimal>) -> (Double)) = { path in
+            return currentPrices.map { $0[keyPath: path]} .max()?.asDouble ?? 0
+        }
+        
+        let xAxis = AXCategoricalDataAxisDescriptor(
+            title: "Date",
+            categoryOrder: currentPrices.map { dateStringConverter($0.timestamp) }
         )
-        BarMark(
-            x: timestamp,
-            yStart: high,
-            yEnd: low,
-			width: isOverview ? 2 : 1
+        
+        // Add axes for each data point captured in the candlestick
+        let closeAxis = AXNumericDataAxisDescriptor(
+            title: "Closing Price",
+            range: 0...highestValue(\.close),
+            gridlinePositions: []
+        ) { value in "Closing: \(value.formatted(.currency(code: "USD")))" }
+        
+        let openAxis = AXNumericDataAxisDescriptor(
+            title: "Opening Price",
+            range: lowestValue(\.open)...highestValue(\.open),
+            gridlinePositions: []
+        ) { value in "Opening: \(value.formatted(.currency(code: "USD")))" }
+        
+        let highAxis = AXNumericDataAxisDescriptor(
+            title: "Highest Price",
+            range: lowestValue(\.high)...highestValue(\.high),
+            gridlinePositions: []
+        ) { value in "High: \(value.formatted(.currency(code: "USD")))" }
+        
+        let lowAxis = AXNumericDataAxisDescriptor(
+            title: "Lowest Price",
+            range: lowestValue(\.low)...highestValue(\.low),
+            gridlinePositions: []
+        ) { value in "Low: \(value.formatted(.currency(code: "USD")))" }
+        
+        let series = AXDataSeriesDescriptor(
+            name: "Apple Stock Price",
+            isContinuous: false,
+            dataPoints: currentPrices.map {
+                .init(x: dateStringConverter($0.timestamp),
+                      y: $0.close.asDouble,
+                      additionalValues: [.number($0.open.asDouble),
+                                         .number($0.high.asDouble),
+                                         .number($0.low.asDouble)])
+            }
+        )
+        
+        return AXChartDescriptor(
+            title: "Apple Stock Price",
+            summary: nil,
+            xAxis: xAxis,
+            yAxis: closeAxis,
+            additionalAxes: [openAxis, highAxis, lowAxis],
+            series: [series]
         )
     }
 }
+
+// MARK: - Preview
 
 struct PriceAnnotation: View {
     private var price: StockData.StockPrice

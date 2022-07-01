@@ -12,8 +12,10 @@ struct SingleLineLollipop: View {
     @State private var interpolationMethod: ChartInterpolationMethod = .cardinal
     @State private var chartColor: Color = .blue
     @State private var showSymbols = true
-    @State private var selectedElement: (day: Date, sales: Int)? = (SalesData.last30Days[10].day, SalesData.last30Days[10].sales)
+    @State private var selectedElement: Sale? = SalesData.last30Days[10]
     @State private var showLollipop = true
+
+    var data = SalesData.last30Days
 
     var body: some View {
         if isOverview {
@@ -36,11 +38,13 @@ struct SingleLineLollipop: View {
     }
 
     private var chart: some View {
-        Chart(SalesData.last30Days, id: \.day) {
+        Chart(data, id: \.day) {
             LineMark(
                 x: .value("Date", $0.day),
                 y: .value("Sales", $0.sales)
             )
+            .accessibilityLabel($0.day.formatted(date: .complete, time: .omitted))
+            .accessibilityValue("\($0.sales) sold")
             .lineStyle(StrokeStyle(lineWidth: lineWidth))
             .foregroundStyle(chartColor.gradient)
             .interpolationMethod(interpolationMethod.mode)
@@ -96,6 +100,8 @@ struct SingleLineLollipop: View {
                                 .font(.title2.bold())
                                 .foregroundColor(.primary)
                         }
+                        .accessibilityElement(children: .combine)
+                        .accessibilityHidden(isOverview)
                         .frame(width: boxWidth, alignment: .leading)
                         .background {
                             ZStack {
@@ -114,29 +120,40 @@ struct SingleLineLollipop: View {
         }
         .chartXAxis(isOverview ? .hidden : .automatic)
         .chartYAxis(isOverview ? .hidden : .automatic)
+        .accessibilityChartDescriptor(self)
 		.frame(height: isOverview ? Constants.previewChartHeight : Constants.detailChartHeight)
     }
 
-    private func findElement(location: CGPoint, proxy: ChartProxy, geometry: GeometryProxy) -> (day: Date, sales: Int)? {
+    private func findElement(location: CGPoint, proxy: ChartProxy, geometry: GeometryProxy) -> Sale? {
         let relativeXPosition = location.x - geometry[proxy.plotAreaFrame].origin.x
         if let date = proxy.value(atX: relativeXPosition) as Date? {
             // Find the closest date element.
             var minDistance: TimeInterval = .infinity
             var index: Int? = nil
-            for salesDataIndex in SalesData.last30Days.indices {
-                let nthSalesDataDistance = SalesData.last30Days[salesDataIndex].day.distance(to: date)
+            for salesDataIndex in data.indices {
+                let nthSalesDataDistance = data[salesDataIndex].day.distance(to: date)
                 if abs(nthSalesDataDistance) < minDistance {
                     minDistance = abs(nthSalesDataDistance)
                     index = salesDataIndex
                 }
             }
             if let index {
-                return SalesData.last30Days[index]
+                return data[index]
             }
         }
         return nil
     }
 }
+
+// MARK: - Accessibility
+
+extension SingleLineLollipop: AXChartDescriptorRepresentable {
+    func makeChartDescriptor() -> AXChartDescriptor {
+        return chartDescriptor(forSalesSeries: data)
+    }
+}
+
+// MARK: - Preview
 
 struct SingleLineLollipop_Previews: PreviewProvider {
     static var previews: some View {

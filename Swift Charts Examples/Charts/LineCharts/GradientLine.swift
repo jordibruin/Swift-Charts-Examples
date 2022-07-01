@@ -5,23 +5,29 @@
 import SwiftUI
 import Charts
 
+// TODO: Convert to spaces after review. This file uses tabs while the rest of this project uses space.
+
 struct GradientLine: View {
 	var isOverview: Bool
 
 	@State private var selectedDate: Date?
+    @State var data = WeatherData.hourlyUVIndex
 
 	var body: some View {
-		if isOverview {
-			chart
-				.allowsHitTesting(false)
-		} else {
-			List {
-				Section {
-					chart
-				}
-			}
-            .navigationBarTitle(ChartType.gradientLine.title, displayMode: .inline)
-		}
+        Group {
+            if isOverview {
+                chart
+                    .allowsHitTesting(false)
+            } else {
+                List {
+                    Section {
+                        chart
+                    }
+                }
+                .navigationBarTitle(ChartType.gradientLine.title, displayMode: .inline)
+            }
+        }
+        .accessibilityChartDescriptor(self)
 	}
 
 	private var chart: some View {
@@ -142,8 +148,65 @@ struct GradientLine: View {
 		.chartYAxis(isOverview ? .hidden : .visible)
 		.chartXAxis(isOverview ? .hidden : .visible)
 		.frame(height: isOverview ? Constants.previewChartHeight : Constants.detailChartHeight)
+        .accessibilityRepresentation {
+            Chart(data, id: \.date) { hour in
+                Plot {
+                    BarMark(
+                        x: .value("hour", hour.date),
+                        y: .value("uvIndex", hour.uvIndex)
+                    )
+                }
+                .accessibilityLabel(hour.date.formatted(date: .omitted, time: .standard))
+                .accessibilityValue("\(hour.uvIndex)")
+            }
+            .accessibilityHidden(isOverview)
+        }
 	}
 }
+
+// MARK: - Accessibility
+
+extension GradientLine: AXChartDescriptorRepresentable {
+    func makeChartDescriptor() -> AXChartDescriptor {
+        let min = data.map(\.uvIndex).min() ?? 0
+        let max = data.map(\.uvIndex).max() ?? 0
+
+        // A closure that takes a date and converts it to a label for axes
+        let dateTupleStringConverter: (((date: Date, uvIndex: Int)) -> (String)) = { dataPoint in
+            dataPoint.date.formatted(date: .omitted, time: .standard)
+        }
+        
+        let xAxis = AXCategoricalDataAxisDescriptor(
+            title: "Time of day",
+            categoryOrder: data.map { dateTupleStringConverter($0) }
+        )
+
+        let yAxis = AXNumericDataAxisDescriptor(
+            title: "UV Index value",
+            range: Double(min)...Double(max),
+            gridlinePositions: []
+        ) { value in "\(Int(value))" }
+
+        let series = AXDataSeriesDescriptor(
+            name: "UV Index",
+            isContinuous: true,
+            dataPoints: data.map {
+                .init(x: dateTupleStringConverter($0), y: Double($0.uvIndex))
+            }
+        )
+
+        return AXChartDescriptor(
+            title: "UV Index",
+            summary: nil,
+            xAxis: xAxis,
+            yAxis: yAxis,
+            additionalAxes: [],
+            series: [series]
+        )
+    }
+}
+
+// MARK: - Preview
 
 struct GradientLine_Previews: PreviewProvider {
 	static var previews: some View {

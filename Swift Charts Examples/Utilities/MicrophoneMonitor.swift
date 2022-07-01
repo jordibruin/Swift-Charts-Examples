@@ -10,7 +10,13 @@ class MicrophoneMonitor: ObservableObject {
     private var timer: Timer?
 
     @Published public var sample: Float
-    var onUpdate: (() -> Void) = {}
+    var onUpdate: (() -> Void) = {} {
+        didSet {
+            // This should only be run once,
+            // i.e when the SoundBars chart is first loaded
+            startMonitoring()
+        }
+    }
 
     init() {
         self.sample = .zero
@@ -34,18 +40,21 @@ class MicrophoneMonitor: ObservableObject {
 
         do {
             audioRecorder = try AVAudioRecorder(url: url, settings: recorderSettings)
-            try audioSession.setCategory(.playAndRecord, mode: .default, options: [])
-            startMonitoring()
+            try audioSession.setCategory(.record, mode: .measurement, options: [])
         } catch {
             print(error.localizedDescription)
         }
     }
 
-    private func startMonitoring() {
-        guard let audioRecorder = audioRecorder else { return }
-        audioRecorder.isMeteringEnabled = true
-        audioRecorder.record()
-        timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
+    private var generatedTimer: Timer {
+
+        // If there is a timer retained, do not create a new one
+        if let timer = timer { return timer }
+        
+       return  Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { [weak self] timer in
+            
+            guard let self = self else { return }
+            
             self.audioRecorder?.updateMeters()
             let averagePower = self.audioRecorder?.averagePower(forChannel: 0) ?? -100
             let minDecibels: Float = -80.0
@@ -63,12 +72,58 @@ class MicrophoneMonitor: ObservableObject {
 
                 self.sample = level
             }
-            self.onUpdate()
+            
+            // A sanity check to stop the chart fromo scrolling if we're not recording
+            if self.audioRecorder?.isRecording ?? false {
+                self.onUpdate()
+            }
         }
+    }
+    
+    private func startMonitoring() {
+        guard let audioRecorder = audioRecorder else { return }
+        audioRecorder.isMeteringEnabled = true
+        audioRecorder.record()
+        timer = generatedTimer
     }
 
     deinit {
         timer?.invalidate()
         audioRecorder?.stop()
     }
+    
+    // MARK: - External methods
+    
+    func stopMonitoring() {
+        guard
+            let recorder = audioRecorder,
+            recorder.isRecording
+        else { return }
+        
+        timer?.invalidate()
+        recorder.stop()
+        timer = nil
+    }
+    
+    func resumeMonitoring() {
+        guard
+            let recorder = audioRecorder,
+            !recorder.isRecording
+        else { return }
+        
+        recorder.record()
+        timer = generatedTimer
+    }
+    
+    func toggle() {
+        guard
+            let recorder = audioRecorder else { return }
+        
+        if recorder.isRecording {
+            stopMonitoring()
+        } else {
+            resumeMonitoring()
+        }
+    }
+    
 }

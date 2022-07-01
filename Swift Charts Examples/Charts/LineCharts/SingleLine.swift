@@ -5,10 +5,11 @@
 import SwiftUI
 import Charts
 
+
 struct SingleLine: View {
 	var isOverview: Bool
 
-	@State private var data: [Sale]
+	@State var data: [Sale]
 	@State private var lineWidth = 2.0
 	@State private var interpolationMethod: ChartInterpolationMethod = .cardinal
 	@State private var chartColor: Color = .blue
@@ -16,7 +17,7 @@ struct SingleLine: View {
 
 	init(isOverview: Bool) {
 		self.isOverview = isOverview
-		self.data = SalesData.last30Days.map { Sale(day: $0.day, sales: isOverview ? $0.sales : 0)}
+		self.data = SalesData.last30Days
 	}
 
 	var body: some View {
@@ -47,6 +48,22 @@ struct SingleLine: View {
 			.symbol(Circle().strokeBorder(lineWidth: lineWidth))
 			.symbolSize(showSymbols ? 60 : 0)
 		}
+        // LineMarks do not seem to verbalize accessibilityLabel/Value as of Beta 2
+        // Using a representation fixes the above, keeping screen coordinates
+        .accessibilityRepresentation {
+            Chart(data, id: \.day) { dataPoint in
+                Plot {
+                    PointMark(
+                        x: .value("Date", dataPoint.day),
+                        y: .value("Sales", dataPoint.sales)
+                    )
+                }
+                .accessibilityLabel(dataPoint.day.formatted(date: .complete, time: .omitted))
+                .accessibilityValue("\(dataPoint.sales) sold")
+                .accessibilityHidden(isOverview)
+            }
+        }
+        .accessibilityChartDescriptor(self)
 		.chartYAxis(isOverview ? .hidden : .automatic)
 		.chartXAxis(isOverview ? .hidden : .automatic)
 		.frame(height: isOverview ? Constants.previewChartHeight : Constants.detailChartHeight)
@@ -84,6 +101,16 @@ struct SingleLine: View {
 		}
 	}
 }
+
+// MARK: - Accessibility
+
+extension SingleLine: AXChartDescriptorRepresentable {
+    func makeChartDescriptor() -> AXChartDescriptor {
+        return chartDescriptor(forSalesSeries: data, isContinuous: true)
+    }
+}
+
+// MARK: - Preview
 
 struct SingleLine_Previews: PreviewProvider {
 	static var previews: some View {
