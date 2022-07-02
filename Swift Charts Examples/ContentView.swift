@@ -107,7 +107,6 @@ struct ContentView: View {
 }
 
 struct AccessiblePreviewImage: View, AXChartDescriptorRepresentable {
-    
     @State var id: String
     @State var image: UIImage
     
@@ -126,9 +125,14 @@ struct AccessiblePreviewImage: View, AXChartDescriptorRepresentable {
         guard let chartType = ChartType(rawValue: id) else {
             fatalError("Unknown Chart Type")
         }
-        
-        return chartType.chartDescriptor
-        
+
+        if let chartDescriptor = chartType.chartDescriptor {
+            return chartDescriptor
+        }
+
+        let axis = AXNumericDataAxisDescriptor(title: "", range: 0...0, gridlinePositions: []) { _ in "" }
+        return AXChartDescriptor(title: "", summary: nil, xAxis: axis, yAxis: axis, series: [])
+
         /*
          // TODO: Something like this might be better, but the if always evaluates to false
          if

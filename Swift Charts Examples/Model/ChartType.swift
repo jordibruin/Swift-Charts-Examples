@@ -155,9 +155,9 @@ enum ChartType: String, Identifiable, CaseIterable {
         overviewOrDetailView(isOverview: true)
     }
     
-    var chartDescriptor: AXChartDescriptor {
+    var chartDescriptor: AXChartDescriptor? {
         // This is necessary since we use images for preview/overview
-        // TODO: Use protocol coonformance to remove manual switch necessity
+        // TODO: Use protocol conformance to remove manual switch necessity
         switch self {
         case .singleLine:
             return SingleLine(isOverview: true).makeChartDescriptor()
@@ -205,6 +205,8 @@ enum ChartType: String, Identifiable, CaseIterable {
             return LinePlot(isOverview: true).makeChartDescriptor()
         case .gitContributions:
             return GitHubContributionsGraph(isOverview: true).makeChartDescriptor()
+        default:
+            return nil
         }
     }
 
