@@ -90,7 +90,7 @@ struct TwoBars: View {
 
 extension TwoBars: AXChartDescriptorRepresentable {
     func makeChartDescriptor() -> AXChartDescriptor {
-        return chartDescriptor(forLocationSeries: data)
+        AccessibilityHelpers.chartDescriptor(forLocationSeries: data)
     }
 }
 

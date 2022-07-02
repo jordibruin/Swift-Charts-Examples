@@ -227,7 +227,7 @@ extension TimeSheetBar: AXChartDescriptorRepresentable {
 
 extension StackedArea: AXChartDescriptorRepresentable {
     func makeChartDescriptor() -> AXChartDescriptor {
-        return chartDescriptor(forLocationSeries: data)
+        AccessibilityHelpers.chartDescriptor(forLocationSeries: data)
     }
 }
 

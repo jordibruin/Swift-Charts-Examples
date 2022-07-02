@@ -102,7 +102,7 @@ struct SingleBarThreshold: View {
 
 extension SingleBarThreshold: AXChartDescriptorRepresentable {
     func makeChartDescriptor() -> AXChartDescriptor {
-        chartDescriptor(forSalesSeries: data, saleThreshold: threshold)
+        AccessibilityHelpers.chartDescriptor(forSalesSeries: data, saleThreshold: threshold)
     }
 }
 

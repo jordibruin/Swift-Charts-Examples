@@ -16,7 +16,6 @@ struct SoundBars: View {
             chart
         } else {
             List {
-                
                 Group {
                     Section {
                         chart
@@ -36,7 +35,6 @@ struct SoundBars: View {
                 .accessibilityAction(.magicTap) {
                     mic.toggle()
                 }
-                
             }
             .navigationBarTitle(ChartType.soundBar.title, displayMode: .inline)
             .onAppear {

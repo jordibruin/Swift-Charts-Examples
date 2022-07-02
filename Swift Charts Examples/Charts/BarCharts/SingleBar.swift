@@ -80,7 +80,7 @@ struct SingleBar: View {
 
 extension SingleBar: AXChartDescriptorRepresentable {
     func makeChartDescriptor() -> AXChartDescriptor {
-        chartDescriptor(forSalesSeries: data)
+        AccessibilityHelpers.chartDescriptor(forSalesSeries: data)
     }
 }
 

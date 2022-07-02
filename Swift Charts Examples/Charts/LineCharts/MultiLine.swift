@@ -49,7 +49,7 @@ struct MultiLine: View {
 
 extension MultiLine: AXChartDescriptorRepresentable {
     func makeChartDescriptor() -> AXChartDescriptor {
-        return chartDescriptor(forLocationSeries: data)
+        AccessibilityHelpers.chartDescriptor(forLocationSeries: data)
     }
 }
 

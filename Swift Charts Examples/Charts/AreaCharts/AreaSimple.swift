@@ -120,7 +120,7 @@ struct AreaSimple: View {
 
 extension AreaSimple: AXChartDescriptorRepresentable {
     func makeChartDescriptor() -> AXChartDescriptor {
-        return chartDescriptor(forSalesSeries: data)
+        AccessibilityHelpers.chartDescriptor(forSalesSeries: data)
     }
 }
 

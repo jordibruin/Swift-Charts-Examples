@@ -149,7 +149,7 @@ struct SingleLineLollipop: View {
 
 extension SingleLineLollipop: AXChartDescriptorRepresentable {
     func makeChartDescriptor() -> AXChartDescriptor {
-        return chartDescriptor(forSalesSeries: data)
+        AccessibilityHelpers.chartDescriptor(forSalesSeries: data)
     }
 }
 

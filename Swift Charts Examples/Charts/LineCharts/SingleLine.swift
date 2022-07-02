@@ -106,7 +106,7 @@ struct SingleLine: View {
 
 extension SingleLine: AXChartDescriptorRepresentable {
     func makeChartDescriptor() -> AXChartDescriptor {
-        return chartDescriptor(forSalesSeries: data, isContinuous: true)
+        AccessibilityHelpers.chartDescriptor(forSalesSeries: data, isContinuous: true)
     }
 }
 
