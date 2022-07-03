@@ -5,11 +5,33 @@
 import SwiftUI
 import Charts
 
+// Reduces clutter when re-used and in type annotations
+fileprivate typealias AccessibilitySummary = (date: Date, totalDuration: TimeInterval, description: String)
+
 struct ScreenTime: View {
 	var isOverview: Bool
 
     @State private var weekData = ScreenTimeValue.week.makeDayValues()
 	@State private var selectedDate: Date = date(year: 2022, month: 06, day: 20)
+    
+    /// A grouping of the startOfDay Date, the total hours of screen time on the date
+    /// and a descriptive breakdown of usage categories
+    /// for use with accessibilityChartDescriptor and label/value of WeekChart data
+    private var accessibilityGroupedWeekData: [AccessibilitySummary] {
+        
+        // NOTE: weekData's valueDate are the start of date for each day based on makeDayValues()
+        let grouped = Dictionary(grouping: weekData) { $0.valueDate }
+        let summaries: [AccessibilitySummary] = grouped.map { k, v in
+            let totalDuration: TimeInterval = v.reduce(0.0) { $0 + $1.duration }
+            let summaries = v.map { "\($0.category.rawValue): \($0.duration.durationDescription)"}
+            return (date: k,
+                    totalDuration: totalDuration,
+                    description: summaries.formatted(.list(type: .and)))
+        }
+        
+        return summaries.sorted { $0.date < $1.date }
+        
+    }
 
 	var body: some View {
 		ZStack {
@@ -52,6 +74,22 @@ struct ScreenTime: View {
 				.foregroundStyle(by: .value("category", isSelected ? category.category : ScreenTimeCategory.other))
 			}
 		}
+        .accessibilityRepresentation {
+            Chart {
+                ForEach(accessibilityGroupedWeekData, id: \.date) { dataPoint in
+                    Plot {
+                        BarMark(
+                            x: .value("date", dataPoint.date, unit: .day),
+                            y: .value("duration", dataPoint.totalDuration)
+                        )
+                    }
+                    .accessibilityLabel("\(dataPoint.date.formatted(Date.FormatStyle().month(.wide).day(.defaultDigits).weekday(.wide)))")
+                    .accessibilityValue(dataPoint.description)
+                    .accessibilityHidden(isOverview)
+                }
+            }
+        }
+        .accessibilityChartDescriptor(WeekChartDescriptor(summaries: accessibilityGroupedWeekData))
 		.chartYAxis {
 			AxisMarks(values: .automatic(desiredCount: 3)) { value in
 				AxisGridLine()
@@ -96,11 +134,16 @@ struct ScreenTime: View {
 	private var dayChart: some View {
 		Chart {
 			ForEach(getDayValue()) { value in
-				BarMark(
-					x: .value("date", value.valueDate, unit: .hour),
-					y: .value("duration", value.duration)
-				)
-				.foregroundStyle(by: .value("category", value.category))
+                Plot {
+                    BarMark(
+                        x: .value("date", value.valueDate, unit: .hour),
+                        y: .value("duration", value.duration)
+                    )
+                    .foregroundStyle(by: .value("category", value.category))
+                }
+                .accessibilityLabel("\(value.valueDate.formatted(date: .long, time: .omitted)): \(value.category.rawValue)")
+                .accessibilityValue("\(value.duration.durationDescription)")
+                // .relative(presentation: .numeric, unitsStyle: .wide)
 			}
 		}
 		.chartXScale(domain: Calendar.current.startOfDay(for: selectedDate)...Calendar.current.startOfDay(for: selectedDate).addingTimeInterval(60*60*24))
@@ -126,6 +169,64 @@ struct ScreenTime: View {
 		ScreenTimeValue.week.filter({ Calendar.current.isDate($0.valueDate, inSameDayAs: selectedDate) })
 	}
 }
+
+// MARK: - Accessibility
+
+struct WeekChartDescriptor: AXChartDescriptorRepresentable {
+    
+    fileprivate let summaries: [AccessibilitySummary]
+    
+    func makeChartDescriptor() -> AXChartDescriptor {
+        
+        let min = 0
+        let max = summaries.map(\.totalDuration).max() ?? 0
+
+        // A closure that takes a date and converts it to a label for axes
+        let dateStringConverter: ((AccessibilitySummary) -> (String)) = { dataPoint in
+            dataPoint.date
+                .formatted(
+                    Date.FormatStyle()
+                        .month(.wide)
+                        .day(.defaultDigits)
+                        .weekday(.wide)
+                )
+        }
+        
+        // The axes and descriptions here mirror Apple's implementation of the Screen time graph
+        // So we simply describe the total usage time instead of detailing the usage breakdown
+        let xAxis = AXCategoricalDataAxisDescriptor(title: "Time",
+                                                    categoryOrder: summaries.map { dateStringConverter($0) } )
+
+        let yAxis = AXNumericDataAxisDescriptor(
+            title: "Usage",
+            range: Double(min)...Double(max),
+            gridlinePositions: []
+        ) { value in "Total usage: \(value.durationDescription)" }
+        
+        
+        // If, however you want to put the usage categories in the audio graph,
+        // add label: point.description to the dataPoints init here
+        let series = AXDataSeriesDescriptor(
+            name: "Device Usage",
+            isContinuous: false,
+            dataPoints: summaries.map { point in
+                    .init(x: dateStringConverter(point),
+                          y: Double(point.totalDuration))
+            }
+        )
+
+        return AXChartDescriptor(
+            title: "Screen Time Data",
+            summary: nil,
+            xAxis: xAxis,
+            yAxis: yAxis,
+            additionalAxes: [],
+            series: [series]
+        )
+    }
+}
+
+// MARK: - Preview
 
 struct ScreenTime_Previews: PreviewProvider {
 	static var previews: some View {

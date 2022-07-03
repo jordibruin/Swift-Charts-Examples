@@ -205,8 +205,13 @@ enum ChartType: String, Identifiable, CaseIterable {
             return LinePlot(isOverview: true).makeChartDescriptor()
         case .gitContributions:
             return GitHubContributionsGraph(isOverview: true).makeChartDescriptor()
+        case .screenTime:
+            // This graph mirrors Apple's implementation
+            // each individual sub graph has it's own audio graph/descriptor
+            fallthrough
         default:
             return nil
+
         }
     }
 
