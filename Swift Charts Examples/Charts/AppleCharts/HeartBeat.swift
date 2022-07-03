@@ -7,7 +7,7 @@ import Charts
 
 struct HeartBeat: View {
     var isOverview: Bool
-
+    
     @State private var data = HealthData.ecgSample
     @State private var lineWidth = 2.0
     @State private var interpolationMethod: ChartInterpolationMethod = .cardinal
@@ -15,25 +15,41 @@ struct HeartBeat: View {
     
     var body: some View {
         if isOverview {
-            chart
-                .allowsHitTesting(false)
+            chartAndLabels
         } else {
             List {
                 Section {
-                    chart
+                    chartAndLabels
                 }
-
                 customisation
             }
             .navigationBarTitle(ChartType.heartBeat.title, displayMode: .inline)
         }
     }
-
+    
+    private var chartAndLabels: some View {
+        VStack(alignment: .leading) {
+            Text("Sinus Rhythm")
+                .font(.system(.title2, design: .rounded))
+                .fontWeight(.bold)
+            Group {
+                Text(Date(), style: .date) +
+                Text(" at ") +
+                Text(Date(), style: .time)
+            }
+            .foregroundColor(.secondary)
+            chart
+            HStack {
+                Image(systemName: "heart.fill")
+                    .foregroundColor(.pink)
+                Text("68 BPM Average")
+                    .foregroundColor(.secondary)
+            }
+        }
+        .frame(height: Constants.detailChartHeight)
+    }
+    
     private var chart: some View {
-//        VStack {
-//            Text("Sinus Rhythum")
-//                .font(.largeTitle)
-//        }
         Chart {
             ForEach(Array(data.enumerated()), id: \.element) { index, element in
                 LineMark(
@@ -75,12 +91,11 @@ struct HeartBeat: View {
             }
         }
         .chartPlotStyle {
-            $0.border(Color.gray, width: 1)
+            $0.border(Color.gray)
         }
         .accessibilityChartDescriptor(self)
-        .frame(height: Constants.detailChartHeight)
     }
-
+    
     private var customisation: some View {
         Section {
             VStack(alignment: .leading) {
@@ -93,11 +108,11 @@ struct HeartBeat: View {
                     Text("10")
                 }
             }
-
+            
             Picker("Interpolation Method", selection: $interpolationMethod) {
                 ForEach(ChartInterpolationMethod.allCases) { Text($0.mode.description).tag($0) }
             }
-
+            
             ColorPicker("Color Picker", selection: $chartColor)
         }
     }
@@ -109,7 +124,7 @@ extension HeartBeat: AXChartDescriptorRepresentable {
     func makeChartDescriptor() -> AXChartDescriptor {
         let min = data.min() ?? 0.0
         let max = data.max() ?? 0.0
-
+        
         // Set the units when creating the axes
         // so users can scrub and pause to narrow on a data point
         let xAxis = AXNumericDataAxisDescriptor(
@@ -117,14 +132,14 @@ extension HeartBeat: AXChartDescriptorRepresentable {
             range: Double(0)...Double(data.count),
             gridlinePositions: []
         ) { value in "\(value)s" }
-
-
+        
+        
         let yAxis = AXNumericDataAxisDescriptor(
             title: "Millivolts",
             range: Double(min)...Double(max),
             gridlinePositions: []
         ) { value in "\(value) mV" }
-
+        
         let series = AXDataSeriesDescriptor(
             name: "ECG data",
             isContinuous: true,
@@ -132,7 +147,7 @@ extension HeartBeat: AXChartDescriptorRepresentable {
                 .init(x: Double($0), y: $1)
             }
         )
-
+        
         return AXChartDescriptor(
             title: "ElectroCardiogram (ECG)",
             summary: nil,

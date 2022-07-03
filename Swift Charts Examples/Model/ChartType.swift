@@ -40,13 +40,13 @@ enum ChartCategory: String, CaseIterable, Hashable, Identifiable {
 
 enum ChartType: String, Identifiable, CaseIterable {
     // Apple
+    case heartBeat
     case oneDimensionalBar
     case screenTime
 
     // Line Charts
     case singleLine
     case singleLineLollipop
-    case heartBeat
     case animatingLine
     case gradientLine
     case multiLine
@@ -81,6 +81,8 @@ enum ChartType: String, Identifiable, CaseIterable {
 
     var title: String {
         switch self {
+        case .heartBeat:
+            return "Electrocardiograms (ECG)"
         case .oneDimensionalBar:
             return "iPhone Storage"
         case .screenTime:
@@ -89,8 +91,6 @@ enum ChartType: String, Identifiable, CaseIterable {
             return "Line Chart"
         case .singleLineLollipop:
             return "Line Chart with Lollipop"
-        case .heartBeat:
-            return "Heart Beat / ECG Chart"
         case .animatingLine:
             return "Animating Line"
         case .gradientLine:
@@ -134,9 +134,9 @@ enum ChartType: String, Identifiable, CaseIterable {
 
     var category: ChartCategory {
         switch self {
-        case .screenTime, .oneDimensionalBar:
+        case .heartBeat, .screenTime, .oneDimensionalBar:
             return .apple
-        case .singleLine, .singleLineLollipop, .heartBeat, .animatingLine, .gradientLine, .multiLine, .linePoint:
+        case .singleLine, .singleLineLollipop, .animatingLine, .gradientLine, .multiLine, .linePoint:
             return .line
         case .singleBar, .singleBarThreshold, .twoBars, .pyramid, .timeSheetBar, .soundBar:
             return .bar
