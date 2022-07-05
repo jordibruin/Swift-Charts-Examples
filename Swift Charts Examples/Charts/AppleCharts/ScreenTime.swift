@@ -5,57 +5,11 @@
 import SwiftUI
 import Charts
 
-// Reduces clutter when re-used and in type annotations
-fileprivate typealias AccessibilitySummary = (date: Date, totalDuration: TimeInterval, description: String)
-
 struct ScreenTime: View {
 	var isOverview: Bool
 
     @State private var weekData = ScreenTimeValue.week.makeDayValues()
 	@State private var selectedDate: Date = date(year: 2022, month: 06, day: 20)
-    
-    /// A grouping of the startOfDay Date, the total hours of screen time on the date
-    /// and a descriptive breakdown of usage categories
-    /// for use with accessibilityChartDescriptor and label/value of WeekChart data
-    private var accessibilityGroupedWeekData: [AccessibilitySummary] {
-        
-        // NOTE: weekData's valueDate are the start of date for each day based on makeDayValues()
-        let grouped = Dictionary(grouping: weekData) { $0.valueDate }
-        let summaries: [AccessibilitySummary] = grouped.map { k, v in
-            let totalDuration: TimeInterval = v.reduce(0.0) { $0 + $1.duration }
-            let summaries = v.map { "\($0.category.rawValue): \($0.duration.durationDescription)"}
-            return (date: k,
-                    totalDuration: totalDuration,
-                    description: summaries.formatted(.list(type: .and)))
-        }
-        
-        return summaries.sorted { $0.date < $1.date }
-        
-    }
-    
-    /// A grouping by the hour of the day, of the total hours of screen time
-    /// and a descriptive breakdown of usage categories
-    /// for use with accessibilityChartDescriptor and label/value of DayChart data
-    private var accessibilityGroupedDayData: [AccessibilitySummary] {
-        
-        let grouped = Dictionary(grouping: getDayValue()) {
-            // Since the sample data only uses hours, we group by the date
-            $0.valueDate
-            // If, the schema changes to include minute data, use the following to get the startOfHour
-            // let hour = Calendar.current.component(.hour, from: $0.valueDate)
-            // return Calendar.current.date(from: .init(hour: hour)) ?? $0.valueDate
-        }
-        let summaries: [AccessibilitySummary] = grouped.map { k, v in
-            let totalDuration: TimeInterval = v.reduce(0.0) { $0 + $1.duration }
-            let summaries = v.map { "\($0.category.rawValue): \($0.duration.durationDescription)"}
-            return (date: k,
-                    totalDuration: totalDuration,
-                    description: summaries.formatted(.list(type: .and)))
-        }
-        
-        return summaries.sorted { $0.date < $1.date }
-        
-    }
 
 	var body: some View {
 		ZStack {
@@ -113,7 +67,8 @@ struct ScreenTime: View {
                 }
             }
         }
-        .accessibilityChartDescriptor(WeekChartDescriptor(summaries: accessibilityGroupedWeekData))
+        .accessibilityChartDescriptor(ScreenTimeChartDescriptor(summaries: accessibilityGroupedWeekData,
+                                                                type: .week))
 		.chartYAxis {
 			AxisMarks(values: .automatic(desiredCount: 3)) { value in
 				AxisGridLine()
@@ -175,13 +130,14 @@ struct ScreenTime: View {
                             y: .value("duration", dataPoint.totalDuration)
                         )
                     }
-                    .accessibilityLabel("\(dataPoint.date.formatted(date: .omitted, time: .standard))")
+                    .accessibilityLabel("\(dataPoint.date.formatted(Date.FormatStyle().hour(.conversationalDefaultDigits(amPM: .wide)).minute(.twoDigits)))")
                     .accessibilityValue(dataPoint.description)
                     .accessibilityHidden(isOverview)
                 }
             }
         }
-//        .accessibilityChartDescriptor(WeekChartDescriptor(summaries: accessibilityGroupedWeekData))
+        .accessibilityChartDescriptor(ScreenTimeChartDescriptor(summaries: accessibilityGroupedDayData,
+                                                                type: .day))
 		.chartXScale(domain: Calendar.current.startOfDay(for: selectedDate)...Calendar.current.startOfDay(for: selectedDate).addingTimeInterval(60*60*24))
 		.chartYAxis {
 			AxisMarks(values: [TimeInterval(0), TimeInterval(30*60), TimeInterval(60*60)]) { value in
@@ -208,9 +164,65 @@ struct ScreenTime: View {
 
 // MARK: - Accessibility
 
-struct WeekChartDescriptor: AXChartDescriptorRepresentable {
+// Reduces clutter when re-used and in type annotations
+fileprivate typealias AccessibilitySummary = (date: Date, totalDuration: TimeInterval, description: String)
+
+fileprivate extension ScreenTime {
+    /// A grouping of the startOfDay Date, the total hours of screen time on the date
+    /// and a descriptive breakdown of usage categories
+    /// for use with accessibilityChartDescriptor and label/value of WeekChart data
+    var accessibilityGroupedWeekData: [AccessibilitySummary] {
+        
+        // NOTE: weekData's valueDate are the start of date for each day based on makeDayValues()
+        let grouped = Dictionary(grouping: weekData) { $0.valueDate }
+        let summaries: [AccessibilitySummary] = grouped.map { k, v in
+            let totalDuration: TimeInterval = v.reduce(0.0) { $0 + $1.duration }
+            let summaries = v.map { "\($0.category.rawValue): \($0.duration.durationDescription)"}
+            return (date: k,
+                    totalDuration: totalDuration,
+                    description: summaries.formatted(.list(type: .and)))
+        }
+        
+        return summaries.sorted { $0.date < $1.date }
+        
+    }
+    
+    /// A grouping by the hour of the day, of the total hours of screen time
+    /// and a descriptive breakdown of usage categories
+    /// for use with accessibilityChartDescriptor and label/value of DayChart data
+    var accessibilityGroupedDayData: [AccessibilitySummary] {
+        
+        let grouped = Dictionary(grouping: getDayValue()) {
+            // Since the sample data only uses hours, we group by the date
+            $0.valueDate
+            // If, the schema changes to include minute data, use the following to get the startOfHour
+            // let hour = Calendar.current.component(.hour, from: $0.valueDate)
+            // return Calendar.current.date(from: .init(hour: hour)) ?? $0.valueDate
+        }
+        let summaries: [AccessibilitySummary] = grouped.map { k, v in
+            let totalDuration: TimeInterval = v.reduce(0.0) { $0 + $1.duration }
+            let summaries = v.map { "\($0.category.rawValue): \($0.duration.durationDescription)"}
+            return (date: k,
+                    totalDuration: totalDuration,
+                    description: summaries.formatted(.list(type: .and)))
+        }
+        
+        return summaries.sorted { $0.date < $1.date }
+        
+    }
+}
+
+struct ScreenTimeChartDescriptor: AXChartDescriptorRepresentable {
+    
+    /// A list of options to change the axis labels
+    /// depending on whether the audio graph is for week or day data
+    fileprivate enum ChartDescriptorType {
+        case week
+        case day
+    }
     
     fileprivate let summaries: [AccessibilitySummary]
+    fileprivate let type: ChartDescriptorType
     
     func makeChartDescriptor() -> AXChartDescriptor {
         
@@ -218,14 +230,29 @@ struct WeekChartDescriptor: AXChartDescriptorRepresentable {
         let max = summaries.map(\.totalDuration).max() ?? 0
 
         // A closure that takes a date and converts it to a label for axes
+        // To re-phrase/frame, the return value here is how we group data points on the axis
+        // So for week data, group by the date, but for day, use the hour
         let dateStringConverter: ((AccessibilitySummary) -> (String)) = { dataPoint in
-            dataPoint.date
-                .formatted(
-                    Date.FormatStyle()
-                        .month(.wide)
-                        .day(.defaultDigits)
-                        .weekday(.wide)
-                )
+            
+            switch type {
+            case .week:
+                return dataPoint.date
+                    .formatted(
+                        Date.FormatStyle()
+                            .month(.wide)
+                            .day(.defaultDigits)
+                            .weekday(.wide)
+                    )
+                
+            case .day:
+                return dataPoint.date
+                    .formatted(
+                        Date.FormatStyle()
+                            .hour(.conversationalDefaultDigits(amPM: .wide))
+                            .minute(.twoDigits)
+                    )
+            }
+            
         }
         
         // The axes and descriptions here mirror Apple's implementation of the Screen time graph
