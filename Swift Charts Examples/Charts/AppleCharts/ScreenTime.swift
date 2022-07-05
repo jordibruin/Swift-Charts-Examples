@@ -32,6 +32,30 @@ struct ScreenTime: View {
         return summaries.sorted { $0.date < $1.date }
         
     }
+    
+    /// A grouping by the hour of the day, of the total hours of screen time
+    /// and a descriptive breakdown of usage categories
+    /// for use with accessibilityChartDescriptor and label/value of DayChart data
+    private var accessibilityGroupedDayData: [AccessibilitySummary] {
+        
+        let grouped = Dictionary(grouping: getDayValue()) {
+            // Since the sample data only uses hours, we group by the date
+            $0.valueDate
+            // If, the schema changes to include minute data, use the following to get the startOfHour
+            // let hour = Calendar.current.component(.hour, from: $0.valueDate)
+            // return Calendar.current.date(from: .init(hour: hour)) ?? $0.valueDate
+        }
+        let summaries: [AccessibilitySummary] = grouped.map { k, v in
+            let totalDuration: TimeInterval = v.reduce(0.0) { $0 + $1.duration }
+            let summaries = v.map { "\($0.category.rawValue): \($0.duration.durationDescription)"}
+            return (date: k,
+                    totalDuration: totalDuration,
+                    description: summaries.formatted(.list(type: .and)))
+        }
+        
+        return summaries.sorted { $0.date < $1.date }
+        
+    }
 
 	var body: some View {
 		ZStack {
@@ -134,18 +158,30 @@ struct ScreenTime: View {
 	private var dayChart: some View {
 		Chart {
 			ForEach(getDayValue()) { value in
-                Plot {
-                    BarMark(
-                        x: .value("date", value.valueDate, unit: .hour),
-                        y: .value("duration", value.duration)
-                    )
-                    .foregroundStyle(by: .value("category", value.category))
-                }
-                .accessibilityLabel("\(value.valueDate.formatted(date: .long, time: .omitted)): \(value.category.rawValue)")
-                .accessibilityValue("\(value.duration.durationDescription)")
-                // .relative(presentation: .numeric, unitsStyle: .wide)
+				BarMark(
+					x: .value("date", value.valueDate, unit: .hour),
+					y: .value("duration", value.duration)
+				)
+				.foregroundStyle(by: .value("category", value.category))
+				// .relative(presentation: .numeric, unitsStyle: .wide)
 			}
 		}
+        .accessibilityRepresentation {
+            Chart {
+                ForEach(accessibilityGroupedDayData, id: \.date) { dataPoint in
+                    Plot {
+                        BarMark(
+                            x: .value("date", dataPoint.date, unit: .hour),
+                            y: .value("duration", dataPoint.totalDuration)
+                        )
+                    }
+                    .accessibilityLabel("\(dataPoint.date.formatted(date: .omitted, time: .standard))")
+                    .accessibilityValue(dataPoint.description)
+                    .accessibilityHidden(isOverview)
+                }
+            }
+        }
+//        .accessibilityChartDescriptor(WeekChartDescriptor(summaries: accessibilityGroupedWeekData))
 		.chartXScale(domain: Calendar.current.startOfDay(for: selectedDate)...Calendar.current.startOfDay(for: selectedDate).addingTimeInterval(60*60*24))
 		.chartYAxis {
 			AxisMarks(values: [TimeInterval(0), TimeInterval(30*60), TimeInterval(60*60)]) { value in
