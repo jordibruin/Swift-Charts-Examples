@@ -25,6 +25,10 @@ Source: https://developer.apple.com/videos/play/wwdc2022/10137/
 
 ### [Apple](https://github.com/jordibruin/SwiftChartExamples/tree/main/Swift%20Charts%20Examples/Charts/AppleCharts)
 
+Electrocardiograms (ECG)
+
+<img src="images/charts/apple/heartBeat.png" width="380">
+            
 iPhone Storage
 
 <img src="images/charts/apple/oneDimensionalBar.png" width="380">
@@ -42,10 +46,6 @@ Line Chart
 Line Chart with Lollipop
 
 <img src="images/charts/line/singleLineLollipop.png" width="380">
-
-Heart Beat / ECG Chart
-
-<img src="images/charts/line/heartBeat.png" width="380">
 
 Animating Line
 
