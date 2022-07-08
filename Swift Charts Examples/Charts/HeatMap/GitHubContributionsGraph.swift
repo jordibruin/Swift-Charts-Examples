@@ -47,14 +47,14 @@ struct GitHubContributionsGraph: View {
             AxisMarks(values: .automatic(desiredCount: 7,
                                          roundLowerBound: false,
                                          roundUpperBound: false)) { _ in
-                AxisGridLine()
+                AxisGridLine(stroke: .init(lineWidth: 1))
             }
         }
         .chartXAxis {
             AxisMarks(values: .automatic(desiredCount: 20,
                                          roundLowerBound: false,
                                          roundUpperBound: false)) { _ in
-                AxisGridLine()
+                AxisGridLine(stroke: .init(lineWidth: 1))
             }
         }
         .chartYScale(domain: .automatic(reversed: true))
