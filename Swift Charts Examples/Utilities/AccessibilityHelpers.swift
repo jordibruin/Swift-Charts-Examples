@@ -14,11 +14,21 @@ import SwiftUI
  */
 
 extension TimeInterval {
+    var accessibilityDurationFormatter: DateComponentsFormatter {
+        let formatter = DateComponentsFormatter()
+        formatter.allowedUnits = [.day, .hour, .minute, .second]
+        formatter.unitsStyle = .brief
+        formatter.maximumUnitCount = 1
+        
+        return formatter
+    }
+    
     var durationDescription: String {
         let hqualifier = (hours == 1) ? "hour" : "hours"
         let mqualifier = (minutes == 1) ? "minute" : "minutes"
         
-        return String(format:"%d \(hqualifier) %02d \(mqualifier)", hours, minutes)
+        return accessibilityDurationFormatter.string(from: self) ??
+        String(format:"%d \(hqualifier) %02d \(mqualifier)", hours, minutes)
     }
 
     var hours: Int {
@@ -44,8 +54,8 @@ extension Date {
 enum AccessibilityHelpers {
     // TODO: This should be a protocol but since the data objects are in flux this will suffice
     static func chartDescriptor(forSalesSeries data: [Sale],
-                         saleThreshold: Double? = nil,
-                         isContinuous: Bool = false) -> AXChartDescriptor {
+                                saleThreshold: Double? = nil,
+                                isContinuous: Bool = false) -> AXChartDescriptor {
 
         // Since we're measuring a tangible quantity,
         // keeping an independant minimum prevents visual scaling in the Rotor Chart Details View

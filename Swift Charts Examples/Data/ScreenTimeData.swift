@@ -475,7 +475,6 @@ extension Array where Element == ScreenTimeValue {
 			var result = partialResult
 			day.value.forEach({ value in
 				if let index = result.firstIndex(where: { ($0.category == value.category) && (Calendar.current.isDate($0.valueDate, inSameDayAs: day.key)) }) {
-					print("Hey")
 					result[index].duration += value.duration
 				} else {
 					result.append(ScreenTimeValue(valueDate: day.key, category: value.category, duration: value.duration))
