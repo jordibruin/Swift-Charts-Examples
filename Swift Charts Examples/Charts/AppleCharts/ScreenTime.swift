@@ -51,6 +51,16 @@ struct ScreenTime: View {
 				)
 				.foregroundStyle(by: .value("category", isSelected ? category.category : ScreenTimeCategory.other))
 			}
+            RuleMark(
+                y: .value("Average", weekAverageDuration)
+            )
+            .foregroundStyle(.green)
+            .lineStyle(StrokeStyle(lineWidth: 1.5, dash: [3, 5]))
+            .annotation(position: .trailing, alignment: .leading) {
+                Text("avg")
+                    .font(.caption2)
+                    .foregroundStyle(.green)
+            }
 		}
         .accessibilityRepresentation {
             Chart {
@@ -160,6 +170,11 @@ struct ScreenTime: View {
 	private func getDayValue() -> [ScreenTimeValue] {
 		ScreenTimeValue.week.filter({ Calendar.current.isDate($0.valueDate, inSameDayAs: selectedDate) })
 	}
+
+    private var weekAverageDuration: TimeInterval {
+        let totalDuration = weekData.reduce(0) { $0 + $1.duration }
+        return totalDuration/7.0
+    }
 }
 
 // MARK: - Accessibility
