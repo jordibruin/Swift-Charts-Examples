@@ -35,6 +35,7 @@ struct MultiLine: View {
                 .accessibilityHidden(isOverview)
                 .interpolationMethod(.cardinal)
                 .foregroundStyle(by: .value("City", series.city))
+                .symbol(by: .value("City", series.city))
             }
         }
         .accessibilityChartDescriptor(self)
