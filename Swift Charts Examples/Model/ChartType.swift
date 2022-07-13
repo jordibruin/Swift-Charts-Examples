@@ -59,6 +59,7 @@ enum ChartType: String, Identifiable, CaseIterable {
     case pyramid
     case timeSheetBar
     case soundBar
+    case scrollingBar
 
     // Area Charts
     case areaSimple
@@ -105,6 +106,8 @@ enum ChartType: String, Identifiable, CaseIterable {
             return "Single Bar with Threshold Rule Mark"
         case .twoBars:
             return "Two Bars"
+        case .scrollingBar:
+            return "Horizontal Scrolling Bar Chart"
         case .pyramid:
             return "Pyramid"
         case .timeSheetBar:
@@ -148,6 +151,8 @@ enum ChartType: String, Identifiable, CaseIterable {
             return .heatMap
         case .scatter, .vectorField:
             return .point
+        case .scrollingBar:
+            return .bar
         }
     }
 
@@ -242,6 +247,8 @@ enum ChartType: String, Identifiable, CaseIterable {
 			LinePlot(isOverview: isOverview)
         case .singleBar:
             SingleBar(isOverview: isOverview)
+        case .scrollingBar:
+            ScrollingBar(isOverview: isOverview)
         case .singleBarThreshold:
             SingleBarThreshold(isOverview: isOverview)
         case .twoBars:
