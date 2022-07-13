@@ -58,13 +58,14 @@ struct WineAction: Identifiable {
         ]
     }
     static var winesIn: [WineAction] {
-        allActions.filter {$0.inOut == .in}
+        allActions.filter { $0.inOut == .in }
     }
     
     static var winesOut: [WineAction] {
-        allActions.filter {$0.inOut == .out}
+        allActions.filter { $0.inOut == .out }
     }
 }
+
 enum WineData {
     struct Grouping: Identifiable {
         let inOut: WineAction.InOut

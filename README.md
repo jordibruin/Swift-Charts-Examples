@@ -59,8 +59,6 @@ Line Charts
 
 <img src="images/charts/line/multiLine.png" width="380">
 
-Scrollable Line Chart
-
 Line Point
 
 <img src="images/charts/line/linePoint.png" width="380">
@@ -90,6 +88,10 @@ Time Sheet Bar
 Sound Bar
 
 <img src="images/charts/bar/soundBar.png" width="380">
+
+Horizontal Scrolling Bar Chart
+
+<img src="images/charts/bar/scrollingBar.png" width="380">
 
 ### [Area Charts](https://github.com/jordibruin/SwiftChartExamples/tree/main/Swift%20Charts%20Examples/Charts/AreaCharts)
 
