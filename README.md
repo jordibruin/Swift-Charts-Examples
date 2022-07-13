@@ -59,6 +59,8 @@ Line Charts
 
 <img src="images/charts/line/multiLine.png" width="380">
 
+Scrollable Line Chart
+
 Line Point
 
 <img src="images/charts/line/linePoint.png" width="380">
