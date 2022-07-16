@@ -68,7 +68,6 @@ struct SoundBars: View {
         }
         .accessibilityAddTraits(.updatesFrequently)
         .accessibilityChartDescriptor(self)
-        .chartYScale(domain: -1...1)
         .chartXAxis(isOverview ? .hidden : .automatic)
         .chartYAxis(isOverview ? .hidden : .automatic)
         .chartLegend(isOverview ? .hidden : .automatic)
