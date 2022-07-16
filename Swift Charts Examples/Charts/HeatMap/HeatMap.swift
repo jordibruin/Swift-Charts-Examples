@@ -36,13 +36,16 @@ struct HeatMap: View {
 	private var chart: some View {
 		Chart(grid.points) { point in
             Plot {
+                let xVal = Int(point.x)
+                let yVal = Int(point.y)
+                let val = Int(point.val * 100)
                 RectangleMark(
-                    xStart: PlottableValue.value("xStart", point.x),
-                    xEnd: PlottableValue.value("xEnd", point.x + 1),
-                    yStart: PlottableValue.value("yStart", point.y),
-                    yEnd: PlottableValue.value("yEnd", point.y + 1)
+                    xStart: PlottableValue.value("xStart", xVal),
+                    xEnd: PlottableValue.value("xEnd", xVal + 1),
+                    yStart: PlottableValue.value("yStart", yVal),
+                    yEnd: PlottableValue.value("yEnd", yVal + 1)
                 )
-                .foregroundStyle(by: .value("Value", point.val))
+                .foregroundStyle(by: .value("Value", val))
             }
             .accessibilityLabel("Point: (\(point.x), \(point.y))")
             .accessibilityValue("Color: \(accessibilityColorName(for: point))")
