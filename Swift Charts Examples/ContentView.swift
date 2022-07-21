@@ -5,31 +5,10 @@
 import SwiftUI
 
 struct ContentView: View {
+    @StateObject private var imageCache = ImagesCache()
     @State private var selectedChartType: ChartType?
     @State var filterCategory: ChartCategory = .all
-    
-    private var cachedChartImages: [String: UIImage] = [:]
-    
-    @MainActor
-    init() {
-        ChartType.allCases.forEach { chart in
-            let view = chart.view
-                .padding(10)
-                .frame(width: 300)
-                .background {
-                    if chart.category == .apple {
-                        RoundedRectangle(cornerRadius: 10)
-                            .foregroundColor(.white)
-                    }
-                }
-            let renderer = ImageRenderer(content: view)
-            renderer.scale = UIScreen.main.scale
-            if let image = renderer.uiImage {
-                cachedChartImages[chart.id] = image
-            }
-        }
-    }
-    
+
     var body: some View {
         NavigationSplitView {
             List(selection: $selectedChartType) {
@@ -98,11 +77,34 @@ struct ContentView: View {
                 
                 // workaround to address hanging UI
                 // Reported FB10335209
-                if let image = cachedChartImages[chart.id] {
+                if let image = imageCache.images[chart] {
                     AccessiblePreviewImage(id: chart.id, image: image)
                 }
             }
         )
+    }
+}
+
+@MainActor private final class ImagesCache: ObservableObject {
+    @Published var images: [ChartType: UIImage] = [:]
+
+    init() {
+        ChartType.allCases.forEach { chart in
+            let view = chart.view
+                .padding(10)
+                .frame(width: 300)
+                .background {
+                    if chart.category == .apple {
+                        RoundedRectangle(cornerRadius: 10)
+                            .foregroundColor(.white)
+                    }
+                }
+            let renderer = ImageRenderer(content: view)
+            renderer.scale = UIScreen.main.scale
+            if let image = renderer.uiImage {
+                images[chart] = image
+            }
+        }
     }
 }
 

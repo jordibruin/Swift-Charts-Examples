@@ -43,17 +43,7 @@ struct PyramidChart: View {
 	private var chart: some View {
 		Chart(data) { series in
 			ForEach(series.population, id: \.percentage) { element in
-                Plot {
-                    BarMark(
-                        xStart: .value("Percentage", 0),
-                        xEnd: .value("Percentage", series.sex == "Male" ? element.percentage : element.percentage * -1),
-                        y: .value("AgeRange", element.ageRange),
-                        height: isOverview ? .automatic : .fixed(barHeight)
-                    )
-                }
-                .accessibilityLabel("\(series.sex); Ages: \(description(for: element.ageRange)) years")
-                .accessibilityValue("\(element.percentage.formatted(.percent))")
-                .accessibilityHidden(isOverview)
+                chartContent(series: series, element: element)
 			}
 			.foregroundStyle(series.sex == "Male" ? rightColor.gradient : leftColor.gradient)
 			.interpolationMethod(.catmullRom)
@@ -79,6 +69,22 @@ struct PyramidChart: View {
 		.chartXAxis(isOverview ? .hidden : .automatic)
 		.frame(height: isOverview ? 200 : 340)
 	}
+
+    // Workaround for previews. Swift compiler seems to have problems checking expression type
+    // for this chart when used directly inside Chart/ForEach, and the preview builds end up timing out.
+    @ChartContentBuilder func chartContent(series: PopulationByAgeData.Series, element: PopulationByAgeData.Series.Population) -> some ChartContent {
+        Plot {
+            BarMark(
+                xStart: .value("Percentage", 0),
+                xEnd: .value("Percentage", series.sex == "Male" ? element.percentage : element.percentage * -1),
+                y: .value("AgeRange", element.ageRange),
+                height: isOverview ? .automatic : .fixed(barHeight)
+            )
+        }
+        .accessibilityLabel("\(series.sex); Ages: \(description(for: element.ageRange)) years")
+        .accessibilityValue("\(element.percentage.formatted(.percent))")
+        .accessibilityHidden(isOverview)
+    }
     
     private var customisation: some View {
         Group {

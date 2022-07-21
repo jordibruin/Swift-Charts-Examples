@@ -234,11 +234,13 @@ enum LocationData {
 struct PopulationByAgeData {
     /// A data series for the bars.
     struct Series: Identifiable {
+        typealias Population = (ageRange: String, percentage: Int)
+
         /// Sex.
         let sex: String
 
         /// Percentage population for ageRange
-        let population: [(ageRange: String, percentage: Int)]
+        let population: [Population]
 
         /// The identifier for the series.
         var id: String { sex }
