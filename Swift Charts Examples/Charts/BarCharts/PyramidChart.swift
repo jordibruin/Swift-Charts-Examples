@@ -33,7 +33,7 @@ struct PyramidChart: View {
     /// - Parameter ageRange: random data set's age range label
     /// - Returns: String description of the input age range
     private func description(for ageRange: String) -> String {
-        let ages = ageRange.split(by: "-")
+        let ages = ageRange.split(separator: "-")
         
         guard ages.count == 2 else { return ageRange }
         
