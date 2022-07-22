@@ -66,22 +66,20 @@ struct ContentView: View {
         }
     }
     
-    private func preview(chart: ChartType) -> AnyView {
-        AnyView(
-            VStack(alignment: .leading) {
-                Text(chart.title)
-                
-                // causes UI to hang for several seconds when scrolling
-                // from 100% CPU usage when cells are reloaded
-                //                chart.view
-                
-                // workaround to address hanging UI
-                // Reported FB10335209
-                if let image = imageCache.images[chart] {
-                    AccessiblePreviewImage(id: chart.id, image: image)
-                }
+    private func preview(chart: ChartType) -> some View {
+        VStack(alignment: .leading) {
+            Text(chart.title)
+
+            // causes UI to hang for several seconds when scrolling
+            // from 100% CPU usage when cells are reloaded
+//            chart.view
+
+            // workaround to address hanging UI
+            // Reported FB10335209
+            if let image = imageCache.images[chart] {
+                AccessiblePreviewImage(id: chart.id, image: image)
             }
-        )
+        }
     }
 }
 
