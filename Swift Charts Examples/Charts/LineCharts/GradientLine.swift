@@ -109,7 +109,7 @@ struct GradientLine: View {
                 case 11:
                     AxisValueLabel("Extreme", anchor: .topLeading)
                 default:
-                    EmptyAxisMark()
+                    AxisValueLabel()
                 }
             }
         }
