@@ -43,6 +43,7 @@ struct GitHubContributionsGraph: View {
         }
         .chartForegroundStyleScale(range: Gradient(colors: [.white, .green]))
         .accessibilityChartDescriptor(self)
+        .chartLegend(.hidden)
         .chartYAxis {
             AxisMarks(values: .automatic(desiredCount: 7,
                                          roundLowerBound: false,

@@ -74,10 +74,11 @@ struct HeatMap: View {
 				AxisValueLabel(centered: true)
 			}
 		}
+        .chartLegend(.hidden)
         .accessibilityChartDescriptor(self)
 		.chartYAxis(isOverview ? .hidden : .automatic)
 		.chartXAxis(isOverview ? .hidden : .automatic)
-		.aspectRatio(contentMode: .fit)
+        .aspectRatio(1, contentMode: .fit)
 	}
 
 	private var customisation: some View {
