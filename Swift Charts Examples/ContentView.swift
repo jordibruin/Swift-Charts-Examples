@@ -63,6 +63,9 @@ struct ContentView: View {
             } label: {
                 Text("Filter")
             }
+            // Temporary fix for the menu selection picker not updating to show the selected item
+            // Broken since Xcode 14 beta 4 (Reported FB11104547)
+            .id(UUID())
         }
     }
     
