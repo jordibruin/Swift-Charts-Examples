@@ -6,9 +6,9 @@ import SwiftUI
 
 enum ChartCategory: String, CaseIterable, Hashable, Identifiable {
 	case all
+    case bar
     case apple
     case line
-    case bar
     case area
     case range
     case heatMap
@@ -60,6 +60,7 @@ enum ChartType: String, Identifiable, CaseIterable {
     case timeSheetBar
     case soundBar
     case scrollingBar
+    case scrollingBarStaticAxis
 
     // Area Charts
     case areaSimple
@@ -108,6 +109,8 @@ enum ChartType: String, Identifiable, CaseIterable {
             return "Two Bars"
         case .scrollingBar:
             return "Horizontal Scrolling Bar Chart"
+        case .scrollingBarStaticAxis:
+            return "Horizontal Scrolling Bar Chart With Static Axis"
         case .pyramid:
             return "Pyramid"
         case .timeSheetBar:
@@ -141,7 +144,7 @@ enum ChartType: String, Identifiable, CaseIterable {
             return .apple
         case .singleLine, .singleLineLollipop, .animatingLine, .gradientLine, .multiLine, .linePoint:
             return .line
-        case .singleBar, .singleBarThreshold, .twoBars, .pyramid, .timeSheetBar, .soundBar:
+        case .singleBar, .singleBarThreshold, .twoBars, .pyramid, .timeSheetBar, .soundBar,.scrollingBar, .scrollingBarStaticAxis:
             return .bar
         case .areaSimple, .stackedArea:
             return .area
@@ -151,8 +154,6 @@ enum ChartType: String, Identifiable, CaseIterable {
             return .heatMap
         case .scatter, .vectorField:
             return .point
-        case .scrollingBar:
-            return .bar
         }
     }
 
@@ -163,6 +164,7 @@ enum ChartType: String, Identifiable, CaseIterable {
     var chartDescriptor: AXChartDescriptor? {
         // This is necessary since we use images for preview/overview
         // TODO: Use protocol conformance to remove manual switch necessity
+        // TODO: Add missing chart types
         switch self {
         case .singleLine:
             return SingleLine(isOverview: true).makeChartDescriptor()
@@ -249,6 +251,8 @@ enum ChartType: String, Identifiable, CaseIterable {
             SingleBar(isOverview: isOverview)
         case .scrollingBar:
             ScrollingBar(isOverview: isOverview)
+        case .scrollingBarStaticAxis:
+            ScrollingBarStaticAxis(isOverview: isOverview)
         case .singleBarThreshold:
             SingleBarThreshold(isOverview: isOverview)
         case .twoBars:

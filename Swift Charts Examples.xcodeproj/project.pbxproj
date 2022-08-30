@@ -28,6 +28,7 @@
 		97A7B09528651B5B0069FFFE /* AccessibilityHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97A7B09428651B5B0069FFFE /* AccessibilityHelpers.swift */; };
 		BB38976F287E6302005DAB8A /* WineData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB38976E287E6302005DAB8A /* WineData.swift */; };
 		BB9878CA287E09DB0010BB30 /* ScrollingBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB9878C9287E097D0010BB30 /* ScrollingBar.swift */; };
+		C229CD312889885B008FD5BA /* ScrollingBarStaticAxis.swift in Sources */ = {isa = PBXBuildFile; fileRef = C229CD302889885B008FD5BA /* ScrollingBarStaticAxis.swift */; };
 		C22EB59E28568D0B000B9F9A /* Swift_Charts_ExamplesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C22EB59D28568D0B000B9F9A /* Swift_Charts_ExamplesApp.swift */; };
 		C22EB5A028568D0B000B9F9A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C22EB59F28568D0B000B9F9A /* ContentView.swift */; };
 		C22EB5A228568D0C000B9F9A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C22EB5A128568D0C000B9F9A /* Assets.xcassets */; };
@@ -95,6 +96,7 @@
 		97A7B09428651B5B0069FFFE /* AccessibilityHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccessibilityHelpers.swift; sourceTree = "<group>"; };
 		BB38976E287E6302005DAB8A /* WineData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WineData.swift; sourceTree = "<group>"; };
 		BB9878C9287E097D0010BB30 /* ScrollingBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollingBar.swift; sourceTree = "<group>"; };
+		C229CD302889885B008FD5BA /* ScrollingBarStaticAxis.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollingBarStaticAxis.swift; sourceTree = "<group>"; };
 		C22EB59A28568D0B000B9F9A /* Swift Charts Examples.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Swift Charts Examples.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C22EB59D28568D0B000B9F9A /* Swift_Charts_ExamplesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Swift_Charts_ExamplesApp.swift; sourceTree = "<group>"; };
 		C22EB59F28568D0B000B9F9A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -307,6 +309,7 @@
 				84A8089C285E112E00B60AFB /* TimeSheetBar.swift */,
 				FC4ECCFD286753ED0008905E /* SoundBars.swift */,
 				BB9878C9287E097D0010BB30 /* ScrollingBar.swift */,
+				C229CD302889885B008FD5BA /* ScrollingBarStaticAxis.swift */,
 			);
 			path = BarCharts;
 			sourceTree = "<group>";
@@ -355,6 +358,8 @@
 			dependencies = (
 			);
 			name = "Swift Charts Examples";
+			packageProductDependencies = (
+			);
 			productName = "Swift Charts Examples";
 			productReference = C22EB59A28568D0B000B9F9A /* Swift Charts Examples.app */;
 			productType = "com.apple.product-type.application";
@@ -427,6 +432,9 @@
 				Base,
 			);
 			mainGroup = C22EB59128568D0B000B9F9A;
+			packageReferences = (
+				C229CD3228898950008FD5BA /* XCRemoteSwiftPackageReference "Inject" */,
+			);
 			productRefGroup = C22EB59B28568D0B000B9F9A /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -483,6 +491,7 @@
 				FC4ECCF22865E3170008905E /* StackedArea.swift in Sources */,
 				4E8ED991286C88880055786A /* ScreenTime.swift in Sources */,
 				FC4ECD00286754C20008905E /* MicrophoneMonitor.swift in Sources */,
+				C229CD312889885B008FD5BA /* ScrollingBarStaticAxis.swift in Sources */,
 				9691226F28594EC5001FCF65 /* ScatterChart.swift in Sources */,
 				BB9878CA287E09DB0010BB30 /* ScrollingBar.swift in Sources */,
 				C22EB5A028568D0B000B9F9A /* ContentView.swift in Sources */,
@@ -679,6 +688,10 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-Xlinker",
+					"-interposable",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.goodsnooze.Swift-Charts-Examples";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -710,6 +723,10 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-Xlinker",
+					"-interposable",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.goodsnooze.Swift-Charts-Examples";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -833,6 +850,17 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		C229CD3228898950008FD5BA /* XCRemoteSwiftPackageReference "Inject" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/krzysztofzablocki/Inject.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
 	};
 	rootObject = C22EB59228568D0B000B9F9A /* Project object */;
 }

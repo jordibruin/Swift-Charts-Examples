@@ -8,7 +8,8 @@ import SwiftUI
 struct Swift_Charts_ExamplesApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+//            ContentView()
+            ScrollingBarStaticAxis(isOverview: false)
         }
     }
 }
