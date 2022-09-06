@@ -24,7 +24,11 @@ struct ContentView: View {
                     }
                 }
             }
+            #if os(macOS)
+            .listStyle(.bordered)
+            #else
             .listStyle(.insetGrouped)
+            #endif
             .navigationTitle("Charts")
             .toolbar {
                 toolbarItems
@@ -49,23 +53,31 @@ struct ContentView: View {
     }
 
     private var toolbarItems: some ToolbarContent {
-        ToolbarItem(placement: .navigationBarTrailing) {
+        ToolbarItem(placement: .primaryAction) {
+            #if os(macOS)
+            picker
+            #else
             Menu {
-                Picker(selection: $filterCategory, label: Text("Filter")) {
-                    ForEach(ChartCategory.allCases.filter { $0 != .all }) { category in
-                        Label("\(category.rawValue.capitalized)", systemImage: category.sfSymbolName)
-                            .tag(category)
-                    }
-                    Divider()
-                    Text("Show all")
-                        .tag(ChartCategory.all)
-                }
+                picker
             } label: {
                 Text("Filter")
             }
             // Temporary fix for the menu selection picker not updating to show the selected item
             // Broken since Xcode 14 beta 4 (Reported FB11104547)
             .id(UUID())
+            #endif
+        }
+    }
+    
+    private var picker: some View {
+        Picker(selection: $filterCategory, label: Text("Filter")) {
+            ForEach(ChartCategory.allCases.filter { $0 != .all }) { category in
+                Label("\(category.rawValue.capitalized)", systemImage: category.sfSymbolName)
+                    .tag(category)
+            }
+            Divider()
+            Text("Show all")
+                .tag(ChartCategory.all)
         }
     }
     
@@ -87,7 +99,7 @@ struct ContentView: View {
 }
 
 @MainActor private final class ImagesCache: ObservableObject {
-    @Published var images: [ChartType: UIImage] = [:]
+    @Published var images: [ChartType: XImage] = [:]
 
     init() {
         ChartType.allCases.forEach { chart in
@@ -101,20 +113,27 @@ struct ContentView: View {
                     }
                 }
             let renderer = ImageRenderer(content: view)
+            #if os(macOS)
+            renderer.scale = NSApplication.shared.mainWindow?.backingScaleFactor ?? 1
+            if let image = renderer.nsImage {
+                images[chart] = image
+            }
+            #else
             renderer.scale = UIScreen.main.scale
             if let image = renderer.uiImage {
                 images[chart] = image
             }
+            #endif
         }
     }
 }
 
 struct AccessiblePreviewImage: View, AXChartDescriptorRepresentable {
     @State var id: String
-    @State var image: UIImage
+    @State var image: XImage
     
     var body: some View {
-        Image(uiImage: image)
+        Image(xImage: image)
             .resizable()
             .aspectRatio(contentMode: .fit)
             .frame(maxWidth: 320)

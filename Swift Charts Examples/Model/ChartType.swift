@@ -58,7 +58,9 @@ enum ChartType: String, Identifiable, CaseIterable {
     case twoBars
     case pyramid
     case timeSheetBar
+    #if canImport(UIKit)
     case soundBar
+    #endif
     case scrollingBar
 
     // Area Charts
@@ -112,8 +114,10 @@ enum ChartType: String, Identifiable, CaseIterable {
             return "Pyramid"
         case .timeSheetBar:
             return "Time Sheet Bar"
+        #if canImport(UIKit)
         case .soundBar:
             return "Sound Bar"
+        #endif
         case .areaSimple:
             return "Area Chart"
         case .stackedArea:
@@ -141,8 +145,12 @@ enum ChartType: String, Identifiable, CaseIterable {
             return .apple
         case .singleLine, .singleLineLollipop, .animatingLine, .gradientLine, .multiLine, .linePoint:
             return .line
-        case .singleBar, .singleBarThreshold, .twoBars, .pyramid, .timeSheetBar, .soundBar:
+        case .singleBar, .singleBarThreshold, .twoBars, .pyramid, .timeSheetBar:
             return .bar
+        #if canImport(UIKit)
+        case .soundBar:
+            return .bar
+        #endif
         case .areaSimple, .stackedArea:
             return .area
         case .rangeSimple, .rangeHeartRate, .candleStick:
@@ -204,8 +212,10 @@ enum ChartType: String, Identifiable, CaseIterable {
             return VectorField(isOverview: true).makeChartDescriptor()
         case .gradientLine:
             return GradientLine(isOverview: true).makeChartDescriptor()
+        #if canImport(UIKit)
         case .soundBar:
             return SoundBars(isOverview: true).makeChartDescriptor()
+        #endif
         case .linePoint:
             return LinePlot(isOverview: true).makeChartDescriptor()
         case .gitContributions:
@@ -257,8 +267,10 @@ enum ChartType: String, Identifiable, CaseIterable {
             PyramidChart(isOverview: isOverview)
         case .timeSheetBar:
             TimeSheetBar(isOverview: isOverview)
+        #if canImport(UIKit)
         case .soundBar:
             SoundBars(isOverview: isOverview)
+        #endif
         case .areaSimple:
             AreaSimple(isOverview: isOverview)
         case .stackedArea:

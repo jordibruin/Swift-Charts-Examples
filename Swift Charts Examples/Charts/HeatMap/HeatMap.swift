@@ -116,7 +116,7 @@ struct HeatMap: View {
         let bins = bins
         let color = gradientColors[bins.index(for: point.val) ]
         
-        return UIColor(color).accessibilityName
+        return XColor(color).accessibilityName
     }
 }
 
@@ -135,7 +135,7 @@ extension AccessibleGradientGrid {
         return NumberBins(range: min-1...max+1, count: gradientColors.count)
     }
     var accessibilityColorNames: [String] {
-        return gradientColors.map { UIColor($0).accessibilityName }
+        return gradientColors.map { XColor($0).accessibilityName }
     }
 }
 

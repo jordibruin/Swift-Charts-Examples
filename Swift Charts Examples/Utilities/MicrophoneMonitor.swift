@@ -5,6 +5,7 @@
 import Foundation
 import AVFoundation
 
+#if canImport(UIKit)
 class MicrophoneMonitor: ObservableObject {
     private var audioRecorder: AVAudioRecorder?
     private var timer: Timer?
@@ -127,3 +128,4 @@ class MicrophoneMonitor: ObservableObject {
     }
     
 }
+#endif

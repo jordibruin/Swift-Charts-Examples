@@ -5,6 +5,7 @@
 import SwiftUI
 import Charts
 
+#if canImport(UIKit)
 struct SoundBars: View {
     var isOverview: Bool
 
@@ -137,3 +138,4 @@ struct SoundBars_Previews: PreviewProvider {
         SoundBars(isOverview: false)
     }
 }
+#endif

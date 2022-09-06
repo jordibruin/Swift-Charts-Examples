@@ -78,13 +78,21 @@ struct GradientLine: View {
 
             if let selectedDate, let uvIndex = WeatherData.hourlyUVIndex.first(where: { $0.date == selectedDate })?.uvIndex {
                 RuleMark(x: .value("hour", selectedDate))
+                    #if os(macOS)
+                    .foregroundStyle(Color.primary)
+                    #else
                     .foregroundStyle(Color(.label))
+                    #endif
                 PointMark(
                     x: .value("hour", selectedDate),
                     y: .value("uvIndex", uvIndex)
                 )
                 .symbolSize(CGSize(width: 15, height: 15))
+                #if os(macOS)
+                .foregroundStyle(Color.primary)
+                #else
                 .foregroundStyle(Color(.label))
+                #endif
             }
         }
         .chartYScale(domain: 0...14)

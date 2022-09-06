@@ -26,6 +26,7 @@
 		934A95042857D035009E29F4 /* OneDimensionalBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934A95032857D035009E29F4 /* OneDimensionalBar.swift */; };
 		9691226F28594EC5001FCF65 /* ScatterChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9691226E28594EC5001FCF65 /* ScatterChart.swift */; };
 		97A7B09528651B5B0069FFFE /* AccessibilityHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97A7B09428651B5B0069FFFE /* AccessibilityHelpers.swift */; };
+		B0EE3FC228C79C7000FEFE39 /* MultiplatformSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0EE3FC128C79C7000FEFE39 /* MultiplatformSupport.swift */; };
 		BB38976F287E6302005DAB8A /* WineData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB38976E287E6302005DAB8A /* WineData.swift */; };
 		BB9878CA287E09DB0010BB30 /* ScrollingBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB9878C9287E097D0010BB30 /* ScrollingBar.swift */; };
 		C22EB59E28568D0B000B9F9A /* Swift_Charts_ExamplesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C22EB59D28568D0B000B9F9A /* Swift_Charts_ExamplesApp.swift */; };
@@ -93,6 +94,7 @@
 		934A95032857D035009E29F4 /* OneDimensionalBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneDimensionalBar.swift; sourceTree = "<group>"; };
 		9691226E28594EC5001FCF65 /* ScatterChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScatterChart.swift; sourceTree = "<group>"; };
 		97A7B09428651B5B0069FFFE /* AccessibilityHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccessibilityHelpers.swift; sourceTree = "<group>"; };
+		B0EE3FC128C79C7000FEFE39 /* MultiplatformSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiplatformSupport.swift; sourceTree = "<group>"; };
 		BB38976E287E6302005DAB8A /* WineData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WineData.swift; sourceTree = "<group>"; };
 		BB9878C9287E097D0010BB30 /* ScrollingBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollingBar.swift; sourceTree = "<group>"; };
 		C22EB59A28568D0B000B9F9A /* Swift Charts Examples.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Swift Charts Examples.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -317,6 +319,7 @@
 				97A7B09428651B5B0069FFFE /* AccessibilityHelpers.swift */,
 				C26088242856A45800B09DDB /* Square.swift */,
 				FC4ECCFF286754C20008905E /* MicrophoneMonitor.swift */,
+				B0EE3FC128C79C7000FEFE39 /* MultiplatformSupport.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -499,6 +502,7 @@
 				88242C262858C17A00DDD8D0 /* HeartBeat.swift in Sources */,
 				C260882E2856B4C900B09DDB /* SingleBar.swift in Sources */,
 				C22EB59E28568D0B000B9F9A /* Swift_Charts_ExamplesApp.swift in Sources */,
+				B0EE3FC228C79C7000FEFE39 /* MultiplatformSupport.swift in Sources */,
 				62FF3F002857EADF0022930C /* Grid.swift in Sources */,
 				5BC09FE32859526B00C2DB92 /* HeartRateRangeChart.swift in Sources */,
 				2E8EA801285AA53F0040C591 /* VectorField.swift in Sources */,
