@@ -63,7 +63,11 @@ struct OneDimensionalBar: View {
         }
 		.chartPlotStyle { plotArea in
 			plotArea
-				.background(Color(.systemFill))
+                #if os(macOS)
+                .background(Color.gray.opacity(0.2))
+                #else
+                .background(Color(.systemFill))
+                #endif
 				.cornerRadius(8)
 		}
         .accessibilityChartDescriptor(self)

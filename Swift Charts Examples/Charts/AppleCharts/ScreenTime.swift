@@ -30,7 +30,9 @@ struct ScreenTime: View {
 					}
 				}
 				.navigationTitle(ChartType.screenTime.title)
+                #if canImport(UIKit)
 				.navigationBarTitleDisplayMode(.inline)
+                #endif
 			}
 		}
 		.chartForegroundStyleScale([

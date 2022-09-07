@@ -42,7 +42,7 @@ struct VectorField: View {
                 .opacity(opacity)
             }
             .accessibilityLabel("Point: (\(point.x), \(point.y))")
-            .accessibilityValue("Angle: \(Int(point.angle(degreeOffset: degreeOffset, inRadians: false))) degrees, Color: \(UIColor(point.angleColor(hueOffset: degreeOffset)).accessibilityName)")
+            .accessibilityValue("Angle: \(Int(point.angle(degreeOffset: degreeOffset, inRadians: false))) degrees, Color: \(XColor(point.angleColor(hueOffset: degreeOffset)).accessibilityName)")
             .accessibilityHidden(isOverview)
 		}
         .accessibilityChartDescriptor(self)
@@ -138,7 +138,7 @@ extension VectorField: AXChartDescriptorRepresentable {
         // i.e. [Colorname(String) : list of points that are categorized as Colorname]
         var unorderedColorGroups: [String: [Point]] = [:]
         data.forEach { point in
-            let colorName = UIColor(point.angleColor(hueOffset: 0)).accessibilityName
+            let colorName = XColor(point.angleColor(hueOffset: 0)).accessibilityName
             if
                 unorderedColorGroups.keys.contains(colorName),
                 var pointList = unorderedColorGroups[colorName] {
