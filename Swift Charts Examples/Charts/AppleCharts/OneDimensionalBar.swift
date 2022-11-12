@@ -71,9 +71,10 @@ struct OneDimensionalBar: View {
 				.cornerRadius(8)
 		}
         .accessibilityChartDescriptor(self)
+        .chartXAxis(.hidden)
 		.chartXScale(range: 0...128)
 		.chartYScale(range: .plotDimension(endPadding: -8))
-		.chartLegend(position: .bottom, spacing: -8)
+		.chartLegend(position: .bottom, spacing: 8)
 		.chartLegend(showLegend ? .visible : .hidden)
 		.frame(height: 50)
 	}
