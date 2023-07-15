@@ -84,7 +84,7 @@ enum SalesData {
     }
 }
 
-struct Sale {
+struct Sale: Equatable {
     let day: Date
     var sales: Int
 }

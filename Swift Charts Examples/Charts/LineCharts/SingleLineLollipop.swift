@@ -14,6 +14,7 @@ struct SingleLineLollipop: View {
     @State private var showSymbols = true
     @State private var selectedElement: Sale? = SalesData.last30Days[10]
     @State private var showLollipop = true
+    @State private var lollipopColor: Color = .red
 
     var data = SalesData.last30Days
 
@@ -31,25 +32,43 @@ struct SingleLineLollipop: View {
                     Text("**Hold and drag** over the chart to view and move the lollipop")
                         .font(.callout)
                     Toggle("Lollipop", isOn: $showLollipop)
+                    if showLollipop {
+                        ColorPicker("Lollipop Color Picker", selection: $lollipopColor)
+                    }
+
                 }
             }
             .navigationBarTitle(ChartType.singleLineLollipop.title, displayMode: .inline)
         }
     }
+  
+  private func CompareSelectedMarkerToChartMarker<T: Equatable>(selectedMarker: T, chartMarker: T) -> Bool {
+        return selectedMarker == chartMarker
+    }
 
+  private func getBaselineMarker (marker: Sale) -> some ChartContent {
+      return LineMark(
+          x: .value("Date", marker.day),
+          y: .value("Sales", marker.sales)
+      )
+      .accessibilityLabel(marker.day.formatted(date: .complete, time: .omitted))
+      .accessibilityValue("\(marker.sales) sold")
+      .lineStyle(StrokeStyle(lineWidth: lineWidth))
+      .foregroundStyle(chartColor)
+      .interpolationMethod(interpolationMethod.mode)
+      .symbolSize(showSymbols ? 60 : 0)
+  }
+  
     private var chart: some View {
-        Chart(data, id: \.day) {
-            LineMark(
-                x: .value("Date", $0.day),
-                y: .value("Sales", $0.sales)
-            )
-            .accessibilityLabel($0.day.formatted(date: .complete, time: .omitted))
-            .accessibilityValue("\($0.sales) sold")
-            .lineStyle(StrokeStyle(lineWidth: lineWidth))
-            .foregroundStyle(chartColor.gradient)
-            .interpolationMethod(interpolationMethod.mode)
-            .symbol(Circle().strokeBorder(lineWidth: lineWidth))
-            .symbolSize(showSymbols ? 60 : 0)
+        Chart(data, id: \.day) { chartMarker in
+            let baselineMarker = getBaselineMarker(marker: chartMarker)
+            if CompareSelectedMarkerToChartMarker(selectedMarker: selectedElement, chartMarker: chartMarker) && showLollipop {
+                baselineMarker.symbol() {
+                    Circle().strokeBorder(chartColor, lineWidth: 2).background(Circle().foregroundColor(lollipopColor)).frame(width: 11)
+                }
+            } else {
+                baselineMarker.symbol(Circle().strokeBorder(lineWidth: lineWidth))
+            }
         }
         .chartOverlay { proxy in
             GeometryReader { geo in
@@ -88,7 +107,7 @@ struct SingleLineLollipop: View {
                         let boxOffset = max(0, min(geo.size.width - boxWidth, lineX - boxWidth / 2))
 
                         Rectangle()
-                            .fill(.red)
+                            .fill(lollipopColor)
                             .frame(width: 2, height: lineHeight)
                             .position(x: lineX, y: lineHeight / 2)
 
