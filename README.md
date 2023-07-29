@@ -140,6 +140,6 @@ Vector Field
 ## Other Example Repos
 Check out my other example repos
 
-[🏝 TipKit](https://github.com/jordibruin/TipKit-Examples)
+[🪧 TipKit](https://github.com/jordibruin/TipKit-Examples)
 
 [📊 Swift Charts](https://github.com/jordibruin/Swift-Charts-Examples)
