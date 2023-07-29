@@ -142,4 +142,5 @@ Check out my other example repos
 
 [🪧 TipKit](https://github.com/jordibruin/TipKit-Examples)
 
-[📊 Swift Charts](https://github.com/jordibruin/Swift-Charts-Examples)
+[🏝️ Dynamic Island](https://github.com/jordibruin/Dynamic-Islands)
+
