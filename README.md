@@ -3,8 +3,6 @@ This repo aims to provide sample code for lots of different chart types for you 
 
 <img width="1511" alt="image" src="https://user-images.githubusercontent.com/170948/173253882-1a80b934-a0b9-4acb-a290-a299ae3fdd7d.png">
 
-If you want to play around with Dynamic Islands / Live Activities, check out the [🏝 Dynamic Islands repo](https://github.com/jordibruin/Dynamic-Islands) as well!
-
 ## Todo
 - [ ] Add missing Charts
 - [ ] Multi-language Support
@@ -138,3 +136,10 @@ Scatter Chart
 Vector Field
 
 <img src="images/charts/point/vectorField.png" width="380">
+
+## Other Example Repos
+Check out my other example repos
+
+[🏝 TipKit](https://github.com/jordibruin/TipKit-Examples)
+
+[📊 Swift Charts](https://github.com/jordibruin/Swift-Charts-Examples)
