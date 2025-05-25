@@ -7,9 +7,12 @@ This repo aims to provide sample code for lots of different chart types for you 
 Check out my other example repos
 
 [🪧 TipKit](https://github.com/jordibruin/TipKit-Examples)
+
 [🏝️ Dynamic Island](https://github.com/jordibruin/Dynamic-Islands)
+
 [🥽 visionOS](https://github.com/jordibruin/visionOS-Examples)
-[💰 StoreKit](https://github.com/jordibruin/StoreKit-Examples))
+
+[💰 StoreKit](https://github.com/jordibruin/StoreKit-Examples)
 
 
 ## Todo
