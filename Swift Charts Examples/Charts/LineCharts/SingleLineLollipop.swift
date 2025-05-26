@@ -15,6 +15,7 @@ struct SingleLineLollipop: View {
     @State private var selectedElement: Sale? = SalesData.last30Days[10]
     @State private var showLollipop = true
     @State private var lollipopColor: Color = .red
+    @State private var lastSelectedElement: Sale?
 
     var data = SalesData.last30Days
 
@@ -87,6 +88,11 @@ struct SingleLineLollipop: View {
                             .exclusively(
                                 before: DragGesture()
                                     .onChanged { value in
+                                        let currentElement = findElement(location: value.location, proxy: proxy, geometry: geo)
+                                        if let currentElement, currentElement != lastSelectedElement {
+                                            UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+                                            lastSelectedElement = currentElement
+                                        }
                                         selectedElement = findElement(location: value.location, proxy: proxy, geometry: geo)
                                     }
                             )
