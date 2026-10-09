@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		06E25FA13078F83A003BCA5F /* SleepData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E25FA03078F83A003BCA5F /* SleepData.swift */; };
+		06E25FA33078F883003BCA5F /* SleepStages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E25FA23078F883003BCA5F /* SleepStages.swift */; };
 		2E5763C628576B1B006C7C36 /* PyramidChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E5763C528576B1B006C7C36 /* PyramidChart.swift */; };
 		2E8EA801285AA53F0040C591 /* VectorField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E8EA800285AA53F0040C591 /* VectorField.swift */; };
 		4E8ED991286C88880055786A /* ScreenTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8ED990286C88880055786A /* ScreenTime.swift */; };
@@ -74,6 +76,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		06E25FA03078F83A003BCA5F /* SleepData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepData.swift; sourceTree = "<group>"; };
+		06E25FA23078F883003BCA5F /* SleepStages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepStages.swift; sourceTree = "<group>"; };
 		262541172856A35B00A1E2EC /* Build.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Build.xcconfig; sourceTree = "<group>"; };
 		2E5763C528576B1B006C7C36 /* PyramidChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PyramidChart.swift; sourceTree = "<group>"; };
 		2E8EA800285AA53F0040C591 /* VectorField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VectorField.swift; sourceTree = "<group>"; };
@@ -160,6 +164,7 @@
 				88242C252858C17A00DDD8D0 /* HeartBeat.swift */,
 				934A95032857D035009E29F4 /* OneDimensionalBar.swift */,
 				4E8ED990286C88880055786A /* ScreenTime.swift */,
+				06E25FA23078F883003BCA5F /* SleepStages.swift */,
 			);
 			path = AppleCharts;
 			sourceTree = "<group>";
@@ -282,6 +287,7 @@
 				FC4ECCF92865FEBC0008905E /* GitHubData.swift */,
 				4E8ED992286C88B00055786A /* ScreenTimeData.swift */,
 				BB38976E287E6302005DAB8A /* WineData.swift */,
+				06E25FA03078F83A003BCA5F /* SleepData.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -496,6 +502,7 @@
 				62FF3F022857EB530022930C /* HeatMap.swift in Sources */,
 				FC5466C62857E0D700315632 /* SingleLineLollipop.swift in Sources */,
 				BB38976F287E6302005DAB8A /* WineData.swift in Sources */,
+				06E25FA33078F883003BCA5F /* SleepStages.swift in Sources */,
 				C26088182856963D00B09DDB /* Data.swift in Sources */,
 				FC4ECCFE286753ED0008905E /* SoundBars.swift in Sources */,
 				84A8089D285E112E00B60AFB /* TimeSheetBar.swift in Sources */,
@@ -511,6 +518,7 @@
 				C26088152856960000B09DDB /* SingleLine.swift in Sources */,
 				FC602024285B532C0089DBDC /* SingleBarThreshold.swift in Sources */,
 				4EE24CB72868E8D200F6D487 /* Point.swift in Sources */,
+				06E25FA13078F83A003BCA5F /* SleepData.swift in Sources */,
 				C26088272856A95A00B09DDB /* ChartStrideBy.swift in Sources */,
 				FC4ECCFA2865FEBC0008905E /* GitHubData.swift in Sources */,
 				52145C322864A60D00EB89D7 /* StockData.swift in Sources */,

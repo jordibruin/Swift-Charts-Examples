@@ -43,6 +43,7 @@ enum ChartType: String, Identifiable, CaseIterable {
     case heartBeat
     case oneDimensionalBar
     case screenTime
+    case sleepStages
 
     // Line Charts
     case singleLine
@@ -90,6 +91,8 @@ enum ChartType: String, Identifiable, CaseIterable {
             return "iPhone Storage"
         case .screenTime:
             return "Screen Time"
+        case .sleepStages:
+            return "Sleep Stages"
         case .singleLine:
             return "Line Chart"
         case .singleLineLollipop:
@@ -141,7 +144,7 @@ enum ChartType: String, Identifiable, CaseIterable {
 
     var category: ChartCategory {
         switch self {
-        case .heartBeat, .screenTime, .oneDimensionalBar:
+        case .heartBeat, .screenTime, .oneDimensionalBar, .sleepStages:
             return .apple
         case .singleLine, .singleLineLollipop, .animatingLine, .gradientLine, .multiLine, .linePoint:
             return .line
@@ -190,6 +193,8 @@ enum ChartType: String, Identifiable, CaseIterable {
             return TwoBars(isOverview: true).makeChartDescriptor()
         case .oneDimensionalBar:
             return OneDimensionalBar(isOverview: true).makeChartDescriptor()
+        case .sleepStages:
+            return SleepStages(isOverview: true).makeChartDescriptor()
         case .candleStick:
             return CandleStickChart(isOverview: true).makeChartDescriptor()
         case .timeSheetBar:
@@ -241,6 +246,8 @@ enum ChartType: String, Identifiable, CaseIterable {
             OneDimensionalBar(isOverview: isOverview)
         case .screenTime:
             ScreenTime(isOverview: isOverview)
+        case .sleepStages:
+            SleepStages(isOverview: isOverview)
         case .singleLine:
             SingleLine(isOverview: isOverview)
         case .singleLineLollipop:

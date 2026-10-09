@@ -19,7 +19,7 @@ Check out my other example repos
 - [ ] Add missing Charts
 - [ ] Multi-language Support
 - [ ] First row, second bar with the lines with blocks in the middle
-- [ ] Sleep stages chart
+- [x] Sleep stages chart
 - [ ] iPhone battery percentage screen with different colors and overlaid bar
 - [ ] Make all charts (even more) accessible
 
@@ -48,6 +48,10 @@ iPhone Storage
 Screen Time
 
 <img src="images/charts/apple/screenTime.png" width="380">
+
+Sleep Stages
+
+<img src="images/charts/apple/sleepStages.png" width="380">
 
 ### [Line Charts](https://github.com/jordibruin/SwiftChartExamples/tree/main/Swift%20Charts%20Examples/Charts/LineCharts)
 
